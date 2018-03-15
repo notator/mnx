@@ -1177,7 +1177,7 @@ Possible extra rowspan handling
 	}
 </style>
   <meta content="Bikeshed version 5afc3ab5248efd53ff0fd6d61ad878a3dc5a357a" name="generator">
-  <meta content="ff14b8057604ebeedfac4c1f6f1507e7fed0ac38" name="document-revision">
+  <meta content="2d9cde473c3a34745c48e0fca06c8680ef93af40" name="document-revision">
 <style>
   .language-xml {
     font-size: 11px;
@@ -1782,8 +1782,10 @@ are referred to the <a data-link-type="dfn" href="https://w3c.github.io/musicxml
 to some portion of a <a data-link-type="dfn" href="#container-document" id="ref-for-container-document">container document</a>.</p>
    <p>The present draft of this specification deals with two <a data-link-type="dfn" href="#score-types" id="ref-for-score-types">score types</a>:</p>
    <ul>
-    <li><a href="#cwmnx" id="ref-for-cwmnx">CWMNX</a>, which encodes Conventional Western Music Notation (CWMN) in a
-  semantically rich fashion. It inherits many ideas and concepts from MusicXML.
+    <li><a href="#cwmnx" id="ref-for-cwmnx">CWMNX</a>, which encodes Conventional Western Music
+  Notation (CWMN) using <a data-link-type="dfn" href="https://www.w3.org/TR/html5/dom.html#elements-semantics" id="ref-for-elements-semantics">semantic markup</a> as defined in the
+  HTML5 standard, allowing applications to present the same information consistently in
+  different contexts. It inherits many ideas and concepts from MusicXML.
     <li><a href="#gmnx" id="ref-for-gmnx">GMNX</a>, where "G" is for <strong>G</strong>eneral. It serves as a kind of universal encoding for
   scores having arbitary graphical and audio content. In consequence, it is
   relatively free of semantics.
@@ -1863,10 +1865,6 @@ MusicXML into MNX. This is essential for migration purposes.</p>
     <dd>Within its semantic encoding for CWMNX, this specification strives to keep semantic
     descriptions from answering to the multitude of tiny features that control presentation and
     performance interpretation. These are segregated in the parallel domains of <a data-link-type="dfn" href="#style-properties" id="ref-for-style-properties">style properties</a> and <a data-link-type="dfn" href="#interpretation-content" id="ref-for-interpretation-content">interpretation content</a>. 
-    <dd>While it is challenging to ground the definition of what is "semantic" in music notation, the litmus
-    test used here is the practical one of <em>widely shared understanding</em>: if the performance interpretation of some notation
-    is widely shared within the culture targeted by some semantic module, then that
-    aspect may be classified as semantic.
     <dt>Allow semantic encodings to "tunnel through" to the literal encoding.
     <dd>A semantic module such as CWMNX cannot supply all known information about rendering and performance, in cases
     where this knowledge lives outside the semantic markup. MNX allows semantic layers to "tunnel"
@@ -2298,7 +2296,7 @@ bibliographic data and other descriptive information.</p>
     <h3 class="heading settled" data-level="5.1" id="cwmnx-scope"><span class="secno">5.1. </span><span class="content">Scope</span><a class="self-link" href="#cwmnx-scope"></a></h3>
     <p><em>This section is non-normative.</em></p>
     <p>This part of the specification is called <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="cwmnx">CWMNX</dfn>, and describes a
-  semantic dialect of MNX designed to encode Conventional Western Music Notation.</p>
+  semantic dialect of MNX designed to encode Conventional Western Music Notation (CWMN).</p>
    </section>
    <h3 class="heading settled" data-level="5.2" id="cwmnx-semantics"><span class="secno">5.2. </span><span class="content">Semantics</span><a class="self-link" href="#cwmnx-semantics"></a></h3>
    <h4 class="heading settled" data-level="5.2.1" id="cwmnx-notational-concepts"><span class="secno">5.2.1. </span><span class="content">Notational concepts</span><a class="self-link" href="#cwmnx-notational-concepts"></a></h4>
@@ -5375,6 +5373,7 @@ the intersection lies at infinity.</p>
           <li><a href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens">ordered set of space-separated tokens</a>
           <li><a href="https://www.w3.org/TR/html5/infrastructure.html#signed-integers">rules for parsing integers</a>
           <li><a href="https://www.w3.org/TR/html5/infrastructure.html#signed-integers">rules for parsing signed integers</a>
+          <li><a href="https://www.w3.org/TR/html5/dom.html#elements-semantics">semantic markup</a>
           <li><a href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens">set of space-separated tokens</a>
           <li><a href="https://www.w3.org/TR/html5/infrastructure.html#signed-integers">signed integer</a>
           <li><a href="https://www.w3.org/TR/html5/infrastructure.html#colors">simple color</a>
