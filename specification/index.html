@@ -992,57 +992,92 @@ Possible extra rowspan handling
 	.toc > li li          { font-weight: normal; }
 	.toc > li li li       { font-size:   95%;    }
 	.toc > li li li li    { font-size:   90%;    }
+	.toc > li li li li .secno { font-size: 85%; }
 	.toc > li li li li li { font-size:   85%;    }
+	.toc > li li li li li .secno { font-size: 100%; }
 
-	.toc > li             { margin: 1.5rem 0;    }
-	.toc > li li          { margin: 0.3rem 0;    }
-	.toc > li li li       { margin-left: 2rem;   }
+	/* @supports not (display:grid) { */
+		.toc > li             { margin: 1.5rem 0;    }
+		.toc > li li          { margin: 0.3rem 0;    }
+		.toc > li li li       { margin-left: 2rem;   }
 
-	/* Section numbers in a column of their own */
-	.toc .secno {
-		float: left;
-		width: 4rem;
-		white-space: nowrap;
-	}
-	.toc > li li li li .secno {
-		font-size: 85%;
-	}
-	.toc > li li li li li .secno {
-		font-size: 100%;
-	}
+		/* Section numbers in a column of their own */
+		.toc .secno {
+			float: left;
+			width: 4rem;
+			white-space: nowrap;
+		}
 
-	:not(li) > .toc              { margin-left:  5rem; }
-	.toc .secno                  { margin-left: -5rem; }
-	.toc > li li li .secno       { margin-left: -7rem; }
-	.toc > li li li li .secno    { margin-left: -9rem; }
-	.toc > li li li li li .secno { margin-left: -11rem; }
+		.toc li {
+			clear: both;
+		}
 
-	/* Tighten up indentation in narrow ToCs */
-	@media (max-width: 30em) {
-		:not(li) > .toc              { margin-left:  4rem; }
-		.toc .secno                  { margin-left: -4rem; }
-		.toc > li li li              { margin-left:  1rem; }
-		.toc > li li li .secno       { margin-left: -5rem; }
-		.toc > li li li li .secno    { margin-left: -6rem; }
-		.toc > li li li li li .secno { margin-left: -7rem; }
-	}
-	@media screen and (min-width: 78em) {
-		body:not(.toc-inline) :not(li) > .toc              { margin-left:  4rem; }
-		body:not(.toc-inline) .toc .secno                  { margin-left: -4rem; }
-		body:not(.toc-inline) .toc > li li li              { margin-left:  1rem; }
-		body:not(.toc-inline) .toc > li li li .secno       { margin-left: -5rem; }
-		body:not(.toc-inline) .toc > li li li li .secno    { margin-left: -6rem; }
-		body:not(.toc-inline) .toc > li li li li li .secno { margin-left: -7rem; }
-	}
-	body.toc-sidebar #toc :not(li) > .toc              { margin-left:  4rem; }
-	body.toc-sidebar #toc .toc .secno                  { margin-left: -4rem; }
-	body.toc-sidebar #toc .toc > li li li              { margin-left:  1rem; }
-	body.toc-sidebar #toc .toc > li li li .secno       { margin-left: -5rem; }
-	body.toc-sidebar #toc .toc > li li li li .secno    { margin-left: -6rem; }
-	body.toc-sidebar #toc .toc > li li li li li .secno { margin-left: -7rem; }
+		:not(li) > .toc              { margin-left:  5rem; }
+		.toc .secno                  { margin-left: -5rem; }
+		.toc > li li li .secno       { margin-left: -7rem; }
+		.toc > li li li li .secno    { margin-left: -9rem; }
+		.toc > li li li li li .secno { margin-left: -11rem; }
 
-	.toc li {
-		clear: both;
+		/* Tighten up indentation in narrow ToCs */
+		@media (max-width: 30em) {
+			:not(li) > .toc              { margin-left:  4rem; }
+			.toc .secno                  { margin-left: -4rem; }
+			.toc > li li li              { margin-left:  1rem; }
+			.toc > li li li .secno       { margin-left: -5rem; }
+			.toc > li li li li .secno    { margin-left: -6rem; }
+			.toc > li li li li li .secno { margin-left: -7rem; }
+		}
+	/* } */
+
+	@supports (display:grid) {
+		/* Use #toc over .toc to override non-@supports rules. */
+		#toc {
+			display: grid;
+			align-content: start;
+			grid-template-columns: auto 1fr;
+			grid-column-gap: 1rem;
+			column-gap: 1rem;
+			grid-row-gap: .6rem;
+			row-gap: .6rem;
+		}
+		#toc h2 {
+			grid-column: 1 / -1;
+			margin-bottom: 0;
+		}
+		#toc ol,
+		#toc li,
+		#toc a {
+			display: contents;
+			/* Switch <a> to subgrid when supported */
+		}
+		#toc span {
+			margin: 0;
+		}
+		#toc > .toc > li > a > span {
+			/* The spans of the top-level list,
+			   comprising the first items of each top-level section. */
+			margin-top: 1.1rem;
+		}
+		#toc .secno {
+			grid-column: 1;
+			width: auto;
+		}
+		#toc .content {
+			grid-column: 2;
+			width: auto;
+			margin-right: 1rem;
+		}
+		#toc .content:hover {
+			background: rgba(75%, 75%, 75%, .25);
+			border-bottom: 3px solid #054572;
+			margin-bottom: -3px;
+		}
+		#toc li li li .content {
+			margin-left: 1rem;
+		}
+		#toc li li li li .content {
+			margin-left: 2rem;
+		}
 	}
 
 
@@ -1176,8 +1211,8 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 3456bb73524907a10ac567d67cde058769c35261" name="generator">
-  <meta content="a7fd70640dd86f8122580d1065f5923b14068a1f" name="document-revision">
+  <meta content="Bikeshed version 1a927b7d2ff9a70dcdc5dc9f892fd154b7b64097" name="generator">
+  <meta content="d34d8ddd6a7a6920e3a13976e1cd6f40c7cd6742" name="document-revision">
 <style>
   .language-xml {
     font-size: 11px;
@@ -1337,41 +1372,41 @@ pre .property::before, pre .property::after {
 }</style>
 <style>/* style-dfn-panel */
 
-        .dfn-panel {
-            position: absolute;
-            z-index: 35;
-            height: auto;
-            width: -webkit-fit-content;
-            width: fit-content;
-            max-width: 300px;
-            max-height: 500px;
-            overflow: auto;
-            padding: 0.5em 0.75em;
-            font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
-            background: #DDDDDD;
-            color: black;
-            border: outset 0.2em;
-        }
-        .dfn-panel:not(.on) { display: none; }
-        .dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
-        .dfn-panel > b { display: block; }
-        .dfn-panel a { color: black; }
-        .dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
-        .dfn-panel > b + b { margin-top: 0.25em; }
-        .dfn-panel ul { padding: 0; }
-        .dfn-panel li { list-style: inside; }
-        .dfn-panel.activated {
-            display: inline-block;
-            position: fixed;
-            left: .5em;
-            bottom: 2em;
-            margin: 0 auto;
-            max-width: calc(100vw - 1.5em - .4em - .5em);
-            max-height: 30vh;
-        }
+.dfn-panel {
+    position: absolute;
+    z-index: 35;
+    height: auto;
+    width: -webkit-fit-content;
+    width: fit-content;
+    max-width: 300px;
+    max-height: 500px;
+    overflow: auto;
+    padding: 0.5em 0.75em;
+    font: small Helvetica Neue, sans-serif, Droid Sans Fallback;
+    background: #DDDDDD;
+    color: black;
+    border: outset 0.2em;
+}
+.dfn-panel:not(.on) { display: none; }
+.dfn-panel * { margin: 0; padding: 0; text-indent: 0; }
+.dfn-panel > b { display: block; }
+.dfn-panel a { color: black; }
+.dfn-panel a:not(:hover) { text-decoration: none !important; border-bottom: none !important; }
+.dfn-panel > b + b { margin-top: 0.25em; }
+.dfn-panel ul { padding: 0; }
+.dfn-panel li { list-style: inside; }
+.dfn-panel.activated {
+    display: inline-block;
+    position: fixed;
+    left: .5em;
+    bottom: 2em;
+    margin: 0 auto;
+    max-width: calc(100vw - 1.5em - .4em - .5em);
+    max-height: 30vh;
+}
 
-        .dfn-paneled { cursor: pointer; }
-        </style>
+.dfn-paneled { cursor: pointer; }
+</style>
 <style>/* style-syntax-highlighting */
 
 .highlight:not(.idl) { background: hsl(24, 20%, 95%); }
@@ -1434,7 +1469,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">MNX Draft Specification</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2018-04-05">5 April 2018</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2018-05-21">21 May 2018</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Issue Tracking:
@@ -1457,7 +1492,7 @@ pre.highlight, pre > code.highlight { display: block; padding: 1em; margin: .5em
    </div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 5 April 2018,
+In addition, as of 21 May 2018,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1704,8 +1739,9 @@ exchange between different applications working with music notation.</p>
           <li><a href="#the-x-property"><span class="secno">5.3.3.7</span> <span class="content">The <span><code>x</code></span> property</span></a>
           <li><a href="#the-end-x-property"><span class="secno">5.3.3.8</span> <span class="content">The <span><code>end-x</code></span> property</span></a>
           <li><a href="#the-y-property"><span class="secno">5.3.3.9</span> <span class="content">The <span><code>y</code></span> property</span></a>
-          <li><a href="#the-stem-direction-property"><span class="secno">5.3.3.10</span> <span class="content">The <span><code>stem-direction</code></span> property</span></a>
-          <li><a href="#the-grace-slash-property"><span class="secno">5.3.3.11</span> <span class="content">The <span><code>grace-slash</code></span> property</span></a>
+          <li><a href="#the-location-property"><span class="secno">5.3.3.10</span> <span class="content">The <span><code>location</code></span> property</span></a>
+          <li><a href="#the-stem-direction-property"><span class="secno">5.3.3.11</span> <span class="content">The <span><code>stem-direction</code></span> property</span></a>
+          <li><a href="#the-grace-slash-property"><span class="secno">5.3.3.12</span> <span class="content">The <span><code>grace-slash</code></span> property</span></a>
          </ol>
        </ol>
       <li>
@@ -1910,7 +1946,7 @@ MusicXML into MNX. This is essential for migration purposes.</p>
   and there are conformance requirements that apply to <em>consumers</em>, for example Web browsers.
   They can be distinguished by what they are requiring: a requirement on a producer states what is
   allowed, while a requirement on a consumer states how software is to act.</p>
-   <div class="example" id="example-0d0458ce"><a class="self-link" href="#example-0d0458ce"></a> For example, "the <code>foo</code> attribute’s value must be a valid integer" is a
+   <div class="example" id="example-65e65375"><a class="self-link" href="#example-65e65375"></a> For example, "the <code>foo</code> attribute’s value must be a valid integer" is a
     requirement on producers, as it lays out the allowed values; in contrast, the requirement "the <code>foo</code> attribute’s value must be parsed using the rules for parsing integers"
     is a requirement on consumers, as it describes how to process the content. </div>
    <p><strong>Requirements on producers have no bearing whatsoever on consumers.</strong></p>
@@ -2178,8 +2214,8 @@ document as a whole.</p>
      <dd>None.
     </dl>
     <p>The <code><a data-link-type="element" href="#elementdef-mnx" id="ref-for-elementdef-mnx">mnx</a></code> element encloses an MNX document as a whole.</p>
-    <div class="example" id="example-5893c332">
-     <a class="self-link" href="#example-5893c332"></a> 
+    <div class="example" id="example-2db3d84c">
+     <a class="self-link" href="#example-2db3d84c"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;mnx</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/mnx"</span><span class="nt">></span>
     <span class="nt">&lt;head></span>
       ...head content...
@@ -2232,8 +2268,8 @@ Valid collection type values include:</p>
 of the resulting structure, causing them to apply them only to those parts of
 the document.</p>
     <p>The following example shows a hierarchy of collections and scores.</p>
-    <div class="example" id="example-87a43407">
-     <a class="self-link" href="#example-87a43407"></a> 
+    <div class="example" id="example-014d10e6">
+     <a class="self-link" href="#example-014d10e6"></a> 
 <pre class="language-xml highlight">    <span class="nt">&lt;collection</span> <span class="na">type=</span><span class="s">"sections"</span><span class="nt">></span>
         <span class="nt">&lt;score></span>
             <span class="nt">&lt;title></span>Section 1 (for Flute and Cello)<span class="nt">&lt;/title></span>
@@ -2507,8 +2543,8 @@ of the following forms:</p>
     <li data-md="">
      <p>Return <var>base value</var> and <var>number of dots</var>.</p>
    </ol>
-   <div class="example" id="example-ebede7d8">
-    <a class="self-link" href="#example-ebede7d8"></a> Here are some instances of the note value syntax: 
+   <div class="example" id="example-f32be0b0">
+    <a class="self-link" href="#example-f32be0b0"></a> Here are some instances of the note value syntax: 
     <dl>
      <dt data-md=""><code>/1</code>
      <dd data-md="">
@@ -2641,7 +2677,7 @@ signature, use the following procedure:</p>
      <p>A compound time signature of 2/8, 3/4 and 2/8 as separate fractions (note that the spaces
 are ignored)</p>
    </dl>
-   <p class="issue" id="issue-1e796285"><a class="self-link" href="#issue-1e796285"></a> Shared denominators are all-or-nothing. So there’s currently no way to share a denominator
+   <p class="issue" id="issue-316b8a06"><a class="self-link" href="#issue-316b8a06"></a> Shared denominators are all-or-nothing. So there’s currently no way to share a denominator
 for only some of a time signature’s fractions, which would require a grouping construct like <code>2/4+(2+3/8)</code> or such.</p>
    <h5 class="heading settled" data-level="5.2.2.4" id="chromatic-pitch-syntax"><span class="secno">5.2.2.4. </span><span class="content">Chromatic pitch syntax</span><a class="self-link" href="#chromatic-pitch-syntax"></a></h5>
    <p>MNX allows the specification of a <a data-link-type="dfn" href="#chromatic-pitch" id="ref-for-chromatic-pitch">chromatic pitch</a> in a single string,
@@ -2779,8 +2815,8 @@ musical event needs to be described, in terms of the content of the measure.</p>
   identified measure. The identified measure must belong to the same <a data-link-type="dfn" href="#measure-content" id="ref-for-measure-content">measure content</a> as the element in which the measure location is given.
     <li>If the <a data-link-type="dfn" href="#measure-location" id="ref-for-measure-location③">measure location</a> is identical to the <a data-link-type="dfn" href="#metrical-position" id="ref-for-metrical-position②">metrical position</a> of some known <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event②">event</a></code> in the score, then it is specified as a <a data-link-type="dfn" href="#element-location" id="ref-for-element-location①">element location</a> identifying the event. The identified event must belong to the same <a data-link-type="dfn" href="#measure-content" id="ref-for-measure-content①">measure content</a> as the element in which the measure location is given.
    </ol>
-   <div class="example" id="example-59001dcc">
-    <a class="self-link" href="#example-59001dcc"></a> Here are some instances of the measure location syntax: 
+   <div class="example" id="example-39b0e731">
+    <a class="self-link" href="#example-39b0e731"></a> Here are some instances of the measure location syntax: 
     <dl>
      <dt data-md=""><code>0.25</code>
      <dd data-md="">
@@ -2833,8 +2869,8 @@ constraints that they represent:</p>
       <dd>All notated events in a chord share the same duration
      </dl>
      <p>The following example provides the basic skeleton of a <code><a data-link-type="element" href="#elementdef-mnx-common" id="ref-for-elementdef-mnx-common①">mnx-common</a></code> musical body:</p>
-     <div class="example" id="example-01a8c767">
-      <a class="self-link" href="#example-01a8c767"></a> 
+     <div class="example" id="example-999d09a9">
+      <a class="self-link" href="#example-999d09a9"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;mnx-common></span>
   <span class="nt">&lt;global></span>
       ...measure content describing system-wide features...
@@ -2870,8 +2906,8 @@ within <code><a data-link-type="element" href="#elementdef-global" id="ref-for-e
       <p>Typical examples of such content include key signatures, time signatures and
 tempo indications.</p>
       <p><a data-link-type="dfn" href="#notated-event" id="ref-for-notated-event①">Notated events</a> like notes or rests cannot be shared between parts in CWMN. Consequently, <a data-link-type="dfn" href="#sequence-content" id="ref-for-sequence-content②">sequence content</a> cannot occur in the measures within <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global⑧">global</a></code>.</p>
-      <div class="example" id="example-060b560c">
-       <a class="self-link" href="#example-060b560c"></a> 
+      <div class="example" id="example-cb190512">
+       <a class="self-link" href="#example-cb190512"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;global></span>
   <span class="nt">&lt;measure</span> <span class="na">index=</span><span class="s">"1"</span><span class="nt">></span>
     <span class="nt">&lt;directions></span>
@@ -2893,8 +2929,8 @@ having different parts in different meters). The default value of this attribute
 the list of all part IDs.</p>
       <p>No two <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⓪">global</a></code> elements may include the same part in their <code><a data-link-type="element-sub" href="#element-attrdef-global-parts" id="ref-for-element-attrdef-global-parts①">parts</a></code> list, to prevent
 conflicting definitions.</p>
-      <div class="example" id="example-2652bcb7">
-       <a class="self-link" href="#example-2652bcb7"></a> 
+      <div class="example" id="example-2c1dc693">
+       <a class="self-link" href="#example-2c1dc693"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;global</span> <span class="na">parts=</span><span class="s">"p1 p2"</span><span class="nt">></span>
   <span class="nt">&lt;measure</span> <span class="na">index=</span><span class="s">"1"</span><span class="nt">></span>
     <span class="nt">&lt;directions></span>
@@ -2933,8 +2969,8 @@ conflicting definitions.</p>
      </section>
      <p>The <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part⑤">part</a></code> element represents a set of measures which describe a single part
 within the score. The sequence of measures must match the measure found in the <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①①">global</a></code> element applying to this part.</p>
-     <div class="example" id="example-72ca9d01">
-      <a class="self-link" href="#example-72ca9d01"></a> 
+     <div class="example" id="example-a2a45022">
+      <a class="self-link" href="#example-a2a45022"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;part></span>
   <span class="nt">&lt;part-name></span>Violin<span class="nt">&lt;/part-name></span>
   <span class="nt">&lt;part-abbreviation></span>Vln<span class="nt">&lt;/part-abbreviation></span>
@@ -3006,8 +3042,8 @@ for the barline drawn at the end of the measure. Allowed values include:</p>
      </dl>
      <p>The following example shows both direction content and a single-voice sequence
 with two monophonic half notes:</p>
-     <div class="example" id="example-c24ad20c">
-      <a class="self-link" href="#example-c24ad20c"></a> <img src="images/measure-el-1.svg"> 
+     <div class="example" id="example-aa29245b">
+      <a class="self-link" href="#example-aa29245b"></a> <img src="images/measure-el-1.svg"> 
 <pre class="language-xml highlight"><span class="nt">&lt;measure</span> <span class="na">index=</span><span class="s">"2"</span><span class="nt">></span>
   <span class="nt">&lt;directions></span>
     <span class="nt">&lt;dynamics</span> <span class="na">type=</span><span class="s">"f"</span> <span class="na">location=</span><span class="s">"0"</span><span class="nt">/></span>
@@ -3059,8 +3095,8 @@ value of <code><a data-link-type="element-sub" href="#element-attrdef-sequence-v
 information from producers to consumers.</p>
      <p>This example shows a sequence with a single monophonic voice including a series
 of events that together comprise a 4/4 measure. A single staff is used, so no <code><a data-link-type="element-sub" href="#element-attrdef-sequence-staff" id="ref-for-element-attrdef-sequence-staff①">staff</a></code> attribute is present.</p>
-     <div class="example" id="example-4bbb105b">
-      <a class="self-link" href="#example-4bbb105b"></a> 
+     <div class="example" id="example-6b5f50ad">
+      <a class="self-link" href="#example-6b5f50ad"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;measure></span>
     <span class="nt">&lt;sequence></span>
         <span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/2"</span><span class="nt">></span>...<span class="nt">&lt;/event></span>
@@ -3072,8 +3108,8 @@ of events that together comprise a 4/4 measure. A single staff is used, so no <c
      </div>
      <p>Here’s a more complex measure that shows two melodic voices with independent
 rhythms on different staves, each represented by a <code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence⑦">sequence</a></code> element:</p>
-     <div class="example" id="example-207545f1">
-      <a class="self-link" href="#example-207545f1"></a> 
+     <div class="example" id="example-24c397ef">
+      <a class="self-link" href="#example-24c397ef"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;measure></span>
     <span class="nt">&lt;sequence</span> <span class="na">staff=</span><span class="s">"1"</span><span class="nt">></span>
         <span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/2"</span><span class="nt">></span>...<span class="nt">&lt;/event></span>
@@ -3093,8 +3129,8 @@ rhythms on different staves, each represented by a <code><a data-link-type="elem
      </div>
      <p>If the voices in the previous example shared a single polyphonic staff,
 it might look like this instead:</p>
-     <div class="example" id="example-7958adf8">
-      <a class="self-link" href="#example-7958adf8"></a> 
+     <div class="example" id="example-723b271d">
+      <a class="self-link" href="#example-723b271d"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;measure></span>
     <span class="nt">&lt;sequence</span> <span class="na">orient=</span><span class="s">"up"</span><span class="nt">></span>
         <span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/2"</span><span class="nt">></span>...<span class="nt">&lt;/event></span>
@@ -3114,8 +3150,8 @@ it might look like this instead:</p>
      </div>
      <p>The following example shows a typical organization of sequences within a measure
 for a SATB-style grand staff with four voices, two on each staff:</p>
-     <div class="example" id="example-d86eae78">
-      <a class="self-link" href="#example-d86eae78"></a> 
+     <div class="example" id="example-0cbef404">
+      <a class="self-link" href="#example-0cbef404"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;measure></span>
     <span class="nt">&lt;sequence</span> <span class="na">orient=</span><span class="s">"up"</span> <span class="na">staff=</span><span class="s">"1"</span><span class="nt">></span>...<span class="nt">&lt;/sequence></span>
     <span class="nt">&lt;sequence</span> <span class="na">orient=</span><span class="s">"down"</span> <span class="na">staff=</span><span class="s">"1"</span><span class="nt">></span>...<span class="nt">&lt;/sequence></span>
@@ -3127,8 +3163,8 @@ for a SATB-style grand staff with four voices, two on each staff:</p>
      <p>When a <a data-link-type="dfn" href="#direction-content" id="ref-for-direction-content">direction content</a> element is included in a sequence, it acquires
 a measure location identical to that of the following event, or to the end of
 the measure if there are no more events. The following example specifies a <code><a data-link-type="element" href="#elementdef-dynamics" id="ref-for-elementdef-dynamics">dynamics</a></code> element which applies to the start of the following note:</p>
-     <div class="example" id="example-43e724d9">
-      <a class="self-link" href="#example-43e724d9"></a> 
+     <div class="example" id="example-8e016a46">
+      <a class="self-link" href="#example-8e016a46"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;sequence></span>
   <span class="nt">&lt;directions></span>
     <span class="nt">&lt;dynamics</span> <span class="na">location=</span><span class="s">"0"</span> <span class="na">type=</span><span class="s">"mp"</span><span class="nt">/></span>
@@ -3145,8 +3181,8 @@ the measure if there are no more events. The following example specifies a <code
 start of a sequence, in which case they are assigned explicit locations. In
 this example, dynamic changes are specified over the course of a single whole
 note which occupies the entire measure:</p>
-     <div class="example" id="example-09d28259">
-      <a class="self-link" href="#example-09d28259"></a> <img src="images/sequence-el-6.svg"> 
+     <div class="example" id="example-4b4f1cb0">
+      <a class="self-link" href="#example-4b4f1cb0"></a> <img src="images/sequence-el-6.svg"> 
 <pre class="language-xml highlight"><span class="nt">&lt;sequence></span>
   <span class="nt">&lt;directions></span>
     <span class="nt">&lt;dynamics</span> <span class="na">type=</span><span class="s">"f"</span> <span class="na">location=</span><span class="s">"0"</span><span class="nt">/></span>
@@ -3230,7 +3266,9 @@ following procedure, called <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt
           Else, 
           <ol>
            <li> Set the <a data-link-type="dfn" href="#metrical-position" id="ref-for-metrical-position⑤">metrical position</a> of <var>next</var> to <var>sequence cursor</var>. 
-           <li> Add the duration of <var>next</var>, multiplied by the <a data-link-type="dfn" href="#time-modification-ratio" id="ref-for-time-modification-ratio①">time modification ratio</a>, to <var>sequence cursor</var>. 
+           <li>If <var>next</var> has a <code><a data-link-type="element-sub" href="#element-attrdef-event-duration" id="ref-for-element-attrdef-event-duration">duration</a></code> attribute, assign it to <var>event duration</var>.
+           <li>Else, set <var>event duration</var> to <var>next</var>’s <code><a data-link-type="element-sub" href="#element-attrdef-event-value" id="ref-for-element-attrdef-event-value">value</a></code> attribute.
+           <li> Multiply <var>event duration</var> by the <a data-link-type="dfn" href="#time-modification-ratio" id="ref-for-time-modification-ratio①">time modification ratio</a>, and add the result to <var>sequence cursor</var>. 
            <li> If <var>beamed group</var> is a list, append <var>next</var> to <var>beamed group</var>. 
           </ol>
         </ol>
@@ -3271,10 +3309,11 @@ following procedure, called <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt
       <dd><a data-link-type="dfn" href="#event-content" id="ref-for-event-content②">Event content</a>
       <dd><a data-link-type="dfn" href="#interpretation-content" id="ref-for-interpretation-content③">Interpretation content</a>
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute①①">Attributes</a>:
-      <dd><code><a data-link-type="element-sub" href="#element-attrdef-event-value" id="ref-for-element-attrdef-event-value">value</a></code> - the metrical duration of this event
+      <dd><code><a data-link-type="element-sub" href="#element-attrdef-event-value" id="ref-for-element-attrdef-event-value①">value</a></code> - the notated metrical duration of this event
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-event-measure" id="ref-for-element-attrdef-event-measure①">measure</a></code> - optional flag indicating that the event occupies the entire measure.
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-event-orient" id="ref-for-element-attrdef-event-orient">orient</a></code> - optional <a data-link-type="dfn" href="#orientation" id="ref-for-orientation②">orientation</a> of this event 
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-event-staff" id="ref-for-element-attrdef-event-staff">staff</a></code> - optional <a data-link-type="dfn" href="#staff-index" id="ref-for-staff-index③">staff index</a> of this event 
+      <dd><code><a data-link-type="element-sub" href="#element-attrdef-event-duration" id="ref-for-element-attrdef-event-duration①">duration</a></code> - optional performed metrical duration, if different from <code><a data-link-type="element-sub" href="#element-attrdef-event-value" id="ref-for-element-attrdef-event-value②">value</a></code>
       <dt><a data-link-type="dfn" href="#style-properties" id="ref-for-style-properties④">Style properties</a>:
       <dd><a class="property" data-link-type="propdesc" href="#propdef-stem-direction" id="ref-for-propdef-stem-direction">stem-direction</a> - the stem direction of this event
      </dl>
@@ -3286,16 +3325,16 @@ This duration is implicitly multiplied by the current <a data-link-type="dfn" hr
 ratio</a>, as specified by the process of <a data-link-type="dfn" href="#sequence-the-content" id="ref-for-sequence-the-content③">sequencing the content</a> of the
 event’s containing element.</p>
      <p>Here’s an example of a simple event representing a half note:</p>
-     <div class="example" id="example-3cdc152f">
-      <a class="self-link" href="#example-3cdc152f"></a> <img src="images/event-el-1.svg"> 
+     <div class="example" id="example-dc3b21ea">
+      <a class="self-link" href="#example-dc3b21ea"></a> <img src="images/event-el-1.svg"> 
 <pre class="language-xml highlight"><span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/2"</span><span class="nt">></span>
   <span class="nt">&lt;note</span> <span class="na">pitch=</span><span class="s">"C4"</span><span class="nt">/></span>
 <span class="nt">&lt;/event></span>
 </pre>
      </div>
      <p>With more than one <code><a data-link-type="element" href="#elementdef-note" id="ref-for-elementdef-note①">note</a></code>, the event becomes a chord:</p>
-     <div class="example" id="example-58733962">
-      <a class="self-link" href="#example-58733962"></a> <img src="images/event-el-2.svg"> 
+     <div class="example" id="example-12c994e6">
+      <a class="self-link" href="#example-12c994e6"></a> <img src="images/event-el-2.svg"> 
 <pre class="language-xml highlight"><span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/2"</span><span class="nt">></span>
   <span class="nt">&lt;note</span> <span class="na">pitch=</span><span class="s">"C4"</span><span class="nt">/></span>
   <span class="nt">&lt;note</span> <span class="na">pitch=</span><span class="s">"E4"</span><span class="nt">/></span>
@@ -3304,8 +3343,8 @@ event’s containing element.</p>
 </pre>
      </div>
      <p>With a <code><a data-link-type="element" href="#elementdef-rest" id="ref-for-elementdef-rest①">rest</a></code> element alone, the event is a rest:</p>
-     <div class="example" id="example-dffd710f">
-      <a class="self-link" href="#example-dffd710f"></a> <img src="images/event-el-3.svg"> 
+     <div class="example" id="example-dd0c9928">
+      <a class="self-link" href="#example-dd0c9928"></a> <img src="images/event-el-3.svg"> 
 <pre class="language-xml highlight"><span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/2"</span><span class="nt">></span>
   <span class="nt">&lt;rest/></span>
 <span class="nt">&lt;/event></span>
@@ -3317,10 +3356,10 @@ must have a valid <a data-link-type="dfn" href="#note-value" id="ref-for-note-va
 thereof.</p>
      <p>If the optional <dfn class="dfn-paneled" data-dfn-for="event" data-dfn-type="element-attr" data-export="" id="element-attrdef-event-measure"><code>measure</code></dfn> attribute is given as <dfn class="dfn-paneled" data-dfn-for="event/measure" data-dfn-type="attr-value" data-export="" id="attr-valuedef-event-measure-yes"><code>yes</code></dfn>, then the event is a <dfn class="dfn-paneled" data-dfn-for="event" data-dfn-type="dfn" data-lt="whole-measure event" data-noexport="" id="event-whole-measure-event">whole-measure
 event</dfn> which occupies the entire measure. Whole-measure events may not
-specify a <code><a data-link-type="element-sub" href="#element-attrdef-event-value" id="ref-for-element-attrdef-event-value①">value</a></code> attribute, and must either be empty or contain
+specify a <code><a data-link-type="element-sub" href="#element-attrdef-event-value" id="ref-for-element-attrdef-event-value③">value</a></code> attribute, and must either be empty or contain
 exactly one <code><a data-link-type="element" href="#elementdef-rest" id="ref-for-elementdef-rest②">rest</a></code>. Here’s an example:</p>
-     <div class="example" id="example-8b784978">
-      <a class="self-link" href="#example-8b784978"></a> <img src="images/event-el-4.svg"> 
+     <div class="example" id="example-c3fb2866">
+      <a class="self-link" href="#example-c3fb2866"></a> <img src="images/event-el-4.svg"> 
 <pre class="language-xml highlight"><span class="nt">&lt;event</span> <span class="na">measure=</span><span class="s">"yes"</span><span class="nt">></span>
   <span class="nt">&lt;rest/></span>
 <span class="nt">&lt;/event></span>
@@ -3338,8 +3377,8 @@ implementation’s rendering rules.</p>
 is for overriding a default staff assignment at the <code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence①④">sequence</a></code> level, as in
 cross-staff keyboard notation. The following example illustrates a lower-staff
 keyboard voice that temporarily crosses into the upper staff:</p>
-     <div class="example" id="example-8b1d8661">
-      <a class="self-link" href="#example-8b1d8661"></a> 
+     <div class="example" id="example-34c38df6">
+      <a class="self-link" href="#example-34c38df6"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;sequence</span> <span class="na">staff=</span><span class="s">"2"</span><span class="nt">></span>
   <span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/4"</span><span class="nt">></span>
     <span class="nt">&lt;note</span> <span class="na">pitch=</span><span class="s">"C3"</span><span class="nt">/></span>
@@ -3356,12 +3395,45 @@ keyboard voice that temporarily crosses into the upper staff:</p>
 <span class="nt">&lt;/sequence></span>
 </pre>
      </div>
+     <p>The optional <dfn class="dfn-paneled" data-dfn-for="event" data-dfn-type="element-attr" data-export="" id="element-attrdef-event-duration"><code>duration</code></dfn> attribute specifies the
+actual, performed duration of the event, if different from the notated
+value given by <code><a data-link-type="element-sub" href="#element-attrdef-event-value" id="ref-for-element-attrdef-event-value④">value</a></code>.  The duration is specified as a <a data-link-type="dfn" href="#note-value-quantity" id="ref-for-note-value-quantity③">note value quantity</a>,
+which is less constrained than <a data-link-type="dfn" href="#note-value" id="ref-for-note-value④">note value</a>: it may be any desired
+multiple of a note value.</p>
+     <p>The <code><a data-link-type="element-sub" href="#element-attrdef-event-duration" id="ref-for-element-attrdef-event-duration②">duration</a></code> attribute not only alters the performance of the event,
+but determines the amount of time the event takes up in the measure, affecting
+the location of subsequent events in the containing sequence. This can change
+the layout of the measure, as subsequent <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑤">event</a></code>s will occur earlier or
+later as a result and be positioned accordingly (see <a data-link-type="dfn" href="#sequence-the-content" id="ref-for-sequence-the-content④">sequencing the
+content</a>). It also affects the validation  of the measure for metrical
+correctness.</p>
+     <p>This attribute is unlikely to be frequently encountered, but is needed to
+handle cases in which composers employ notated values that are not
+interpreted literally. Some examples follow.</p>
+     <p>One case occurs in Brahms, in which a dotted half is used to specify
+a note that is traditionally understood as occupying the space of 11
+sixteenth notes:</p>
+     <div class="example" id="example-bfc38504">
+      <a class="self-link" href="#example-bfc38504"></a> <img src="images/duration-attr-1.png"> 
+<pre class="language-xml highlight"><span class="nt">&lt;sequence></span>
+  <span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/16"</span><span class="nt">></span>
+    <span class="nt">&lt;rest/></span>
+  <span class="nt">&lt;/event></span>
+  <span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/2d"</span> <span class="na">duration=</span><span class="s">"11/16"</span><span class="nt">></span>
+    <span class="nt">&lt;note</span> <span class="na">pitch=</span><span class="s">"E4"</span><span class="nt">/></span>
+  <span class="nt">&lt;/event></span>
+<span class="nt">&lt;/sequence></span>
+</pre>
+     </div>
+     <p>Because <code><a data-link-type="element-sub" href="#element-attrdef-event-duration" id="ref-for-element-attrdef-event-duration③">duration</a></code> must be specified as a legal note value multiple,
+an enclosing <code><a data-link-type="element" href="#elementdef-tuplet" id="ref-for-elementdef-tuplet⑥">tuplet</a></code> element may be required in some cases to impose an appropriate
+time modification ratio.</p>
     </section>
     <h5 class="heading settled" data-level="5.2.5.2" id="the-tuplet-element"><span class="secno">5.2.5.2. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-export="" id="elementdef-tuplet"><code>tuplet</code></dfn> element</span><a class="self-link" href="#the-tuplet-element"></a></h5>
     <section>
      <dl class="def">
       <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts①②">Contexts</a>:
-      <dd><code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence①⑤">sequence</a></code>, <code><a data-link-type="element" href="#elementdef-tuplet" id="ref-for-elementdef-tuplet⑥">tuplet</a></code>, <code><a data-link-type="element" href="#elementdef-beamed" id="ref-for-elementdef-beamed②">beamed</a></code>
+      <dd><code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence①⑤">sequence</a></code>, <code><a data-link-type="element" href="#elementdef-tuplet" id="ref-for-elementdef-tuplet⑦">tuplet</a></code>, <code><a data-link-type="element" href="#elementdef-beamed" id="ref-for-elementdef-beamed②">beamed</a></code>
       <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model①②">Content Model</a>:
       <dd><a data-link-type="dfn" href="#metadata-content" id="ref-for-metadata-content⑦">Metadata content</a>
       <dd><a data-link-type="dfn" href="#sequence-content" id="ref-for-sequence-content⑤">Sequence content</a>
@@ -3371,19 +3443,22 @@ keyboard voice that temporarily crosses into the upper staff:</p>
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-tuplet-inner" id="ref-for-element-attrdef-tuplet-inner②">inner</a></code> - duration of the enclosed sequence content
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-sequence-orient" id="ref-for-element-attrdef-sequence-orient①">orient</a></code> - optional <a data-link-type="dfn" href="#orientation" id="ref-for-orientation④">orientation</a> of this tuplet 
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-sequence-staff" id="ref-for-element-attrdef-sequence-staff②">staff</a></code> - optional <a data-link-type="dfn" href="#staff-index" id="ref-for-staff-index⑤">staff index</a> of this tuplet 
+      <dd><code><a data-link-type="element-sub" href="#element-attrdef-tuplet-show-number" id="ref-for-element-attrdef-tuplet-show-number">show-number</a></code> - optional control over the display of the tuplet ratio numbers
+      <dd><code><a data-link-type="element-sub" href="#element-attrdef-tuplet-show-value" id="ref-for-element-attrdef-tuplet-show-value">show-value</a></code> - optional control over the display of the tuplet ratio note values
+      <dd><code><a data-link-type="element-sub" href="#element-attrdef-tuplet-bracket" id="ref-for-element-attrdef-tuplet-bracket">bracket</a></code> - optional control over the display of brackets
      </dl>
-     <p>The <code><a data-link-type="element" href="#elementdef-tuplet" id="ref-for-elementdef-tuplet⑦">tuplet</a></code> element organizes a set of musical events that form a distinct
+     <p>The <code><a data-link-type="element" href="#elementdef-tuplet" id="ref-for-elementdef-tuplet⑧">tuplet</a></code> element organizes a set of musical events that form a distinct
 and contiguous run within a &lt;{sequence}, and which are subject to a common <a data-link-type="dfn" href="#time-modification-ratio" id="ref-for-time-modification-ratio⑥">time modification ratio</a> expressed as the quotient of two rational numbers.
-A <code><a data-link-type="element" href="#elementdef-tuplet" id="ref-for-elementdef-tuplet⑧">tuplet</a></code> behaves much like a <code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence①⑥">sequence</a></code> element with respect to its contents.</p>
-     <p>The required attribute <dfn class="dfn-paneled" data-dfn-for="tuplet" data-dfn-type="element-attr" data-export="" id="element-attrdef-tuplet-outer"><code>outer</code></dfn> supplies a <a data-link-type="dfn" href="#note-value-quantity" id="ref-for-note-value-quantity③">note value
+A <code><a data-link-type="element" href="#elementdef-tuplet" id="ref-for-elementdef-tuplet⑨">tuplet</a></code> behaves much like a <code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence①⑥">sequence</a></code> element with respect to its contents.</p>
+     <p>The required attribute <dfn class="dfn-paneled" data-dfn-for="tuplet" data-dfn-type="element-attr" data-export="" id="element-attrdef-tuplet-outer"><code>outer</code></dfn> supplies a <a data-link-type="dfn" href="#note-value-quantity" id="ref-for-note-value-quantity④">note value
 quantity</a> describing both the duration and the units of the tuplet with
 respect to its enclosing context. This is how much time the tuplet occupies in
 the measure or tuplet in which it is placed.</p>
-     <p>The required attribute <dfn class="dfn-paneled" data-dfn-for="tuplet" data-dfn-type="element-attr" data-export="" id="element-attrdef-tuplet-inner"><code>inner</code></dfn> supplies a <a data-link-type="dfn" href="#note-value-quantity" id="ref-for-note-value-quantity④">note value
+     <p>The required attribute <dfn class="dfn-paneled" data-dfn-for="tuplet" data-dfn-type="element-attr" data-export="" id="element-attrdef-tuplet-inner"><code>inner</code></dfn> supplies a <a data-link-type="dfn" href="#note-value-quantity" id="ref-for-note-value-quantity⑤">note value
 quantity</a> describing the total duration and the units of the events within
 the tuplet, as notated.</p>
      <p>The contents of the tuplet are placed into a temporal sequence by performing
-the procedure <a data-link-type="dfn" href="#sequence-the-content" id="ref-for-sequence-the-content④">sequencing the content</a> with a <a data-link-type="dfn" href="#starting-position" id="ref-for-starting-position③">starting position</a> determined by the parent context, and a <a data-link-type="dfn" href="#time-modification-ratio" id="ref-for-time-modification-ratio⑦">time modification ratio</a> equal
+the procedure <a data-link-type="dfn" href="#sequence-the-content" id="ref-for-sequence-the-content⑤">sequencing the content</a> with a <a data-link-type="dfn" href="#starting-position" id="ref-for-starting-position③">starting position</a> determined by the parent context, and a <a data-link-type="dfn" href="#time-modification-ratio" id="ref-for-time-modification-ratio⑦">time modification ratio</a> equal
 to the tuplet’s <code><a data-link-type="element-sub" href="#element-attrdef-tuplet-outer" id="ref-for-element-attrdef-tuplet-outer③">outer</a></code> value divided by its <code><a data-link-type="element-sub" href="#element-attrdef-tuplet-inner" id="ref-for-element-attrdef-tuplet-inner③">inner</a></code> value.
 Following this procedure, the value of the <var>sequence cursor</var> MUST
 equal the value of <code><a data-link-type="element-sub" href="#element-attrdef-tuplet-inner" id="ref-for-element-attrdef-tuplet-inner④">inner</a></code>, or the contents are considered to be in error.</p>
@@ -3393,8 +3468,42 @@ rendering rules.</p>
      <p>The <dfn data-dfn-for="tuplet" data-dfn-type="element-attr" data-export="" id="element-attrdef-tuplet-staff"><code>staff</code><a class="self-link" href="#element-attrdef-tuplet-staff"></a></dfn> attribute provides a specific <a data-link-type="dfn" href="#staff-index" id="ref-for-staff-index⑥">staff index</a> for all content within this tuplet.  If not provided, the
 staff index is determined automatically according to the implementation’s
 rendering rules.</p>
-     <div class="example" id="example-cbff830e">
-      <a class="self-link" href="#example-cbff830e"></a> 
+     <p>The optional <dfn class="dfn-paneled" data-dfn-for="tuplet" data-dfn-type="element-attr" data-export="" id="element-attrdef-tuplet-show-number"><code>show-number</code></dfn> attribute controls the display
+of the quantity of inner and outer note value units for the tuplet. Permissible values
+include:</p>
+     <dl>
+      <dt><dfn class="dfn-paneled" data-dfn-for="tuplet/show-number" data-dfn-type="attr-value" data-export="" id="attr-valuedef-tuplet-show-number-none"><code>none</code></dfn>
+      <dd>Do not show any tuplet number.
+      <dt><dfn data-dfn-for="tuplet/show-number" data-dfn-type="attr-value" data-export="" id="attr-valuedef-tuplet-show-number-inner"><code>inner</code><a class="self-link" href="#attr-valuedef-tuplet-show-number-inner"></a></dfn> (default)
+      <dd>Display only the numerator of the tuplet’s <code><a data-link-type="element-sub" href="#element-attrdef-tuplet-inner" id="ref-for-element-attrdef-tuplet-inner⑤">inner</a></code> attribute.
+      <dt><dfn data-dfn-for="tuplet/show-number" data-dfn-type="attr-value" data-export="" id="attr-valuedef-tuplet-show-number-both"><code>both</code><a class="self-link" href="#attr-valuedef-tuplet-show-number-both"></a></dfn>
+      <dd>Display the numerators of the tuplet’s <code><a data-link-type="element-sub" href="#element-attrdef-tuplet-inner" id="ref-for-element-attrdef-tuplet-inner⑥">inner</a></code> and <code><a data-link-type="element-sub" href="#element-attrdef-tuplet-outer" id="ref-for-element-attrdef-tuplet-outer④">outer</a></code> attributes.
+     </dl>
+     <p>The optional <dfn class="dfn-paneled" data-dfn-for="tuplet" data-dfn-type="element-attr" data-export="" id="element-attrdef-tuplet-show-value"><code>show-value</code></dfn> attribute controls the display
+of the note value units used inside and outside the tuplet. Permissible values
+include:</p>
+     <dl>
+      <dt><dfn data-dfn-for="tuplet/show-value" data-dfn-type="attr-value" data-export="" id="attr-valuedef-tuplet-show-value-none"><code>none</code><a class="self-link" href="#attr-valuedef-tuplet-show-value-none"></a></dfn> (default)
+      <dd>Do not show any tuplet units.
+      <dt><dfn data-dfn-for="tuplet/show-value" data-dfn-type="attr-value" data-export="" id="attr-valuedef-tuplet-show-value-inner"><code>inner</code><a class="self-link" href="#attr-valuedef-tuplet-show-value-inner"></a></dfn>
+      <dd>Display only the note value unit of the tuplet’s <code><a data-link-type="element-sub" href="#element-attrdef-tuplet-inner" id="ref-for-element-attrdef-tuplet-inner⑦">inner</a></code> attribute.
+      <dt><dfn data-dfn-for="tuplet/show-value" data-dfn-type="attr-value" data-export="" id="attr-valuedef-tuplet-show-value-both"><code>both</code><a class="self-link" href="#attr-valuedef-tuplet-show-value-both"></a></dfn>
+      <dd>Display both the note value units of the tuplet’s <code><a data-link-type="element-sub" href="#element-attrdef-tuplet-inner" id="ref-for-element-attrdef-tuplet-inner⑧">inner</a></code> and <code><a data-link-type="element-sub" href="#element-attrdef-tuplet-outer" id="ref-for-element-attrdef-tuplet-outer⑤">outer</a></code> attributes.
+     </dl>
+     <p>The optional <dfn class="dfn-paneled" data-dfn-for="tuplet" data-dfn-type="element-attr" data-export="" id="element-attrdef-tuplet-bracket"><code>bracket</code></dfn> attribute controls the display of
+a bracket in conjunction with the tuplet. 
+It is disregarded if <code><a data-link-type="element-sub" href="#element-attrdef-tuplet-show-number" id="ref-for-element-attrdef-tuplet-show-number①">show-number</a></code> has a value of <code><a data-link-type="attr-value" href="#attr-valuedef-tuplet-show-number-none" id="ref-for-attr-valuedef-tuplet-show-number-none">none</a></code>.
+Values include:</p>
+     <dl>
+      <dt><dfn data-dfn-for="tuplet/bracket" data-dfn-type="attr-value" data-export="" id="attr-valuedef-tuplet-bracket-auto"><code>auto</code><a class="self-link" href="#attr-valuedef-tuplet-bracket-auto"></a></dfn> (default)
+      <dd>A bracket is shown for the tuplet if and only if the notes are unbeamed.
+      <dt><dfn data-dfn-for="tuplet/bracket" data-dfn-type="attr-value" data-export="" id="attr-valuedef-tuplet-bracket-no"><code>no</code><a class="self-link" href="#attr-valuedef-tuplet-bracket-no"></a></dfn>
+      <dd>Do not display a bracket.
+      <dt><dfn data-dfn-for="tuplet/bracket" data-dfn-type="attr-value" data-export="" id="attr-valuedef-tuplet-bracket-yes"><code>yes</code><a class="self-link" href="#attr-valuedef-tuplet-bracket-yes"></a></dfn>
+      <dd>Always display a bracket.
+     </dl>
+     <div class="example" id="example-adbb99d3">
+      <a class="self-link" href="#example-adbb99d3"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;sequence></span>
     ...preceding events in sequence...
     <span class="nt">&lt;tuplet</span> <span class="na">inner=</span><span class="s">"3/8"</span> <span class="na">outer=</span><span class="s">"1/4"</span><span class="nt">></span>
@@ -3411,7 +3520,7 @@ rendering rules.</p>
     <section>
      <dl class="def">
       <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts①③">Contexts</a>:
-      <dd><code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence①⑦">sequence</a></code>, <code><a data-link-type="element" href="#elementdef-tuplet" id="ref-for-elementdef-tuplet⑨">tuplet</a></code>, <code><a data-link-type="element" href="#elementdef-grace" id="ref-for-elementdef-grace①">grace</a></code>, <code><a data-link-type="element" href="#elementdef-beamed" id="ref-for-elementdef-beamed③">beamed</a></code>
+      <dd><code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence①⑦">sequence</a></code>, <code><a data-link-type="element" href="#elementdef-tuplet" id="ref-for-elementdef-tuplet①⓪">tuplet</a></code>, <code><a data-link-type="element" href="#elementdef-grace" id="ref-for-elementdef-grace①">grace</a></code>, <code><a data-link-type="element" href="#elementdef-beamed" id="ref-for-elementdef-beamed③">beamed</a></code>
       <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model①③">Content Model</a>:
       <dd><a data-link-type="dfn" href="#metadata-content" id="ref-for-metadata-content⑧">Metadata content</a>
       <dd><a data-link-type="dfn" href="#sequence-content" id="ref-for-sequence-content⑥">Sequence content</a>
@@ -3433,8 +3542,8 @@ overridden using style properties, but do not amount to semantic markup.</p>
 suffices; there is no need to describe individual beams within the beamed
 group, such as the distinct beam that joins the two 16th notes in the second
 group:</p>
-     <div class="example" id="example-055a42f6">
-      <a class="self-link" href="#example-055a42f6"></a> 
+     <div class="example" id="example-0c68d55a">
+      <a class="self-link" href="#example-0c68d55a"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;sequence></span>
     <span class="nt">&lt;beamed></span>
       <span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/8"</span><span class="nt">></span>...<span class="nt">&lt;/event></span>
@@ -3459,8 +3568,8 @@ each, which are in turn placed within a higher-parent beamed group. Each of
 the two subgroups has a note value of one eighth note for beaming purposes,
 and so the subgroups are themselves connected by a single beam to constitute
 the larger group:</p>
-     <div class="example" id="example-dc0536c4">
-      <a class="self-link" href="#example-dc0536c4"></a> 
+     <div class="example" id="example-6c8f218e">
+      <a class="self-link" href="#example-6c8f218e"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;beamed></span>
   <span class="nt">&lt;beamed</span> <span class="na">value=</span><span class="s">"/8"</span><span class="nt">></span>
     <span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/32"</span><span class="nt">></span>...<span class="nt">&lt;/event></span>
@@ -3482,8 +3591,8 @@ beamed group, and so has no consequences unless beamed groups are nested.</p>
      <p>Indirect nesting of beam groups also occurs. One example is a set of grace
 notes sharing their own beam, preceding a regular non-grace note within a
 larger beamed group:</p>
-     <div class="example" id="example-1dcc0876">
-      <a class="self-link" href="#example-1dcc0876"></a> 
+     <div class="example" id="example-0331f92e">
+      <a class="self-link" href="#example-0331f92e"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;beamed></span>
   <span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/8"</span><span class="nt">></span>...<span class="nt">&lt;/event></span>
   <span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/8"</span><span class="nt">></span>...<span class="nt">&lt;/event></span>
@@ -3508,8 +3617,8 @@ beamed group in its measure.</p>
      <p>A continuation of a prior beamed group, may itself have a continuation. Thus,
 beamed groups can continue throughout a part without interruption if desired.</p>
      <p>The following example illustrates a beam that crosses a measure boundary:</p>
-     <div class="example" id="example-077e5491">
-      <a class="self-link" href="#example-077e5491"></a> 
+     <div class="example" id="example-a689aff1">
+      <a class="self-link" href="#example-a689aff1"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;measure</span> <span class="na">index=</span><span class="s">"9"</span><span class="nt">></span>
   <span class="nt">&lt;sequence></span>
       ...preceding sequence content...
@@ -3535,7 +3644,7 @@ beamed groups can continue throughout a part without interruption if desired.</p
     <section>
      <dl class="def">
       <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts①④">Contexts</a>:
-      <dd><code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence①⑧">sequence</a></code>, <code><a data-link-type="element" href="#elementdef-tuplet" id="ref-for-elementdef-tuplet①⓪">tuplet</a></code>
+      <dd><code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence①⑧">sequence</a></code>, <code><a data-link-type="element" href="#elementdef-tuplet" id="ref-for-elementdef-tuplet①①">tuplet</a></code>
       <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model①④">Content Model</a>:
       <dd>None.
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute①④">Attributes</a>:
@@ -3544,16 +3653,16 @@ beamed groups can continue throughout a part without interruption if desired.</p
      <p>The <code><a data-link-type="element" href="#elementdef-forward" id="ref-for-elementdef-forward②">forward</a></code> element represents a discrete period of time within a sequence
 in which no sequence content occurs. It embodies the idea of blank space
 within a measure.</p>
-     <p>The <dfn class="dfn-paneled" data-dfn-for="forward" data-dfn-type="element-attr" data-export="" id="element-attrdef-forward-duration"><code>duration</code></dfn> attribute specifies a <a data-link-type="dfn" href="#note-value-quantity" id="ref-for-note-value-quantity⑤">note value
+     <p>The <dfn class="dfn-paneled" data-dfn-for="forward" data-dfn-type="element-attr" data-export="" id="element-attrdef-forward-duration"><code>duration</code></dfn> attribute specifies a <a data-link-type="dfn" href="#note-value-quantity" id="ref-for-note-value-quantity⑥">note value
 quantity</a> that provides the length of this <code><a data-link-type="element" href="#elementdef-forward" id="ref-for-elementdef-forward③">forward</a></code>.</p>
-     <p class="note" role="note"><span>NOTE:</span> In contrast to <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑤">event</a></code>'s <code><a data-link-type="element-sub" href="#element-attrdef-event-value" id="ref-for-element-attrdef-event-value②">value</a></code> attribute, the <code><a data-link-type="element-sub" href="#element-attrdef-forward-duration" id="ref-for-element-attrdef-forward-duration①">duration</a></code> attribute is not constrained to a single note value, but
+     <p class="note" role="note"><span>NOTE:</span> In contrast to <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑥">event</a></code>'s <code><a data-link-type="element-sub" href="#element-attrdef-event-value" id="ref-for-element-attrdef-event-value⑤">value</a></code> attribute, the <code><a data-link-type="element-sub" href="#element-attrdef-forward-duration" id="ref-for-element-attrdef-forward-duration①">duration</a></code> attribute is not constrained to a single note value, but
 may be a multiple of one.</p>
     </section>
     <h5 class="heading settled" data-level="5.2.5.5" id="the-grace-element"><span class="secno">5.2.5.5. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-export="" id="elementdef-grace"><code>grace</code></dfn> element</span><a class="self-link" href="#the-grace-element"></a></h5>
     <section>
      <dl class="def">
       <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts①⑤">Contexts</a>:
-      <dd><code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence①⑨">sequence</a></code>, <code><a data-link-type="element" href="#elementdef-tuplet" id="ref-for-elementdef-tuplet①①">tuplet</a></code>
+      <dd><code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence①⑨">sequence</a></code>, <code><a data-link-type="element" href="#elementdef-tuplet" id="ref-for-elementdef-tuplet①②">tuplet</a></code>
       <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model①⑤">Content Model</a>:
       <dd><a data-link-type="dfn" href="#metadata-content" id="ref-for-metadata-content⑨">Metadata content</a>
       <dd><a data-link-type="dfn" href="#sequence-content" id="ref-for-sequence-content⑦">Sequence content</a>
@@ -3589,8 +3698,8 @@ values according to the performance characteristics given by <code><a data-link-
 even though grace notes in the same run technically share the same <a data-link-type="dfn" href="#measure-location" id="ref-for-measure-location④">measure
 location</a>.</p>
      <p>The following example illustrates a run of two grace notes up to a quarter note.</p>
-     <div class="example" id="example-5e4296e8">
-      <a class="self-link" href="#example-5e4296e8"></a> 
+     <div class="example" id="example-9d34ca85">
+      <a class="self-link" href="#example-9d34ca85"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;sequence></span>
     ...preceding event content...
     <span class="nt">&lt;grace></span>
@@ -3610,7 +3719,7 @@ of a single event, that is performed at a distinct time.</p>
     <section>
      <dl class="def">
       <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts①⑥">Contexts</a>:
-      <dd><code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑥">event</a></code>
+      <dd><code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑦">event</a></code>
       <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model①⑥">Content Model</a>:
       <dd><a data-link-type="dfn" href="#metadata-content" id="ref-for-metadata-content①⓪">Metadata content</a>
       <dd><a data-link-type="dfn" href="#note-content" id="ref-for-note-content">Note content</a>
@@ -3625,7 +3734,7 @@ of a single event, that is performed at a distinct time.</p>
 information pertaining to the note itself rather than to its containing event.</p>
      <p>The <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-export="" id="element-attrdef-note-pitch"><code>pitch</code></dfn> attribute supplies the pitch of the note
 as a <a data-link-type="dfn" href="#chromatic-pitch" id="ref-for-chromatic-pitch①">chromatic pitch</a>, using the <a data-link-type="dfn" href="#rules-for-parsing-a-chromatic-pitch" id="ref-for-rules-for-parsing-a-chromatic-pitch">rules for parsing a chromatic pitch</a>.</p>
-     <p>Optionally, the <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-export="" id="element-attrdef-note-staff"><code>staff</code></dfn> attribute supplies a <a data-link-type="dfn" href="#staff-index" id="ref-for-staff-index⑦">staff index</a> for this note where this differs from the staff index which applies to the containing <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑦">event</a></code> as a whole.</p>
+     <p>Optionally, the <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-export="" id="element-attrdef-note-staff"><code>staff</code></dfn> attribute supplies a <a data-link-type="dfn" href="#staff-index" id="ref-for-staff-index⑦">staff index</a> for this note where this differs from the staff index which applies to the containing <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑧">event</a></code> as a whole.</p>
      <p>The <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-export="" id="element-attrdef-note-accidental"><code>accidental</code></dfn> attribute supplies an accidental value
 for this note. In the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard①">standard</a></code> MNX-Common profile, this attribute
 must match the <a data-link-type="dfn" href="#alteration" id="ref-for-alteration">alteration</a> of the <code><a data-link-type="element-sub" href="#element-attrdef-note-pitch" id="ref-for-element-attrdef-note-pitch①">pitch</a></code> attribute. Omission of
@@ -3637,8 +3746,8 @@ context.</p>
 editorial indications. Handle the case of "explicit" accidentals that should
 be preserved even if the chromatic context is changed by edits.)</em></p>
      <p><strong class="advisement"> The following features are not supported by the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard②">standard</a></code> MNX-Common profile.</strong></p>
-     <p>The <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-export="" id="element-attrdef-note-value"><code>value</code></dfn> attribute optionally supplies a <a data-link-type="dfn" href="#note-value" id="ref-for-note-value④">note
-value</a> for this note, where this differs from the containing <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑧">event</a></code>'s
+     <p>The <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-export="" id="element-attrdef-note-value"><code>value</code></dfn> attribute optionally supplies a <a data-link-type="dfn" href="#note-value" id="ref-for-note-value⑤">note
+value</a> for this note, where this differs from the containing <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑨">event</a></code>'s
 note value.  The value of the note must be less than or equal to the value of
 the containing event.</p>
     </section>
@@ -3646,7 +3755,7 @@ the containing event.</p>
     <section>
      <dl class="def">
       <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts①⑦">Contexts</a>:
-      <dd><code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑨">event</a></code>
+      <dd><code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①⓪">event</a></code>
       <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model①⑦">Content Model</a>:
       <dd><a data-link-type="dfn" href="#metadata-content" id="ref-for-metadata-content①①">Metadata content</a>
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute①⑦">Attributes</a>:
@@ -3699,7 +3808,7 @@ on this attribute vary from one liaison to another.</p>
      </dl>
      <p>The <code><a data-link-type="element" href="#elementdef-tied" id="ref-for-elementdef-tied">tied</a></code> element is used to indicate that a note is tied to a successor <code><a data-link-type="element" href="#elementdef-note" id="ref-for-elementdef-note⑤">note</a></code> element.</p>
      <p>If the <code><a data-link-type="element-sub" href="#element-attrdef-liaisons-target" id="ref-for-element-attrdef-liaisons-target①">target</a></code> attribute is provided, it must specify the element
-ID of a <code><a data-link-type="element" href="#elementdef-note" id="ref-for-elementdef-note⑥">note</a></code> which lies in the same part, and whose containing <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①⓪">event</a></code> begins directly after the end of the of this note’s event. The step, alteration and
+ID of a <code><a data-link-type="element" href="#elementdef-note" id="ref-for-elementdef-note⑥">note</a></code> which lies in the same part, and whose containing <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①①">event</a></code> begins directly after the end of the of this note’s event. The step, alteration and
 octave values for the target note must be identical to this one.</p>
      <p>If <code><a data-link-type="element-sub" href="#element-attrdef-liaisons-target" id="ref-for-element-attrdef-liaisons-target②">target</a></code> is not provided, the tie does not connect to a
 particular destination note. In this case <dfn class="dfn-paneled" data-dfn-for="tied" data-dfn-type="element-attr" data-export="" id="element-attrdef-tied-location"><code>location</code></dfn> attribute may be used to specify the <a data-link-type="dfn" href="#measure-location" id="ref-for-measure-location⑤">measure location</a> of the other end
@@ -3727,8 +3836,8 @@ at a conventionally short distance after the current note.</p>
 consumer implementations must not search for a matching end note of the same
 pitch.</p>
      <p>Examples:</p>
-     <div class="example" id="example-75359ca8">
-      <a class="self-link" href="#example-75359ca8"></a> 
+     <div class="example" id="example-1e40b0c3">
+      <a class="self-link" href="#example-1e40b0c3"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;sequence></span>
   <span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/4"</span><span class="nt">></span>
     <span class="nt">&lt;note</span> <span class="na">pitch=</span><span class="s">"C4"</span><span class="nt">></span>
@@ -3774,7 +3883,7 @@ to the content within this sequence.</p>
     </dl>
     <p>All directions within a <code><a data-link-type="element" href="#elementdef-directions" id="ref-for-elementdef-directions⑧">directions</a></code> parent element must be given an explicit <a data-link-type="dfn" href="#measure-location" id="ref-for-measure-location⑦">measure location</a> by supplying a <dfn class="dfn-paneled" data-dfn-for="direction" data-dfn-type="element-attr" data-export="" dfn-="" id="element-attrdef-direction-location"><code>location</code></dfn> attribute. The default measure location is zero.</p>
     <p>Conversely, directions occurring within <a data-link-type="dfn" href="#sequence-content" id="ref-for-sequence-content⑧">sequence content</a> must omit this
-attribute as their location is determined during the procedure of <a data-link-type="dfn" href="#sequence-the-content" id="ref-for-sequence-the-content⑤">sequencing the content</a>.</p>
+attribute as their location is determined during the procedure of <a data-link-type="dfn" href="#sequence-the-content" id="ref-for-sequence-the-content⑥">sequencing the content</a>.</p>
     <p>The optional <dfn class="dfn-paneled" data-dfn-for="direction" data-dfn-type="element-attr" data-export="" id="element-attrdef-direction-staff"><code>staff</code></dfn> attribute
 designates the staff index to which this direction applies, if such a
 designation makes sense.  If not provided, the orientation is inherited from
@@ -3818,8 +3927,8 @@ dynamics are supported:</p>
      </dl>
       The <code><a data-link-type="element" href="#elementdef-instruction" id="ref-for-elementdef-instruction">instruction</a></code> element describes a run of text that is presented in a visual style
 consistent with general instructions to the performer. 
-     <div class="example" id="example-73da65b8">
-      <a class="self-link" href="#example-73da65b8"></a> 
+     <div class="example" id="example-935c4d56">
+      <a class="self-link" href="#example-935c4d56"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;measure></span>
   <span class="nt">&lt;directions></span>
     <span class="nt">&lt;instruction></span>Molto adagio<span class="nt">&lt;/instruction></span>
@@ -3841,8 +3950,8 @@ consistent with general instructions to the performer.
      </dl>
      <p>The <code><a data-link-type="element" href="#elementdef-expression" id="ref-for-elementdef-expression">expression</a></code> element describes a run of text that is presented in a visual style
 consistent with describing musical expression.</p>
-     <div class="example" id="example-bcc061f6">
-      <a class="self-link" href="#example-bcc061f6"></a> 
+     <div class="example" id="example-ed2465fe">
+      <a class="self-link" href="#example-ed2465fe"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;sequence></span>
   <span class="nt">&lt;directions></span>
     <span class="nt">&lt;dirgroup</span> <span class="na">location=</span><span class="s">"0"</span><span class="nt">></span>
@@ -4018,8 +4127,8 @@ measures, until changed.</p>
 inside <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⑥">global</a></code> measure content, not within a <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①②">part</a></code>.</p>
      <p>The required <dfn class="dfn-paneled" data-dfn-for="time" data-dfn-type="element-attr" data-export="" id="element-attrdef-time-signature"><code>signature</code></dfn> attribute supplies a <a data-link-type="dfn" href="#time-signature" id="ref-for-time-signature②">time signature</a> that gives the time signature for this measure and for subsequent measures. By default this signature is displayed in normative rendering.</p>
      <p>Here is an example of a 4/4 time signature:</p>
-     <div class="example" id="example-bb46b951">
-      <a class="self-link" href="#example-bb46b951"></a> 
+     <div class="example" id="example-95d59963">
+      <a class="self-link" href="#example-95d59963"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;global></span>
   <span class="nt">&lt;measure></span>
     <span class="nt">&lt;directions></span>
@@ -4037,8 +4146,8 @@ only</em>, where this value differs from <code><a data-link-type="element-sub" h
 for anacruses and for shortened measures prior to a repeat or jump back to an anacrusis.</p>
      <p>For example, here is an example of a 3/4 time signature beginning with an anacrusis
 or pickup measure containing a single beat:</p>
-     <div class="example" id="example-255d4da6">
-      <a class="self-link" href="#example-255d4da6"></a> 
+     <div class="example" id="example-a6d5b50a">
+      <a class="self-link" href="#example-a6d5b50a"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;global></span>
   <span class="nt">&lt;measure></span>
     <span class="nt">&lt;directions></span>
@@ -4073,7 +4182,7 @@ The tempo is rendered as a conventional pairing of a small beat unit notation eq
 metronome marking.</p>
      <p>In the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard⑤">standard</a></code> MNX-Common profile, a <code><a data-link-type="element" href="#elementdef-tempo" id="ref-for-elementdef-tempo①">tempo</a></code> element may only appear
 inside <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⑦">global</a></code> measure content, not within a <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①③">part</a></code>.</p>
-     <p>The required <dfn class="dfn-paneled" data-dfn-for="tempo" data-dfn-type="element-attr" data-export="" id="element-attrdef-tempo-value"><code>value</code></dfn> attribute supplies a <a data-link-type="dfn" href="#note-value" id="ref-for-note-value⑤">note value</a> which is asserted to occur with a frequency of <dfn class="dfn-paneled" data-dfn-for="tempo" data-dfn-type="element-attr" data-export="" id="element-attrdef-tempo-bpm"><code>bpm</code></dfn> times per
+     <p>The required <dfn class="dfn-paneled" data-dfn-for="tempo" data-dfn-type="element-attr" data-export="" id="element-attrdef-tempo-value"><code>value</code></dfn> attribute supplies a <a data-link-type="dfn" href="#note-value" id="ref-for-note-value⑥">note value</a> which is asserted to occur with a frequency of <dfn class="dfn-paneled" data-dfn-for="tempo" data-dfn-type="element-attr" data-export="" id="element-attrdef-tempo-bpm"><code>bpm</code></dfn> times per
 minute, which is a <a data-link-type="dfn" href="https://www.w3.org/TR/html5/infrastructure.html#floating-point-numbers" id="ref-for-floating-point-numbers③">valid floating-point number</a>.</p>
      <p>To notate tempi using arbitrary text, various approaches may be taken,
 singly or in combination:</p>
@@ -4184,17 +4293,17 @@ generate.</p>
      <p>Within <code><a data-link-type="element" href="#elementdef-interpret" id="ref-for-elementdef-interpret①">interpret</a></code>, a set of child <code><a data-link-type="element" href="#elementdef-performance-event" id="ref-for-elementdef-performance-event①">performance-event</a></code> and <code><a data-link-type="element" href="#elementdef-performance-tempo" id="ref-for-elementdef-performance-tempo②">performance-tempo</a></code> elements supply
 this performance information. The <a data-link-type="dfn" href="#performance-tempo-notated-time-unit" id="ref-for-performance-tempo-notated-time-unit">notated time units</a> for all such
 events are equal to the same units used by the containing element to represent
-note values, and are thus modified in the case of elements for which the <a data-link-type="dfn" href="#time-modification-ratio" id="ref-for-time-modification-ratio⑧">time modification ratio</a> is not unity, such as <code><a data-link-type="element" href="#elementdef-tuplet" id="ref-for-elementdef-tuplet①②">tuplet</a></code>.</p>
+note values, and are thus modified in the case of elements for which the <a data-link-type="dfn" href="#time-modification-ratio" id="ref-for-time-modification-ratio⑧">time modification ratio</a> is not unity, such as <code><a data-link-type="element" href="#elementdef-tuplet" id="ref-for-elementdef-tuplet①③">tuplet</a></code>.</p>
      <p>The notated time coordinate of zero refers to the measure location of the
 containing element. All performance event times within <code><a data-link-type="element" href="#elementdef-interpret" id="ref-for-elementdef-interpret②">interpret</a></code> are thus
 relative to this origin. Negative event times are permitted, and specify
 performance events which precede the location of the containing element.</p>
-     <p>When <code><a data-link-type="element" href="#elementdef-interpret" id="ref-for-elementdef-interpret③">interpret</a></code> occurs within an <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①①">event</a></code> or <code><a data-link-type="element" href="#elementdef-note" id="ref-for-elementdef-note⑦">note</a></code> element, all <code><a data-link-type="element" href="#elementdef-performance-event" id="ref-for-elementdef-performance-event②">performance-event</a></code> attributes are defaulted to the values that would be
+     <p>When <code><a data-link-type="element" href="#elementdef-interpret" id="ref-for-elementdef-interpret③">interpret</a></code> occurs within an <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①②">event</a></code> or <code><a data-link-type="element" href="#elementdef-note" id="ref-for-elementdef-note⑦">note</a></code> element, all <code><a data-link-type="element" href="#elementdef-performance-event" id="ref-for-elementdef-performance-event②">performance-event</a></code> attributes are defaulted to the values that would be
 generated by an implementation for the first note in the containing element.</p>
      <p>As one example, consider this use of <code><a data-link-type="element" href="#elementdef-interpret" id="ref-for-elementdef-interpret④">interpret</a></code> to play a beamed pair of eighth
 notes in a swung triplet rhythm instead:</p>
-     <div class="example" id="example-e0a09ea7">
-      <a class="self-link" href="#example-e0a09ea7"></a> 
+     <div class="example" id="example-a0871961">
+      <a class="self-link" href="#example-a0871961"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;beamed></span>
   <span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/8"</span><span class="nt">></span>
     <span class="nt">&lt;note</span> <span class="na">pitch=</span><span class="s">"C4"</span><span class="nt">/></span>
@@ -4214,8 +4323,8 @@ the interpretation could be expressed at a per-event level as in the following
 example. Note that the <code><a data-link-type="element-sub" href="#element-attrdef-performance-event-pitch" id="ref-for-element-attrdef-performance-event-pitch">pitch</a></code> attributes no longer require
 specification, and that the time origin for the second note now relates to its
 default onset time.</p>
-     <div class="example" id="example-14922156">
-      <a class="self-link" href="#example-14922156"></a> 
+     <div class="example" id="example-f5a39812">
+      <a class="self-link" href="#example-f5a39812"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;sequence></span>
   ...preceding sequence content...
   <span class="nt">&lt;event</span> <span class="na">value=</span><span class="s">"/8"</span><span class="nt">></span>
@@ -4236,8 +4345,8 @@ default onset time.</p>
      </div>
      <p>As a final example, this case uses an <code><a data-link-type="element" href="#elementdef-instruction" id="ref-for-elementdef-instruction②">instruction</a></code> element to specify
 a tempo via an explicit interpretation:</p>
-     <div class="example" id="example-06fcf409">
-      <a class="self-link" href="#example-06fcf409"></a> 
+     <div class="example" id="example-2689f1f0">
+      <a class="self-link" href="#example-2689f1f0"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;sequence></span>
   <span class="nt">&lt;directions></span>
     <span class="nt">&lt;instruction</span> <span class="na">class=</span><span class="s">"tempo"</span><span class="nt">></span>
@@ -4286,8 +4395,8 @@ procedure for <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="
      The <code><a data-link-type="element-sub" href="#element-attrdef-global-style" id="ref-for-element-attrdef-global-style①">style</a></code> attribute supplies the value of one or more explicit style properties
 which apply to its parent element. The attribute value must be a valid <a data-link-type="dfn" href="#style-property-list" id="ref-for-style-property-list②">style property list</a>. 
     <p>Here’s an example of a style property definition adding color to a note:</p>
-    <div class="example" id="example-04339a98">
-     <a class="self-link" href="#example-04339a98"></a> 
+    <div class="example" id="example-4330a280">
+     <a class="self-link" href="#example-4330a280"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;note</span> <span class="na">pitch=</span><span class="s">"C4"</span> <span class="na">style=</span><span class="s">"color: #000099;"</span><span class="nt">/></span>
 </pre>
     </div>
@@ -4302,14 +4411,14 @@ space-separated tokens</a>. All style property values supplied by each class
 definition are applied to the element, in the order in which they were defined.</p>
      <p>For example, the following applies a class named <code>emphasis</code> to
 a note:</p>
-     <div class="example" id="example-64cffd4d">
-      <a class="self-link" href="#example-64cffd4d"></a> 
+     <div class="example" id="example-a4014398">
+      <a class="self-link" href="#example-a4014398"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;note</span> <span class="na">class=</span><span class="s">"emphasis"</span> <span class="na">pitch=</span><span class="s">"C4"</span><span class="nt">/></span>
 </pre>
      </div>
      <p>In this case, two different classes <code>emphasis</code> and <code>alternate</code> are applied, along with a local overriding color:</p>
-     <div class="example" id="example-e4cacc4e">
-      <a class="self-link" href="#example-e4cacc4e"></a> 
+     <div class="example" id="example-60a826ec">
+      <a class="self-link" href="#example-60a826ec"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;note</span> <span class="na">class=</span><span class="s">"emphasis alternate"</span> <span class="na">style=</span><span class="s">"color: blue;"</span> <span class="na">pitch=</span><span class="s">"C4"</span><span class="nt">/></span>
 </pre>
      </div>
@@ -4411,7 +4520,7 @@ descendants interact with the layout of the document.</p>
      <p>The <a class="property" data-link-type="propdesc" href="#propdef-visibility" id="ref-for-propdef-visibility">visibility</a> property controls whether an element’s contents (including
 all of its descendants) are displayed by a consumer or not.</p>
      <p>In contrast to <a class="property" data-link-type="propdesc" href="#propdef-display" id="ref-for-propdef-display②">display</a> with a value of <a class="css" data-link-type="maybe" href="#valdef-display-none" id="ref-for-valdef-display-none②">none</a>, a <a class="property" data-link-type="propdesc" href="#propdef-visibility" id="ref-for-propdef-visibility①">visibility</a> value of <a class="css" data-link-type="maybe" href="#valdef-visibility-hidden" id="ref-for-valdef-visibility-hidden①">hidden</a> does not affect the layout of any other
-elements in the document. For example, the contents of a hidden <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①②">event</a></code> will not be shown, but the place where the event would have appeared
+elements in the document. For example, the contents of a hidden <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①③">event</a></code> will not be shown, but the place where the event would have appeared
 will still occupy space in the containing measure.</p>
      <p>Permitted values include:</p>
      <ul>
@@ -4491,9 +4600,25 @@ proceeding downwards in a positive direction.
      <p>The special values <dfn class="dfn-paneled css" data-dfn-for="y" data-dfn-type="value" data-export="" id="valdef-y-above">above</dfn> and <dfn class="dfn-paneled css" data-dfn-for="y" data-dfn-type="value" data-export="" id="valdef-y-below">below</dfn> delegate
 exact positioning of the direction to the implementation and request that
 the direction be placed respectively above or below the staff.</p>
-     <p><em>TBD: describe rendering model and regisration</em></p>
+     <p><em>TBD: describe rendering model and registration</em></p>
     </section>
-    <h5 class="heading settled" data-level="5.3.3.10" id="the-stem-direction-property"><span class="secno">5.3.3.10. </span><span class="content">The <dfn class="dfn-paneled css" data-dfn-type="property" data-export="" id="propdef-stem-direction"><code>stem-direction</code></dfn> property</span><a class="self-link" href="#the-stem-direction-property"></a></h5>
+    <h5 class="heading settled" data-level="5.3.3.10" id="the-location-property"><span class="secno">5.3.3.10. </span><span class="content">The <dfn class="dfn-paneled css" data-dfn-type="property" data-export="" id="propdef-location"><code>location</code></dfn> property</span><a class="self-link" href="#the-location-property"></a></h5>
+    <section>
+     <dl class="def">
+      <dt>Applies to:
+      <dd><a data-link-type="dfn" href="#direction-content" id="ref-for-direction-content②②">Direction content</a>, <a data-link-type="dfn" href="#sequence-content" id="ref-for-sequence-content①⑤">Sequence content</a>
+      <dt>Value:
+      <dd><var>location</var>
+      <dt>Inherited:
+      <dd>no
+     </dl>
+     <p>For layout purposes only, the <a class="property" data-link-type="propdesc" href="#propdef-location" id="ref-for-propdef-location">location</a> property overrides the measure location of an event or
+direction determined by <a data-link-type="dfn" href="#sequence-the-content" id="ref-for-sequence-the-content⑦">sequencing the content</a>, replacing it with
+the value <var>location</var> expressed as a <a data-link-type="dfn" href="#measure-location" id="ref-for-measure-location①⑥">measure location</a> within the containing measure.</p>
+     <p>This is useful for forcing the positioning or alignment of objects that would otherwise
+be placed elsewhere, without otherwise altering their semantics.</p>
+    </section>
+    <h5 class="heading settled" data-level="5.3.3.11" id="the-stem-direction-property"><span class="secno">5.3.3.11. </span><span class="content">The <dfn class="dfn-paneled css" data-dfn-type="property" data-export="" id="propdef-stem-direction"><code>stem-direction</code></dfn> property</span><a class="self-link" href="#the-stem-direction-property"></a></h5>
     <section>
      <dl class="def">
       <dt>Applies to:
@@ -4509,7 +4634,7 @@ is determined automatically by the implementation, in accordance with the <a dat
      <p>The value <dfn class="dfn-paneled css" data-dfn-for="stem-direction" data-dfn-type="value" data-export="" id="valdef-stem-direction-up">up</dfn> causes an event’s stem to be rendered pointing upwards.</p>
      <p>The value <dfn class="dfn-paneled css" data-dfn-for="stem-direction" data-dfn-type="value" data-export="" id="valdef-stem-direction-down">down</dfn> causes an event’s stem to be rendered pointing downwards.</p>
     </section>
-    <h5 class="heading settled" data-level="5.3.3.11" id="the-grace-slash-property"><span class="secno">5.3.3.11. </span><span class="content">The <dfn class="dfn-paneled css" data-dfn-type="property" data-export="" id="propdef-grace-slash"><code>grace-slash</code></dfn> property</span><a class="self-link" href="#the-grace-slash-property"></a></h5>
+    <h5 class="heading settled" data-level="5.3.3.12" id="the-grace-slash-property"><span class="secno">5.3.3.12. </span><span class="content">The <dfn class="dfn-paneled css" data-dfn-type="property" data-export="" id="propdef-grace-slash"><code>grace-slash</code></dfn> property</span><a class="self-link" href="#the-grace-slash-property"></a></h5>
     <section>
      <dl class="def">
       <dt>Applies to:
@@ -4558,8 +4683,8 @@ in the same order.</p>
      <p>Here is a style class definition that creates a class called <code>emphasis</code>,
 intended to color its target objects bright red and apply a thicker stem width
 in the case of events:</p>
-     <div class="example" id="example-b4b569bd">
-      <a class="self-link" href="#example-b4b569bd"></a> 
+     <div class="example" id="example-8def8155">
+      <a class="self-link" href="#example-8def8155"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;style-class</span> <span class="na">name=</span><span class="s">"emphasis"</span> <span class="na">style=</span><span class="s">"color: #FF0000; stem-width: 0.05;"</span><span class="nt">/></span>
 </pre>
      </div>
@@ -4594,10 +4719,10 @@ of <code><a data-link-type="element-sub" href="#element-attrdef-style-selector-r
 in the same order.</p>
      <p class="note" role="note"><span>Note:</span> The scope of a defined rule is not limited to descendants of the element in which
 the <code><a data-link-type="element" href="#elementdef-style-selector" id="ref-for-elementdef-style-selector④">style-selector</a></code> element occurs, but is global to the entire document.</p>
-     <p>For example, the following specifies that all <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①③">event</a></code> elements in the document
+     <p>For example, the following specifies that all <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①④">event</a></code> elements in the document
 will employ a given stem width:</p>
-     <div class="example" id="example-b0a1fb9f">
-      <a class="self-link" href="#example-b0a1fb9f"></a> 
+     <div class="example" id="example-bf0e82b6">
+      <a class="self-link" href="#example-bf0e82b6"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;style-selector</span> <span class="na">rule=</span><span class="s">"event"</span> <span class="na">style=</span><span class="s">"stem-width: 0.05;"</span><span class="nt">/></span>
 </pre>
      </div>
@@ -4656,8 +4781,8 @@ semantic information does not suffice to yield the desired musical result.</p>
 score as a whole.</p>
       <p>The following example illustrates an entire MNX-Generic document; the elements
 are described individually in the remainder of this section.</p>
-      <div class="example" id="example-a2217544">
-       <a class="self-link" href="#example-a2217544"></a> 
+      <div class="example" id="example-764a1fc0">
+       <a class="self-link" href="#example-764a1fc0"></a> 
 <pre class="language-xml highlight"><span class="nt">&lt;mnx-generic></span>
   <span class="nt">&lt;score-view</span> <span class="na">id=</span><span class="s">"page1"</span> <span class="na">view=</span><span class="s">"score.svg#page1"</span><span class="nt">/></span>
   <span class="nt">&lt;score-view</span> <span class="na">id=</span><span class="s">"page2"</span> <span class="na">view=</span><span class="s">"score.svg#page2"</span><span class="nt">/></span>
@@ -4835,7 +4960,7 @@ for this part.</p>
 time and an arbitrary <dfn class="dfn-paneled" data-dfn-for="performance-tempo" data-dfn-type="dfn" data-noexport="" id="performance-tempo-notated-time-unit">notated time unit</dfn> that may be used by the score.</p>
       <p>This relationship applies to a time range beginning at the time in seconds
 specified by <dfn class="dfn-paneled" data-dfn-for="performance-tempo" data-dfn-type="element-attr" data-export="" id="element-attrdef-performance-tempo-start"><code>start</code></dfn> and continuing until the next <code><a data-link-type="element" href="#elementdef-performance-tempo" id="ref-for-elementdef-performance-tempo⑧">performance-tempo</a></code> element. The default value is 0.</p>
-      <p>The <dfn class="dfn-paneled" data-dfn-for="performance-tempo" data-dfn-type="element-attr" data-export="" id="element-attrdef-performance-tempo-beat"><code>beat</code></dfn> element is a <a data-link-type="dfn" href="#note-value" id="ref-for-note-value⑥">note value</a> which
+      <p>The <dfn class="dfn-paneled" data-dfn-for="performance-tempo" data-dfn-type="element-attr" data-export="" id="element-attrdef-performance-tempo-beat"><code>beat</code></dfn> element is a <a data-link-type="dfn" href="#note-value" id="ref-for-note-value⑦">note value</a> which
 establishes a beat as some fraction or multiple of a notated time unit (which
 in CWMN a whole note by convention). The default value is 1.</p>
       <p>The <dfn class="dfn-paneled" data-dfn-for="performance-tempo" data-dfn-type="element-attr" data-export="" id="element-attrdef-performance-tempo-bpm"><code>bpm</code></dfn> element establishes a tempo, expressed as a <a data-link-type="dfn" href="https://www.w3.org/TR/html5/infrastructure.html#floating-point-numbers" id="ref-for-floating-point-numbers⑦">valid floating-point number</a> giving the number of beats per minute. The
@@ -4990,7 +5115,12 @@ the intersection lies at infinity.</p>
         <li><a href="#ascii-hex-digits">ASCII hex digits</a><span>, in §3.2.1</span>
         <li><a href="#ascii-letters">ASCII letters</a><span>, in §3.2.1</span>
         <li><a href="#audio-media">audio media</a><span>, in §6.1.3</span>
-        <li><a href="#attr-valuedef-note-accidental-auto">auto</a><span>, in §5.2.6.1</span>
+        <li>
+         auto
+         <ul>
+          <li><a href="#attr-valuedef-note-accidental-auto">attr-value for note/accidental</a><span>, in §5.2.6.1</span>
+          <li><a href="#attr-valuedef-tuplet-bracket-auto">attr-value for tuplet/bracket</a><span>, in §5.2.5.2</span>
+         </ul>
         <li>
          barline
          <ul>
@@ -5004,12 +5134,23 @@ the intersection lies at infinity.</p>
         <li><a href="#valdef-y-below">below</a><span>, in §5.3.3.9</span>
         <li><a href="#elementdef-bend">bend</a><span>, in §5.2.8.6</span>
         <li>
+         both
+         <ul>
+          <li><a href="#attr-valuedef-tuplet-show-number-both">attr-value for tuplet/show-number</a><span>, in §5.2.5.2</span>
+          <li><a href="#attr-valuedef-tuplet-show-value-both">attr-value for tuplet/show-value</a><span>, in §5.2.5.2</span>
+         </ul>
+        <li>
          bpm
          <ul>
           <li><a href="#element-attrdef-performance-tempo-bpm">element-attr for performance-tempo</a><span>, in §6.1.3.5</span>
           <li><a href="#element-attrdef-tempo-bpm">element-attr for tempo</a><span>, in §5.2.11.3</span>
          </ul>
-        <li><a href="#elementdef-bracket">bracket</a><span>, in §5.2.10.7</span>
+        <li>
+         bracket
+         <ul>
+          <li><a href="#elementdef-bracket">(element)</a><span>, in §5.2.10.7</span>
+          <li><a href="#element-attrdef-tuplet-bracket">element-attr for tuplet</a><span>, in §5.2.5.2</span>
+         </ul>
         <li><a href="#attr-valuedef-clef-sign-c">C</a><span>, in §5.2.11.5</span>
         <li><a href="#chords">chords</a><span>, in §5.2.1.2</span>
         <li><a href="#chromatic-pitch">chromatic pitch</a><span>, in §5.2.1.4</span>
@@ -5055,11 +5196,12 @@ the intersection lies at infinity.</p>
          down
          <ul>
           <li><a href="#valdef-orientation-down">value for orientation</a><span>, in §5.2.1.11</span>
-          <li><a href="#valdef-stem-direction-down">value for stem-direction</a><span>, in §5.3.3.10</span>
+          <li><a href="#valdef-stem-direction-down">value for stem-direction</a><span>, in §5.3.3.11</span>
          </ul>
         <li>
          duration
          <ul>
+          <li><a href="#element-attrdef-event-duration">element-attr for event</a><span>, in §5.2.5.1</span>
           <li><a href="#element-attrdef-forward-duration">element-attr for forward</a><span>, in §5.2.5.4</span>
           <li><a href="#element-attrdef-performance-event-duration">element-attr for performance-event</a><span>, in §6.1.3.6</span>
          </ul>
@@ -5081,8 +5223,8 @@ the intersection lies at infinity.</p>
         <li><a href="#elementdef-event">event</a><span>, in §5.2.5.1</span>
         <li><a href="#event-content">Event content</a><span>, in §5.2.6</span>
         <li><a href="#elementdef-expression">expression</a><span>, in §5.2.9.4</span>
-        <li><a href="#attr-valuedef-clef-sign-f">F</a><span>, in §5.2.11.5</span>
         <li><a href="#attr-valuedef-dynamics-type-f">f</a><span>, in §5.2.9.2</span>
+        <li><a href="#attr-valuedef-clef-sign-f">F</a><span>, in §5.2.11.5</span>
         <li><a href="#attr-valuedef-dynamics-type-ff">ff</a><span>, in §5.2.9.2</span>
         <li><a href="#attr-valuedef-dynamics-type-fff">fff</a><span>, in §5.2.9.2</span>
         <li><a href="#attr-valuedef-dynamics-type-ffff">ffff</a><span>, in §5.2.9.2</span>
@@ -5099,7 +5241,7 @@ the intersection lies at infinity.</p>
         <li><a href="#elementdef-global">global</a><span>, in §5.2.3.2</span>
         <li><a href="#propdef-glyph">glyph</a><span>, in §5.3.3.3</span>
         <li><a href="#elementdef-grace">grace</a><span>, in §5.2.5.5</span>
-        <li><a href="#propdef-grace-slash">grace-slash</a><span>, in §5.3.3.11</span>
+        <li><a href="#propdef-grace-slash">grace-slash</a><span>, in §5.3.3.12</span>
         <li>
          graphics
          <ul>
@@ -5115,7 +5257,13 @@ the intersection lies at infinity.</p>
         <li><a href="#valdef-visibility-hidden">hidden</a><span>, in §5.3.3.5</span>
         <li><a href="#attr-valuedef-tied-location-incoming">incoming</a><span>, in §5.2.8.2</span>
         <li><a href="#element-attrdef-measure-index">index</a><span>, in §5.2.4.1</span>
-        <li><a href="#element-attrdef-tuplet-inner">inner</a><span>, in §5.2.5.2</span>
+        <li>
+         inner
+         <ul>
+          <li><a href="#attr-valuedef-tuplet-show-number-inner">attr-value for tuplet/show-number</a><span>, in §5.2.5.2</span>
+          <li><a href="#attr-valuedef-tuplet-show-value-inner">attr-value for tuplet/show-value</a><span>, in §5.2.5.2</span>
+          <li><a href="#element-attrdef-tuplet-inner">element-attr for tuplet</a><span>, in §5.2.5.2</span>
+         </ul>
         <li><a href="#elementdef-instruction">instruction</a><span>, in §5.2.9.3</span>
         <li>
          instrument-sound
@@ -5138,6 +5286,7 @@ the intersection lies at infinity.</p>
         <li>
          location
          <ul>
+          <li><a href="#propdef-location">(property)</a><span>, in §5.3.3.10</span>
           <li><a href="#element-attrdef-direction-location">element-attr for direction</a><span>, in §5.2.9.1</span>
           <li><a href="#element-attrdef-tied-location">element-attr for tied</a><span>, in §5.2.8.2</span>
          </ul>
@@ -5169,10 +5318,13 @@ the intersection lies at infinity.</p>
         <li><a href="#musical-body">musical body content</a><span>, in §4.2</span>
         <li><a href="#attr-valuedef-dynamics-type-n">n</a><span>, in §5.2.9.2</span>
         <li><a href="#element-attrdef-style-class-name">name</a><span>, in §5.4.1</span>
+        <li><a href="#attr-valuedef-tuplet-bracket-no">no</a><span>, in §5.2.5.2</span>
         <li>
          none
          <ul>
           <li><a href="#attr-valuedef-measure-barline-none">attr-value for measure/barline</a><span>, in §5.2.4.1</span>
+          <li><a href="#attr-valuedef-tuplet-show-number-none">attr-value for tuplet/show-number</a><span>, in §5.2.5.2</span>
+          <li><a href="#attr-valuedef-tuplet-show-value-none">attr-value for tuplet/show-value</a><span>, in §5.2.5.2</span>
           <li><a href="#valdef-display-none">value for display</a><span>, in §5.3.3.4</span>
           <li><a href="#valdef-perform-none">value for perform</a><span>, in §5.3.3.6</span>
          </ul>
@@ -5298,6 +5450,8 @@ the intersection lies at infinity.</p>
         <li><a href="#attr-valuedef-dynamics-type-sfz">sfz</a><span>, in §5.2.9.2</span>
         <li><a href="#attr-valuedef-dynamics-type-sfzp">sfzp</a><span>, in §5.2.9.2</span>
         <li><a href="#attr-valuedef-measure-barline-short">short</a><span>, in §5.2.4.1</span>
+        <li><a href="#element-attrdef-tuplet-show-number">show-number</a><span>, in §5.2.5.2</span>
+        <li><a href="#element-attrdef-tuplet-show-value">show-value</a><span>, in §5.2.5.2</span>
         <li><a href="#element-attrdef-clef-sign">sign</a><span>, in §5.2.11.5</span>
         <li><a href="#element-attrdef-time-signature">signature</a><span>, in §5.2.11.2</span>
         <li><a href="#single-ended">Single-ended</a><span>, in §5.2.1.5</span>
@@ -5346,7 +5500,7 @@ the intersection lies at infinity.</p>
          </ul>
         <li><a href="#attr-valuedef-grace-type-steal-following">steal-following</a><span>, in §5.2.5.5</span>
         <li><a href="#attr-valuedef-grace-type-steal-previous">steal-previous</a><span>, in §5.2.5.5</span>
-        <li><a href="#propdef-stem-direction">stem-direction</a><span>, in §5.3.3.10</span>
+        <li><a href="#propdef-stem-direction">stem-direction</a><span>, in §5.3.3.11</span>
         <li><a href="#strictly-splitting-the-string">strictly split</a><span>, in §3.2.1</span>
         <li><a href="#strictly-splitting-the-string">strictly split a string</a><span>, in §3.2.1</span>
         <li><a href="#strictly-splitting-the-string">strictly splitting the string</a><span>, in §3.2.1</span>
@@ -5405,7 +5559,7 @@ the intersection lies at infinity.</p>
          up
          <ul>
           <li><a href="#valdef-orientation-up">value for orientation</a><span>, in §5.2.1.11</span>
-          <li><a href="#valdef-stem-direction-up">value for stem-direction</a><span>, in §5.3.3.10</span>
+          <li><a href="#valdef-stem-direction-up">value for stem-direction</a><span>, in §5.3.3.11</span>
          </ul>
         <li><a href="#uppercase-ascii-hex-digits">uppercase ASCII hex digits</a><span>, in §3.2.1</span>
         <li><a href="#uppercase-ascii-letters">uppercase ASCII letters</a><span>, in §3.2.1</span>
@@ -5440,6 +5594,7 @@ the intersection lies at infinity.</p>
          <ul>
           <li><a href="#attr-valuedef-event-measure-yes">attr-value for event/measure</a><span>, in §5.2.5.1</span>
           <li><a href="#attr-valuedef-grace-slash-yes">attr-value for grace/slash</a><span>, in §5.2.5.5</span>
+          <li><a href="#attr-valuedef-tuplet-bracket-yes">attr-value for tuplet/bracket</a><span>, in §5.2.5.2</span>
          </ul>
        </ul>
        <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
@@ -5447,29 +5602,29 @@ the intersection lies at infinity.</p>
         <li>
          <a data-link-type="biblio">[DOM]</a> defines the following terms:
          <ul>
-          <li><a href="https://dom.spec.whatwg.org/#concept-attribute">attribute</a>
+          <li><span class="dfn-paneled" id="term-for-concept-attribute" style="color:initial">attribute</span>
          </ul>
         <li>
          <a data-link-type="biblio">[HTML]</a> defines the following terms:
          <ul>
-          <li><a href="https://www.w3.org/TR/html5/infrastructure.html#non-negative-integers">non-negative integer</a>
-          <li><a href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens">ordered set of space-separated tokens</a>
-          <li><a href="https://www.w3.org/TR/html5/infrastructure.html#signed-integers">rules for parsing integers</a>
-          <li><a href="https://www.w3.org/TR/html5/infrastructure.html#signed-integers">rules for parsing signed integers</a>
-          <li><a href="https://www.w3.org/TR/html5/dom.html#elements-semantics">semantic markup</a>
-          <li><a href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens">set of space-separated tokens</a>
-          <li><a href="https://www.w3.org/TR/html5/infrastructure.html#signed-integers">signed integer</a>
-          <li><a href="https://www.w3.org/TR/html5/infrastructure.html#colors">simple color</a>
-          <li><a href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens">split a string on spaces</a>
-          <li><a href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens">unordered set of space-separated tokens</a>
-          <li><a href="https://www.w3.org/TR/html5/infrastructure.html#floating-point-numbers">valid floating-point number</a>
-          <li><a href="https://www.w3.org/TR/html5/infrastructure.html#signed-integers">valid integer</a>
-          <li><a href="https://www.w3.org/TR/html5/infrastructure.html#non-negative-integers">valid non-negative integer</a>
+          <li><span class="dfn-paneled" id="term-for-non-negative-integers" style="color:initial">non-negative integer</span>
+          <li><span class="dfn-paneled" id="term-for-space-separated-tokens" style="color:initial">ordered set of space-separated tokens</span>
+          <li><span class="dfn-paneled" id="term-for-signed-integers" style="color:initial">rules for parsing integers</span>
+          <li><span class="dfn-paneled" id="term-for-signed-integers①" style="color:initial">rules for parsing signed integers</span>
+          <li><span class="dfn-paneled" id="term-for-elements-semantics" style="color:initial">semantic markup</span>
+          <li><span class="dfn-paneled" id="term-for-space-separated-tokens①" style="color:initial">set of space-separated tokens</span>
+          <li><span class="dfn-paneled" id="term-for-signed-integers②" style="color:initial">signed integer</span>
+          <li><span class="dfn-paneled" id="term-for-colors" style="color:initial">simple color</span>
+          <li><span class="dfn-paneled" id="term-for-space-separated-tokens②" style="color:initial">split a string on spaces</span>
+          <li><span class="dfn-paneled" id="term-for-space-separated-tokens③" style="color:initial">unordered set of space-separated tokens</span>
+          <li><span class="dfn-paneled" id="term-for-floating-point-numbers" style="color:initial">valid floating-point number</span>
+          <li><span class="dfn-paneled" id="term-for-signed-integers③" style="color:initial">valid integer</span>
+          <li><span class="dfn-paneled" id="term-for-non-negative-integers①" style="color:initial">valid non-negative integer</span>
          </ul>
         <li>
          <a data-link-type="biblio">[INFRA]</a> defines the following terms:
          <ul>
-          <li><a href="https://infra.spec.whatwg.org/#split-on-commas">split a string on commas</a>
+          <li><span class="dfn-paneled" id="term-for-split-on-commas" style="color:initial">split a string on commas</span>
          </ul>
        </ul>
       </div>
@@ -5480,7 +5635,7 @@ the intersection lies at infinity.</p>
        <div style="counter-reset:issue">
         <div class="issue">This is an open issue.<a href="#issue-87a3171c"> ↵ </a></div>
         <div class="issue"> Shared denominators are all-or-nothing. So there’s currently no way to share a denominator
-for only some of a time signature’s fractions, which would require a grouping construct like <code>2/4+(2+3/8)</code> or such.<a href="#issue-1e796285"> ↵ </a></div>
+for only some of a time signature’s fractions, which would require a grouping construct like <code>2/4+(2+3/8)</code> or such.<a href="#issue-316b8a06"> ↵ </a></div>
         <div class="issue"> Simple colors as per the HTML5 spec don’t support an alpha property, so perhaps we
   should adopt a separate syntactical definition here.<a href="#issue-549f7d59"> ↵ </a></div>
         <div class="issue"> continuous changes need to be supported<a href="#issue-a3eb060f"> ↵ </a></div>
@@ -5636,6 +5791,195 @@ for only some of a time signature’s fractions, which would require a grouping 
 
 })();
 </script>
+  <aside class="dfn-panel" data-for="term-for-concept-attribute">
+   <a href="https://dom.spec.whatwg.org/#concept-attribute">https://dom.spec.whatwg.org/#concept-attribute</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-concept-attribute">3.3.1. Element definitions</a>
+    <li><a href="#ref-for-concept-attribute①">4.1.1. The mnx element</a>
+    <li><a href="#ref-for-concept-attribute②">4.1.2. The head element</a>
+    <li><a href="#ref-for-concept-attribute③">4.1.3. The collection element</a>
+    <li><a href="#ref-for-concept-attribute④">4.2.1. The score element</a>
+    <li><a href="#ref-for-concept-attribute⑤">4.3.1. The title element</a>
+    <li><a href="#ref-for-concept-attribute⑥">5.2.3.1. The mnx-common element</a>
+    <li><a href="#ref-for-concept-attribute⑦">5.2.3.2. The global element</a>
+    <li><a href="#ref-for-concept-attribute⑧">5.2.4.1. The measure element</a>
+    <li><a href="#ref-for-concept-attribute⑨">5.2.4.2. The sequence element</a>
+    <li><a href="#ref-for-concept-attribute①⓪">5.2.4.3. The directions element</a>
+    <li><a href="#ref-for-concept-attribute①①">5.2.5.1. The event element</a>
+    <li><a href="#ref-for-concept-attribute①②">5.2.5.2. The tuplet element</a>
+    <li><a href="#ref-for-concept-attribute①③">5.2.5.3. The beamed element</a>
+    <li><a href="#ref-for-concept-attribute①④">5.2.5.4. The forward element</a>
+    <li><a href="#ref-for-concept-attribute①⑤">5.2.5.5. The grace element</a>
+    <li><a href="#ref-for-concept-attribute①⑥">5.2.6.1. The note element</a>
+    <li><a href="#ref-for-concept-attribute①⑦">5.2.6.2. The rest element</a>
+    <li><a href="#ref-for-concept-attribute①⑧">5.2.8.1. Liaison attributes</a>
+    <li><a href="#ref-for-concept-attribute①⑨">5.2.8.2. The tied element</a>
+    <li><a href="#ref-for-concept-attribute②⓪">5.2.9.1. Direction attributes</a>
+    <li><a href="#ref-for-concept-attribute②①">5.2.9.2. The dynamics element</a>
+    <li><a href="#ref-for-concept-attribute②②">5.2.10.1. Span attributes</a>
+    <li><a href="#ref-for-concept-attribute②③">5.2.10.3. The wedge element</a>
+    <li><a href="#ref-for-concept-attribute②④">5.2.10.4. The cresc element</a>
+    <li><a href="#ref-for-concept-attribute②⑤">5.2.10.5. The dim element</a>
+    <li><a href="#ref-for-concept-attribute②⑥">5.2.11.1. The key element</a>
+    <li><a href="#ref-for-concept-attribute②⑦">5.2.11.2. The time element</a>
+    <li><a href="#ref-for-concept-attribute②⑧">5.2.11.3. The tempo element</a>
+    <li><a href="#ref-for-concept-attribute②⑨">5.2.11.4. The staves element</a>
+    <li><a href="#ref-for-concept-attribute③⓪">5.2.11.5. The clef element</a>
+    <li><a href="#ref-for-concept-attribute③①">5.4.1. The style-class element</a>
+    <li><a href="#ref-for-concept-attribute③②">5.4.2. The style-selector element</a>
+    <li><a href="#ref-for-concept-attribute③③">6.1.1.1. The mnx-generic element</a>
+    <li><a href="#ref-for-concept-attribute③④">6.1.2.1. The score-view element</a>
+    <li><a href="#ref-for-concept-attribute③⑤">6.1.2.2. The score-mapping element</a>
+    <li><a href="#ref-for-concept-attribute③⑥">6.1.3.2. The performance-audio-media element</a>
+    <li><a href="#ref-for-concept-attribute③⑦">6.1.3.3. The performance-data element</a>
+    <li><a href="#ref-for-concept-attribute③⑧">6.1.3.4. The performance-part element</a>
+    <li><a href="#ref-for-concept-attribute③⑨">6.1.3.5. The performance-tempo element</a>
+    <li><a href="#ref-for-concept-attribute④⓪">6.1.3.6. The performance-event element</a>
+    <li><a href="#ref-for-concept-attribute④①">6.1.3.7. The performance-mapping element</a>
+    <li><a href="#ref-for-concept-attribute④②">6.1.3.8. The performance-region element</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-non-negative-integers">
+   <a href="https://www.w3.org/TR/html5/infrastructure.html#non-negative-integers">https://www.w3.org/TR/html5/infrastructure.html#non-negative-integers</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-non-negative-integers">5.2.4.1. The measure element</a>
+    <li><a href="#ref-for-non-negative-integers①">5.2.11.4. The staves element</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-space-separated-tokens">
+   <a href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens">https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-space-separated-tokens">3.2.1. Common parser idioms</a>
+    <li><a href="#ref-for-space-separated-tokens①">5.2.2.5. Measure location syntax</a>
+    <li><a href="#ref-for-space-separated-tokens②">5.2.3.2. The global element</a>
+    <li><a href="#ref-for-space-separated-tokens③">5.3.2. The class attribute</a>
+    <li><a href="#ref-for-space-separated-tokens④">5.4.2. The style-selector element</a>
+    <li><a href="#ref-for-space-separated-tokens⑤">6.1.3.6. The performance-event element</a>
+    <li><a href="#ref-for-space-separated-tokens⑥">6.1.3.8. The performance-region element</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-signed-integers">
+   <a href="https://www.w3.org/TR/html5/infrastructure.html#signed-integers">https://www.w3.org/TR/html5/infrastructure.html#signed-integers</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-signed-integers">3.2.2.1. Rational numbers</a>
+    <li><a href="#ref-for-signed-integers①">5.2.2.1. Note value syntax</a>
+    <li><a href="#ref-for-signed-integers②">5.2.2.2. Note value quantity syntax</a>
+    <li><a href="#ref-for-signed-integers③">5.2.2.3. Time signature syntax</a>
+    <li><a href="#ref-for-signed-integers④">5.2.2.4. Chromatic pitch syntax</a>
+    <li><a href="#ref-for-signed-integers⑤">5.2.11.1. The key element</a>
+    <li><a href="#ref-for-signed-integers⑥">5.2.11.5. The clef element</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-signed-integers">
+   <a href="https://www.w3.org/TR/html5/infrastructure.html#signed-integers">https://www.w3.org/TR/html5/infrastructure.html#signed-integers</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-signed-integers">3.2.2.1. Rational numbers</a>
+    <li><a href="#ref-for-signed-integers①">5.2.2.1. Note value syntax</a>
+    <li><a href="#ref-for-signed-integers②">5.2.2.2. Note value quantity syntax</a>
+    <li><a href="#ref-for-signed-integers③">5.2.2.3. Time signature syntax</a>
+    <li><a href="#ref-for-signed-integers④">5.2.2.4. Chromatic pitch syntax</a>
+    <li><a href="#ref-for-signed-integers⑤">5.2.11.1. The key element</a>
+    <li><a href="#ref-for-signed-integers⑥">5.2.11.5. The clef element</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-elements-semantics">
+   <a href="https://www.w3.org/TR/html5/dom.html#elements-semantics">https://www.w3.org/TR/html5/dom.html#elements-semantics</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-elements-semantics">2.2. MNX score types</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-space-separated-tokens">
+   <a href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens">https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-space-separated-tokens">3.2.1. Common parser idioms</a>
+    <li><a href="#ref-for-space-separated-tokens①">5.2.2.5. Measure location syntax</a>
+    <li><a href="#ref-for-space-separated-tokens②">5.2.3.2. The global element</a>
+    <li><a href="#ref-for-space-separated-tokens③">5.3.2. The class attribute</a>
+    <li><a href="#ref-for-space-separated-tokens④">5.4.2. The style-selector element</a>
+    <li><a href="#ref-for-space-separated-tokens⑤">6.1.3.6. The performance-event element</a>
+    <li><a href="#ref-for-space-separated-tokens⑥">6.1.3.8. The performance-region element</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-signed-integers">
+   <a href="https://www.w3.org/TR/html5/infrastructure.html#signed-integers">https://www.w3.org/TR/html5/infrastructure.html#signed-integers</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-signed-integers">3.2.2.1. Rational numbers</a>
+    <li><a href="#ref-for-signed-integers①">5.2.2.1. Note value syntax</a>
+    <li><a href="#ref-for-signed-integers②">5.2.2.2. Note value quantity syntax</a>
+    <li><a href="#ref-for-signed-integers③">5.2.2.3. Time signature syntax</a>
+    <li><a href="#ref-for-signed-integers④">5.2.2.4. Chromatic pitch syntax</a>
+    <li><a href="#ref-for-signed-integers⑤">5.2.11.1. The key element</a>
+    <li><a href="#ref-for-signed-integers⑥">5.2.11.5. The clef element</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-colors">
+   <a href="https://www.w3.org/TR/html5/infrastructure.html#colors">https://www.w3.org/TR/html5/infrastructure.html#colors</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-colors">5.3.3.1. The color property</a> <a href="#ref-for-colors①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-space-separated-tokens">
+   <a href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens">https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-space-separated-tokens">3.2.1. Common parser idioms</a>
+    <li><a href="#ref-for-space-separated-tokens①">5.2.2.5. Measure location syntax</a>
+    <li><a href="#ref-for-space-separated-tokens②">5.2.3.2. The global element</a>
+    <li><a href="#ref-for-space-separated-tokens③">5.3.2. The class attribute</a>
+    <li><a href="#ref-for-space-separated-tokens④">5.4.2. The style-selector element</a>
+    <li><a href="#ref-for-space-separated-tokens⑤">6.1.3.6. The performance-event element</a>
+    <li><a href="#ref-for-space-separated-tokens⑥">6.1.3.8. The performance-region element</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-space-separated-tokens">
+   <a href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens">https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-space-separated-tokens">3.2.1. Common parser idioms</a>
+    <li><a href="#ref-for-space-separated-tokens①">5.2.2.5. Measure location syntax</a>
+    <li><a href="#ref-for-space-separated-tokens②">5.2.3.2. The global element</a>
+    <li><a href="#ref-for-space-separated-tokens③">5.3.2. The class attribute</a>
+    <li><a href="#ref-for-space-separated-tokens④">5.4.2. The style-selector element</a>
+    <li><a href="#ref-for-space-separated-tokens⑤">6.1.3.6. The performance-event element</a>
+    <li><a href="#ref-for-space-separated-tokens⑥">6.1.3.8. The performance-region element</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-floating-point-numbers">
+   <a href="https://www.w3.org/TR/html5/infrastructure.html#floating-point-numbers">https://www.w3.org/TR/html5/infrastructure.html#floating-point-numbers</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-floating-point-numbers">5.2.2.4. Chromatic pitch syntax</a>
+    <li><a href="#ref-for-floating-point-numbers①">5.2.2.5. Measure location syntax</a> <a href="#ref-for-floating-point-numbers②">(2)</a>
+    <li><a href="#ref-for-floating-point-numbers③">5.2.11.3. The tempo element</a>
+    <li><a href="#ref-for-floating-point-numbers④">5.3.3.7. The x property</a>
+    <li><a href="#ref-for-floating-point-numbers⑤">5.3.3.8. The end-x property</a>
+    <li><a href="#ref-for-floating-point-numbers⑥">5.3.3.9. The y property</a>
+    <li><a href="#ref-for-floating-point-numbers⑦">6.1.3.5. The performance-tempo element</a>
+    <li><a href="#ref-for-floating-point-numbers⑧">6.1.3.6. The performance-event element</a> <a href="#ref-for-floating-point-numbers⑨">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-signed-integers">
+   <a href="https://www.w3.org/TR/html5/infrastructure.html#signed-integers">https://www.w3.org/TR/html5/infrastructure.html#signed-integers</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-signed-integers">3.2.2.1. Rational numbers</a>
+    <li><a href="#ref-for-signed-integers①">5.2.2.1. Note value syntax</a>
+    <li><a href="#ref-for-signed-integers②">5.2.2.2. Note value quantity syntax</a>
+    <li><a href="#ref-for-signed-integers③">5.2.2.3. Time signature syntax</a>
+    <li><a href="#ref-for-signed-integers④">5.2.2.4. Chromatic pitch syntax</a>
+    <li><a href="#ref-for-signed-integers⑤">5.2.11.1. The key element</a>
+    <li><a href="#ref-for-signed-integers⑥">5.2.11.5. The clef element</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-non-negative-integers">
+   <a href="https://www.w3.org/TR/html5/infrastructure.html#non-negative-integers">https://www.w3.org/TR/html5/infrastructure.html#non-negative-integers</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-non-negative-integers">5.2.4.1. The measure element</a>
+    <li><a href="#ref-for-non-negative-integers①">5.2.11.4. The staves element</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-split-on-commas">
+   <a href="https://infra.spec.whatwg.org/#split-on-commas">https://infra.spec.whatwg.org/#split-on-commas</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-split-on-commas">3.2.1. Common parser idioms</a>
+   </ul>
+  </aside>
   <h2 class="no-num no-ref heading settled" id="references"><span class="content">References</span><a class="self-link" href="#references"></a></h2>
   <h3 class="no-num no-ref heading settled" id="normative"><span class="content">Normative References</span><a class="self-link" href="#normative"></a></h3>
   <dl>
@@ -6058,10 +6402,10 @@ for only some of a time signature’s fractions, which would require a grouping 
    <ul>
     <li><a href="#ref-for-note-value">5.2.1.2. Notated events</a>
     <li><a href="#ref-for-note-value①">5.2.2.2. Note value quantity syntax</a>
-    <li><a href="#ref-for-note-value②">5.2.5.1. The event element</a> <a href="#ref-for-note-value③">(2)</a>
-    <li><a href="#ref-for-note-value④">5.2.6.1. The note element</a>
-    <li><a href="#ref-for-note-value⑤">5.2.11.3. The tempo element</a>
-    <li><a href="#ref-for-note-value⑥">6.1.3.5. The performance-tempo element</a>
+    <li><a href="#ref-for-note-value②">5.2.5.1. The event element</a> <a href="#ref-for-note-value③">(2)</a> <a href="#ref-for-note-value④">(3)</a>
+    <li><a href="#ref-for-note-value⑤">5.2.6.1. The note element</a>
+    <li><a href="#ref-for-note-value⑥">5.2.11.3. The tempo element</a>
+    <li><a href="#ref-for-note-value⑦">6.1.3.5. The performance-tempo element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="base-note-values">
@@ -6092,7 +6436,7 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-orientation②">5.2.5.1. The event element</a> <a href="#ref-for-orientation③">(2)</a>
     <li><a href="#ref-for-orientation④">5.2.5.2. The tuplet element</a> <a href="#ref-for-orientation⑤">(2)</a>
     <li><a href="#ref-for-orientation⑥">5.2.9.1. Direction attributes</a> <a href="#ref-for-orientation⑦">(2)</a>
-    <li><a href="#ref-for-orientation⑧">5.3.3.10. The stem-direction property</a>
+    <li><a href="#ref-for-orientation⑧">5.3.3.11. The stem-direction property</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="valdef-orientation-up">
@@ -6118,8 +6462,9 @@ for only some of a time signature’s fractions, which would require a grouping 
    <ul>
     <li><a href="#ref-for-note-value-quantity">5.2.2.3. Time signature syntax</a>
     <li><a href="#ref-for-note-value-quantity①">5.2.2.5. Measure location syntax</a> <a href="#ref-for-note-value-quantity②">(2)</a>
-    <li><a href="#ref-for-note-value-quantity③">5.2.5.2. The tuplet element</a> <a href="#ref-for-note-value-quantity④">(2)</a>
-    <li><a href="#ref-for-note-value-quantity⑤">5.2.5.4. The forward element</a>
+    <li><a href="#ref-for-note-value-quantity③">5.2.5.1. The event element</a>
+    <li><a href="#ref-for-note-value-quantity④">5.2.5.2. The tuplet element</a> <a href="#ref-for-note-value-quantity⑤">(2)</a>
+    <li><a href="#ref-for-note-value-quantity⑥">5.2.5.4. The forward element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="time-signature">
@@ -6148,6 +6493,7 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-measure-location①③">5.2.11.4. The staves element</a>
     <li><a href="#ref-for-measure-location①④">5.3.3.7. The x property</a>
     <li><a href="#ref-for-measure-location①⑤">5.3.3.8. The end-x property</a>
+    <li><a href="#ref-for-measure-location①⑥">5.3.3.10. The location property</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="elementdef-mnx-common">
@@ -6335,6 +6681,7 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-sequence-content①②">5.3.3.5. The visibility property</a>
     <li><a href="#ref-for-sequence-content①③">5.3.3.6. The perform property</a>
     <li><a href="#ref-for-sequence-content①④">5.3.3.7. The x property</a>
+    <li><a href="#ref-for-sequence-content①⑤">5.3.3.10. The location property</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="starting-position">
@@ -6360,9 +6707,10 @@ for only some of a time signature’s fractions, which would require a grouping 
    <ul>
     <li><a href="#ref-for-sequence-the-content">5.2.4.2. The sequence element</a>
     <li><a href="#ref-for-sequence-the-content①">5.2.5. Sequence content</a> <a href="#ref-for-sequence-the-content②">(2)</a>
-    <li><a href="#ref-for-sequence-the-content③">5.2.5.1. The event element</a>
-    <li><a href="#ref-for-sequence-the-content④">5.2.5.2. The tuplet element</a>
-    <li><a href="#ref-for-sequence-the-content⑤">5.2.9.1. Direction attributes</a>
+    <li><a href="#ref-for-sequence-the-content③">5.2.5.1. The event element</a> <a href="#ref-for-sequence-the-content④">(2)</a>
+    <li><a href="#ref-for-sequence-the-content⑤">5.2.5.2. The tuplet element</a>
+    <li><a href="#ref-for-sequence-the-content⑥">5.2.9.1. Direction attributes</a>
+    <li><a href="#ref-for-sequence-the-content⑦">5.3.3.10. The location property</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="elementdef-event">
@@ -6372,21 +6720,22 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-elementdef-event①">5.2.1.2. Notated events</a>
     <li><a href="#ref-for-elementdef-event②">5.2.2.5. Measure location syntax</a>
     <li><a href="#ref-for-elementdef-event③">5.2.5. Sequence content</a>
-    <li><a href="#ref-for-elementdef-event④">5.2.5.1. The event element</a>
-    <li><a href="#ref-for-elementdef-event⑤">5.2.5.4. The forward element</a>
-    <li><a href="#ref-for-elementdef-event⑥">5.2.6.1. The note element</a> <a href="#ref-for-elementdef-event⑦">(2)</a> <a href="#ref-for-elementdef-event⑧">(3)</a>
-    <li><a href="#ref-for-elementdef-event⑨">5.2.6.2. The rest element</a>
-    <li><a href="#ref-for-elementdef-event①⓪">5.2.8.2. The tied element</a>
-    <li><a href="#ref-for-elementdef-event①①">5.2.13.1. The interpret element</a>
-    <li><a href="#ref-for-elementdef-event①②">5.3.3.5. The visibility property</a>
-    <li><a href="#ref-for-elementdef-event①③">5.4.2. The style-selector element</a>
+    <li><a href="#ref-for-elementdef-event④">5.2.5.1. The event element</a> <a href="#ref-for-elementdef-event⑤">(2)</a>
+    <li><a href="#ref-for-elementdef-event⑥">5.2.5.4. The forward element</a>
+    <li><a href="#ref-for-elementdef-event⑦">5.2.6.1. The note element</a> <a href="#ref-for-elementdef-event⑧">(2)</a> <a href="#ref-for-elementdef-event⑨">(3)</a>
+    <li><a href="#ref-for-elementdef-event①⓪">5.2.6.2. The rest element</a>
+    <li><a href="#ref-for-elementdef-event①①">5.2.8.2. The tied element</a>
+    <li><a href="#ref-for-elementdef-event①②">5.2.13.1. The interpret element</a>
+    <li><a href="#ref-for-elementdef-event①③">5.3.3.5. The visibility property</a>
+    <li><a href="#ref-for-elementdef-event①④">5.4.2. The style-selector element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="element-attrdef-event-value">
    <b><a href="#element-attrdef-event-value">#element-attrdef-event-value</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-element-attrdef-event-value">5.2.5.1. The event element</a> <a href="#ref-for-element-attrdef-event-value①">(2)</a>
-    <li><a href="#ref-for-element-attrdef-event-value②">5.2.5.4. The forward element</a>
+    <li><a href="#ref-for-element-attrdef-event-value">5.2.5. Sequence content</a>
+    <li><a href="#ref-for-element-attrdef-event-value①">5.2.5.1. The event element</a> <a href="#ref-for-element-attrdef-event-value②">(2)</a> <a href="#ref-for-element-attrdef-event-value③">(3)</a> <a href="#ref-for-element-attrdef-event-value④">(4)</a>
+    <li><a href="#ref-for-element-attrdef-event-value⑤">5.2.5.4. The forward element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="element-attrdef-event-measure">
@@ -6420,30 +6769,61 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-element-attrdef-event-staff">5.2.5.1. The event element</a> <a href="#ref-for-element-attrdef-event-staff①">(2)</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="element-attrdef-event-duration">
+   <b><a href="#element-attrdef-event-duration">#element-attrdef-event-duration</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-element-attrdef-event-duration">5.2.5. Sequence content</a>
+    <li><a href="#ref-for-element-attrdef-event-duration①">5.2.5.1. The event element</a> <a href="#ref-for-element-attrdef-event-duration②">(2)</a> <a href="#ref-for-element-attrdef-event-duration③">(3)</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="elementdef-tuplet">
    <b><a href="#elementdef-tuplet">#elementdef-tuplet</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-elementdef-tuplet">5.2.5. Sequence content</a> <a href="#ref-for-elementdef-tuplet①">(2)</a> <a href="#ref-for-elementdef-tuplet②">(3)</a>
-    <li><a href="#ref-for-elementdef-tuplet③">5.2.5.1. The event element</a> <a href="#ref-for-elementdef-tuplet④">(2)</a> <a href="#ref-for-elementdef-tuplet⑤">(3)</a>
-    <li><a href="#ref-for-elementdef-tuplet⑥">5.2.5.2. The tuplet element</a> <a href="#ref-for-elementdef-tuplet⑦">(2)</a> <a href="#ref-for-elementdef-tuplet⑧">(3)</a>
-    <li><a href="#ref-for-elementdef-tuplet⑨">5.2.5.3. The beamed element</a>
-    <li><a href="#ref-for-elementdef-tuplet①⓪">5.2.5.4. The forward element</a>
-    <li><a href="#ref-for-elementdef-tuplet①①">5.2.5.5. The grace element</a>
-    <li><a href="#ref-for-elementdef-tuplet①②">5.2.13.1. The interpret element</a>
+    <li><a href="#ref-for-elementdef-tuplet③">5.2.5.1. The event element</a> <a href="#ref-for-elementdef-tuplet④">(2)</a> <a href="#ref-for-elementdef-tuplet⑤">(3)</a> <a href="#ref-for-elementdef-tuplet⑥">(4)</a>
+    <li><a href="#ref-for-elementdef-tuplet⑦">5.2.5.2. The tuplet element</a> <a href="#ref-for-elementdef-tuplet⑧">(2)</a> <a href="#ref-for-elementdef-tuplet⑨">(3)</a>
+    <li><a href="#ref-for-elementdef-tuplet①⓪">5.2.5.3. The beamed element</a>
+    <li><a href="#ref-for-elementdef-tuplet①①">5.2.5.4. The forward element</a>
+    <li><a href="#ref-for-elementdef-tuplet①②">5.2.5.5. The grace element</a>
+    <li><a href="#ref-for-elementdef-tuplet①③">5.2.13.1. The interpret element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="element-attrdef-tuplet-outer">
    <b><a href="#element-attrdef-tuplet-outer">#element-attrdef-tuplet-outer</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-element-attrdef-tuplet-outer">5.2.5. Sequence content</a> <a href="#ref-for-element-attrdef-tuplet-outer①">(2)</a>
-    <li><a href="#ref-for-element-attrdef-tuplet-outer②">5.2.5.2. The tuplet element</a> <a href="#ref-for-element-attrdef-tuplet-outer③">(2)</a>
+    <li><a href="#ref-for-element-attrdef-tuplet-outer②">5.2.5.2. The tuplet element</a> <a href="#ref-for-element-attrdef-tuplet-outer③">(2)</a> <a href="#ref-for-element-attrdef-tuplet-outer④">(3)</a> <a href="#ref-for-element-attrdef-tuplet-outer⑤">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="element-attrdef-tuplet-inner">
    <b><a href="#element-attrdef-tuplet-inner">#element-attrdef-tuplet-inner</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-element-attrdef-tuplet-inner">5.2.5. Sequence content</a> <a href="#ref-for-element-attrdef-tuplet-inner①">(2)</a>
-    <li><a href="#ref-for-element-attrdef-tuplet-inner②">5.2.5.2. The tuplet element</a> <a href="#ref-for-element-attrdef-tuplet-inner③">(2)</a> <a href="#ref-for-element-attrdef-tuplet-inner④">(3)</a>
+    <li><a href="#ref-for-element-attrdef-tuplet-inner②">5.2.5.2. The tuplet element</a> <a href="#ref-for-element-attrdef-tuplet-inner③">(2)</a> <a href="#ref-for-element-attrdef-tuplet-inner④">(3)</a> <a href="#ref-for-element-attrdef-tuplet-inner⑤">(4)</a> <a href="#ref-for-element-attrdef-tuplet-inner⑥">(5)</a> <a href="#ref-for-element-attrdef-tuplet-inner⑦">(6)</a> <a href="#ref-for-element-attrdef-tuplet-inner⑧">(7)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="element-attrdef-tuplet-show-number">
+   <b><a href="#element-attrdef-tuplet-show-number">#element-attrdef-tuplet-show-number</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-element-attrdef-tuplet-show-number">5.2.5.2. The tuplet element</a> <a href="#ref-for-element-attrdef-tuplet-show-number①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="attr-valuedef-tuplet-show-number-none">
+   <b><a href="#attr-valuedef-tuplet-show-number-none">#attr-valuedef-tuplet-show-number-none</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-attr-valuedef-tuplet-show-number-none">5.2.5.2. The tuplet element</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="element-attrdef-tuplet-show-value">
+   <b><a href="#element-attrdef-tuplet-show-value">#element-attrdef-tuplet-show-value</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-element-attrdef-tuplet-show-value">5.2.5.2. The tuplet element</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="element-attrdef-tuplet-bracket">
+   <b><a href="#element-attrdef-tuplet-bracket">#element-attrdef-tuplet-bracket</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-element-attrdef-tuplet-bracket">5.2.5.2. The tuplet element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="elementdef-beamed">
@@ -6493,7 +6873,7 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-elementdef-grace">5.2.5. Sequence content</a>
     <li><a href="#ref-for-elementdef-grace①">5.2.5.3. The beamed element</a>
     <li><a href="#ref-for-elementdef-grace②">5.2.5.5. The grace element</a> <a href="#ref-for-elementdef-grace③">(2)</a>
-    <li><a href="#ref-for-elementdef-grace④">5.3.3.11. The grace-slash property</a>
+    <li><a href="#ref-for-elementdef-grace④">5.3.3.12. The grace-slash property</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="element-attrdef-grace-type">
@@ -6519,7 +6899,7 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-event-content⑤">5.3.3.4. The display property</a>
     <li><a href="#ref-for-event-content⑥">5.3.3.5. The visibility property</a>
     <li><a href="#ref-for-event-content⑦">5.3.3.6. The perform property</a>
-    <li><a href="#ref-for-event-content⑧">5.3.3.10. The stem-direction property</a>
+    <li><a href="#ref-for-event-content⑧">5.3.3.11. The stem-direction property</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="elementdef-note">
@@ -6646,6 +7026,7 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-direction-content①⑨">5.3.3.7. The x property</a>
     <li><a href="#ref-for-direction-content②⓪">5.3.3.8. The end-x property</a>
     <li><a href="#ref-for-direction-content②①">5.3.3.9. The y property</a>
+    <li><a href="#ref-for-direction-content②②">5.3.3.10. The location property</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="direction-attributes">
@@ -7024,29 +7405,35 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-valdef-y-below">5.3.3.9. The y property</a>
    </ul>
   </aside>
+  <aside class="dfn-panel" data-for="propdef-location">
+   <b><a href="#propdef-location">#propdef-location</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-propdef-location">5.3.3.10. The location property</a>
+   </ul>
+  </aside>
   <aside class="dfn-panel" data-for="propdef-stem-direction">
    <b><a href="#propdef-stem-direction">#propdef-stem-direction</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-propdef-stem-direction">5.2.5.1. The event element</a>
-    <li><a href="#ref-for-propdef-stem-direction①">5.3.3.10. The stem-direction property</a>
+    <li><a href="#ref-for-propdef-stem-direction①">5.3.3.11. The stem-direction property</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="valdef-stem-direction-up">
    <b><a href="#valdef-stem-direction-up">#valdef-stem-direction-up</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-valdef-stem-direction-up">5.3.3.10. The stem-direction property</a>
+    <li><a href="#ref-for-valdef-stem-direction-up">5.3.3.11. The stem-direction property</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="valdef-stem-direction-down">
    <b><a href="#valdef-stem-direction-down">#valdef-stem-direction-down</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-valdef-stem-direction-down">5.3.3.10. The stem-direction property</a>
+    <li><a href="#ref-for-valdef-stem-direction-down">5.3.3.11. The stem-direction property</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="propdef-grace-slash">
    <b><a href="#propdef-grace-slash">#propdef-grace-slash</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-propdef-grace-slash">5.3.3.11. The grace-slash property</a>
+    <li><a href="#ref-for-propdef-grace-slash">5.3.3.12. The grace-slash property</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="stylesheet-definitions">
@@ -7368,58 +7755,57 @@ for only some of a time signature’s fractions, which would require a grouping 
   </aside>
 <script>/* script-dfn-panel */
 
-        document.body.addEventListener("click", function(e) {
-            var queryAll = function(sel) { return [].slice.call(document.querySelectorAll(sel)); }
-            // Find the dfn element or panel, if any, that was clicked on.
-            var el = e.target;
-            var target;
-            var hitALink = false;
-            while(el.parentElement) {
-                if(el.tagName == "A") {
-                    // Clicking on a link in a <dfn> shouldn't summon the panel
-                    hitALink = true;
-                }
-                if(el.classList.contains("dfn-paneled")) {
-                    target = "dfn";
-                    break;
-                }
-                if(el.classList.contains("dfn-panel")) {
-                    target = "dfn-panel";
-                    break;
-                }
-                el = el.parentElement;
-            }
-            if(target != "dfn-panel") {
-                // Turn off any currently "on" or "activated" panels.
-                queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(function(el){
-                    el.classList.remove("on");
-                    el.classList.remove("activated");
-                });
-            }
-            if(target == "dfn" && !hitALink) {
-                // open the panel
-                var dfnPanel = document.querySelector(".dfn-panel[data-for='" + el.id + "']");
-                if(dfnPanel) {
-                    console.log(dfnPanel);
-                    dfnPanel.classList.add("on");
-                    var rect = el.getBoundingClientRect();
-                    dfnPanel.style.left = window.scrollX + rect.right + 5 + "px";
-                    dfnPanel.style.top = window.scrollY + rect.top + "px";
-                    var panelRect = dfnPanel.getBoundingClientRect();
-                    var panelWidth = panelRect.right - panelRect.left;
-                    if(panelRect.right > document.body.scrollWidth && (rect.left - (panelWidth + 5)) > 0) {
-                        // Reposition, because the panel is overflowing
-                        dfnPanel.style.left = window.scrollX + rect.left - (panelWidth + 5) + "px";
-                    }
-                } else {
-                    console.log("Couldn't find .dfn-panel[data-for='" + el.id + "']");
-                }
-            } else if(target == "dfn-panel") {
-                // Switch it to "activated" state, which pins it.
-                el.classList.add("activated");
-                el.style.left = null;
-                el.style.top = null;
-            }
-
+document.body.addEventListener("click", function(e) {
+    var queryAll = function(sel) { return [].slice.call(document.querySelectorAll(sel)); }
+    // Find the dfn element or panel, if any, that was clicked on.
+    var el = e.target;
+    var target;
+    var hitALink = false;
+    while(el.parentElement) {
+        if(el.tagName == "A") {
+            // Clicking on a link in a <dfn> shouldn't summon the panel
+            hitALink = true;
+        }
+        if(el.classList.contains("dfn-paneled")) {
+            target = "dfn";
+            break;
+        }
+        if(el.classList.contains("dfn-panel")) {
+            target = "dfn-panel";
+            break;
+        }
+        el = el.parentElement;
+    }
+    if(target != "dfn-panel") {
+        // Turn off any currently "on" or "activated" panels.
+        queryAll(".dfn-panel.on, .dfn-panel.activated").forEach(function(el){
+            el.classList.remove("on");
+            el.classList.remove("activated");
         });
-        </script>
+    }
+    if(target == "dfn" && !hitALink) {
+        // open the panel
+        var dfnPanel = document.querySelector(".dfn-panel[data-for='" + el.id + "']");
+        if(dfnPanel) {
+            dfnPanel.classList.add("on");
+            var rect = el.getBoundingClientRect();
+            dfnPanel.style.left = window.scrollX + rect.right + 5 + "px";
+            dfnPanel.style.top = window.scrollY + rect.top + "px";
+            var panelRect = dfnPanel.getBoundingClientRect();
+            var panelWidth = panelRect.right - panelRect.left;
+            if(panelRect.right > document.body.scrollWidth && (rect.left - (panelWidth + 5)) > 0) {
+                // Reposition, because the panel is overflowing
+                dfnPanel.style.left = window.scrollX + rect.left - (panelWidth + 5) + "px";
+            }
+        } else {
+            console.log("Couldn't find .dfn-panel[data-for='" + el.id + "']");
+        }
+    } else if(target == "dfn-panel") {
+        // Switch it to "activated" state, which pins it.
+        el.classList.add("activated");
+        el.style.left = null;
+        el.style.top = null;
+    }
+
+});
+</script>
