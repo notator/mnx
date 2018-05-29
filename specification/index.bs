@@ -12,7 +12,7 @@
 <pre class="metadata">
 Status: LD
 Title: MNX Draft Specification
-Shortname: cwmnx-draft
+Shortname: mnx-draft
 Level: 1
 Editor: Joe Berkovitz, Risible LLC
 Abstract: A draft specification for the MNX music notation document format.
@@ -97,6 +97,9 @@ url: https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens; typ
 url: https://www.w3.org/TR/html5/infrastructure.html#colors; type:dfn; spec: html;
     text: simple color
 
+url: https://www.w3.org/TR/html5/dom.html#elements-semantics; type:dfn; spec: html;
+    text: semantic markup
+
 url: https://w3c.github.io/musicxml/#; type: dfn;
     text: MusicXML specification
 
@@ -146,12 +149,13 @@ to some portion of a <a>container document</a>.
 The present draft of this specification deals with two <a>score types</a>:
 
 <ul>
-  <li><a href="#cwmnx">CWMNX</a>, which encodes Conventional Western Music Notation (CWMN) in a
-  semantically rich fashion. It inherits many ideas and concepts from MusicXML.</li>
+  <li><a href="#common">MNX-Common</a>, which encodes Conventional Western Music
+  Notation (CWMN) using <a>semantic markup</a> as defined in the
+  HTML5 standard, allowing applications to present the same information consistently in
+  different contexts. It inherits many ideas and concepts from MusicXML.</li>
 
-  <li><a href="#gmnx">GMNX</a>, where "G" is for
-  <strong>G</strong>eneral. It serves as a kind of universal encoding for
-  scores having arbitary graphical and audio content. In consequence, it is
+  <li><a href="#generic">MNX-Generic</a>, which serves as a universal encoding for
+  score instances having arbitrary graphical and audio content. In consequence, it is
   relatively free of semantics.</li>
 </ul>
 
@@ -159,10 +163,10 @@ The present draft of this specification deals with two <a>score types</a>:
 
   <em>This section is non-normative.</em>
 
-The CWMNX score type of MNX is a lineal descendant of MusicXML, and employs
+The MNX-Common score type of MNX is a lineal descendant of MusicXML, and employs
 many of the same concepts. However it sacrifices some features and flexibility
 of MusicXML in favor of tighter interoperability, and simplifies the element
-structure considerably. CWMNX also moves all non-semantic information into CSS
+structure considerably. MNX-Common also moves all non-semantic information into CSS
 properties.
 
 MEI is a very general and expressive medium for encoding arbitrary musical
@@ -175,8 +179,8 @@ interoperable medium for encoding CWMN (sometimes known as "MEI Go").
 
 IEEE 1599 is a specification that has paid unique attention to the
 relationships between different layers of musical information. Its Logic layer
-is similar in content to CWMNX, while its Notational, Performance and Audio
-layers answer some of the same concerns as GMNX. GMNX takes a different
+is similar in content to MNX-Common, while its Notational, Performance and Audio
+layers answer some of the same concerns as MNX-Generic. MNX-Generic takes a different
 approach to connecting these layers, and does not attempt to fully
 unify semantic information with visual and performance data. It relies
 to a greater degree on SVG, and to a lesser degree on MIDI.
@@ -236,8 +240,8 @@ Some general principles regarding the design of this specification follow.
 
   <dt>Address both literal encoding and semantic encoding.</dt>
   <dd>MNX includes two separate approaches to encoding music: high-level semantic encodings
-    described by <a>CWMNX</a> (and other future modules), and low-level literal
-    encodings described by <a>GMNX</a>. The literal encoding attempts to eliminate cultural
+    described by <a>MNX-Common</a> (and other future modules), and low-level literal
+    encodings described by <a>MNX-Generic</a>. The literal encoding attempts to eliminate cultural
     and semantic assumptions within its scope, while still allowing linkage between the literal and
     semantic layers.
   </dd>
@@ -252,25 +256,20 @@ Some general principles regarding the design of this specification follow.
   <dd>While much of the MNX specification addresses common Western music notation, nothing
     in the specification prevents the development of additional modules targeting other notation
     systems at a semantic level, or from taking other semantic approaches to Western music.
-    The <a>GMNX</a> module avoids cultural specificity due to its literal focus.
+    The <a>MNX-Generic</a> module avoids cultural specificity due to its literal focus.
   </dd>
 
   <dt>Separate semantic concerns from presentation/interpretation concerns.</dt>
-  <dd>Within its semantic encoding for CWMNX, this specification strives to keep semantic
+  <dd>Within its semantic encoding for MNX-Common, this specification strives to keep semantic
     descriptions from answering to the multitude of tiny features that control presentation and
     performance interpretation. These are segregated in the parallel domains of <a>style properties</a>
     and <a>interpretation content</a>.
   </dd>
 
-  <dd>While it is challenging to ground the definition of what is "semantic" in music notation, the litmus
-    test used here is the practical one of <em>widely shared understanding</em>: if the performance interpretation of some notation
-    is widely shared within the culture targeted by some semantic module, then that
-    aspect may be classified as semantic.</dd>
-
   <dt>Allow semantic encodings to "tunnel through" to the literal encoding.</dt>
-  <dd>A semantic module such as CWMNX cannot supply all known information about rendering and performance, in cases
+  <dd>A semantic module such as MNX-Common cannot supply all known information about rendering and performance, in cases
     where this knowledge lives outside the semantic markup. MNX allows semantic layers to "tunnel"
-    through to employ the literal constructs of GMNX, allowing the same primitives to describe
+    through to employ the literal constructs of MNX-Generic, allowing the same primitives to describe
     both entire scores at a literal level, and those fragments of a semantic score that require
     an embedded, literal description.
   </dd>
@@ -278,7 +277,7 @@ Some general principles regarding the design of this specification follow.
   <dt>Leverage existing value in the world</dt>
   <dd>The ecosystem of the Web is broad and valuable. MNX attempts to exploit this by making use of existing
     patterns and tooling. Examples include the reuse of many CSS concepts, and the ability to employ completely standard SVG
-    documents within GMNX without need of alteration.
+    documents within MNX-Generic without need of alteration.
   </dd>
 </dl>
 
@@ -301,9 +300,9 @@ Some general principles regarding the design of this specification follow.
     :: Scaffolding material on which the remainder of the specification relies
     : [[#mnx-container]]
     :: The high-level structure of MNX which organizes a hierarchy of musical resources in a document
-    : [[#cwmnx-section]]
+    : [[#common]]
     :: A schema describing a musical score in Conventional Western Music Notation.
-    : [[#gmnx-section]]
+    : [[#generic]]
     :: A schema describing an arbitrary graphical score in conjunction with audio and performance data.
   </div>
 
@@ -387,6 +386,9 @@ music as some set of visual markings, which can be interpreted by musicians to
 produce an audible performance.
 
 <h5 id="cwmn">Conventional Western music notation (CWMN)</h5>
+
+This notational idiom comprises a set of notational rules common to (but not
+limited to) Western European music from circa 1600 to the present day.
 
 <h4 id="score profiles">Score profiles</h4>
 
@@ -596,7 +598,7 @@ Examples include:
 
 </section>
 
-<h2 id="mnx-container">MNX container</h2>
+<h2 id="mnx-container">MNX-Container</h2>
 
 Each MNX document acts as a <dfn>container document</dfn>, which contains a
 hierarchy of components which collectively make up the
@@ -686,22 +688,22 @@ The following example shows a hierarchy of collections and scores.
     <collection type="sections">
         <score>
             <title>Section 1 (for Flute and Cello)</title>
-            <cwmnx>...</cwmnx>
+            <mnx-common>...</mnx-common>
         </score>
         <collection type="movements">
             <title>Section 2</title>
             <score>
                 <title>Section 2, Movement 1 (for Solo Flute)</title>
-                <cwmnx>...</cwmnx>
+                <mnx-common>...</mnx-common>
             </score>
             <score>
                 <title>Section 2, Movement 2 (for Solo Cello)</title>
-                <cwmnx>...</cwmnx>
+                <mnx-common>...</mnx-common>
             </score>
         </collection>
         <score>
             <title>Section 3 (for Flute and Cello)</title>
-            <cwmnx>...</cwmnx>
+            <mnx-common>...</mnx-common>
         </score>
     </collection>
 ```
@@ -758,26 +760,26 @@ bibliographic data and other descriptive information.
 The <{title}> element assigns a title to its parent element in the context of the document as a whole.
 </section>
 
-<h2 id="cwmnx-section">CWMNX</h2>
+<h2 id="common">MNX-Common</h2>
 
 <section>
-<h3 id="cwmnx-scope">Scope</h3>
+<h3 id="common-scope">Scope</h3>
 
   <em>This section is non-normative.</em>
 
-  This part of the specification is called <dfn>CWMNX</dfn>, and describes a
-  semantic dialect of MNX designed to encode Conventional Western Music Notation.
+  This part of the specification is called <dfn>MNX-Common</dfn>, and describes a
+  semantic dialect of MNX designed to encode Conventional Western Music Notation (CWMN).
 
 </section>
 
-<h3 id="cwmnx-semantics">Semantics</h3>
+<h3 id="common-semantics">Semantics</h3>
 
-<h4 id="cwmnx-notational-concepts">Notational concepts</h4>
+<h4 id="common-notational-concepts">Notational concepts</h4>
 
 This section describes various foundational concepts in music notation that
 are frequently referenced by this specification. 
 
-<h5 id="cwmnx-parts-staves">Parts and staves</h5>
+<h5 id="common-parts-staves">Parts and staves</h5>
 
 A score consists of multiple <dfn>parts</dfn>.  Each <a>part</a> is a grouping
 of related musical material that relates to a single performer or set of
@@ -803,7 +805,7 @@ Staves in CWMN are identified within a part by a unique <dfn>staff
 index</dfn>. The topmost staff in a part has a staff index of 1; staves below
 the topmost staff are identified with successively increasing indices.
 
-<h5 id="cwmnx-notated-events">Notated events</h5>
+<h5 id="common-notated-events">Notated events</h5>
 
 A <dfn>notated event</dfn> in CWMN is a discrete action in the score with a
 notated duration. It has an onset that
@@ -832,7 +834,7 @@ cover all such additional properties.
 
 Notated events are represented by the <{event}> element.
 
-<h5 id="cwmnx-metrical-position">Metrical position</h5>
+<h5 id="common-metrical-position">Metrical position</h5>
 
 Most notated events possess a well-defined <dfn>metrical position</dfn>,
 giving a time onset expressed as a rational number of whole note durations
@@ -858,7 +860,7 @@ three elements:
 - The <dfn>alteration</dfn>, which is a fractional alteration of pitch
     from the given step and octave, expressed in terms of the prevailing temperament of the work.
 
-<h5 id="cwmnx-directions">Directions</h5>
+<h5 id="common-directions">Directions</h5>
 
 A <dfn>direction</dfn> is a discrete instruction in the score
 that applies to notated events.
@@ -909,18 +911,18 @@ and pasting material from  a given voice in one measure into the same voice in
 a different measure. Consumer implementations might allow users to isolate the
 playback of a single voice, including only the sequences that belong to it.
 
-<h5 id="cwmnx-performance-interpretation">Performance Interpretation</h5>
+<h5 id="common-performance-interpretation">Performance Interpretation</h5>
 
 A <dfn>performance interpretation</dfn> is the end result of deriving
 a set of <a>performance events</a> from a score. Human performers do this
 by reading music, while MNX consumers will generally do this algorithmically.
 
-In GMNX, a consumer is given the exact performance interpretation as part of
-the document.  In CWMNX, a consumer will typically employ a set of rules that
+In MNX-Generic, a consumer is given the exact performance interpretation as part of
+the document.  In MNX-Common, a consumer will typically employ a set of rules that
 mimic the actions of a human performer, overriding these with exact
 performance events where these are explicitly supplied within the document.
 
-<h5 id="cwmnx-performance-events">Performance events</h5>
+<h5 id="common-performance-events">Performance events</h5>
 
 A <dfn>performance event</dfn> is a description of a single timed
 element of a musical performance with specific attributes for its onset,
@@ -953,7 +955,7 @@ act as a multiplier on the <a>base note value</a>. These multipliers take the fo
 
 Events and sequences may possess an optional <dfn>orientation</dfn> that
 determines a the placement and rendering of content according to a complex set
-of CWMN conventions. For the purposes of CWMNX there are two orientations:
+of CWMN conventions. For the purposes of MNX-Common there are two orientations:
 
 <ul>
 <li>An orientation of <dfn value dfn-for="orientation">up</dfn> orients note stems pointing upwards, and places beams, directions
@@ -963,7 +965,7 @@ and articulations accordingly.</li>
 and articulations accordingly.</li>
 </ul>
 
-<h4 id="cwmnx-notational-syntaxes">Notational syntaxes</h4>
+<h4 id="common-notational-syntaxes">Notational syntaxes</h4>
 
 <h5 id="note-value-syntax">Note value syntax</h5>
 
@@ -1215,13 +1217,13 @@ a <a>SMuFL glyph name</a> from the catalog of glyph names defined in the
 <a>SMuFL specification</a>.
 
 <section>
-<h4 id="cwmnx-body-content">CWMNX body content</h4>
+<h4 id="common-body-content">MNX-Common body content</h4>
 
-These elements of a CWMNX score supply its high-level description and structure.
+These elements of an MNX-Common score supply its high-level description and structure.
 
-<h5 id="the-cwmnx-element">The <dfn element><code>cwmnx</code></dfn> element</h5>
+<h5 id="the-mnx-common-element">The <dfn element><code>mnx-common</code></dfn> element</h5>
 
-<section dfn-for="cwmnx">
+<section dfn-for="mnx-common">
 
   <dl class="def">
     <dt><a>Contexts</a>:</dt>
@@ -1229,34 +1231,35 @@ These elements of a CWMNX score supply its high-level description and structure.
     <dt><a>Content Model</a>:</dt>
     <dd><a>Metadata content</a>.</dd>
     <dd><a>Stylesheet definitions</a>.</dd>
-    <dd>Exactly one <{global}> element - <a>measure content</a> that is common to all parts within the score</dd>
+    <dd>One or more <{global}> elements - <a>measure content</a> shared by sets of parts within the score</dd>
     <dd>One or more <{part}> elements - description and <a>measure content</a> of each part in the score.</dd>
     <dt><a>Attributes</a>:</dt>
-    <dd><{cwmnx/profile}> — profile describing constraints on the contents of this score</dd>
+    <dd><{mnx-common/profile}> — profile describing constraints on the contents of this score</dd>
   </dl>
 
-The <{cwmnx}> element is a <a>musical body</a> that describes a CWMNX
+The <{mnx-common}> element is a <a>musical body</a> that describes an MNX-Common
 score as a whole.
 
 The <dfn element-attr><code>profile</code></dfn> attribute declares a <a>score
 profile</a> that supplies constraints to which the score is expected to obey.
 
-The following values of <{cwmnx/profile}> are supported, along with the
+The following values of <{mnx-common/profile}> are supported, along with the
 constraints that they represent:
 
-<dl dfn-for="cwmnx/profile">
+<dl dfn-for="mnx-common/profile">
     <dt><dfn attr-value><code>standard</code></dfn></dt>
     <dd>The <a>measure content</a> in all <{global}> or <{part}> elements consists of an identical number of measures.</dd>
+    <dd>Only a single <{global}> element exists.</dd>
     <dd>Time signatures and tempo indications only occur in measures within the <{global}> element.</dd>
     <dd>Key signatures within the <{global}> element only occur in enharmonic/transposed forms that are equivalent within <{part}> elements.</dd>
     <dd>All notated events in a chord share the same duration</dd>
 </dl>
 
-The following example provides the basic skeleton of a <{cwmnx}> musical body:
+The following example provides the basic skeleton of a <{mnx-common}> musical body:
 
 <div class="example">
 ```xml
-<cwmnx>
+<mnx-common>
   <global>
       ...measure content describing system-wide features...
   </global>
@@ -1269,7 +1272,7 @@ The following example provides the basic skeleton of a <{cwmnx}> musical body:
       ...measure content for part 2...
   </part>
   ...additional parts...
-</cwmnx>
+</mnx-common>
 ```
 </div>
 </section>
@@ -1280,15 +1283,19 @@ The following example provides the basic skeleton of a <{cwmnx}> musical body:
 <section dfn-for="global">
   <dl class="def">
     <dt><a>Contexts</a>:</dt>
-    <dd><{cwmnx}></dd>
+    <dd><{mnx-common}></dd>
     <dt><a>Content Model</a>:</dt>
     <dd><a>Measure content</a>, which must not include any <a>sequence content</a></dd>
+    <dt><a>Attributes</a>:</dt>
+    <dd><{global/parts}> - an optional set of IDs of <{part}> elements to which this global content applies
   </dl>
 
 The <{global}> element represents a set of measures, each of which provides
-content that is shared by all parts within the score. Each <{measure}> element
+content that is shared by a set of parts within the score. Each <{measure}> element
 within <{global}> supplies the shared content for all other <{measure}>
-elements which share the same measure number.
+elements which share the same <{measure/index}>.
+
+By default, the content in <{global}> applies to <em>all</em> parts in the score.
 
 Typical examples of such content include key signatures, time signatures and
 tempo indications.
@@ -1299,25 +1306,67 @@ tempo indications.
 <div class="example">
 ```xml
 <global>
-  <measure>
+  <measure index="1">
     <directions>
       <tempo bpm="120" value="4"/>
       <time signature="4/4"/>
     </directions>
   </measure>
-  <measure/>
-  <measure/>
-  <measure barline="final"/>
+  <measure index="2"/>
+  <measure index="3"/>
+  <measure index="4" barline="final"/>
 </global>
 ```
 </div>
+
+Advisement: The following features are not supported by the
+<{mnx-common/profile/standard}> MNX-Common profile.
+
+The <dfn element-attr>parts</dfn> attribute optionally supplies a list of
+<{part}> element IDs as an <a>unordered set of space-separated tokens</a>.
+This restricts the scope of the <{global}> element to the set of parts given, allowing
+subsets of parts in the score to share dissimilar structures (for example, in scores
+having different parts in different meters). The default value of this attribute is
+the list of all part IDs.
+
+No two <{global}> elements may include the same part in their <{global/parts}> list, to prevent
+conflicting definitions.
+
+<div class="example">
+```xml
+<global parts="p1 p2">
+  <measure index="1">
+    <directions>
+      <time signature="6/8"/>
+    </directions>
+  </measure>
+  <measure index="2"/>
+  <measure index="3"/>
+  <measure index="4" barline="final"/>
+</global>
+<global parts="p3 p4">
+  <measure index="1">
+    <directions>
+      <time signature="4/4"/>
+    </directions>
+  </measure>
+  <measure index="2"/>
+  <measure index="3" barline="final"/>
+</global>
+<part id="p1">...</part>
+<part id="p2">...</part>
+<part id="p3">...</part>
+<part id="p4">...</part>
+```
+</div>
+
 </section>
 
 <h5 id="the-part-element">The <dfn element><code>part</code></dfn> element</h5>
 <section dfn-for="part">
   <dl class="def">
     <dt><a>Contexts</a>:</dt>
-    <dd><{cwmnx}></dd>
+    <dd><{mnx-common}></dd>
     <dt><a>Content Model</a>:</dt>
     <dd><a>Part description content</a></dd>
     <dd><a>Measure content</a></dd>
@@ -1325,8 +1374,8 @@ tempo indications.
 </section>
 
 The <{part}> element represents a set of measures which describe a single part
-within the score. The sequence of measures must match the sequences found in the
-score's <{global}> element, and in all other <{part}> elements.
+within the score. The sequence of measures must match the measure found in the
+<{global}> element applying to this part.
 
 <div class="example">
 ```xml
@@ -1353,7 +1402,7 @@ score's <{global}> element, and in all other <{part}> elements.
 </section>
 
 
-<h4 id="cwmnx-system-content">Measure content</h4>
+<h4 id="common-measure-content">Measure content</h4>
 
 <dfn>Measure content</dfn> supplies a sequence of <{measure}> elements, each of
 which supplies musical content for a time interval within a score.
@@ -1362,6 +1411,10 @@ The placement of the measures in measure content constitutes their <dfn>score
 order</dfn>, which is the order in which they are logically presented to a
 reader. This is distinct from their <dfn>performance order</dfn>, which is the
 order in which they are played by a performer.
+
+Each measure may bear the <{measure/index}> attribute, which provides its
+index within the <a>score order</a>. The first measure has an <{measure/index}>
+of 1.
 
 <h5 id="the-measure-element">The <dfn element><code>measure</code></dfn> element</h5>
 <section dfn-for="measure">
@@ -1374,16 +1427,24 @@ order in which they are played by a performer.
     <dd>One or more <{sequence}> elements (for measures within <{part}> elements only)</dd>
     <dd><a>Interpretation content</a></dd>
     <dt><a>Attributes</a>:</dt>
-    <dd><{measure/number}> - an optional numeric index for the measure
+    <dd><{measure/index}> - an optional integer index for the measure
+    <dd><{measure/number}> - an optional textual number to be displayed for the measure
     <dd><{measure/barline}> - an optional ending barline type for the measure
   </dl>
 
 The <{measure}> element encloses the direction and sequence content that together
-make up the majority of musical content in a CWMNX score.
+make up the majority of musical content in an MNX-Common score.
+
+The optional attribute <dfn element-attr>index</dfn> defines the one-based
+index of this measure within score order. This is used for cross-
+referencing <{measure}> elements in corresponding runs of <a>measure
+content</a>. The default value of <{measure/index}> is 1 for the first <{measure}> element
+within a run of content; for all other <{measure}>s its default is the index of the previous
+<{measure}> element plus 1.
 
 The optional attribute <dfn element-attr>number</dfn> provides an <a>non-negative integer</a>
-which can be used for visually cross-referencing <{measure}> elements in different parts.
-If provided, corresponding measures must share the same value for <{measure/number}>.
+which is to be used as a visual label for the measure. It is not required to be unique.
+If omitted, its default value is the same as <{measure/index}>.
 
 The optional attribute <dfn element-attr>barline</dfn> defines a barline type
 for the barline drawn at the end of the measure. Allowed values include:
@@ -1408,7 +1469,7 @@ with two monophonic half notes:
 <div class="example">
 <img src="images/measure-el-1.svg"/>
 ```xml
-<measure number="2">
+<measure index="2">
   <directions>
     <dynamics type="f" location="0"/>
     <wedge type="diminuendo" location="0" end="1/2"/>
@@ -1557,8 +1618,10 @@ the measure if there are no more events. The following example specifies a
 <div class="example">
 ```xml
 <sequence>
+  <directions>
+    <dynamics location="0" type="mp"/>
+  </directions>
   ...preceding sequence content...
-  <dynamics type="mp"/>
   <event value="/4">
     <note pitch="C4"/>
   </event>
@@ -1610,7 +1673,7 @@ explicit location independent of this order.
 
 The context of the <{directions}> element defines a scope for contained directions as follows:
 
-- Directions in a <{measure}> within the <{global}> element apply to all sequences of the measure in all parts. Directions with an orientation of ''orientation/up'' appear above the first displayed part; those with an orientation of ''orientation/down'' below the last displayed part.
+- Directions in a <{measure}> within the <{global}> element apply to all sequences of the measure in all applicable parts. Directions with an orientation of ''orientation/up'' appear above the first displayed part; those with an orientation of ''orientation/down'' below the last displayed part.
 
 - Directions in a <{measure}> within a <{part}> element apply to all sequences of the measure in a given part.
 
@@ -1618,7 +1681,7 @@ The context of the <{directions}> element defines a scope for contained directio
 
 </section>
 
-<h4 id="cwmnx-sequence-content">Sequence content</h4>
+<h4 id="common-sequence-content">Sequence content</h4>
 
 <dfn>Sequence content</dfn> supplies a series of musical events that are
 both presented and performed in a given order, each at a distinct time. Such
@@ -1674,9 +1737,11 @@ following procedure, called <dfn lt="sequence the content|sequencing the content
               <li>
                 Set the <a>metrical position</a> of <var>next</var> to <var>sequence cursor</var>.
               </li>
+              <li>If <var>next</var> has a <{event/duration}> attribute, assign it to <var>event duration</var>.</li>
+              <li>Else, set <var>event duration</var> to <var>next</var>'s <{event/value}> attribute.</li>
               <li>
-                Add the duration of <var>next</var>, multiplied by the
-                  <a>time modification ratio</a>, to <var>sequence cursor</var>.
+                Multiply <var>event duration</var> by the
+                  <a>time modification ratio</a>, and add the result to <var>sequence cursor</var>.
               </li>
               <li>
                 If <var>beamed group</var> is a list, append <var>next</var> to <var>beamed group</var>.
@@ -1717,13 +1782,6 @@ following procedure, called <dfn lt="sequence the content|sequencing the content
             relative to preceding or following elements as appropriate.
         </ol>
       </li>
-      <li>Else, if <var>next</var> is <a>direction content</a>:
-        <ol>
-          <li>
-            Take the current value of <var>sequence cursor</var> as the <a>measure location</a> of <var>next</var>.
-          </li>
-        </ol>
-      </li>
       <li>
         If <var>sequence cursor</var> exceeds the specified duration for the enclosing element
         (time signature for a <{measure}>, <{tuplet/inner}> attribute for a <{tuplet}>), throw
@@ -1744,10 +1802,11 @@ following procedure, called <dfn lt="sequence the content|sequencing the content
     <dd><a>Event content</a></dd>
     <dd><a>Interpretation content</a></dd>
     <dt><a>Attributes</a>:</dt>
-    <dd><{event/value}> - the metrical duration of this event</dd>
+    <dd><{event/value}> - the notated metrical duration of this event</dd>
     <dd><{event/measure}> - optional flag indicating that the event occupies the entire measure.</dd>
     <dd><{event/orient}> - optional <a>orientation</a> of this event </dd>
     <dd><{event/staff}> - optional <a>staff index</a> of this event </dd>
+    <dd><{event/duration}> - optional performed metrical duration, if different from <{event/value}></dd>
     <dt><a>Style properties</a>:</dt>
     <dd>'stem-direction' - the stem direction of this event</dd>
   </dl>
@@ -1853,6 +1912,47 @@ keyboard voice that temporarily crosses into the upper staff:
 ```
 </div>
 
+The optional <dfn element-attr>duration</dfn> attribute specifies the
+actual, performed duration of the event, if different from the notated
+value given by
+<{event/value}>.  The duration is specified as a <a>note value quantity</a>,
+which is less constrained than <a>note value</a>: it may be any desired
+multiple of a note value.
+
+The <{event/duration}> attribute not only alters the performance of the event,
+but determines the amount of time the event takes up in the measure, affecting
+the location of subsequent events in the containing sequence. This can change
+the layout of the measure, as subsequent <{event}>s will occur earlier or
+later as a result and be positioned accordingly (see <a>sequencing the
+content</a>). It also affects the validation  of the measure for metrical
+correctness.
+
+This attribute is unlikely to be frequently encountered, but is needed to
+handle cases in which composers employ notated values that are not
+interpreted literally. Some examples follow.
+
+One case occurs in Brahms, in which a dotted half is used to specify
+a note that is traditionally understood as occupying the space of 11
+sixteenth notes:
+
+<div class="example">
+<img src="images/duration-attr-1.png">
+```xml
+<sequence>
+  <event value="/16">
+    <rest/>
+  </event>
+  <event value="/2d" duration="11/16">
+    <note pitch="E4"/>
+  </event>
+</sequence>
+```
+</div>
+
+Because <{event/duration}> must be specified as a legal note value multiple,
+an enclosing <{tuplet}> element may be required in some cases to impose an appropriate
+time modification ratio.
+
 </section>
 
 <h5 id="the-tuplet-element">The <dfn element><code>tuplet</code></dfn> element</h5>
@@ -1869,6 +1969,9 @@ keyboard voice that temporarily crosses into the upper staff:
     <dd><{tuplet/inner}> - duration of the enclosed sequence content</dd>
     <dd><{sequence/orient}> - optional <a>orientation</a> of this tuplet </dd>
     <dd><{sequence/staff}> - optional <a>staff index</a> of this tuplet </dd>
+    <dd><{tuplet/show-number}> - optional control over the display of the tuplet ratio numbers</dd>
+    <dd><{tuplet/show-value}> - optional control over the display of the tuplet ratio note values</dd>
+    <dd><{tuplet/bracket}> - optional control over the display of brackets</dd>
   </dl>
 
 The <{tuplet}> element organizes a set of musical events that form a distinct
@@ -1901,6 +2004,46 @@ The <dfn element-attr>staff</dfn> attribute provides a specific
 <a>staff index</a> for all content within this tuplet.  If not provided, the
 staff index is determined automatically according to the implementation's
 rendering rules.
+
+The optional <dfn element-attr>show-number</dfn> attribute controls the display
+of the quantity of inner and outer note value units for the tuplet. Permissible values
+include:
+
+<dl dfn-for="tuplet/show-number">
+  <dt><dfn attr-value><code>none</code></dfn></dt>
+  <dd>Do not show any tuplet number.</dd>
+  <dt><dfn attr-value><code>inner</code></dfn> (default)</dt>
+  <dd>Display only the numerator of the tuplet's <{tuplet/inner}> attribute.</dd>
+  <dt><dfn attr-value><code>both</code></dfn></dt>
+  <dd>Display the numerators of the tuplet's <{tuplet/inner}> and <{tuplet/outer}> attributes.</dd>
+</dl>
+
+The optional <dfn element-attr>show-value</dfn> attribute controls the display
+of the note value units used inside and outside the tuplet. Permissible values
+include:
+
+<dl dfn-for="tuplet/show-value">
+  <dt><dfn attr-value><code>none</code></dfn> (default)</dt>
+  <dd>Do not show any tuplet units.</dd>
+  <dt><dfn attr-value><code>inner</code></dfn></dt>
+  <dd>Display only the note value unit of the tuplet's <{tuplet/inner}> attribute.</dd>
+  <dt><dfn attr-value><code>both</code></dfn></dt>
+  <dd>Display both the note value units of the tuplet's <{tuplet/inner}> and <{tuplet/outer}> attributes.</dd>
+</dl>
+
+The optional <dfn element-attr>bracket</dfn> attribute controls the display of
+a bracket in conjunction with the tuplet. 
+It is disregarded if <{tuplet/show-number}> has a value of <{tuplet/show-number/none}>.
+Values include:
+
+<dl dfn-for="tuplet/bracket">
+  <dt><dfn attr-value><code>auto</code></dfn> (default)</dt>
+  <dd>A bracket is shown for the tuplet if and only if the notes are unbeamed.</dd>
+  <dt><dfn attr-value><code>no</code></dfn></dt>
+  <dd>Do not display a bracket.</dd>
+  <dt><dfn attr-value><code>yes</code></dfn></dt>
+  <dd>Always display a bracket.</dd>
+</dl>
 
 <div class="example">
 ```xml
@@ -1939,7 +2082,7 @@ notes and the other end outside the same grouping. This element acts to
 enforce that constraint.
 
 NOTE: In general, the number of beams and the use of forward or backward hooks
-is determined automatically by implementations. There is thus no CWMNX element
+is determined automatically by implementations. There is thus no MNX-Common element
 that represents an individual beam.  More detailed beam specifications may be
 overridden using style properties, but do not amount to semantic markup.
 
@@ -2037,7 +2180,7 @@ The following example illustrates a beam that crosses a measure boundary:
 
 <div class="example">
 ```xml
-<measure number="9">
+<measure index="9">
   <sequence>
       ...preceding sequence content...
       <beamed continue="#beamcont1">
@@ -2046,7 +2189,7 @@ The following example illustrates a beam that crosses a measure boundary:
       </beamed>
   </sequence>
 </measure>
-<measure number="10">
+<measure index="10">
   <sequence>
       <beamed id="beamcont1">
         <event value="/8">...</event>
@@ -2146,7 +2289,7 @@ The following example illustrates a run of two grace notes up to a quarter note.
 
 </section>
 
-<h4 id="cwmnx-event-content">Event content</h4>
+<h4 id="common-event-content">Event content</h4>
 
 <dfn>Event content</dfn> comprises elements that describe the musical content
 of a single event, that is performed at a distinct time.
@@ -2178,7 +2321,7 @@ for this note where this differs from the staff index which applies to the conta
 <{event}> as a whole.
 
 The <dfn element-attr>accidental</dfn> attribute supplies an accidental value
-for this note. In the <{cwmnx/profile/standard}> CWMNX profile, this attribute
+for this note. In the <{mnx-common/profile/standard}> MNX-Common profile, this attribute
 must match the <a>alteration</a> of the <{note/pitch}> attribute. Omission of
 the  attribute indicates that no accidental is to be displayed. The special
 value <dfn attr-value for="note/accidental">auto</dfn> indicates that a
@@ -2190,7 +2333,7 @@ editorial indications. Handle the case of "explicit" accidentals that should
 be preserved even if the chromatic context is changed by edits.)</em>
 
 Advisement: The following features are not supported by the
-<{cwmnx/profile/standard}> CWMNX profile.
+<{mnx-common/profile/standard}> MNX-Common profile.
 
 The <dfn element-attr>value</dfn> attribute optionally supplies a <a>note
 value</a> for this note, where this differs from the containing <{event}>'s
@@ -2239,7 +2382,7 @@ ignored for this purpose.
 <em>Needs migration from MusicXML.</em>
 </section>
 
-<h4 id="cwmnx-note-content">Note content</h4>
+<h4 id="common-note-content">Note content</h4>
 
 <dfn>Note content</dfn> comprises elements that describe the musical nature
 of a single note within an event.
@@ -2259,12 +2402,12 @@ of a single note within an event.
 <em>Needs migration from MusicXML.</em>
 </section>
 
-<h4 id="cwmnx-liaison-content">Liaison content</h4>
+<h4 id="common-liaison-content">Liaison content</h4>
 
 <dfn>Liaison content</dfn> comprises elements that describe the liaison or connection
 between a single note within an event, and some other note.
 
-<h5 id="cwmnx-liaison-attributes">Liaison attributes</h5>
+<h5 id="common-liaison-attributes">Liaison attributes</h5>
 
 Liaison elements share a set of common <dfn>liaison attributes</dfn> in an attribute group.
 
@@ -2374,19 +2517,19 @@ Examples:
 </section>
 
 
-<h4 id="cwmnx-direction-content">Direction content</h4>
+<h4 id="common-direction-content">Direction content</h4>
 
 <dfn>Direction content</dfn> consists of some number of musical
 <dfn>directions</dfn> that modify or accompany the performance of events in
-one or more measures. Directions may be included in a CWMNX score in two ways:
+one or more measures. Directions may be included in an MNX-Common score in two ways:
 
-- Within a <{directions}> element below a <{measure}> or <{sequence}>, with
-    explicitly defined measure locations for each direction.
+- Within a <{directions}> element below a <{measure}>. The direction is considered
+    to apply to all sequences.
 
-- Within <a>sequence content</a>, in which case measure locations are assigned
-    as an outcome of <a>sequencing the content</a>.
+- Within a <{directions}> element below a <{sequence}>. The direction applies only
+    to the content within this sequence.
 
-<h5 id="cwmnx-direction-attributes">Direction attributes</h5>
+<h5 id="common-direction-attributes">Direction attributes</h5>
 
 Directions share a set of common <dfn>direction attributes</dfn> in an attribute group.
 
@@ -2397,11 +2540,9 @@ Directions share a set of common <dfn>direction attributes</dfn> in an attribute
     <dd><{direction/orient}> - an optional <a>orientation</a></dd>
   </dl>
 
-All directions within a <{directions}> parent element may be given an explicit
+All directions within a <{directions}> parent element must be given an explicit
 <a>measure location</a> by supplying a <dfn element-attr dfn-
-for="direction">location</dfn> attribute. If omitted, this is determined by
-the process of <a>sequencing the content</a> in which it occurs; if not within
-a <{sequence}>, the default measure location is zero.
+for="direction">location</dfn> attribute. The default measure location is zero.
 
 Conversely, directions occurring within <a>sequence content</a> must omit this
 attribute as their location is determined during the procedure of
@@ -2517,10 +2658,12 @@ consistent with describing musical expression.
 <div class="example">
 ```xml
 <sequence>
-  <dirgroup>
-    <expression>subito</expression>
-    <dynamics>p</dynamics>
-  </dirgroup>
+  <directions>
+    <dirgroup location="0">
+      <expression>subito</expression>
+      <dynamics>p</dynamics>
+    </dirgroup>
+  </directions>
   ...following sequence content...
 </sequence>
 ```
@@ -2577,12 +2720,12 @@ to arrange them horizontally from left to right.
 TBD: spacing properties
 
 </section>
-<h4 id="cwmnx-spanning-directions">Spanning directions</h4>
+<h4 id="common-spanning-directions">Spanning directions</h4>
 
 <dfn>Spanning directions</dfn> are directions whose temporal extent within a part is
 characterized by a <a>span</a>.
 
-<h5 id="cwmnx-span-attributes">Span attributes</h5>
+<h5 id="common-span-attributes">Span attributes</h5>
 
 Spanning directions share a set of common <dfn>span attributes</dfn> in an attribute group.
 
@@ -2680,7 +2823,7 @@ displayed in the score for this element.
 
 Advisement: Other spans exist in MusicXML and need to be migrated.
 
-<h4 id="cwmnx-staff-directions">Staff directions</h4>
+<h4 id="common-staff-directions">Staff directions</h4>
 
 <dfn>Staff directions</dfn> are directions that apply as a whole to the
 one or more musical staves in a part, and which determine the interpretation
@@ -2721,7 +2864,7 @@ to all the staves in a given part (if not the whole score).
 
 It is invalid to place more than one <{key}> element within a <{measure}>.
 
-In the <{cwmnx/profile/standard}> CWMNX profile, <{key}> elements in <{global}> measure content
+In the <{mnx-common/profile/standard}> MNX-Common profile, <{key}> elements in <{global}> measure content
 are required for every key change. <{key}> elements below <{part}>
 are optional; if present they must indicate a value of <{key/fifths}> that is
 either identical to the corresponding value in the global <{key}> or differs from it
@@ -2751,7 +2894,7 @@ The <a>measure location</a> of a <{time}> direction is ignored and is assumed to
 
 It is invalid to place more than one <{time}> element within a <{measure}>.
 
-In the <{cwmnx/profile/standard}> CWMNX profile, a <{time}> element may only appear
+In the <{mnx-common/profile/standard}> MNX-Common profile, a <{time}> element may only appear
 inside <{global}> measure content, not within a <{part}>.
 
 The required <dfn element-attr>signature</dfn> attribute supplies a <a>time signature</a> that gives the time signature for this measure and for subsequent measures. By default this signature is displayed in normative rendering.
@@ -2821,7 +2964,7 @@ The <{tempo}> element defines a tempo, from the point of its occurrence forward 
 The tempo is rendered as a conventional pairing of a small beat unit notation equated to a
 metronome marking.
 
-In the <{cwmnx/profile/standard}> CWMNX profile, a <{tempo}> element may only appear
+In the <{mnx-common/profile/standard}> MNX-Common profile, a <{tempo}> element may only appear
 inside <{global}> measure content, not within a <{part}>.
 
 The required <dfn element-attr>value</dfn> attribute supplies a <a>note value</a>
@@ -2944,7 +3087,7 @@ measure content in the part until changed. Expected to resemble MusicXML's corre
 Advisement: Other staff direction elements exist in MusicXML and need to be migrated.
 
 
-<h4 id="cwmnx-part-description-content">Part description content</h4>
+<h4 id="common-part-description-content">Part description content</h4>
 
 <dfn>Part description content</dfn> consists of elements that supply information describing a part,
 and occur at the beginning of a <{part}> element.
@@ -2961,7 +3104,7 @@ and occur at the beginning of a <{part}> element.
 <section dfn-for="instrument-sound">
 </section>
 
-<h4 id="cwmnx-interpretation-content">Interpretation content</h4>
+<h4 id="common-interpretation-content">Interpretation content</h4>
 
 <dfn>Interpretation content</dfn> may be included in some elements to control
 the specific way in which the element is interpreted as a musical performance.
@@ -2973,8 +3116,8 @@ the specific way in which the element is interpreted as a musical performance.
     <dd>Any number of <{performance-event}> or <{performance-tempo}> elements</dd>
   </dl>
 
-The <{interpret}> element substitutes explicit GMNX <a>performance data</a>
-for the performance of its CWMNX parent element that a producer would normally
+The <{interpret}> element substitutes explicit MNX-Generic <a>performance data</a>
+for the performance of its MNX-Common parent element that a producer would normally
 generate.
 
 Within <{interpret}>, a set of child <{performance-event}> and <{performance-tempo}> elements supply
@@ -3045,13 +3188,14 @@ a tempo via an explicit interpretation:
 <div class="example">
 ```xml
 <sequence>
-  ...preceding sequence content...
-  <instruction class="tempo">
-    <interpret>
-      <performance-tempo beat="/4" bpm="60"/>
-    </interpret>
-    Langsamer
-  </instruction>
+  <directions>
+    <instruction class="tempo">
+      <interpret>
+        <performance-tempo beat="/4" bpm="60"/>
+      </interpret>
+      Langsamer
+    </instruction>
+  </directions>
   ...following sequence content...
 </sequence>
 ```
@@ -3075,7 +3219,7 @@ the handling of grace notes, for example.
 -->
 </section>
 
-<h3 id="cwmnx-style-properties">Style properties</h3>
+<h3 id="common-style-properties">Style properties</h3>
 
 <dfn>Style properties</dfn> may be included in many elements to control the
 specific way in which the element is rendered. Each property is defined as a
@@ -3105,7 +3249,7 @@ procedure for <dfn>style property computation</dfn>:
 
 Properties are documented in the following places:
 
-- Properties applying to all elements are defined below under <a href="cwmnx-common-properties">common style properties</a>.
+- Properties applying to all elements are defined below under <a href="common-properties">common style properties</a>.
 
 - Properties applying to a <a>content category</a> are defined in the section describing that category.
 
@@ -3156,9 +3300,9 @@ In this case, two different classes `emphasis` and `alternate` are applied, alon
 
 </section>
 
-<h4 id="cwmnx-common-properties">Common style properties</h4>
+<h4 id="common-properties">Common style properties</h4>
 
-The following <a>style properties</a> apply to many kinds of object in CWMNX, and in general
+The following <a>style properties</a> apply to many kinds of object in MNX-Common, and in general
 apply to all descendants of the element within which they are specified.
 
 <h5 id="the-color-property">The <dfn property><code>color</code></dfn> property</h5>
@@ -3300,6 +3444,42 @@ Permitted values include:
 
 </section>
 
+<h5 id="the-x-property">The <dfn property><code>x</code></dfn> property</h5>
+<section dfn-for="x">
+  <dl class="def">
+    <dt>Applies to:</dt>
+    <dd><a>Direction content</a>, <a>Sequence content</a></dd>
+    <dt>Value:</dt>
+    <dd><var>staff position</var></dd>
+    <dt>Inherited:</dt>
+    <dd>no</dd>
+  </dl>
+
+The 'x' property places the horizontal anchor point of an event or direction
+at a given graphical offset relative to its specified <a>measure location</a>,
+given as a <a>valid floating-point number</a> of staff lines starting from the
+measure location's assigned position in the layout and proceeding to the right
+in a positive direction.
+</section>
+
+<h5 id="the-end-x-property">The <dfn property><code>end-x</code></dfn> property</h5>
+<section dfn-for="end-x">
+  <dl class="def">
+    <dt>Applies to:</dt>
+    <dd><a>Direction content</a></dd>
+    <dt>Value:</dt>
+    <dd><var>staff position</var></dd>
+    <dt>Inherited:</dt>
+    <dd>no</dd>
+  </dl>
+
+The 'end-x' property places the horizontal anchor point of the end of a
+<a>spanning direction</a> at a given graphical offset relative to its
+specified <a>measure location</a>, given as a <a>valid floating-point
+number</a> of staff lines starting from the measure location's assigned
+position in the layout and proceeding to the right in a positive direction.
+</section>
+
 <h5 id="the-y-property">The <dfn property><code>y</code></dfn> property</h5>
 <section dfn-for="y">
   <dl class="def">
@@ -3311,14 +3491,38 @@ Permitted values include:
     <dd>no</dd>
   </dl>
 The 'y' property places a direction at a given <var>staff position</var> given as a
-<a>valid floating-point number</a> of staff lines starting from the top line and
+<a>valid floating-point number</a> of staff lines starting from the center of the top staff line and
 proceeding downwards in a positive direction.
 
 The special values <dfn value>above</dfn> and <dfn value>below</dfn> delegate
 exact positioning of the direction to the implementation and request that
 the direction be placed respectively above or below the staff.
 
-<em>TBD: describe rendering model and regisration</em>
+<em>TBD: describe rendering model and registration</em>
+</section>
+
+<h5 id="the-location-property">The <dfn property><code>location</code></dfn> property</h5>
+<section dfn-for="location">
+  <dl class="def">
+    <dt>Applies to:</dt>
+    <dd><a>Direction content</a>, <a>Sequence content</a></dd>
+    <dt>Value:</dt>
+    <dd><var>location</var></dd>
+    <dt>Inherited:</dt>
+    <dd>no</dd>
+  </dl>
+
+For layout purposes only, the 'location' property overrides the measure location of an event or
+direction determined by <a>sequencing the content</a>, replacing it with
+the value <var>location</var> expressed as a <a>measure location</a>
+within the containing measure.
+
+This is useful for forcing the positioning or alignment of objects that would otherwise
+be placed elsewhere, without otherwise altering their semantics.
+
+</section>
+
+
 
 </section>
 
@@ -3363,7 +3567,7 @@ nature of the grace note.
 Advisement: Many other style properties exist in MusicXML (although not as
 styles per se) and will need to be migrated.
 
-<h3 id="cwmnx-stylesheet-definitions">Stylesheet definitions</h3>
+<h3 id="common-stylesheet-definitions">Stylesheet definitions</h3>
 
 The <{style-class}> and <{style-selector}> elements allow definition of style
 properties in groups that can be applied in a unitary fashion to other
@@ -3372,7 +3576,7 @@ algorithmic rule matching in a <a>style selector definition</a>. Taken together,
 these supply a set of <dfn>stylesheet definitions</dfn> that control the rendering
 and interpretation of the document.
 
-These definitions may be placed in the <{head}>, the <{cwmnx}>
+These definitions may be placed in the <{head}>, the <{mnx-common}>
 element, or in a separate linked stylesheet.
 
 <h4 id="the-style-class-element">The <dfn element><code>style-class</code></dfn> element</h4>
@@ -3462,10 +3666,10 @@ will employ a given stem width:
 </section>
 
 <section>
-<h3 id="cwmnx-rendering">Rendering</h3>
+<h3 id="common-rendering">Rendering</h3>
 
-<em>TBD: section describing normative CWMNX rendering procedure, leaving room for implementation decisions.
-The intent is to set out the normative constraints that CWMNX rendering must follow, including at least:
+<em>TBD: section describing normative MNX-Common rendering procedure, leaving room for implementation decisions.
+The intent is to set out the normative constraints that MNX-Common rendering must follow, including at least:
 
 - 
 - normative registration
@@ -3475,37 +3679,37 @@ The intent is to set out the normative constraints that CWMNX rendering must fol
 </section>
 
 <section>
-<h3 id="cwmnx-interpretation">Interpretation</h3>
+<h3 id="common-interpretation">Interpretation</h3>
 
-<em>TBD: section describing normative CWMNX performance interpretation, leaving room for implementation decisions.</em>
+<em>TBD: section describing normative MNX-Common performance interpretation, leaving room for implementation decisions.</em>
 
 
 </section>
 
 <section>
-<h2 id="gmnx-section">GMNX</h2>
+<h2 id="generic">MNX-Generic</h2>
 
-<dfn>GMNX</dfn> is a general format for representing musical scores in terms of linked
+<dfn>MNX-Generic</dfn> is a general format for representing musical scores in terms of linked
 graphical media, audio media and performance data.
 
-In contrast to CWMNX, there is no attempt to represent semantics directly in
-GMNX. Thus, GMNX can be described as a low-level, literal format that
-represents instances of scores, rather than their semantic content. GMNX is
+In contrast to MNX-Common, there is no attempt to represent semantics directly in
+MNX-Generic. Thus, MNX-Generic can be described as a low-level, literal format that
+represents instances of scores, rather than their semantic content. MNX-Generic is
 intended to support applications which <em>must</em> be able to faithfully
 execute a visual and/or audible rendition of a score, with an awareness of the
 relationship between what is seen and what is heard.
 
-GMNX can be employed as a <dfn>target format</dfn> for applications that
-render semantic notation into media. And even though GMNX is not a semantic
-format, GMNX elements may cross-reference elements in a semantic source
-document that was rendered into GMNX. This supports a connection between  the
-original semantic markup and a GMNX rendering of same.
+MNX-Generic can be employed as a <dfn>target format</dfn> for applications that
+render semantic notation into media. And even though MNX-Generic is not a semantic
+format, MNX-Generic elements may cross-reference elements in a semantic source
+document that was rendered into MNX-Generic. This supports a connection between  the
+original semantic markup and an MNX-Generic rendering of same.
 
-Given GMNX's characteristics as a target format, some features of GMNX are
-employed within CWMNX to provide literal descriptions of rendering where
+Given MNX-Generic's characteristics as a target format, some features of MNX-Generic are
+employed within MNX-Common to provide literal descriptions of rendering where
 semantic information does not suffice to yield the desired musical result.
 
-The only constraints on the nature of a GMNX score are:
+The only constraints on the nature of an MNX-Generic score are:
 
 1. The visual content of the score must be encoded in SVG.
 
@@ -3513,13 +3717,13 @@ The only constraints on the nature of a GMNX score are:
     or <a>performance data</a>.
 
 
-<h3 id="gmnx-elements">Elements</h3>
+<h3 id="generic-elements">Elements</h3>
 
-<h4 id="gmnx-body">Musical body content</h4>
+<h4 id="generic-body">Musical body content</h4>
 
-<h5 id="the-gmnx-element">The <dfn element><code>gmnx</code></dfn> element</h5>
+<h5 id="the-mnx-generic-element">The <dfn element><code>mnx-generic</code></dfn> element</h5>
 
-<section dfn-for="gmnx">
+<section dfn-for="mnx-generic">
 
   <dl class="def">
     <dt><a>Contexts</a>:</dt>
@@ -3532,15 +3736,15 @@ The only constraints on the nature of a GMNX score are:
     <dd>None.</dd>
   </dl>
 
-The <{gmnx}> element is a <a>musical body</a> that describes a GMNX
+The <{mnx-generic}> element is a <a>musical body</a> that describes an MNX-Generic
 score as a whole.
 
-The following example illustrates an entire GMNX document; the elements
+The following example illustrates an entire MNX-Generic document; the elements
 are described individually in the remainder of this section.
 
 <div class="example">
 ```xml
-<gmnx>
+<mnx-generic>
   <score-view id="page1" view="score.svg#page1"/>
   <score-view id="page2" view="score.svg#page2"/>
   <score-view id="page3" view="score.svg#page3"/>
@@ -3570,13 +3774,13 @@ are described individually in the remainder of this section.
       ...following events...
     </performance-part>
   </performance-data>
-</gmnx>
+</mnx-generic>
 ```
 </div>
 
 </section>
 
-<h4 id="gmnx-graphics">Graphics media</h4>
+<h4 id="generic-graphics">Graphics media</h4>
 
 <h5 id="the-score-view-element">The <dfn element><code>score-view</code></dfn> element</h5>
 
@@ -3584,7 +3788,7 @@ are described individually in the remainder of this section.
 
   <dl class="def">
     <dt><a>Contexts</a>:</dt>
-    <dd><{gmnx}></dd>
+    <dd><{mnx-generic}></dd>
     <dt><a>Content Model</a>:</dt>
     <dd>Any number of <{score-mapping}> elements.</dd>
     <dt><a>Attributes</a>:</dt>
@@ -3629,7 +3833,7 @@ the nature or structure of this element, nor on its relationship to other
 elements.
 
 The optional <dfn element-attr>semantics</dfn> attribute supplies one or more
-IDs of elements in a semantic source document, for example a CWMNX document.
+IDs of elements in a semantic source document, for example an MNX-Common document.
 This asserts that each of the referenced semantic source elements are considered as
 generating the SVG content described by <{score-mapping/graphics}>.
 
@@ -3639,13 +3843,13 @@ semantic source.
 
 </section>
 
-<h4 id="gmnx-performance">Performance content</h4>
+<h4 id="generic-performance">Performance content</h4>
 
 The category of <dfn>performance content</dfn> includes both of the following:
 
-- <dfn>audio media</dfn> supplying a performance of a GMNX score in an audio file format
+- <dfn>audio media</dfn> supplying a performance of an MNX-Generic score in an audio file format
 
-- <dfn>performance data</dfn>, describing a performance of a GMNX score in
+- <dfn>performance data</dfn>, describing a performance of an MNX-Generic score in
     terms of discrete, parameterized sonic events
 
 <h5 id="the-performance-audio-element">The <dfn element><code>performance-audio</code></dfn> element</h5>
@@ -3654,7 +3858,7 @@ The category of <dfn>performance content</dfn> includes both of the following:
 
   <dl class="def">
     <dt><a>Contexts</a>:</dt>
-    <dd><{gmnx}></dd>
+    <dd><{mnx-generic}></dd>
     <dt><a>Content Model</a>:</dt>
     <dd><a>Metadata content</a>.</dd>
     <dd>Zero or more <{performance-tempo}> elements.</dd>
@@ -3683,7 +3887,7 @@ between the performance data and the graphical score.
 
   <dl class="def">
     <dt><a>Contexts</a>:</dt>
-    <dd><{gmnx}></dd>
+    <dd><{mnx-generic}></dd>
     <dt><a>Content Model</a>:</dt>
     <dd><a>Metadata content</a>.</dd>
     <dt><a>Attributes</a>:</dt>
@@ -3701,7 +3905,7 @@ in the <dfn element-attr>src</dfn> attribute.
 
   <dl class="def">
     <dt><a>Contexts</a>:</dt>
-    <dd><{gmnx}></dd>
+    <dd><{mnx-generic}></dd>
     <dt><a>Content Model</a>:</dt>
     <dd><a>Metadata content</a>.</dd>
     <dd>One or more <{performance-part}> elements.</dd>
@@ -3746,7 +3950,7 @@ elements, within a given performance.
 The <dfn element-attr>instrument-sound</dfn> attribute gives the MusicXML sound ID of the instrument
 for this part.
 
-Note: <{performance-part}> elements do not necessarily correspond to CWMNX
+Note: <{performance-part}> elements do not necessarily correspond to MNX-Common
 <{part}> elements, as they pertain to a single instrument.
 
 </section>
