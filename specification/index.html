@@ -1212,7 +1212,7 @@ Possible extra rowspan handling
 	}
 </style>
   <meta content="Bikeshed version 6abc9f98f620481a5031cd9b44944d60af9b79b9" name="generator">
-  <meta content="801a29a20001037363d7b7978938346f63b3545f" name="document-revision">
+  <meta content="8c48aa55e588d71bef76394f12e6bad7ca3574f3" name="document-revision">
 <style>
   .language-xml {
     font-size: 11px;
@@ -1747,8 +1747,9 @@ exchange between different applications working with music notation.</p>
       <li>
        <a href="#common-stylesheet-definitions"><span class="secno">5.4</span> <span class="content">Stylesheet definitions</span></a>
        <ol class="toc">
-        <li><a href="#the-style-class-element"><span class="secno">5.4.1</span> <span class="content">The <span><code>style-class</code></span> element</span></a>
-        <li><a href="#the-style-selector-element"><span class="secno">5.4.2</span> <span class="content">The <span><code>style-selector</code></span> element</span></a>
+        <li><a href="#the-stylesheet-element"><span class="secno">5.4.1</span> <span class="content">The <span><code>stylesheet</code></span> element</span></a>
+        <li><a href="#the-style-class-element"><span class="secno">5.4.2</span> <span class="content">The <span><code>style-class</code></span> element</span></a>
+        <li><a href="#the-style-selector-element"><span class="secno">5.4.3</span> <span class="content">The <span><code>style-selector</code></span> element</span></a>
        </ol>
       <li><a href="#common-rendering"><span class="secno">5.5</span> <span class="content">Rendering</span></a>
       <li><a href="#common-interpretation"><span class="secno">5.6</span> <span class="content">Interpretation</span></a>
@@ -2235,12 +2236,12 @@ document as a whole.</p>
       <dd>Any.
       <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model①">Content Model</a>:
       <dd><a data-link-type="dfn" href="#metadata-content" id="ref-for-metadata-content">Metadata content</a>.
-      <dd><a data-link-type="dfn" href="#stylesheet-definitions" id="ref-for-stylesheet-definitions">Stylesheet definitions</a>.
+      <dd><code><a data-link-type="element" href="#elementdef-stylesheet" id="ref-for-elementdef-stylesheet">stylesheet</a></code>
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute②">Attributes</a>:
       <dd>None.
      </dl>
       The <code><a data-link-type="element" href="#elementdef-head" id="ref-for-elementdef-head①">head</a></code> element supplies overall descriptive information for an MNX document,
-such as document-scoped metadata or <a data-link-type="dfn" href="#stylesheet-definitions" id="ref-for-stylesheet-definitions①">stylesheet definitions</a>. 
+such as document-scoped metadata or <a data-link-type="dfn" href="#stylesheet-definitions" id="ref-for-stylesheet-definitions">stylesheet definitions</a>. 
     </section>
     <h4 class="heading settled" data-level="4.1.3" id="the-collection-element"><span class="secno">4.1.3. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport="" id="elementdef-collection"><code>collection</code></dfn> element</span><a class="self-link" href="#the-collection-element"></a></h4>
     <section>
@@ -2851,7 +2852,7 @@ a <a data-link-type="dfn" href="https://w3c.github.io/smufl/gitbook/specificatio
        <dd>Wherever a <a data-link-type="dfn" href="#musical-body" id="ref-for-musical-body②">musical body</a> is expected.
        <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model⑤">Content Model</a>:
        <dd><a data-link-type="dfn" href="#metadata-content" id="ref-for-metadata-content③">Metadata content</a>.
-       <dd><a data-link-type="dfn" href="#stylesheet-definitions" id="ref-for-stylesheet-definitions②">Stylesheet definitions</a>.
+       <dd><code><a data-link-type="element" href="#elementdef-stylesheet" id="ref-for-elementdef-stylesheet①">stylesheet</a></code>.
        <dd>One or more <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global">global</a></code> elements - <a data-link-type="dfn" href="#measure-content" id="ref-for-measure-content②">measure content</a> shared by sets of parts within the score
        <dd>One or more <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part">part</a></code> elements - description and <a data-link-type="dfn" href="#measure-content" id="ref-for-measure-content③">measure content</a> of each part in the score.
        <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute⑥">Attributes</a>:
@@ -4657,33 +4658,43 @@ nature of the grace note.</p>
    <p><strong class="advisement"> Many other style properties exist in MusicXML (although not as
 styles per se) and will need to be migrated.</strong></p>
    <h3 class="heading settled" data-level="5.4" id="common-stylesheet-definitions"><span class="secno">5.4. </span><span class="content">Stylesheet definitions</span><a class="self-link" href="#common-stylesheet-definitions"></a></h3>
-   <p>The <code><a data-link-type="element" href="#elementdef-style-class" id="ref-for-elementdef-style-class">style-class</a></code> and <code><a data-link-type="element" href="#elementdef-style-selector" id="ref-for-elementdef-style-selector">style-selector</a></code> elements allow definition of style
-properties in groups that can be applied in a unitary fashion to other
-elements, respectively by name matching in a <a data-link-type="dfn" href="#style-class-style-class-definition" id="ref-for-style-class-style-class-definition②">style class definition</a>, or by
-algorithmic rule matching in a <a data-link-type="dfn" href="#style-selector-style-selector-definition" id="ref-for-style-selector-style-selector-definition①">style selector definition</a>. Taken together,
-these supply a set of <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="stylesheet-definitions">stylesheet definitions</dfn> that control the rendering
-and interpretation of the document.</p>
+   <p>The <code><a data-link-type="element" href="#elementdef-stylesheet" id="ref-for-elementdef-stylesheet②">stylesheet</a></code> element may be used to define style properties using rules that
+can be applied in a unitary fashion to other elements, respectively by name
+matching in a <a data-link-type="dfn" href="#style-class-style-class-definition" id="ref-for-style-class-style-class-definition②">style class definition</a>, or by algorithmic rule matching
+in a <a data-link-type="dfn" href="#style-selector-style-selector-definition" id="ref-for-style-selector-style-selector-definition①">style selector definition</a>. Taken together, these supply a set of <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport="" id="stylesheet-definitions">stylesheet definitions</dfn> that control the rendering and
+interpretation of the document.</p>
    <p>These definitions may be placed in the <code><a data-link-type="element" href="#elementdef-head" id="ref-for-elementdef-head②">head</a></code>, the <code><a data-link-type="element" href="#elementdef-mnx-common" id="ref-for-elementdef-mnx-common④">mnx-common</a></code> element, or in a separate linked stylesheet.</p>
-   <h4 class="heading settled" data-level="5.4.1" id="the-style-class-element"><span class="secno">5.4.1. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-export="" id="elementdef-style-class"><code>style-class</code></dfn> element</span><a class="self-link" href="#the-style-class-element"></a></h4>
+   <h4 class="heading settled" data-level="5.4.1" id="the-stylesheet-element"><span class="secno">5.4.1. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-export="" id="elementdef-stylesheet"><code>stylesheet</code></dfn> element</span><a class="self-link" href="#the-stylesheet-element"></a></h4>
    <section>
     <dl class="def">
      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③①">Contexts</a>:
-     <dd>Any.
+     <dd><code><a data-link-type="element" href="#elementdef-head" id="ref-for-elementdef-head③">head</a></code>, <code><a data-link-type="element" href="#elementdef-mnx-common" id="ref-for-elementdef-mnx-common⑤">mnx-common</a></code>
      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③②">Content Model</a>:
+     <dd><a data-link-type="dfn" href="#stylesheet-definitions" id="ref-for-stylesheet-definitions①">Stylesheet definitions</a>.
+    </dl>
+    <p>The <code><a data-link-type="element" href="#elementdef-stylesheet" id="ref-for-elementdef-stylesheet③">stylesheet</a></code> element serves to place stylesheet definition elements under a
+single container to support clean document organization and validation.</p>
+   </section>
+   <h4 class="heading settled" data-level="5.4.2" id="the-style-class-element"><span class="secno">5.4.2. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-export="" id="elementdef-style-class"><code>style-class</code></dfn> element</span><a class="self-link" href="#the-style-class-element"></a></h4>
+   <section>
+    <dl class="def">
+     <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③②">Contexts</a>:
+     <dd><code><a data-link-type="element" href="#elementdef-stylesheet" id="ref-for-elementdef-stylesheet④">stylesheet</a></code>
+     <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③③">Content Model</a>:
      <dd>None.
      <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute③①">Attributes</a>:
      <dd><code><a data-link-type="element-sub" href="#element-attrdef-style-class-name" id="ref-for-element-attrdef-style-class-name">name</a></code> - the name of this style class definition
      <dd><code><a data-link-type="element-sub" href="#element-attrdef-global-style" id="ref-for-element-attrdef-global-style②">style</a></code> - the style property list applied by this definition
     </dl>
-    <p>The <code><a data-link-type="element" href="#elementdef-style-class" id="ref-for-elementdef-style-class①">style-class</a></code> element supplies a <dfn class="dfn-paneled" data-dfn-for="style-class" data-dfn-type="dfn" data-noexport="" id="style-class-style-class-definition">style class definition</dfn>,
+    <p>The <code><a data-link-type="element" href="#elementdef-style-class" id="ref-for-elementdef-style-class">style-class</a></code> element supplies a <dfn class="dfn-paneled" data-dfn-for="style-class" data-dfn-type="dfn" data-noexport="" id="style-class-style-class-definition">style class definition</dfn>,
 which associates a list of style property values with a class that can be
 referenced elsewhere using its name alone, as per the rules of <a data-link-type="dfn" href="#style-property-computation" id="ref-for-style-property-computation①">style
 property computation</a>.</p>
     <p>The <dfn class="dfn-paneled" data-dfn-for="style-class" data-dfn-type="element-attr" data-export="" id="element-attrdef-style-class-name"><code>name</code></dfn> attribute supplies the name of this style class
 definition; the <code><a data-link-type="element-sub" href="#element-attrdef-global-style" id="ref-for-element-attrdef-global-style③">style</a></code> attribute supplies the properties that make up the
 content of the definition.</p>
-    <p>Multiple occurrences of <code><a data-link-type="element" href="#elementdef-style-class" id="ref-for-elementdef-style-class②">style-class</a></code> are permitted to share the same value
-of <code><a data-link-type="element-sub" href="#element-attrdef-style-class-name" id="ref-for-element-attrdef-style-class-name①">name</a></code>. These are equivalent to a single occurrence of <code><a data-link-type="element" href="#elementdef-style-class" id="ref-for-elementdef-style-class③">style-class</a></code> with the same constituent definitions of style property values
+    <p>Multiple occurrences of <code><a data-link-type="element" href="#elementdef-style-class" id="ref-for-elementdef-style-class①">style-class</a></code> are permitted to share the same value
+of <code><a data-link-type="element-sub" href="#element-attrdef-style-class-name" id="ref-for-element-attrdef-style-class-name①">name</a></code>. These are equivalent to a single occurrence of <code><a data-link-type="element" href="#elementdef-style-class" id="ref-for-elementdef-style-class②">style-class</a></code> with the same constituent definitions of style property values
 in the same order.</p>
     <p>Here is a style class definition that creates a class called <code>emphasis</code>,
 intended to color its target objects bright red and apply a thicker stem width
@@ -4694,18 +4705,18 @@ in the case of events:</p>
 </pre>
     </div>
    </section>
-   <h4 class="heading settled" data-level="5.4.2" id="the-style-selector-element"><span class="secno">5.4.2. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-export="" id="elementdef-style-selector"><code>style-selector</code></dfn> element</span><a class="self-link" href="#the-style-selector-element"></a></h4>
+   <h4 class="heading settled" data-level="5.4.3" id="the-style-selector-element"><span class="secno">5.4.3. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-export="" id="elementdef-style-selector"><code>style-selector</code></dfn> element</span><a class="self-link" href="#the-style-selector-element"></a></h4>
    <section>
     <dl class="def">
-     <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③②">Contexts</a>:
-     <dd>Any.
-     <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③③">Content Model</a>:
+     <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③③">Contexts</a>:
+     <dd><code><a data-link-type="element" href="#elementdef-stylesheet" id="ref-for-elementdef-stylesheet⑤">stylesheet</a></code>
+     <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③④">Content Model</a>:
      <dd>None.
      <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute③②">Attributes</a>:
      <dd><code><a data-link-type="element-sub" href="#element-attrdef-style-selector-rule" id="ref-for-element-attrdef-style-selector-rule">rule</a></code> - a set of element names to which this style selector definition applies
      <dd><code><a data-link-type="element-sub" href="#element-attrdef-global-style" id="ref-for-element-attrdef-global-style④">style</a></code> - the style property list applied by this definition
     </dl>
-    <p>The <code><a data-link-type="element" href="#elementdef-style-selector" id="ref-for-elementdef-style-selector①">style-selector</a></code> element supplies a <dfn class="dfn-paneled" data-dfn-for="style-selector" data-dfn-type="dfn" data-lt="style selector definition" data-noexport="" id="style-selector-style-selector-definition">style selector
+    <p>The <code><a data-link-type="element" href="#elementdef-style-selector" id="ref-for-elementdef-style-selector">style-selector</a></code> element supplies a <dfn class="dfn-paneled" data-dfn-for="style-selector" data-dfn-type="dfn" data-lt="style selector definition" data-noexport="" id="style-selector-style-selector-definition">style selector
 definition</dfn>, which defines a list of style property values applying to
 all elements matching a <a data-link-type="dfn" href="#style-selector-style-selector-rule" id="ref-for-style-selector-style-selector-rule①">style selector rule</a>, as per the rules of <a data-link-type="dfn" href="#style-property-computation" id="ref-for-style-property-computation②">style
 property computation</a>.</p>
@@ -4719,11 +4730,11 @@ match the rule.</p>
     </ul>
     <p>The <code><a data-link-type="element-sub" href="#element-attrdef-global-style" id="ref-for-element-attrdef-global-style⑤">style</a></code> attribute supplies the properties that make up the
 content of the rule.</p>
-    <p>Multiple occurrences of <code><a data-link-type="element" href="#elementdef-style-selector" id="ref-for-elementdef-style-selector②">style-selector</a></code> are permitted to share the same value
-of <code><a data-link-type="element-sub" href="#element-attrdef-style-selector-rule" id="ref-for-element-attrdef-style-selector-rule①">rule</a></code>. These are equivalent to a single occurrence of <code><a data-link-type="element" href="#elementdef-style-selector" id="ref-for-elementdef-style-selector③">style-selector</a></code> with the same constituent definitions of style property values
+    <p>Multiple occurrences of <code><a data-link-type="element" href="#elementdef-style-selector" id="ref-for-elementdef-style-selector①">style-selector</a></code> are permitted to share the same value
+of <code><a data-link-type="element-sub" href="#element-attrdef-style-selector-rule" id="ref-for-element-attrdef-style-selector-rule①">rule</a></code>. These are equivalent to a single occurrence of <code><a data-link-type="element" href="#elementdef-style-selector" id="ref-for-elementdef-style-selector②">style-selector</a></code> with the same constituent definitions of style property values
 in the same order.</p>
     <p class="note" role="note"><span>Note:</span> The scope of a defined rule is not limited to descendants of the element in which
-the <code><a data-link-type="element" href="#elementdef-style-selector" id="ref-for-elementdef-style-selector④">style-selector</a></code> element occurs, but is global to the entire document.</p>
+the <code><a data-link-type="element" href="#elementdef-style-selector" id="ref-for-elementdef-style-selector③">style-selector</a></code> element occurs, but is global to the entire document.</p>
     <p>For example, the following specifies that all <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①④">event</a></code> elements in the document
 will employ a given stem width:</p>
     <div class="example" id="example-bf0e82b6">
@@ -4773,9 +4784,9 @@ semantic information does not suffice to yield the desired musical result.</p>
     <h5 class="heading settled" data-level="6.1.1.1" id="the-mnx-generic-element"><span class="secno">6.1.1.1. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport="" id="elementdef-mnx-generic"><code>mnx-generic</code></dfn> element</span><a class="self-link" href="#the-mnx-generic-element"></a></h5>
     <section>
      <dl class="def">
-      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③③">Contexts</a>:
+      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③④">Contexts</a>:
       <dd>Wherever a <a data-link-type="dfn" href="#musical-body" id="ref-for-musical-body④">musical body</a> is expected.
-      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③④">Content Model</a>:
+      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③⑤">Content Model</a>:
       <dd><a data-link-type="dfn" href="#metadata-content" id="ref-for-metadata-content①③">Metadata content</a>.
       <dd>One or more <code><a data-link-type="element" href="#elementdef-score-view" id="ref-for-elementdef-score-view">score-view</a></code> elements.
       <dd><a data-link-type="dfn" href="#performance-content" id="ref-for-performance-content">Performance content</a>.
@@ -4826,9 +4837,9 @@ are described individually in the remainder of this section.</p>
     <h5 class="heading settled" data-level="6.1.2.1" id="the-score-view-element"><span class="secno">6.1.2.1. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport="" id="elementdef-score-view"><code>score-view</code></dfn> element</span><a class="self-link" href="#the-score-view-element"></a></h5>
     <section>
      <dl class="def">
-      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③④">Contexts</a>:
+      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③⑤">Contexts</a>:
       <dd><code><a data-link-type="element" href="#elementdef-mnx-generic" id="ref-for-elementdef-mnx-generic①">mnx-generic</a></code>
-      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③⑤">Content Model</a>:
+      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③⑥">Content Model</a>:
       <dd>Any number of <code><a data-link-type="element" href="#elementdef-score-mapping" id="ref-for-elementdef-score-mapping">score-mapping</a></code> elements.
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute③④">Attributes</a>:
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-score-view-view" id="ref-for-element-attrdef-score-view-view">view</a></code> - link to an SVG view of the score
@@ -4844,9 +4855,9 @@ between performance and graphics.</p>
     <h5 class="heading settled" data-level="6.1.2.2" id="the-score-mapping-element"><span class="secno">6.1.2.2. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport="" id="elementdef-score-mapping"><code>score-mapping</code></dfn> element</span><a class="self-link" href="#the-score-mapping-element"></a></h5>
     <section>
      <dl class="def">
-      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③⑤">Contexts</a>:
+      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③⑥">Contexts</a>:
       <dd><code><a data-link-type="element" href="#elementdef-score-view" id="ref-for-elementdef-score-view④">score-view</a></code>
-      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③⑥">Content Model</a>:
+      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③⑦">Content Model</a>:
       <dd>None.
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute③⑤">Attributes</a>:
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-score-mapping-graphics" id="ref-for-element-attrdef-score-mapping-graphics">graphics</a></code> - an element ID within the SVG content described by the parent <code><a data-link-type="element" href="#elementdef-score-view" id="ref-for-elementdef-score-view⑤">score-view</a></code>
@@ -4879,9 +4890,9 @@ terms of discrete, parameterized sonic events</p>
     <h5 class="heading settled" data-level="6.1.3.1" id="the-performance-audio-element"><span class="secno">6.1.3.1. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport="" id="elementdef-performance-audio"><code>performance-audio</code></dfn> element</span><a class="self-link" href="#the-performance-audio-element"></a></h5>
     <section>
      <dl class="def">
-      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③⑥">Contexts</a>:
+      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③⑦">Contexts</a>:
       <dd><code><a data-link-type="element" href="#elementdef-mnx-generic" id="ref-for-elementdef-mnx-generic②">mnx-generic</a></code>
-      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③⑦">Content Model</a>:
+      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③⑧">Content Model</a>:
       <dd><a data-link-type="dfn" href="#metadata-content" id="ref-for-metadata-content①④">Metadata content</a>.
       <dd>Zero or more <code><a data-link-type="element" href="#elementdef-performance-tempo" id="ref-for-elementdef-performance-tempo③">performance-tempo</a></code> elements.
       <dd>Zero or one <code><a data-link-type="element" href="#elementdef-performance-mapping" id="ref-for-elementdef-performance-mapping">performance-mapping</a></code> elements.
@@ -4900,9 +4911,9 @@ between the performance data and the graphical score.</p>
     <h5 class="heading settled" data-level="6.1.3.2" id="the-performance-audio-media-element"><span class="secno">6.1.3.2. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport="" id="elementdef-performance-audio-media"><code>performance-audio-media</code></dfn> element</span><a class="self-link" href="#the-performance-audio-media-element"></a></h5>
     <section>
      <dl class="def">
-      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③⑦">Contexts</a>:
+      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③⑧">Contexts</a>:
       <dd><code><a data-link-type="element" href="#elementdef-performance-audio" id="ref-for-elementdef-performance-audio①">performance-audio</a></code>
-      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③⑧">Content Model</a>:
+      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③⑨">Content Model</a>:
       <dd><a data-link-type="dfn" href="#metadata-content" id="ref-for-metadata-content①⑤">Metadata content</a>.
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute③⑥">Attributes</a>:
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-performance-audio-media-src" id="ref-for-element-attrdef-performance-audio-media-src">src</a></code> - URL of an audio file of the score
@@ -4913,9 +4924,9 @@ in the <dfn class="dfn-paneled" data-dfn-for="performance-audio-media" data-dfn-
     <h5 class="heading settled" data-level="6.1.3.3" id="the-performance-data-element"><span class="secno">6.1.3.3. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport="" id="elementdef-performance-data"><code>performance-data</code></dfn> element</span><a class="self-link" href="#the-performance-data-element"></a></h5>
     <section>
      <dl class="def">
-      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③⑧">Contexts</a>:
+      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③⑨">Contexts</a>:
       <dd><code><a data-link-type="element" href="#elementdef-mnx-generic" id="ref-for-elementdef-mnx-generic③">mnx-generic</a></code>
-      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③⑨">Content Model</a>:
+      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model④⓪">Content Model</a>:
       <dd><a data-link-type="dfn" href="#metadata-content" id="ref-for-metadata-content①⑥">Metadata content</a>.
       <dd>One or more <code><a data-link-type="element" href="#elementdef-performance-part" id="ref-for-elementdef-performance-part">performance-part</a></code> elements.
       <dd>Zero or more <code><a data-link-type="element" href="#elementdef-performance-tempo" id="ref-for-elementdef-performance-tempo⑤">performance-tempo</a></code> elements.
@@ -4936,9 +4947,9 @@ between the performance data and the graphical score.</p>
     <h5 class="heading settled" data-level="6.1.3.4" id="the-performance-part-element"><span class="secno">6.1.3.4. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport="" id="elementdef-performance-part"><code>performance-part</code></dfn> element</span><a class="self-link" href="#the-performance-part-element"></a></h5>
     <section>
      <dl class="def">
-      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts③⑨">Contexts</a>:
+      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts④⓪">Contexts</a>:
       <dd><code><a data-link-type="element" href="#elementdef-performance-data" id="ref-for-elementdef-performance-data①">performance-data</a></code>
-      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model④⓪">Content Model</a>:
+      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model④①">Content Model</a>:
       <dd><a data-link-type="dfn" href="#metadata-content" id="ref-for-metadata-content①⑦">Metadata content</a>.
       <dd>Zero or more <code><a data-link-type="element" href="#elementdef-performance-event" id="ref-for-elementdef-performance-event③">performance-event</a></code> elements.
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute③⑧">Attributes</a>:
@@ -4952,9 +4963,9 @@ for this part.</p>
     <h5 class="heading settled" data-level="6.1.3.5" id="the-performance-tempo-element"><span class="secno">6.1.3.5. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport="" id="elementdef-performance-tempo"><code>performance-tempo</code></dfn> element</span><a class="self-link" href="#the-performance-tempo-element"></a></h5>
     <section>
      <dl class="def">
-      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts④⓪">Contexts</a>:
+      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts④①">Contexts</a>:
       <dd><code><a data-link-type="element" href="#elementdef-performance-data" id="ref-for-elementdef-performance-data②">performance-data</a></code>, <code><a data-link-type="element" href="#elementdef-performance-audio" id="ref-for-elementdef-performance-audio②">performance-audio</a></code>, <code><a data-link-type="element" href="#elementdef-interpret" id="ref-for-elementdef-interpret⑤">interpret</a></code>
-      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model④①">Content Model</a>:
+      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model④②">Content Model</a>:
       <dd>None.
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute③⑨">Attributes</a>:
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-performance-tempo-start" id="ref-for-element-attrdef-performance-tempo-start">start</a></code> - start time of this performance tempo
@@ -4980,9 +4991,9 @@ of a scoring time unit relative to performance time, similar to a MIDI tempo tra
     <h5 class="heading settled" data-level="6.1.3.6" id="the-performance-event-element"><span class="secno">6.1.3.6. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport="" id="elementdef-performance-event"><code>performance-event</code></dfn> element</span><a class="self-link" href="#the-performance-event-element"></a></h5>
     <section>
      <dl class="def">
-      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts④①">Contexts</a>:
+      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts④②">Contexts</a>:
       <dd><code><a data-link-type="element" href="#elementdef-performance-part" id="ref-for-elementdef-performance-part③">performance-part</a></code>, <code><a data-link-type="element" href="#elementdef-interpret" id="ref-for-elementdef-interpret⑥">interpret</a></code>
-      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model④②">Content Model</a>:
+      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model④③">Content Model</a>:
       <dd>None.
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute④⓪">Attributes</a>:
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-performance-event-start" id="ref-for-element-attrdef-performance-event-start">start</a></code> - start time of this event
@@ -5029,9 +5040,9 @@ information about the graphics is encoded.</p>
     <h5 class="heading settled" data-level="6.1.3.7" id="the-performance-mapping-element"><span class="secno">6.1.3.7. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport="" id="elementdef-performance-mapping"><code>performance-mapping</code></dfn> element</span><a class="self-link" href="#the-performance-mapping-element"></a></h5>
     <section>
      <dl class="def">
-      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts④②">Contexts</a>:
+      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts④③">Contexts</a>:
       <dd><code><a data-link-type="element" href="#elementdef-performance-audio" id="ref-for-elementdef-performance-audio③">performance-audio</a></code>, <code><a data-link-type="element" href="#elementdef-performance-data" id="ref-for-elementdef-performance-data③">performance-data</a></code>
-      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model④③">Content Model</a>:
+      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model④④">Content Model</a>:
       <dd>Zero or more <code><a data-link-type="element" href="#elementdef-performance-region" id="ref-for-elementdef-performance-region">performance-region</a></code> elements.
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute④①">Attributes</a>:
      </dl>
@@ -5048,9 +5059,9 @@ equal to the <code><a data-link-type="element-sub" href="#element-attrdef-perfor
     <h5 class="heading settled" data-level="6.1.3.8" id="the-performance-region-element"><span class="secno">6.1.3.8. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport="" id="elementdef-performance-region"><code>performance-region</code></dfn> element</span><a class="self-link" href="#the-performance-region-element"></a></h5>
     <section>
      <dl class="def">
-      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts④③">Contexts</a>:
+      <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts④④">Contexts</a>:
       <dd><code><a data-link-type="element" href="#elementdef-performance-mapping" id="ref-for-elementdef-performance-mapping⑤">performance-mapping</a></code>
-      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model④④">Content Model</a>:
+      <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model④⑤">Content Model</a>:
       <dd>None.
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute④②">Attributes</a>:
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-performance-region-start" id="ref-for-element-attrdef-performance-region-start①">start</a></code> - start time of the time region being mapped
@@ -5323,7 +5334,7 @@ the intersection lies at infinity.</p>
       <li><a href="#musical-body">musical body</a><span>, in §4.2</span>
       <li><a href="#musical-body">musical body content</a><span>, in §4.2</span>
       <li><a href="#attr-valuedef-dynamics-type-n">n</a><span>, in §5.2.9.2</span>
-      <li><a href="#element-attrdef-style-class-name">name</a><span>, in §5.4.1</span>
+      <li><a href="#element-attrdef-style-class-name">name</a><span>, in §5.4.2</span>
       <li><a href="#attr-valuedef-tuplet-bracket-no">no</a><span>, in §5.2.5.2</span>
       <li>
        none
@@ -5433,7 +5444,7 @@ the intersection lies at infinity.</p>
        </ul>
       <li><a href="#attr-valuedef-dynamics-type-rf">rf</a><span>, in §5.2.9.2</span>
       <li><a href="#attr-valuedef-dynamics-type-rfz">rfz</a><span>, in §5.2.9.2</span>
-      <li><a href="#element-attrdef-style-selector-rule">rule</a><span>, in §5.4.2</span>
+      <li><a href="#element-attrdef-style-selector-rule">rule</a><span>, in §5.4.3</span>
       <li><a href="#rules-for-parsing-a-chromatic-pitch">rules for parsing a chromatic pitch</a><span>, in §5.2.2.4</span>
       <li><a href="#rules-for-parsing-rational-numbers">rules for parsing rational numbers</a><span>, in §3.2.2.1</span>
       <li><a href="#elementdef-score">score</a><span>, in §4.2.1</span>
@@ -5518,14 +5529,15 @@ the intersection lies at infinity.</p>
       <li><a href="#stripping-and-collapsing-white-space">stripping and collapsing white space</a><span>, in §3.2.1</span>
       <li><a href="#strip-leading-and-trailing-white-space">stripping leading and trailing white space</a><span>, in §3.2.1</span>
       <li><a href="#element-attrdef-global-style">style</a><span>, in §5.3.1</span>
-      <li><a href="#elementdef-style-class">style-class</a><span>, in §5.4.1</span>
-      <li><a href="#style-class-style-class-definition">style class definition</a><span>, in §5.4.1</span>
+      <li><a href="#elementdef-style-class">style-class</a><span>, in §5.4.2</span>
+      <li><a href="#style-class-style-class-definition">style class definition</a><span>, in §5.4.2</span>
       <li><a href="#style-properties">Style properties</a><span>, in §5.3</span>
       <li><a href="#style-property-computation">style property computation</a><span>, in §5.3</span>
       <li><a href="#style-property-list">style property list</a><span>, in §3.2.4</span>
-      <li><a href="#elementdef-style-selector">style-selector</a><span>, in §5.4.2</span>
-      <li><a href="#style-selector-style-selector-definition">style selector definition</a><span>, in §5.4.2</span>
-      <li><a href="#style-selector-style-selector-rule">style selector rule</a><span>, in §5.4.2</span>
+      <li><a href="#elementdef-style-selector">style-selector</a><span>, in §5.4.3</span>
+      <li><a href="#style-selector-style-selector-definition">style selector definition</a><span>, in §5.4.3</span>
+      <li><a href="#style-selector-style-selector-rule">style selector rule</a><span>, in §5.4.3</span>
+      <li><a href="#elementdef-stylesheet">stylesheet</a><span>, in §5.4.1</span>
       <li><a href="#stylesheet-definitions">stylesheet definitions</a><span>, in §5.4</span>
       <li><a href="#elementdef-symbol">symbol</a><span>, in §5.2.9.10</span>
       <li><a href="#element-attrdef-liaisons-target">target</a><span>, in §5.2.8.1</span>
@@ -5829,8 +5841,8 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-concept-attribute②⑧">5.2.11.3. The tempo element</a>
     <li><a href="#ref-for-concept-attribute②⑨">5.2.11.4. The staves element</a>
     <li><a href="#ref-for-concept-attribute③⓪">5.2.11.5. The clef element</a>
-    <li><a href="#ref-for-concept-attribute③①">5.4.1. The style-class element</a>
-    <li><a href="#ref-for-concept-attribute③②">5.4.2. The style-selector element</a>
+    <li><a href="#ref-for-concept-attribute③①">5.4.2. The style-class element</a>
+    <li><a href="#ref-for-concept-attribute③②">5.4.3. The style-selector element</a>
     <li><a href="#ref-for-concept-attribute③③">6.1.1.1. The mnx-generic element</a>
     <li><a href="#ref-for-concept-attribute③④">6.1.2.1. The score-view element</a>
     <li><a href="#ref-for-concept-attribute③⑤">6.1.2.2. The score-mapping element</a>
@@ -5857,7 +5869,7 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-space-separated-tokens①">5.2.2.5. Measure location syntax</a>
     <li><a href="#ref-for-space-separated-tokens②">5.2.3.2. The global element</a>
     <li><a href="#ref-for-space-separated-tokens③">5.3.2. The class attribute</a>
-    <li><a href="#ref-for-space-separated-tokens④">5.4.2. The style-selector element</a>
+    <li><a href="#ref-for-space-separated-tokens④">5.4.3. The style-selector element</a>
     <li><a href="#ref-for-space-separated-tokens⑤">6.1.3.6. The performance-event element</a>
     <li><a href="#ref-for-space-separated-tokens⑥">6.1.3.8. The performance-region element</a>
    </ul>
@@ -5899,7 +5911,7 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-space-separated-tokens①">5.2.2.5. Measure location syntax</a>
     <li><a href="#ref-for-space-separated-tokens②">5.2.3.2. The global element</a>
     <li><a href="#ref-for-space-separated-tokens③">5.3.2. The class attribute</a>
-    <li><a href="#ref-for-space-separated-tokens④">5.4.2. The style-selector element</a>
+    <li><a href="#ref-for-space-separated-tokens④">5.4.3. The style-selector element</a>
     <li><a href="#ref-for-space-separated-tokens⑤">6.1.3.6. The performance-event element</a>
     <li><a href="#ref-for-space-separated-tokens⑥">6.1.3.8. The performance-region element</a>
    </ul>
@@ -5929,7 +5941,7 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-space-separated-tokens①">5.2.2.5. Measure location syntax</a>
     <li><a href="#ref-for-space-separated-tokens②">5.2.3.2. The global element</a>
     <li><a href="#ref-for-space-separated-tokens③">5.3.2. The class attribute</a>
-    <li><a href="#ref-for-space-separated-tokens④">5.4.2. The style-selector element</a>
+    <li><a href="#ref-for-space-separated-tokens④">5.4.3. The style-selector element</a>
     <li><a href="#ref-for-space-separated-tokens⑤">6.1.3.6. The performance-event element</a>
     <li><a href="#ref-for-space-separated-tokens⑥">6.1.3.8. The performance-region element</a>
    </ul>
@@ -5941,7 +5953,7 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-space-separated-tokens①">5.2.2.5. Measure location syntax</a>
     <li><a href="#ref-for-space-separated-tokens②">5.2.3.2. The global element</a>
     <li><a href="#ref-for-space-separated-tokens③">5.3.2. The class attribute</a>
-    <li><a href="#ref-for-space-separated-tokens④">5.4.2. The style-selector element</a>
+    <li><a href="#ref-for-space-separated-tokens④">5.4.3. The style-selector element</a>
     <li><a href="#ref-for-space-separated-tokens⑤">6.1.3.6. The performance-event element</a>
     <li><a href="#ref-for-space-separated-tokens⑥">6.1.3.8. The performance-region element</a>
    </ul>
@@ -6149,19 +6161,20 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-contexts②⑧">5.2.11.3. The tempo element</a>
     <li><a href="#ref-for-contexts②⑨">5.2.11.4. The staves element</a>
     <li><a href="#ref-for-contexts③⓪">5.2.11.5. The clef element</a>
-    <li><a href="#ref-for-contexts③①">5.4.1. The style-class element</a>
-    <li><a href="#ref-for-contexts③②">5.4.2. The style-selector element</a>
-    <li><a href="#ref-for-contexts③③">6.1.1.1. The mnx-generic element</a>
-    <li><a href="#ref-for-contexts③④">6.1.2.1. The score-view element</a>
-    <li><a href="#ref-for-contexts③⑤">6.1.2.2. The score-mapping element</a>
-    <li><a href="#ref-for-contexts③⑥">6.1.3.1. The performance-audio element</a>
-    <li><a href="#ref-for-contexts③⑦">6.1.3.2. The performance-audio-media element</a>
-    <li><a href="#ref-for-contexts③⑧">6.1.3.3. The performance-data element</a>
-    <li><a href="#ref-for-contexts③⑨">6.1.3.4. The performance-part element</a>
-    <li><a href="#ref-for-contexts④⓪">6.1.3.5. The performance-tempo element</a>
-    <li><a href="#ref-for-contexts④①">6.1.3.6. The performance-event element</a>
-    <li><a href="#ref-for-contexts④②">6.1.3.7. The performance-mapping element</a>
-    <li><a href="#ref-for-contexts④③">6.1.3.8. The performance-region element</a>
+    <li><a href="#ref-for-contexts③①">5.4.1. The stylesheet element</a>
+    <li><a href="#ref-for-contexts③②">5.4.2. The style-class element</a>
+    <li><a href="#ref-for-contexts③③">5.4.3. The style-selector element</a>
+    <li><a href="#ref-for-contexts③④">6.1.1.1. The mnx-generic element</a>
+    <li><a href="#ref-for-contexts③⑤">6.1.2.1. The score-view element</a>
+    <li><a href="#ref-for-contexts③⑥">6.1.2.2. The score-mapping element</a>
+    <li><a href="#ref-for-contexts③⑦">6.1.3.1. The performance-audio element</a>
+    <li><a href="#ref-for-contexts③⑧">6.1.3.2. The performance-audio-media element</a>
+    <li><a href="#ref-for-contexts③⑨">6.1.3.3. The performance-data element</a>
+    <li><a href="#ref-for-contexts④⓪">6.1.3.4. The performance-part element</a>
+    <li><a href="#ref-for-contexts④①">6.1.3.5. The performance-tempo element</a>
+    <li><a href="#ref-for-contexts④②">6.1.3.6. The performance-event element</a>
+    <li><a href="#ref-for-contexts④③">6.1.3.7. The performance-mapping element</a>
+    <li><a href="#ref-for-contexts④④">6.1.3.8. The performance-region element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="content-model">
@@ -6199,19 +6212,20 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-content-model②⑨">5.2.11.4. The staves element</a>
     <li><a href="#ref-for-content-model③⓪">5.2.11.5. The clef element</a>
     <li><a href="#ref-for-content-model③①">5.2.13.1. The interpret element</a>
-    <li><a href="#ref-for-content-model③②">5.4.1. The style-class element</a>
-    <li><a href="#ref-for-content-model③③">5.4.2. The style-selector element</a>
-    <li><a href="#ref-for-content-model③④">6.1.1.1. The mnx-generic element</a>
-    <li><a href="#ref-for-content-model③⑤">6.1.2.1. The score-view element</a>
-    <li><a href="#ref-for-content-model③⑥">6.1.2.2. The score-mapping element</a>
-    <li><a href="#ref-for-content-model③⑦">6.1.3.1. The performance-audio element</a>
-    <li><a href="#ref-for-content-model③⑧">6.1.3.2. The performance-audio-media element</a>
-    <li><a href="#ref-for-content-model③⑨">6.1.3.3. The performance-data element</a>
-    <li><a href="#ref-for-content-model④⓪">6.1.3.4. The performance-part element</a>
-    <li><a href="#ref-for-content-model④①">6.1.3.5. The performance-tempo element</a>
-    <li><a href="#ref-for-content-model④②">6.1.3.6. The performance-event element</a>
-    <li><a href="#ref-for-content-model④③">6.1.3.7. The performance-mapping element</a>
-    <li><a href="#ref-for-content-model④④">6.1.3.8. The performance-region element</a>
+    <li><a href="#ref-for-content-model③②">5.4.1. The stylesheet element</a>
+    <li><a href="#ref-for-content-model③③">5.4.2. The style-class element</a>
+    <li><a href="#ref-for-content-model③④">5.4.3. The style-selector element</a>
+    <li><a href="#ref-for-content-model③⑤">6.1.1.1. The mnx-generic element</a>
+    <li><a href="#ref-for-content-model③⑥">6.1.2.1. The score-view element</a>
+    <li><a href="#ref-for-content-model③⑦">6.1.2.2. The score-mapping element</a>
+    <li><a href="#ref-for-content-model③⑧">6.1.3.1. The performance-audio element</a>
+    <li><a href="#ref-for-content-model③⑨">6.1.3.2. The performance-audio-media element</a>
+    <li><a href="#ref-for-content-model④⓪">6.1.3.3. The performance-data element</a>
+    <li><a href="#ref-for-content-model④①">6.1.3.4. The performance-part element</a>
+    <li><a href="#ref-for-content-model④②">6.1.3.5. The performance-tempo element</a>
+    <li><a href="#ref-for-content-model④③">6.1.3.6. The performance-event element</a>
+    <li><a href="#ref-for-content-model④④">6.1.3.7. The performance-mapping element</a>
+    <li><a href="#ref-for-content-model④⑤">6.1.3.8. The performance-region element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="container-document">
@@ -6234,6 +6248,7 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-elementdef-head">4.1.1. The mnx element</a>
     <li><a href="#ref-for-elementdef-head①">4.1.2. The head element</a>
     <li><a href="#ref-for-elementdef-head②">5.4. Stylesheet definitions</a>
+    <li><a href="#ref-for-elementdef-head③">5.4.1. The stylesheet element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="elementdef-collection">
@@ -6507,6 +6522,7 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-elementdef-mnx-common②">5.2.3.2. The global element</a>
     <li><a href="#ref-for-elementdef-mnx-common③">5.2.3.3. The part element</a>
     <li><a href="#ref-for-elementdef-mnx-common④">5.4. Stylesheet definitions</a>
+    <li><a href="#ref-for-elementdef-mnx-common⑤">5.4.1. The stylesheet element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="element-attrdef-mnx-common-profile">
@@ -6731,7 +6747,7 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-elementdef-event①①">5.2.8.2. The tied element</a>
     <li><a href="#ref-for-elementdef-event①②">5.2.13.1. The interpret element</a>
     <li><a href="#ref-for-elementdef-event①③">5.3.3.5. The visibility property</a>
-    <li><a href="#ref-for-elementdef-event①④">5.4.2. The style-selector element</a>
+    <li><a href="#ref-for-elementdef-event①④">5.4.3. The style-selector element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="element-attrdef-event-value">
@@ -7282,8 +7298,8 @@ for only some of a time signature’s fractions, which would require a grouping 
    <b><a href="#style-property-computation">#style-property-computation</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-style-property-computation">5.3.2. The class attribute</a>
-    <li><a href="#ref-for-style-property-computation①">5.4.1. The style-class element</a>
-    <li><a href="#ref-for-style-property-computation②">5.4.2. The style-selector element</a>
+    <li><a href="#ref-for-style-property-computation①">5.4.2. The style-class element</a>
+    <li><a href="#ref-for-style-property-computation②">5.4.3. The style-selector element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="element-attrdef-global-style">
@@ -7291,8 +7307,8 @@ for only some of a time signature’s fractions, which would require a grouping 
    <ul>
     <li><a href="#ref-for-element-attrdef-global-style">5.3. Style properties</a>
     <li><a href="#ref-for-element-attrdef-global-style①">5.3.1. The style attribute</a>
-    <li><a href="#ref-for-element-attrdef-global-style②">5.4.1. The style-class element</a> <a href="#ref-for-element-attrdef-global-style③">(2)</a>
-    <li><a href="#ref-for-element-attrdef-global-style④">5.4.2. The style-selector element</a> <a href="#ref-for-element-attrdef-global-style⑤">(2)</a>
+    <li><a href="#ref-for-element-attrdef-global-style②">5.4.2. The style-class element</a> <a href="#ref-for-element-attrdef-global-style③">(2)</a>
+    <li><a href="#ref-for-element-attrdef-global-style④">5.4.3. The style-selector element</a> <a href="#ref-for-element-attrdef-global-style⑤">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="element-attrdef-global-class">
@@ -7443,15 +7459,25 @@ for only some of a time signature’s fractions, which would require a grouping 
   <aside class="dfn-panel" data-for="stylesheet-definitions">
    <b><a href="#stylesheet-definitions">#stylesheet-definitions</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-stylesheet-definitions">4.1.2. The head element</a> <a href="#ref-for-stylesheet-definitions①">(2)</a>
-    <li><a href="#ref-for-stylesheet-definitions②">5.2.3.1. The mnx-common element</a>
+    <li><a href="#ref-for-stylesheet-definitions">4.1.2. The head element</a>
+    <li><a href="#ref-for-stylesheet-definitions①">5.4.1. The stylesheet element</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="elementdef-stylesheet">
+   <b><a href="#elementdef-stylesheet">#elementdef-stylesheet</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-elementdef-stylesheet">4.1.2. The head element</a>
+    <li><a href="#ref-for-elementdef-stylesheet①">5.2.3.1. The mnx-common element</a>
+    <li><a href="#ref-for-elementdef-stylesheet②">5.4. Stylesheet definitions</a>
+    <li><a href="#ref-for-elementdef-stylesheet③">5.4.1. The stylesheet element</a>
+    <li><a href="#ref-for-elementdef-stylesheet④">5.4.2. The style-class element</a>
+    <li><a href="#ref-for-elementdef-stylesheet⑤">5.4.3. The style-selector element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="elementdef-style-class">
    <b><a href="#elementdef-style-class">#elementdef-style-class</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-elementdef-style-class">5.4. Stylesheet definitions</a>
-    <li><a href="#ref-for-elementdef-style-class①">5.4.1. The style-class element</a> <a href="#ref-for-elementdef-style-class②">(2)</a> <a href="#ref-for-elementdef-style-class③">(3)</a>
+    <li><a href="#ref-for-elementdef-style-class">5.4.2. The style-class element</a> <a href="#ref-for-elementdef-style-class①">(2)</a> <a href="#ref-for-elementdef-style-class②">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="style-class-style-class-definition">
@@ -7465,14 +7491,13 @@ for only some of a time signature’s fractions, which would require a grouping 
   <aside class="dfn-panel" data-for="element-attrdef-style-class-name">
    <b><a href="#element-attrdef-style-class-name">#element-attrdef-style-class-name</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-element-attrdef-style-class-name">5.4.1. The style-class element</a> <a href="#ref-for-element-attrdef-style-class-name①">(2)</a>
+    <li><a href="#ref-for-element-attrdef-style-class-name">5.4.2. The style-class element</a> <a href="#ref-for-element-attrdef-style-class-name①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="elementdef-style-selector">
    <b><a href="#elementdef-style-selector">#elementdef-style-selector</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-elementdef-style-selector">5.4. Stylesheet definitions</a>
-    <li><a href="#ref-for-elementdef-style-selector①">5.4.2. The style-selector element</a> <a href="#ref-for-elementdef-style-selector②">(2)</a> <a href="#ref-for-elementdef-style-selector③">(3)</a> <a href="#ref-for-elementdef-style-selector④">(4)</a>
+    <li><a href="#ref-for-elementdef-style-selector">5.4.3. The style-selector element</a> <a href="#ref-for-elementdef-style-selector①">(2)</a> <a href="#ref-for-elementdef-style-selector②">(3)</a> <a href="#ref-for-elementdef-style-selector③">(4)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="style-selector-style-selector-definition">
@@ -7485,14 +7510,14 @@ for only some of a time signature’s fractions, which would require a grouping 
   <aside class="dfn-panel" data-for="element-attrdef-style-selector-rule">
    <b><a href="#element-attrdef-style-selector-rule">#element-attrdef-style-selector-rule</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-element-attrdef-style-selector-rule">5.4.2. The style-selector element</a> <a href="#ref-for-element-attrdef-style-selector-rule①">(2)</a>
+    <li><a href="#ref-for-element-attrdef-style-selector-rule">5.4.3. The style-selector element</a> <a href="#ref-for-element-attrdef-style-selector-rule①">(2)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="style-selector-style-selector-rule">
    <b><a href="#style-selector-style-selector-rule">#style-selector-style-selector-rule</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-style-selector-style-selector-rule">5.3. Style properties</a>
-    <li><a href="#ref-for-style-selector-style-selector-rule①">5.4.2. The style-selector element</a>
+    <li><a href="#ref-for-style-selector-style-selector-rule①">5.4.3. The style-selector element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="mnx-generic">
