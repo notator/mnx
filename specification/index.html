@@ -1213,7 +1213,7 @@ Possible extra rowspan handling
 	}
 </style>
   <meta content="Bikeshed version 10ff3eb4050069e20bb9b943c8b76fe5bfe3a48f" name="generator">
-  <meta content="b3d13245705dce4321393e4424f8ae14b9fc95a5" name="document-revision">
+  <meta content="05cd5a96fea6d25a9b35811e48df612c91331d6c" name="document-revision">
 <style>
   .language-xml {
     font-size: 11px;
@@ -1608,7 +1608,7 @@ Parts of this work may be from another specification document.  If so, those par
           <li><a href="#common-performance-events"><span class="secno">5.2.1.9</span> <span class="content">Performance events</span></a>
           <li><a href="#note-values"><span class="secno">5.2.1.10</span> <span class="content">Note values</span></a>
           <li><a href="#event-orientation"><span class="secno">5.2.1.11</span> <span class="content">Orientation</span></a>
-          <li><a href="#written-pitch"><span class="secno">5.2.1.12</span> <span class="content">Written pitch</span></a>
+          <li><a href="#written-pitches"><span class="secno">5.2.1.12</span> <span class="content">Written pitches</span></a>
          </ol>
         <li>
          <a href="#common-notational-syntaxes"><span class="secno">5.2.2</span> <span class="content">Notational syntaxes</span></a>
@@ -2491,8 +2491,8 @@ and articulations accordingly.
      <li>An orientation of <dfn class="dfn-paneled css" data-dfn-for="orientation" data-dfn-type="value" data-noexport id="valdef-orientation-down">down</dfn> orients note stems pointing upwards, and places beams, directions
 and articulations accordingly.
     </ul>
-    <h5 class="heading settled" data-level="5.2.1.12" id="written-pitch"><span class="secno">5.2.1.12. </span><span class="content">Written pitch</span><a class="self-link" href="#written-pitch"></a></h5>
-    <p>A note’s <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="written-pitch①">written pitch</dfn> is the pitch that is rendered in
+    <h5 class="heading settled" data-level="5.2.1.12" id="written-pitches"><span class="secno">5.2.1.12. </span><span class="content">Written pitches</span><a class="self-link" href="#written-pitches"></a></h5>
+    <p>A note’s <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="written-pitch">written pitch</dfn> is the pitch that is rendered in
 notation. This might be different from its sounded pitch, which is
 the pitch that an instrument generates.</p>
     <p>A note’s written pitch differs from its sounded pitch in case of a
@@ -3760,7 +3760,7 @@ of a single event, that is performed at a distinct time.</p>
       </dl>
       <p>The <code><a data-link-type="element" href="#elementdef-note" id="ref-for-elementdef-note②">note</a></code> element defines a single note within an event, along with other
 information pertaining to the note itself rather than to its containing event.</p>
-      <p>The <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-noexport id="element-attrdef-note-pitch"><code>pitch</code></dfn> attribute supplies the <a data-link-type="dfn" href="#written-pitch①" id="ref-for-written-pitch①">written pitch</a> of the note
+      <p>The <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-noexport id="element-attrdef-note-pitch"><code>pitch</code></dfn> attribute supplies the <a data-link-type="dfn" href="#written-pitch" id="ref-for-written-pitch">written pitch</a> of the note
 as a <a data-link-type="dfn" href="#chromatic-pitch" id="ref-for-chromatic-pitch①">chromatic pitch</a>, using the <a data-link-type="dfn" href="#rules-for-parsing-a-chromatic-pitch" id="ref-for-rules-for-parsing-a-chromatic-pitch">rules for parsing a chromatic pitch</a>.</p>
       <p>Optionally, the <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-noexport id="element-attrdef-note-staff"><code>staff</code></dfn> attribute supplies a <a data-link-type="dfn" href="#staff-index" id="ref-for-staff-index⑦">staff index</a> for this note where this differs from the staff index which applies to the containing <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑧">event</a></code> as a whole.</p>
       <p>The <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-noexport id="element-attrdef-note-accidental"><code>accidental</code></dfn> attribute supplies an accidental value
@@ -5757,7 +5757,7 @@ the intersection lies at infinity.</p>
       <li><a href="#white_space">white_space</a><span>, in §3.2.1</span>
       <li><a href="#white_space">white_space characters</a><span>, in §3.2.1</span>
       <li><a href="#event-whole-measure-event">whole-measure event</a><span>, in §5.2.5.1</span>
-      <li><a href="#written-pitch①">written pitch</a><span>, in §5.2.1.12</span>
+      <li><a href="#written-pitch">written pitch</a><span>, in §5.2.1.12</span>
       <li><a href="#propdef-x">x</a><span>, in §5.3.3.7</span>
       <li><a href="#propdef-y">y</a><span>, in §5.3.3.9</span>
       <li>
@@ -6619,10 +6619,10 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-valdef-orientation-down">5.2.4.3. The directions element</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="written-pitch①">
-   <b><a href="#written-pitch①">#written-pitch①</a></b><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="written-pitch">
+   <b><a href="#written-pitch">#written-pitch</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-written-pitch①">5.2.6.1. The note element</a>
+    <li><a href="#ref-for-written-pitch">5.2.6.1. The note element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="parse-a-note-value">
