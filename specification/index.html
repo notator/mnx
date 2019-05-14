@@ -1213,7 +1213,7 @@ Possible extra rowspan handling
 	}
 </style>
   <meta content="Bikeshed version ee4d7efc3ed6155392d49e10a542e2351fd5792d" name="generator">
-  <meta content="2abe8db949487bccc684934797751a3edf9b58ad" name="document-revision">
+  <meta content="002b7700b7d9bd70c65f6ff93f405a77333770d1" name="document-revision">
 <style>
   .language-xml {
     font-size: 11px;
@@ -2492,14 +2492,20 @@ and articulations accordingly.
 and articulations accordingly.
     </ul>
     <h5 class="heading settled" data-level="5.2.1.12" id="written-pitches"><span class="secno">5.2.1.12. </span><span class="content">Written pitches</span><a class="self-link" href="#written-pitches"></a></h5>
-    <p>A note’s <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="written-pitch">written pitch</dfn> is the pitch that is rendered in
-notation. This might be different from its sounded pitch, which is
-the pitch that an instrument generates.</p>
-    <p>A note’s written pitch differs from its sounded pitch in case of a
-part written for a transposing instrument, such as a clarinet.</p>
-    <p><em>Needs clarity about how 8va markings are taken into account. Is the
-written pitch the literal pitch that’s printed on the page, or is it the
-pitch that the musician is "thinking of" (after applying the 8va)?</em></p>
+    <p>A note’s <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="written-pitch">written pitch</dfn> is the pitch that would sound
+if the note’s notation were performed by a concert-pitch instrument.
+Written pitch can be thought of as the note’s pitch from the
+musician’s instrument-specific perspective.</p>
+    <p>A note’s written pitch might be different from its sounded pitch,
+which is the pitch that an instrument generates. Written pitch
+differs from sounded pitch in case of notation written for a
+transposing instrument, such as a clarinet.</p>
+    <p>MNX considers ottava markings (e.g., "8va," "8vb") to be purely
+presentational. Hence, ottava markings have no effect on a note’s
+written pitch. For example, if a note is rendered on the bottom
+staff line without an ottava marking, and a second note is
+rendered on the top staff space with an "8vb" marking, the two
+notes have the same written pitch.</p>
     <h4 class="heading settled" data-level="5.2.2" id="common-notational-syntaxes"><span class="secno">5.2.2. </span><span class="content">Notational syntaxes</span><a class="self-link" href="#common-notational-syntaxes"></a></h4>
     <h5 class="heading settled" data-level="5.2.2.1" id="note-value-syntax"><span class="secno">5.2.2.1. </span><span class="content">Note value syntax</span><a class="self-link" href="#note-value-syntax"></a></h5>
     <p>MNX provides a microsyntax for encoding note values whose syntactic
