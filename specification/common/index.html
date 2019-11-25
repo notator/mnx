@@ -1213,7 +1213,7 @@ Possible extra rowspan handling
 	}
 </style>
   <meta content="Bikeshed version 83d3ceadc5400c8422976bbcbe49615aace9cf1e" name="generator">
-  <meta content="362b2924d0a2d2bde22e4de16f8f0b9a0fc0a93b" name="document-revision">
+  <meta content="1f6b11c4b1886c48972826cb2e854d8c6ba05915" name="document-revision">
 <style>
   .language-xml {
     font-size: 11px;
@@ -2837,8 +2837,8 @@ within <code><a data-link-type="element" href="#elementdef-global" id="ref-for-e
       <p>Typical examples of such content include key signatures, time signatures and
 tempo indications.</p>
       <p><a data-link-type="dfn" href="#notated-event" id="ref-for-notated-event①">Notated events</a> like notes or rests cannot be shared between parts in CWMN. Consequently, <a data-link-type="dfn" href="#sequence-content" id="ref-for-sequence-content②">sequence content</a> cannot occur in the measures within <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global⑧">global</a></code>.</p>
-      <div class="example" id="example-cb190512">
-       <a class="self-link" href="#example-cb190512"></a> 
+      <div class="example" id="example-03803425">
+       <a class="self-link" href="#example-03803425"></a> 
 <pre class="language-xml highlight"><c- f>&lt;global></c->
   <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"1"</c-><c- f>></c->
     <c- f>&lt;directions></c->
@@ -2848,7 +2848,7 @@ tempo indications.</p>
   <c- f>&lt;/measure></c->
   <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"2"</c-><c- f>/></c->
   <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"3"</c-><c- f>/></c->
-  <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"4"</c-> <c- e>barline=</c-><c- s>"final"</c-><c- f>/></c->
+  <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"4"</c-><c- f>/></c->
 <c- f>&lt;/global></c->
 </pre>
       </div>
@@ -2860,8 +2860,8 @@ having different parts in different meters). The default value of this attribute
 the list of all part IDs.</p>
       <p>No two <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⓪">global</a></code> elements may include the same part in their <code><a data-link-type="element-sub" href="#element-attrdef-global-parts" id="ref-for-element-attrdef-global-parts①">parts</a></code> list, to prevent
 conflicting definitions.</p>
-      <div class="example" id="example-2c1dc693">
-       <a class="self-link" href="#example-2c1dc693"></a> 
+      <div class="example" id="example-31961a9f">
+       <a class="self-link" href="#example-31961a9f"></a> 
 <pre class="language-xml highlight"><c- f>&lt;global</c-> <c- e>parts=</c-><c- s>"p1 p2"</c-><c- f>></c->
   <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"1"</c-><c- f>></c->
     <c- f>&lt;directions></c->
@@ -2870,7 +2870,7 @@ conflicting definitions.</p>
   <c- f>&lt;/measure></c->
   <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"2"</c-><c- f>/></c->
   <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"3"</c-><c- f>/></c->
-  <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"4"</c-> <c- e>barline=</c-><c- s>"final"</c-><c- f>/></c->
+  <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"4"</c-><c- f>/></c->
 <c- f>&lt;/global></c->
 <c- f>&lt;global</c-> <c- e>parts=</c-><c- s>"p3 p4"</c-><c- f>></c->
   <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"1"</c-><c- f>></c->
@@ -2879,7 +2879,7 @@ conflicting definitions.</p>
     <c- f>&lt;/directions></c->
   <c- f>&lt;/measure></c->
   <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"2"</c-><c- f>/></c->
-  <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"3"</c-> <c- e>barline=</c-><c- s>"final"</c-><c- f>/></c->
+  <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"3"</c-><c- f>/></c->
 <c- f>&lt;/global></c->
 <c- f>&lt;part</c-> <c- e>id=</c-><c- s>"p1"</c-><c- f>></c->...<c- f>&lt;/part></c->
 <c- f>&lt;part</c-> <c- e>id=</c-><c- s>"p2"</c-><c- f>></c->...<c- f>&lt;/part></c->
@@ -2972,6 +2972,13 @@ for the barline drawn at the end of the measure. Allowed values include:</p>
       <dd><dfn data-dfn-for="measure/barline" data-dfn-type="attr-value" data-noexport id="attr-valuedef-measure-barline-short"><code>short</code><a class="self-link" href="#attr-valuedef-measure-barline-short"></a></dfn>
       <dd><dfn data-dfn-for="measure/barline" data-dfn-type="attr-value" data-noexport id="attr-valuedef-measure-barline-none"><code>none</code><a class="self-link" href="#attr-valuedef-measure-barline-none"></a></dfn>
      </dl>
+     <p>If <code><a data-link-type="element" href="#elementdef-barline" id="ref-for-elementdef-barline">barline</a></code> is not given, then the barline should be interpreted as follows:</p>
+     <ol>
+      <li data-md>
+       <p>If the measure is the last in the document, use <code><a data-link-type="element">light-heavy</a></code>.</p>
+      <li data-md>
+       <p>Otherwise, use <code><a data-link-type="element">regular</a></code>.</p>
+     </ol>
      <p>The following example shows both direction content and a single-voice sequence
 with two monophonic half notes:</p>
      <div class="example" id="example-aa29245b">
@@ -4227,7 +4234,7 @@ indicated by the given clef sign should be transposed. It defaults to zero.</p>
      <p><em>Describes the nature of a particular staff; applies to this staff in all succeeeding
 measure content in the part until changed. Expected to resemble MusicXML’s corresponding element.</em></p>
     </section>
-    <h4 class="heading settled" data-level="6.9.7" id="the-barline-element"><span class="secno">6.9.7. </span><span class="content">The <dfn data-dfn-type="element" data-noexport id="elementdef-barline"><code>barline</code><a class="self-link" href="#elementdef-barline"></a></dfn> element</span><a class="self-link" href="#the-barline-element"></a></h4>
+    <h4 class="heading settled" data-level="6.9.7" id="the-barline-element"><span class="secno">6.9.7. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport id="elementdef-barline"><code>barline</code></dfn> element</span><a class="self-link" href="#the-barline-element"></a></h4>
     <section> <em>Only describes a barline explicitly placed elsewhere than the end of a measure. Barlines at the end of a measure
       are more simply described by the <code><a data-link-type="element-sub" href="#element-attrdef-measure-barline" id="ref-for-element-attrdef-measure-barline①">barline</a></code> attribute.</em> </section>
     <h4 class="heading settled" data-level="6.9.8" id="the-use-instrument-element"><span class="secno">6.9.8. </span><span class="content">The <dfn data-dfn-type="element" data-noexport id="elementdef-use-instrument"><code>use-instrument</code><a class="self-link" href="#elementdef-use-instrument"></a></dfn> element</span><a class="self-link" href="#the-use-instrument-element"></a></h4>
@@ -6870,6 +6877,12 @@ for only some of a time signature’s fractions, which would require a grouping 
    <b><a href="#element-attrdef-clef-octave">#element-attrdef-clef-octave</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-element-attrdef-clef-octave">6.9.5. The clef element</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="elementdef-barline">
+   <b><a href="#elementdef-barline">#elementdef-barline</a></b><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-elementdef-barline">6.2.1. The measure element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="part-description-content">
