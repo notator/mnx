@@ -1,7 +1,7 @@
 <!doctype html><html lang="en">
  <head>
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-  <title>MNX-Common Draft Specification</title>
+  <title>MNX Draft Specification</title>
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 <style data-fill-with="stylesheet">/******************************************************************************
  *                   Style sheet for the W3C specifications                   *
@@ -1222,7 +1222,7 @@ Possible extra rowspan handling
 	}
 </style>
   <meta content="Bikeshed version 65c8882a, updated Fri Aug 14 17:43:28 2020 -0700" name="generator">
-  <meta content="437dc94dfca2b76224321a3d999cf6d57602834a" name="document-revision">
+  <meta content="67ebced66f9b88f2e64002a93a4ddd3a72fb5e39" name="document-revision">
 <style>
   .language-xml {
     font-size: 11px;
@@ -1478,7 +1478,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
  <body class="h-entry">
   <div class="head">
    <p data-fill-with="logo"></p>
-   <h1 class="p-name no-ref" id="title">MNX-Common Draft Specification</h1>
+   <h1 class="p-name no-ref" id="title">MNX Draft Specification</h1>
    <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2020-08-18">18 August 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
@@ -1510,11 +1510,11 @@ Parts of this work may be from another specification document.  If so, those par
   </div>
   <div class="p-summary" data-fill-with="abstract">
    <h2 class="no-num no-toc no-ref heading settled" id="abstract"><span class="content">Abstract</span></h2>
-   <p>A draft specification for the MNX-Common music notation document format.
+   <p>A draft specification for the MNX music notation document format.
 
-    MNX-Common is a proposed music notation markup standard. Its aim is to improve
+    MNX is a proposed music notation markup standard. Its aim is to improve
     MusicXML in fundamental ways, while retaining many of its key concepts, terms
-    and features. MNX-Common seeks to provide a high degree of interoperability and
+    and features. MNX seeks to provide a high degree of interoperability and
     exchange between different applications working with music notation.</p>
   </div>
   <div data-fill-with="at-risk"></div>
@@ -1777,25 +1777,25 @@ Parts of this work may be from another specification document.  If so, those par
   <main>
    <h2 class="heading settled" data-level="1" id="status"><span class="secno">1. </span><span class="content">Status of this document</span><a class="self-link" href="#status"></a></h2>
    <p>This document is an early draft and focuses on the main structural features
-that distinguish MNX-Common from MusicXML 3.1. Many elements are omitted, or their details
+that distinguish MNX from MusicXML 3.1. Many elements are omitted, or their details
 are referred to the <a data-link-type="dfn" href="https://w3c.github.io/musicxml/#">MusicXML specification</a> as a placeholder.</p>
    <h2 class="heading settled" data-level="2" id="introduction"><span class="secno">2. </span><span class="content">Introduction</span><a class="self-link" href="#introduction"></a></h2>
    <h3 class="heading settled" data-level="2.1" id="background"><span class="secno">2.1. </span><span class="content">Background</span><a class="self-link" href="#background"></a></h3>
    <p><em>This section is non-normative.</em></p>
-   <p>MNX-Common is a proposed music notation markup standard, which seeks to provide a
+   <p>MNX is a proposed music notation markup standard, which seeks to provide a
   high degree of interoperability and exchange between different applications
   working with music notation.</p>
    <p>The standard encodes Conventional Western Music Notation (CWMN) using <a data-link-type="dfn" href="https://www.w3.org/TR/html5/dom.html#elements-semantics" id="ref-for-elements-semantics">semantic markup</a> as defined in the HTML5 standard, allowing applications
   to present the same information consistently in different contexts.</p>
-   <p>Many different sources of inspiration inform the design of MNX-Common, including
+   <p>Many different sources of inspiration inform the design of MNX, including
   MusicXML, the <a data-link-type="dfn" href="http://music-encoding.org/#">Music Encoding Initiative</a>, the IEEE 1599 specification
   and others.</p>
    <h3 class="heading settled" data-level="2.2" id="comparisons"><span class="secno">2.2. </span><span class="content">Comparisons with other notation standards</span><a class="self-link" href="#comparisons"></a></h3>
    <p><em>This section is non-normative.</em></p>
-   <p>MNX-Common is a lineal descendant of MusicXML, and employs
+   <p>MNX is a lineal descendant of MusicXML, and employs
 many of the same concepts. However it sacrifices some features and flexibility
 of MusicXML in favor of tighter interoperability, and simplifies the element
-structure considerably. MNX-Common also moves all non-semantic information into CSS
+structure considerably. MNX also moves all non-semantic information into CSS
 properties.</p>
    <p>MEI is a very general and expressive medium for encoding arbitrary musical
 documents, with particular attention to the needs of scholars. Due to its
@@ -1806,16 +1806,16 @@ However there are efforts underway to define a clean MEI subset as an
 interoperable medium for encoding CWMN (sometimes known as "MEI Go").</p>
    <p>IEEE 1599 is a specification that has paid unique attention to the
 relationships between different layers of musical information. Its Logic layer
-is similar in content to MNX-Common.</p>
+is similar in content to MNX.</p>
    <h3 class="heading settled" data-level="2.3" id="compatibility"><span class="secno">2.3. </span><span class="content">Compatibility with MusicXML</span><a class="self-link" href="#compatibility"></a></h3>
    <p><em>This section is non-normative.</em></p>
-   <p>MNX-Common uses MusicXML as a point of departure in many ways, but it does not
+   <p>MNX uses MusicXML as a point of departure in many ways, but it does not
 attempt to be backward-compatible with MusicXML, nor is it a superset of
 MusicXML. However, a large proportion of MusicXML markup is expected to be
 preserved. In these examples, MusicXML constructs are used freely throughout
 as a way to show how proposed new concepts dovetail with existing ones.</p>
    <p>Backward compatibility aside, it is a goal to be able to machine-translate
-MusicXML into MNX-Common. This is essential for migration purposes.</p>
+MusicXML into MNX. This is essential for migration purposes.</p>
    <h3 class="heading settled" data-level="2.4" id="use-cases"><span class="secno">2.4. </span><span class="content">Use cases</span><a class="self-link" href="#use-cases"></a></h3>
    <p><em>This section is non-normative.</em></p>
    <p>A companion document details a set of <a href="../use-cases/index.html">known use cases for music notation</a>.</p>
@@ -1834,16 +1834,16 @@ MusicXML into MNX-Common. This is essential for migration purposes.</p>
    <p>Some general principles regarding the design of this specification follow.</p>
    <dl>
     <dt>Make schematic form follow function.
-    <dd>The schema of MNX-Common tries where possible to let the constraints of an element hierarchy
+    <dd>The schema of MNX tries where possible to let the constraints of an element hierarchy
     serve a useful purpose, by embodying analogous constraints in music notation. For example,
     the <code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence">sequence</a></code> and <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event">event</a></code> elements force a musical voice in CWMN to follow conventional rules for avoiding temporal overlap. 
     <dt>Preserve ease of reading and writing for simple content.
     <dd>While complex scores will necessarily be generated and parsed by machines, it’s valuable to
     allow humans to easily create and read simple content. Therefore in some cases, encodings
-    are intentionally more compact than strictly necessary. Examples in MNX-Common include microsyntaxes
+    are intentionally more compact than strictly necessary. Examples in MNX include microsyntaxes
     and the use of XML attributes instead of elements for the most frequent properties. 
     <dt>Be specific about what is valid and what is not.
-    <dd>MNX-Common attempts to keep things constrained in its semantic layers, while
+    <dd>MNX attempts to keep things constrained in its semantic layers, while
     the literal encoding is wide-open. While this constrains some potential expression towards the
     edges of CWMN, it enhances interoperability at the core. 
     <dt>Separate semantic concerns from presentation/interpretation concerns.
@@ -1851,7 +1851,7 @@ MusicXML into MNX-Common. This is essential for migration purposes.</p>
     descriptions from answering to the multitude of tiny features that control presentation and
     performance interpretation. These are segregated in the parallel domains of <a data-link-type="dfn" href="#style-properties" id="ref-for-style-properties">style properties</a> and <a data-link-type="dfn" href="#interpretation-content" id="ref-for-interpretation-content">interpretation content</a>. 
     <dt>Leverage existing value in the world
-    <dd>The ecosystem of the Web is broad and valuable. MNX-Common attempts to exploit this by making use of existing
+    <dd>The ecosystem of the Web is broad and valuable. MNX attempts to exploit this by making use of existing
     patterns and tooling. For example, it reuses many CSS concepts. 
    </dl>
    <h4 class="heading settled" data-level="2.6.1" id="design-notes-extensibility"><span class="secno">2.6.1. </span><span class="content">Extensibility</span><a class="self-link" href="#design-notes-extensibility"></a></h4>
@@ -1876,7 +1876,7 @@ MusicXML into MNX-Common. This is essential for migration purposes.</p>
       <p>Various syntaxes of music notation that are used by this specification.</p>
      <dt data-md><a href="#document-structure">§ 6 Document structure</a>
      <dd data-md>
-      <p>The elements that make up the MNX-Common format.</p>
+      <p>The elements that make up the MNX format.</p>
     </dl>
    </div>
    <h4 class="heading settled" data-level="2.7.1" id="how-to-read-this-specification"><span class="secno">2.7.1. </span><span class="content">How to read this specification</span><a class="self-link" href="#how-to-read-this-specification"></a></h4>
@@ -1933,9 +1933,9 @@ limited to) Western European music from circa 1600 to the present day.</p>
     <h4 class="heading settled" data-level="3.1.2" id="score profiles"><span class="secno">3.1.2. </span><span class="content">Score profiles</span><a class="self-link" href="#score%20profiles"></a></h4>
     <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="score-profile">score profile</dfn> is a set of constraints on the rules in a notational idiom.
 Score profiles are designed to narrow the set of constructs that can be produced or consumed
-in MNX-Common to a practical scope.</p>
+in MNX to a practical scope.</p>
     <h3 class="heading settled" data-level="3.2" id="common-syntaxes"><span class="secno">3.2. </span><span class="content">Common syntaxes</span><a class="self-link" href="#common-syntaxes"></a></h3>
-    <p>There are various places in MNX-Common that accept particular data types, such as
+    <p>There are various places in MNX that accept particular data types, such as
 note values, numbers or durations. This section describes the conformance
 criteria for content in those formats, and how to parse them.</p>
     <h4 class="heading settled" data-level="3.2.1" id="common-parser-idioms"><span class="secno">3.2.1. </span><span class="content">Common parser idioms</span><a class="self-link" href="#common-parser-idioms"></a></h4>
@@ -2059,7 +2059,7 @@ criteria for content in those formats, and how to parse them.</p>
 in the document. It consists of the character <code>#</code>, immediately followed by the
 XML ID of the referenced element.</p>
     <h4 class="heading settled" data-level="3.2.4" id="style-property-lists"><span class="secno">3.2.4. </span><span class="content">Style property lists</span><a class="self-link" href="#style-property-lists"></a></h4>
-    <p>MNX-Common supports a simple and compact <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="style-property-list">style property list</dfn> syntax, allowing
+    <p>MNX supports a simple and compact <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="style-property-list">style property list</dfn> syntax, allowing
 a map of key-value pairs to be represented in a single string where the keys
 are names of <a data-link-type="dfn" href="#style-properties" id="ref-for-style-properties①">style properties</a>.</p>
     <p>To parse a <a data-link-type="dfn" href="#style-property-list" id="ref-for-style-property-list">style property list</a>:</p>
@@ -2105,7 +2105,7 @@ are names of <a data-link-type="dfn" href="#style-properties" id="ref-for-style-
       <p>A definition of two properties: <code>smufl-font</code> with value <code>Bravura</code>, and <code>color</code> with value <code>red</code>.</p>
     </dl>
     <h3 class="heading settled" data-level="3.3" id="content-models"><span class="secno">3.3. </span><span class="content">Content models and categories</span><a class="self-link" href="#content-models"></a></h3>
-    <p>Each element in MNX-Common falls into zero or more <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="content
+    <p>Each element in MNX falls into zero or more <dfn class="dfn-paneled" data-dfn-type="dfn" data-lt="content
   categories|content category" data-noexport id="content-categories">categories</dfn> that group elements with
   similar characteristics together. Examples of content categories
   include <a data-link-type="dfn" href="#event-content" id="ref-for-event-content">event content</a> and <a data-link-type="dfn" href="#sequence-content" id="ref-for-sequence-content">sequence content</a>, among
@@ -2242,8 +2242,7 @@ playback of a single voice, including only the sequences that belong to it.</p>
     <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="performance-interpretation">performance interpretation</dfn> is the end result of deriving
 a set of <a data-link-type="dfn" href="#performance-event" id="ref-for-performance-event①">performance events</a> from a score. Human performers do this
 by reading music, while MNX consumers will generally do this algorithmically.</p>
-    <p>In MNX-Generic, a consumer is given the exact performance interpretation as part of
-the document.  In MNX-Common, a consumer will typically employ a set of rules that
+    <p>In MNX, a consumer will typically employ a set of rules that
 mimic the actions of a human performer, overriding these with exact
 performance events where these are explicitly supplied within the document.</p>
     <h3 class="heading settled" data-level="4.9" id="common-performance-events"><span class="secno">4.9. </span><span class="content">Performance events</span><a class="self-link" href="#common-performance-events"></a></h3>
@@ -2269,7 +2268,7 @@ values of breve, longa, etc. are expressed by the positive powers
     <h3 class="heading settled" data-level="4.11" id="event-orientation"><span class="secno">4.11. </span><span class="content">Orientation</span><a class="self-link" href="#event-orientation"></a></h3>
     <p>Events and sequences may possess an optional <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="orientation">orientation</dfn> that
 determines a the placement and rendering of content according to a complex set
-of CWMN conventions. For the purposes of MNX-Common there are two orientations:</p>
+of CWMN conventions. For the purposes of MNX there are two orientations:</p>
     <ul>
      <li>An orientation of <dfn class="dfn-paneled css" data-dfn-for="orientation" data-dfn-type="value" data-noexport id="valdef-orientation-up">up</dfn> orients note stems pointing upwards, and places beams, directions
 and articulations accordingly.
@@ -2697,7 +2696,7 @@ a <a data-link-type="dfn" href="https://w3c.github.io/smufl/gitbook/specificatio
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute②">Attributes</a>:
       <dd>None.
      </dl>
-      The <code><a data-link-type="element" href="#elementdef-head" id="ref-for-elementdef-head①">head</a></code> element supplies overall descriptive information for an MNX-Common document,
+      The <code><a data-link-type="element" href="#elementdef-head" id="ref-for-elementdef-head①">head</a></code> element supplies overall descriptive information for an MNX document,
 such as document-scoped metadata or <a data-link-type="dfn" href="#stylesheet-definitions" id="ref-for-stylesheet-definitions">stylesheet definitions</a>. 
     </section>
     <h4 class="heading settled" data-level="6.1.3" id="the-collection-element"><span class="secno">6.1.3. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport id="elementdef-collection"><code>collection</code></dfn> element</span><a class="self-link" href="#the-collection-element"></a></h4>
@@ -2800,7 +2799,7 @@ bibliographic data and other descriptive information.</p>
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute⑥">Attributes</a>:
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-mnx-common-profile" id="ref-for-element-attrdef-mnx-common-profile">profile</a></code> — profile describing constraints on the contents of this score
      </dl>
-     <p>The <code><a data-link-type="element" href="#elementdef-mnx-common" id="ref-for-elementdef-mnx-common①">mnx-common</a></code> element describes an MNX-Common score as a whole.</p>
+     <p>The <code><a data-link-type="element" href="#elementdef-mnx-common" id="ref-for-elementdef-mnx-common①">mnx-common</a></code> element describes an MNX score as a whole.</p>
      <p>The <dfn class="dfn-paneled" data-dfn-for="mnx-common" data-dfn-type="element-attr" data-noexport id="element-attrdef-mnx-common-profile"><code>profile</code></dfn> attribute declares a <a data-link-type="dfn" href="#score-profile" id="ref-for-score-profile">score
 profile</a> that supplies constraints to which the score is expected to obey.</p>
      <p>The following values of <code><a data-link-type="element-sub" href="#element-attrdef-mnx-common-profile" id="ref-for-element-attrdef-mnx-common-profile①">profile</a></code> are supported, along with the
@@ -2866,7 +2865,7 @@ tempo indications.</p>
 <c- f>&lt;/global></c->
 </pre>
       </div>
-      <p><strong class="advisement"> The following features are not supported by the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard">standard</a></code> MNX-Common profile.</strong></p>
+      <p><strong class="advisement"> The following features are not supported by the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard">standard</a></code> MNX profile.</strong></p>
       <p>The <dfn class="dfn-paneled" data-dfn-for="global" data-dfn-type="element-attr" data-noexport id="element-attrdef-global-parts"><code>parts</code></dfn> attribute optionally supplies a list of <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part④">part</a></code> element IDs as an <a data-link-type="dfn" href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens" id="ref-for-space-separated-tokens①">unordered set of space-separated tokens</a>.
 This restricts the scope of the <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global⑨">global</a></code> element to the set of parts given, allowing
 subsets of parts in the score to share dissimilar structures (for example, in scores
@@ -2963,7 +2962,7 @@ content. The first measure in a system has an <code><a data-link-type="element-s
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-measure-barline" id="ref-for-element-attrdef-measure-barline">barline</a></code> - an optional ending barline type for the measure 
      </dl>
      <p>The <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure④">measure</a></code> element encloses the direction and sequence content that together
-make up the majority of musical content in an MNX-Common score.</p>
+make up the majority of musical content in an MNX score.</p>
      <p>The optional attribute <dfn class="dfn-paneled" data-dfn-for="measure" data-dfn-type="element-attr" data-noexport id="element-attrdef-measure-index"><code>index</code></dfn> defines the one-based
 index of this measure within score order. This is used for cross-
 referencing <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure⑤">measure</a></code> elements in corresponding runs of <a data-link-type="dfn" href="#measure-content" id="ref-for-measure-content⑦">measure
@@ -3488,7 +3487,7 @@ CWMN, beams cannot have one end inside a grouping such as tuplets or grace
 notes and the other end outside the same grouping. This element acts to
 enforce that constraint.</p>
      <p class="note" role="note"><span>NOTE:</span> In general, the number of beams and the use of forward or backward hooks
-is determined automatically by implementations. There is thus no MNX-Common element
+is determined automatically by implementations. There is thus no MNX element
 that represents an individual beam.  More detailed beam specifications may be
 overridden using style properties, but do not amount to semantic markup.</p>
      <p>Here is a simple beaming example in a 6/8 time signature. The grouping
@@ -3689,7 +3688,7 @@ information pertaining to the note itself rather than to its containing event.</
 as a <a data-link-type="dfn" href="#chromatic-pitch" id="ref-for-chromatic-pitch①">chromatic pitch</a>, using the <a data-link-type="dfn" href="#rules-for-parsing-a-chromatic-pitch" id="ref-for-rules-for-parsing-a-chromatic-pitch">rules for parsing a chromatic pitch</a>.</p>
      <p>Optionally, the <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-noexport id="element-attrdef-note-staff"><code>staff</code></dfn> attribute supplies a <a data-link-type="dfn" href="#staff-index" id="ref-for-staff-index⑦">staff index</a> for this note where this differs from the staff index which applies to the containing <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑧">event</a></code> as a whole.</p>
      <p>The <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-noexport id="element-attrdef-note-accidental"><code>accidental</code></dfn> attribute supplies an accidental value
-for this note. In the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard①">standard</a></code> MNX-Common profile, this attribute
+for this note. In the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard①">standard</a></code> MNX profile, this attribute
 must match the <a data-link-type="dfn" href="#alteration" id="ref-for-alteration">alteration</a> of the <code><a data-link-type="element-sub" href="#element-attrdef-note-pitch" id="ref-for-element-attrdef-note-pitch①">pitch</a></code> attribute. Omission of
 the  attribute indicates that no accidental is to be displayed. The special
 value <dfn data-dfn-for="note/accidental" data-dfn-type="attr-value" data-noexport id="attr-valuedef-note-accidental-auto"><code>auto</code><a class="self-link" href="#attr-valuedef-note-accidental-auto"></a></dfn> indicates that a
@@ -3698,7 +3697,7 @@ context.</p>
      <p><em>(Import values here from MusicXML specification. Add style properties for
 editorial indications. Handle the case of "explicit" accidentals that should
 be preserved even if the chromatic context is changed by edits.)</em></p>
-     <p><strong class="advisement"> The following features are not supported by the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard②">standard</a></code> MNX-Common profile.</strong></p>
+     <p><strong class="advisement"> The following features are not supported by the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard②">standard</a></code> MNX profile.</strong></p>
      <p>The <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-noexport id="element-attrdef-note-value"><code>value</code></dfn> attribute optionally supplies a <a data-link-type="dfn" href="#note-value" id="ref-for-note-value⑤">note
 value</a> for this note, where this differs from the containing <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑨">event</a></code>'s
 note value.  The value of the note must be less than or equal to the value of
@@ -3884,7 +3883,7 @@ direction according to its own algorithms.</p>
     </section>
     <h3 class="heading settled" data-level="6.8" id="common-direction-content"><span class="secno">6.8. </span><span class="content">Direction content</span><a class="self-link" href="#common-direction-content"></a></h3>
     <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="direction-content">Direction content</dfn> consists of some number of musical <dfn data-dfn-type="dfn" data-noexport id="directions">directions<a class="self-link" href="#directions"></a></dfn> that modify or accompany the performance of events in
-one or more measures. Directions may be included in an MNX-Common score in two ways:</p>
+one or more measures. Directions may be included in an MNX score in two ways:</p>
     <ul>
      <li data-md>
       <p>Within a <code><a data-link-type="element" href="#elementdef-directions" id="ref-for-elementdef-directions⑥">directions</a></code> element below a <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure①⑥">measure</a></code>. The direction is considered
@@ -4153,7 +4152,7 @@ measure content, until changed.</p>
      <p>The <a data-link-type="dfn" href="#staff-index" id="ref-for-staff-index⑨">staff index</a> of a <code><a data-link-type="element" href="#elementdef-key" id="ref-for-elementdef-key②">key</a></code> direction is ignored, as the direction always applies
 to all the staves in a given part (if not the whole score).</p>
      <p>It is invalid to place more than one <code><a data-link-type="element" href="#elementdef-key" id="ref-for-elementdef-key③">key</a></code> element within a <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure①⑧">measure</a></code>.</p>
-     <p>In the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard③">standard</a></code> MNX-Common profile, <code><a data-link-type="element" href="#elementdef-key" id="ref-for-elementdef-key④">key</a></code> elements in <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⑤">global</a></code> measure content
+     <p>In the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard③">standard</a></code> MNX profile, <code><a data-link-type="element" href="#elementdef-key" id="ref-for-elementdef-key④">key</a></code> elements in <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⑤">global</a></code> measure content
 are required for every key change. <code><a data-link-type="element" href="#elementdef-key" id="ref-for-elementdef-key⑤">key</a></code> elements below <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①①">part</a></code> are optional; if present they must indicate a value of <code><a data-link-type="element-sub" href="#element-attrdef-key-fifths" id="ref-for-element-attrdef-key-fifths①">fifths</a></code> that is
 either identical to the corresponding value in the global <code><a data-link-type="element" href="#elementdef-key" id="ref-for-elementdef-key⑥">key</a></code> or differs from it
 by a multiple of 12.</p>
@@ -4176,7 +4175,7 @@ no accidentals.</p>
 measures, until changed.</p>
      <p>The <a data-link-type="dfn" href="#measure-location" id="ref-for-measure-location①④">measure location</a> of a <code><a data-link-type="element" href="#elementdef-time" id="ref-for-elementdef-time①">time</a></code> direction is ignored and is assumed to be zero.</p>
      <p>It is invalid to place more than one <code><a data-link-type="element" href="#elementdef-time" id="ref-for-elementdef-time②">time</a></code> element within a <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure①⑨">measure</a></code>.</p>
-     <p>In the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard④">standard</a></code> MNX-Common profile, a <code><a data-link-type="element" href="#elementdef-time" id="ref-for-elementdef-time③">time</a></code> element may only appear
+     <p>In the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard④">standard</a></code> MNX profile, a <code><a data-link-type="element" href="#elementdef-time" id="ref-for-elementdef-time③">time</a></code> element may only appear
 inside <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⑥">global</a></code> measure content, not within a <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①②">part</a></code>.</p>
      <p>The required <dfn class="dfn-paneled" data-dfn-for="time" data-dfn-type="element-attr" data-noexport id="element-attrdef-time-signature"><code>signature</code></dfn> attribute supplies a <a data-link-type="dfn" href="#time-signature" id="ref-for-time-signature②">time signature</a> that gives the time signature for this measure and for subsequent measures. By default this signature is displayed in normative rendering.</p>
      <p>Here is an example of a 4/4 time signature:</p>
@@ -4233,7 +4232,7 @@ the contents of measures to determine their intended length.</p>
      <p>The <code><a data-link-type="element" href="#elementdef-tempo" id="ref-for-elementdef-tempo">tempo</a></code> element defines a tempo, from the point of its occurrence forward until changed.
 The tempo is rendered as a conventional pairing of a small beat unit notation equated to a
 metronome marking.</p>
-     <p>In the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard⑤">standard</a></code> MNX-Common profile, a <code><a data-link-type="element" href="#elementdef-tempo" id="ref-for-elementdef-tempo①">tempo</a></code> element may only appear
+     <p>In the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard⑤">standard</a></code> MNX profile, a <code><a data-link-type="element" href="#elementdef-tempo" id="ref-for-elementdef-tempo①">tempo</a></code> element may only appear
 inside <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⑦">global</a></code> measure content, not within a <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①③">part</a></code>.</p>
      <p>The required <dfn class="dfn-paneled" data-dfn-for="tempo" data-dfn-type="element-attr" data-noexport id="element-attrdef-tempo-value"><code>value</code></dfn> attribute supplies a <a data-link-type="dfn" href="#note-value" id="ref-for-note-value⑥">note value</a> which is asserted to occur with a frequency of <dfn class="dfn-paneled" data-dfn-for="tempo" data-dfn-type="element-attr" data-noexport id="element-attrdef-tempo-bpm"><code>bpm</code></dfn> times per
 minute, which is a <a data-link-type="dfn" href="https://www.w3.org/TR/html5/infrastructure.html#floating-point-numbers" id="ref-for-floating-point-numbers③">valid floating-point number</a>.</p>
@@ -4341,7 +4340,7 @@ the specific way in which the element is interpreted as a musical performance.</
       <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③②">Content Model</a>:
       <dd>Any number of <code><a data-link-type="element">performance-event</a></code> or <code><a data-link-type="element">performance-tempo</a></code> elements
      </dl>
-     <p>The <code><a data-link-type="element" href="#elementdef-interpret" id="ref-for-elementdef-interpret">interpret</a></code> element substitutes explicit MNX-Generic <a data-link-type="dfn">performance data</a> for the performance of its MNX-Common parent element that a producer would normally
+     <p>The <code><a data-link-type="element" href="#elementdef-interpret" id="ref-for-elementdef-interpret">interpret</a></code> element substitutes explicit MNX-Generic <a data-link-type="dfn">performance data</a> for the performance of its MNX parent element that a producer would normally
 generate.</p>
      <p>Within <code><a data-link-type="element" href="#elementdef-interpret" id="ref-for-elementdef-interpret①">interpret</a></code>, a set of child <code><a data-link-type="element">performance-event</a></code> and <code><a data-link-type="element">performance-tempo</a></code> elements supply
 this performance information. The <a data-link-type="dfn">notated time units</a> for all such
@@ -4595,7 +4594,7 @@ a note:</p>
     </div>
    </section>
    <h4 class="heading settled" data-level="6.14.3" id="common-properties"><span class="secno">6.14.3. </span><span class="content">Common style properties</span><a class="self-link" href="#common-properties"></a></h4>
-   <p>The following <a data-link-type="dfn" href="#style-properties" id="ref-for-style-properties⑤">style properties</a> apply to many kinds of object in MNX-Common, and in general
+   <p>The following <a data-link-type="dfn" href="#style-properties" id="ref-for-style-properties⑤">style properties</a> apply to many kinds of object in MNX, and in general
 apply to all descendants of the element within which they are specified.</p>
    <h5 class="heading settled" data-level="6.14.3.1" id="the-color-property"><span class="secno">6.14.3.1. </span><span class="content">The <dfn class="dfn-paneled css" data-dfn-type="property" data-export id="propdef-color"><code>color</code></dfn> property</span><a class="self-link" href="#the-color-property"></a></h5>
    <section>
@@ -4910,14 +4909,14 @@ will employ a given stem width:</p>
    </section>
    <section>
     <h3 class="heading settled" data-level="6.16" id="common-rendering"><span class="secno">6.16. </span><span class="content">Rendering</span><a class="self-link" href="#common-rendering"></a></h3>
-    <p><em>TBD: section describing normative MNX-Common rendering procedure, leaving room for implementation decisions.
-The intent is to set out the normative constraints that MNX-Common rendering must follow, including at least:</em></p>
+    <p><em>TBD: section describing normative MNX rendering procedure, leaving room for implementation decisions.
+The intent is to set out the normative constraints that MNX rendering must follow, including at least:</em></p>
     <em> <ul><li data-md> </li><li data-md><p>normative registration</p> </li></ul> </em>
     <p><em></em></p>
    </section>
    <section>
     <h3 class="heading settled" data-level="6.17" id="common-interpretation"><span class="secno">6.17. </span><span class="content">Interpretation</span><a class="self-link" href="#common-interpretation"></a></h3>
-    <p><em>TBD: section describing normative MNX-Common performance interpretation, leaving room for implementation decisions.</em></p>
+    <p><em>TBD: section describing normative MNX performance interpretation, leaving room for implementation decisions.</em></p>
    </section>
    <section>
     <div data-fill-with="issues-index">
