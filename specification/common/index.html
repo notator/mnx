@@ -1221,8 +1221,8 @@ Possible extra rowspan handling
 		}
 	}
 </style>
-  <meta content="Bikeshed version 65c8882a, updated Fri Aug 14 17:43:28 2020 -0700" name="generator">
-  <meta content="67ebced66f9b88f2e64002a93a4ddd3a72fb5e39" name="document-revision">
+  <meta content="Bikeshed version f6ef768c, updated Fri Sep 11 11:29:35 2020 -0700" name="generator">
+  <meta content="f30a4e2ac6179f4f6f184a5f0e7a41f172f1f795" name="document-revision">
 <style>
   .language-xml {
     font-size: 11px;
@@ -1479,7 +1479,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">MNX Draft Specification</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2020-08-18">18 August 2020</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Living Document, <time class="dt-updated" datetime="2020-09-14">14 September 2020</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>Issue Tracking:
@@ -1502,7 +1502,7 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
    </div>
    <p class="copyright" data-fill-with="copyright"><a href="http://creativecommons.org/publicdomain/zero/1.0/" rel="license"><img alt="CC0" src="https://licensebuttons.net/p/zero/1.0/80x15.png"></a> To the extent possible under law, the editors have waived all copyright
 and related or neighboring rights to this work.
-In addition, as of 18 August 2020,
+In addition, as of 14 September 2020,
 the editors have made this specification available under the <a href="http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0" rel="license">Open Web Foundation Agreement Version 1.0</a>,
 which is available at http://www.openwebfoundation.org/legal/the-owf-1-0-agreements/owfa-1-0.
 Parts of this work may be from another specification document.  If so, those parts are instead covered by the license of that specification document. </p>
@@ -1554,7 +1554,6 @@ Parts of this work may be from another specification document.  If so, those par
          <ol class="toc">
           <li><a href="#cwmn"><span class="secno">3.1.1.1</span> <span class="content">Conventional Western music notation (CWMN)</span></a>
          </ol>
-        <li><a href="#score profiles"><span class="secno">3.1.2</span> <span class="content">Score profiles</span></a>
        </ol>
       <li>
        <a href="#common-syntaxes"><span class="secno">3.2</span> <span class="content">Common syntaxes</span></a>
@@ -1930,10 +1929,6 @@ produce an audible performance.</p>
     <h5 class="heading settled" data-level="3.1.1.1" id="cwmn"><span class="secno">3.1.1.1. </span><span class="content">Conventional Western music notation (CWMN)</span><a class="self-link" href="#cwmn"></a></h5>
     <p>This notational idiom comprises a set of notational rules common to (but not
 limited to) Western European music from circa 1600 to the present day.</p>
-    <h4 class="heading settled" data-level="3.1.2" id="score profiles"><span class="secno">3.1.2. </span><span class="content">Score profiles</span><a class="self-link" href="#score%20profiles"></a></h4>
-    <p>A <dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="score-profile">score profile</dfn> is a set of constraints on the rules in a notational idiom.
-Score profiles are designed to narrow the set of constructs that can be produced or consumed
-in MNX to a practical scope.</p>
     <h3 class="heading settled" data-level="3.2" id="common-syntaxes"><span class="secno">3.2. </span><span class="content">Common syntaxes</span><a class="self-link" href="#common-syntaxes"></a></h3>
     <p>There are various places in MNX that accept particular data types, such as
 note values, numbers or durations. This section describes the conformance
@@ -2797,21 +2792,9 @@ bibliographic data and other descriptive information.</p>
       <dd>One or more <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part">part</a></code> elements - description and <a data-link-type="dfn" href="#measure-content" id="ref-for-measure-content③">measure content</a> of each part in the score.
       <dd>Zero or more <code><a data-link-type="element" href="#elementdef-score-audio" id="ref-for-elementdef-score-audio">score-audio</a></code> elements - recordings of the score and their associated synchronization date.
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute⑥">Attributes</a>:
-      <dd><code><a data-link-type="element-sub" href="#element-attrdef-mnx-common-profile" id="ref-for-element-attrdef-mnx-common-profile">profile</a></code> — profile describing constraints on the contents of this score
+      <dd>None.
      </dl>
      <p>The <code><a data-link-type="element" href="#elementdef-mnx-common" id="ref-for-elementdef-mnx-common①">mnx-common</a></code> element describes an MNX score as a whole.</p>
-     <p>The <dfn class="dfn-paneled" data-dfn-for="mnx-common" data-dfn-type="element-attr" data-noexport id="element-attrdef-mnx-common-profile"><code>profile</code></dfn> attribute declares a <a data-link-type="dfn" href="#score-profile" id="ref-for-score-profile">score
-profile</a> that supplies constraints to which the score is expected to obey.</p>
-     <p>The following values of <code><a data-link-type="element-sub" href="#element-attrdef-mnx-common-profile" id="ref-for-element-attrdef-mnx-common-profile①">profile</a></code> are supported, along with the
-constraints that they represent:</p>
-     <dl>
-      <dt><dfn class="dfn-paneled" data-dfn-for="mnx-common/profile" data-dfn-type="attr-value" data-noexport id="attr-valuedef-mnx-common-profile-standard"><code>standard</code></dfn>
-      <dd>The <a data-link-type="dfn" href="#measure-content" id="ref-for-measure-content④">measure content</a> in all <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①">global</a></code> or <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①">part</a></code> elements consists of an identical number of measures.
-      <dd>Only a single <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global②">global</a></code> element exists.
-      <dd>Time signatures and tempo indications only occur in measures within the <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global③">global</a></code> element.
-      <dd>Key signatures within the <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global④">global</a></code> element only occur in enharmonic/transposed forms that are equivalent within <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part②">part</a></code> elements.
-      <dd>All notated events in a chord share the same duration
-     </dl>
      <p>The following example provides the basic skeleton of a <code><a data-link-type="element" href="#elementdef-mnx-common" id="ref-for-elementdef-mnx-common②">mnx-common</a></code> musical body:</p>
      <div class="example" id="example-999d09a9">
       <a class="self-link" href="#example-999d09a9"></a> 
@@ -2839,17 +2822,17 @@ constraints that they represent:</p>
        <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts⑥">Contexts</a>:
        <dd><code><a data-link-type="element" href="#elementdef-mnx-common" id="ref-for-elementdef-mnx-common③">mnx-common</a></code>
        <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model⑥">Content Model</a>:
-       <dd><a data-link-type="dfn" href="#measure-content" id="ref-for-measure-content⑤">Measure content</a>, which must not include any <a data-link-type="dfn" href="#sequence-content" id="ref-for-sequence-content①">sequence content</a>
+       <dd><a data-link-type="dfn" href="#measure-content" id="ref-for-measure-content④">Measure content</a>, which must not include any <a data-link-type="dfn" href="#sequence-content" id="ref-for-sequence-content①">sequence content</a>
        <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute⑦">Attributes</a>:
-       <dd><code><a data-link-type="element-sub" href="#element-attrdef-global-parts" id="ref-for-element-attrdef-global-parts">parts</a></code> - an optional set of IDs of <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part③">part</a></code> elements to which this global content applies 
+       <dd>None. 
       </dl>
-      <p>The <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global⑤">global</a></code> element represents a set of measures, each of which provides
+      <p>The <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①">global</a></code> element represents a set of measures, each of which provides
 content that is shared by a set of parts within the score. Each <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure①">measure</a></code> element
-within <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global⑥">global</a></code> supplies the shared content for all other <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure②">measure</a></code> elements which share the same <code><a data-link-type="element-sub" href="#element-attrdef-measure-index" id="ref-for-element-attrdef-measure-index">index</a></code>.</p>
-      <p>By default, the content in <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global⑦">global</a></code> applies to <em>all</em> parts in the score.</p>
+within <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global②">global</a></code> supplies the shared content for all other <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure②">measure</a></code> elements which share the same <code><a data-link-type="element-sub" href="#element-attrdef-measure-index" id="ref-for-element-attrdef-measure-index">index</a></code>.</p>
+      <p>The content in <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global③">global</a></code> applies to <em>all</em> parts in the score.</p>
       <p>Typical examples of such content include key signatures, time signatures and
 tempo indications.</p>
-      <p><a data-link-type="dfn" href="#notated-event" id="ref-for-notated-event①">Notated events</a> like notes or rests cannot be shared between parts in CWMN. Consequently, <a data-link-type="dfn" href="#sequence-content" id="ref-for-sequence-content②">sequence content</a> cannot occur in the measures within <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global⑧">global</a></code>.</p>
+      <p><a data-link-type="dfn" href="#notated-event" id="ref-for-notated-event①">Notated events</a> like notes or rests cannot be shared between parts in CWMN. Consequently, <a data-link-type="dfn" href="#sequence-content" id="ref-for-sequence-content②">sequence content</a> cannot occur in the measures within <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global④">global</a></code>.</p>
       <div class="example" id="example-03803425">
        <a class="self-link" href="#example-03803425"></a> 
 <pre class="language-xml highlight"><c- f>&lt;global></c->
@@ -2865,41 +2848,6 @@ tempo indications.</p>
 <c- f>&lt;/global></c->
 </pre>
       </div>
-      <p><strong class="advisement"> The following features are not supported by the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard">standard</a></code> MNX profile.</strong></p>
-      <p>The <dfn class="dfn-paneled" data-dfn-for="global" data-dfn-type="element-attr" data-noexport id="element-attrdef-global-parts"><code>parts</code></dfn> attribute optionally supplies a list of <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part④">part</a></code> element IDs as an <a data-link-type="dfn" href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens" id="ref-for-space-separated-tokens①">unordered set of space-separated tokens</a>.
-This restricts the scope of the <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global⑨">global</a></code> element to the set of parts given, allowing
-subsets of parts in the score to share dissimilar structures (for example, in scores
-having different parts in different meters). The default value of this attribute is
-the list of all part IDs.</p>
-      <p>No two <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⓪">global</a></code> elements may include the same part in their <code><a data-link-type="element-sub" href="#element-attrdef-global-parts" id="ref-for-element-attrdef-global-parts①">parts</a></code> list, to prevent
-conflicting definitions.</p>
-      <div class="example" id="example-31961a9f">
-       <a class="self-link" href="#example-31961a9f"></a> 
-<pre class="language-xml highlight"><c- f>&lt;global</c-> <c- e>parts=</c-><c- s>"p1 p2"</c-><c- f>></c->
-  <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"1"</c-><c- f>></c->
-    <c- f>&lt;directions></c->
-      <c- f>&lt;time</c-> <c- e>signature=</c-><c- s>"6/8"</c-><c- f>/></c->
-    <c- f>&lt;/directions></c->
-  <c- f>&lt;/measure></c->
-  <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"2"</c-><c- f>/></c->
-  <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"3"</c-><c- f>/></c->
-  <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"4"</c-><c- f>/></c->
-<c- f>&lt;/global></c->
-<c- f>&lt;global</c-> <c- e>parts=</c-><c- s>"p3 p4"</c-><c- f>></c->
-  <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"1"</c-><c- f>></c->
-    <c- f>&lt;directions></c->
-      <c- f>&lt;time</c-> <c- e>signature=</c-><c- s>"4/4"</c-><c- f>/></c->
-    <c- f>&lt;/directions></c->
-  <c- f>&lt;/measure></c->
-  <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"2"</c-><c- f>/></c->
-  <c- f>&lt;measure</c-> <c- e>index=</c-><c- s>"3"</c-><c- f>/></c->
-<c- f>&lt;/global></c->
-<c- f>&lt;part</c-> <c- e>id=</c-><c- s>"p1"</c-><c- f>></c->...<c- f>&lt;/part></c->
-<c- f>&lt;part</c-> <c- e>id=</c-><c- s>"p2"</c-><c- f>></c->...<c- f>&lt;/part></c->
-<c- f>&lt;part</c-> <c- e>id=</c-><c- s>"p3"</c-><c- f>></c->...<c- f>&lt;/part></c->
-<c- f>&lt;part</c-> <c- e>id=</c-><c- s>"p4"</c-><c- f>></c->...<c- f>&lt;/part></c->
-</pre>
-      </div>
      </section>
      <h4 class="heading settled" data-level="6.1.9" id="the-part-element"><span class="secno">6.1.9. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport id="elementdef-part"><code>part</code></dfn> element</span><a class="self-link" href="#the-part-element"></a></h4>
      <section>
@@ -2908,11 +2856,11 @@ conflicting definitions.</p>
        <dd><code><a data-link-type="element" href="#elementdef-mnx-common" id="ref-for-elementdef-mnx-common④">mnx-common</a></code>
        <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model⑦">Content Model</a>:
        <dd><a data-link-type="dfn" href="#part-description-content" id="ref-for-part-description-content">Part description content</a>
-       <dd><a data-link-type="dfn" href="#measure-content" id="ref-for-measure-content⑥">Measure content</a>
+       <dd><a data-link-type="dfn" href="#measure-content" id="ref-for-measure-content⑤">Measure content</a>
       </dl>
      </section>
-     <p>The <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part⑤">part</a></code> element represents a set of measures which describe a single part
-within the score. The sequence of measures must match the measure found in the <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①①">global</a></code> element applying to this part.</p>
+     <p>The <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①">part</a></code> element represents a set of measures which describe a single part
+within the score. The sequence of measures must match the measure found in the <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global⑤">global</a></code> element applying to this part.</p>
      <div class="example" id="example-a2a45022">
       <a class="self-link" href="#example-a2a45022"></a> 
 <pre class="language-xml highlight"><c- f>&lt;part></c->
@@ -2950,11 +2898,11 @@ content. The first measure in a system has an <code><a data-link-type="element-s
     <section>
      <dl class="def">
       <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts⑧">Contexts</a>:
-      <dd><code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①②">global</a></code>, <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part⑥">part</a></code>
+      <dd><code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global⑥">global</a></code>, <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part②">part</a></code>
       <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model⑧">Content Model</a>:
       <dd><a data-link-type="dfn" href="#metadata-content" id="ref-for-metadata-content④">Metadata content</a>
       <dd>Zero or one <code><a data-link-type="element" href="#elementdef-directions" id="ref-for-elementdef-directions">directions</a></code> elements
-      <dd>One or more <code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence②">sequence</a></code> elements (for measures within <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part⑦">part</a></code> elements only)
+      <dd>One or more <code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence②">sequence</a></code> elements (for measures within <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part③">part</a></code> elements only)
       <dd><a data-link-type="dfn" href="#interpretation-content" id="ref-for-interpretation-content①">Interpretation content</a>
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute⑧">Attributes</a>:
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-measure-index" id="ref-for-element-attrdef-measure-index③">index</a></code> - an optional integer index for the measure 
@@ -2965,7 +2913,7 @@ content. The first measure in a system has an <code><a data-link-type="element-s
 make up the majority of musical content in an MNX score.</p>
      <p>The optional attribute <dfn class="dfn-paneled" data-dfn-for="measure" data-dfn-type="element-attr" data-noexport id="element-attrdef-measure-index"><code>index</code></dfn> defines the one-based
 index of this measure within score order. This is used for cross-
-referencing <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure⑤">measure</a></code> elements in corresponding runs of <a data-link-type="dfn" href="#measure-content" id="ref-for-measure-content⑦">measure
+referencing <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure⑤">measure</a></code> elements in corresponding runs of <a data-link-type="dfn" href="#measure-content" id="ref-for-measure-content⑥">measure
 content</a>. The default value of <code><a data-link-type="element-sub" href="#element-attrdef-measure-index" id="ref-for-element-attrdef-measure-index④">index</a></code> is 1 for the first <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure⑥">measure</a></code> element
 within a run of content; for all other <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure⑦">measure</a></code>s its default is the index of the previous <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure⑧">measure</a></code> element plus 1.</p>
      <p>The optional attribute <dfn class="dfn-paneled" data-dfn-for="measure" data-dfn-type="element-attr" data-noexport id="element-attrdef-measure-number"><code>number</code></dfn> provides an <a data-link-type="dfn" href="https://www.w3.org/TR/html5/infrastructure.html#non-negative-integers" id="ref-for-non-negative-integers">non-negative integer</a> which is to be used as a visual label for the measure. It is not required to be unique.
@@ -3042,7 +2990,7 @@ rendering rules, and may also be overridden by descendants.</p>
 staff index is determined automatically according to the implementation’s
 rendering rules, and may also be overridden by descendants.</p>
      <p>The optional <dfn class="dfn-paneled" data-dfn-for="sequence" data-dfn-type="element-attr" data-noexport id="element-attrdef-sequence-voice"><code>voice</code></dfn> attribute supplies a string that
-identifies the <a data-link-type="dfn" href="#voices" id="ref-for-voices">voice</a> to which this sequence belongs. All <code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence⑤">sequence</a></code> elements in a given <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part⑧">part</a></code> having the same value of <code><a data-link-type="element-sub" href="#element-attrdef-sequence-voice" id="ref-for-element-attrdef-sequence-voice①">voice</a></code> belong to the same voice. Within a given <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure①⓪">measure</a></code> element, no two <code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence⑥">sequence</a></code> elements may share the same value for <code><a data-link-type="element-sub" href="#element-attrdef-sequence-voice" id="ref-for-element-attrdef-sequence-voice②">voice</a></code>.  The
+identifies the <a data-link-type="dfn" href="#voices" id="ref-for-voices">voice</a> to which this sequence belongs. All <code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence⑤">sequence</a></code> elements in a given <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part④">part</a></code> having the same value of <code><a data-link-type="element-sub" href="#element-attrdef-sequence-voice" id="ref-for-element-attrdef-sequence-voice①">voice</a></code> belong to the same voice. Within a given <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure①⓪">measure</a></code> element, no two <code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence⑥">sequence</a></code> elements may share the same value for <code><a data-link-type="element-sub" href="#element-attrdef-sequence-voice" id="ref-for-element-attrdef-sequence-voice②">voice</a></code>.  The
 value of <code><a data-link-type="element-sub" href="#element-attrdef-sequence-voice" id="ref-for-element-attrdef-sequence-voice③">voice</a></code> is an opaque identifier that does not supply
 information from producers to consumers.</p>
      <p>This example shows a sequence with a single monophonic voice including a series
@@ -3165,9 +3113,9 @@ explicit location independent of this order.</p>
      <p>The context of the <code><a data-link-type="element" href="#elementdef-directions" id="ref-for-elementdef-directions⑤">directions</a></code> element defines a scope for contained directions as follows:</p>
      <ul>
       <li data-md>
-       <p>Directions in a <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure①③">measure</a></code> within the <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①③">global</a></code> element apply to all sequences of the measure in all applicable parts. Directions with an orientation of <a class="css" data-link-type="maybe" href="#valdef-orientation-up" id="ref-for-valdef-orientation-up">up</a> appear above the first displayed part; those with an orientation of <a class="css" data-link-type="maybe" href="#valdef-orientation-down" id="ref-for-valdef-orientation-down">down</a> below the last displayed part.</p>
+       <p>Directions in a <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure①③">measure</a></code> within the <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global⑦">global</a></code> element apply to all sequences of the measure in all applicable parts. Directions with an orientation of <a class="css" data-link-type="maybe" href="#valdef-orientation-up" id="ref-for-valdef-orientation-up">up</a> appear above the first displayed part; those with an orientation of <a class="css" data-link-type="maybe" href="#valdef-orientation-down" id="ref-for-valdef-orientation-down">down</a> below the last displayed part.</p>
       <li data-md>
-       <p>Directions in a <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure①④">measure</a></code> within a <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part⑨">part</a></code> element apply to all sequences of the measure in a given part.</p>
+       <p>Directions in a <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure①④">measure</a></code> within a <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part⑤">part</a></code> element apply to all sequences of the measure in a given part.</p>
       <li data-md>
        <p>Directions in a <code><a data-link-type="element" href="#elementdef-sequence" id="ref-for-elementdef-sequence①⓪">sequence</a></code> apply to the sequence in which it occurs.</p>
      </ul>
@@ -3679,8 +3627,7 @@ of a single event, that is performed at a distinct time.</p>
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute①⑥">Attributes</a>:
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-note-pitch" id="ref-for-element-attrdef-note-pitch">pitch</a></code> - the musical pitch of this note 
       <dd><code><a data-link-type="element-sub" href="#element-attrdef-note-staff" id="ref-for-element-attrdef-note-staff">staff</a></code> - an optional staff index for this note 
-      <dd><code><a data-link-type="element-sub" href="#element-attrdef-note-accidental" id="ref-for-element-attrdef-note-accidental">accidental</a></code> - an optional accidental for this note 
-      <dd><code><a data-link-type="element-sub" href="#element-attrdef-note-value" id="ref-for-element-attrdef-note-value">value</a></code> - an optional note value for this note 
+      <dd><code><a data-link-type="element-sub" href="#element-attrdef-note-accidental" id="ref-for-element-attrdef-note-accidental">accidental</a></code> - an optional accidental to render for this note
      </dl>
      <p>The <code><a data-link-type="element" href="#elementdef-note" id="ref-for-elementdef-note②">note</a></code> element defines a single note within an event, along with other
 information pertaining to the note itself rather than to its containing event.</p>
@@ -3688,26 +3635,17 @@ information pertaining to the note itself rather than to its containing event.</
 as a <a data-link-type="dfn" href="#chromatic-pitch" id="ref-for-chromatic-pitch①">chromatic pitch</a>, using the <a data-link-type="dfn" href="#rules-for-parsing-a-chromatic-pitch" id="ref-for-rules-for-parsing-a-chromatic-pitch">rules for parsing a chromatic pitch</a>.</p>
      <p>Optionally, the <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-noexport id="element-attrdef-note-staff"><code>staff</code></dfn> attribute supplies a <a data-link-type="dfn" href="#staff-index" id="ref-for-staff-index⑦">staff index</a> for this note where this differs from the staff index which applies to the containing <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑧">event</a></code> as a whole.</p>
      <p>The <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-noexport id="element-attrdef-note-accidental"><code>accidental</code></dfn> attribute supplies an accidental value
-for this note. In the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard①">standard</a></code> MNX profile, this attribute
-must match the <a data-link-type="dfn" href="#alteration" id="ref-for-alteration">alteration</a> of the <code><a data-link-type="element-sub" href="#element-attrdef-note-pitch" id="ref-for-element-attrdef-note-pitch①">pitch</a></code> attribute. Omission of
-the  attribute indicates that no accidental is to be displayed. The special
-value <dfn data-dfn-for="note/accidental" data-dfn-type="attr-value" data-noexport id="attr-valuedef-note-accidental-auto"><code>auto</code><a class="self-link" href="#attr-valuedef-note-accidental-auto"></a></dfn> indicates that a
-consumer application should determine the proper accidental based on musical
-context.</p>
+for this note. This attribute must match the <a data-link-type="dfn" href="#alteration" id="ref-for-alteration">alteration</a> of the <code><a data-link-type="element-sub" href="#element-attrdef-note-pitch" id="ref-for-element-attrdef-note-pitch①">pitch</a></code> attribute. Omission of the attribute indicates that no accidental
+is to be displayed.</p>
      <p><em>(Import values here from MusicXML specification. Add style properties for
 editorial indications. Handle the case of "explicit" accidentals that should
 be preserved even if the chromatic context is changed by edits.)</em></p>
-     <p><strong class="advisement"> The following features are not supported by the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard②">standard</a></code> MNX profile.</strong></p>
-     <p>The <dfn class="dfn-paneled" data-dfn-for="note" data-dfn-type="element-attr" data-noexport id="element-attrdef-note-value"><code>value</code></dfn> attribute optionally supplies a <a data-link-type="dfn" href="#note-value" id="ref-for-note-value⑤">note
-value</a> for this note, where this differs from the containing <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑨">event</a></code>'s
-note value.  The value of the note must be less than or equal to the value of
-the containing event.</p>
     </section>
     <h4 class="heading settled" data-level="6.4.2" id="the-rest-element"><span class="secno">6.4.2. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport id="elementdef-rest"><code>rest</code></dfn> element</span><a class="self-link" href="#the-rest-element"></a></h4>
     <section>
      <dl class="def">
       <dt><a data-link-type="dfn" href="#contexts" id="ref-for-contexts①⑦">Contexts</a>:
-      <dd><code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①⓪">event</a></code>
+      <dd><code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event⑨">event</a></code>
       <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model①⑦">Content Model</a>:
       <dd><a data-link-type="dfn" href="#metadata-content" id="ref-for-metadata-content①①">Metadata content</a>
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute①⑦">Attributes</a>:
@@ -3760,7 +3698,7 @@ on this attribute vary from one liaison to another.</p>
      </dl>
      <p>The <code><a data-link-type="element" href="#elementdef-tied" id="ref-for-elementdef-tied">tied</a></code> element is used to indicate that a note is tied to a successor <code><a data-link-type="element" href="#elementdef-note" id="ref-for-elementdef-note⑤">note</a></code> element.</p>
      <p>If the <code><a data-link-type="element-sub" href="#element-attrdef-liaisons-target" id="ref-for-element-attrdef-liaisons-target①">target</a></code> attribute is provided, it must specify the element
-ID of a <code><a data-link-type="element" href="#elementdef-note" id="ref-for-elementdef-note⑥">note</a></code> which lies in the same part, and whose containing <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①①">event</a></code> begins directly after the end of the of this note’s event. The step, alteration and
+ID of a <code><a data-link-type="element" href="#elementdef-note" id="ref-for-elementdef-note⑥">note</a></code> which lies in the same part, and whose containing <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①⓪">event</a></code> begins directly after the end of the of this note’s event. The step, alteration and
 octave values for the target note must be identical to this one.</p>
      <p>If <code><a data-link-type="element-sub" href="#element-attrdef-liaisons-target" id="ref-for-element-attrdef-liaisons-target②">target</a></code> is not provided, the tie does not connect to a
 particular destination note. In this case <dfn class="dfn-paneled" data-dfn-for="tied" data-dfn-type="element-attr" data-noexport id="element-attrdef-tied-location"><code>location</code></dfn> attribute may be used to specify the <a data-link-type="dfn" href="#measure-location" id="ref-for-measure-location⑤">measure location</a> of the other end
@@ -4023,7 +3961,7 @@ characterized by a <a data-link-type="dfn" href="#span" id="ref-for-span">span</
     </dl>
     <p>Spanning directions MUST be given a <a data-link-type="dfn" href="#measure-location" id="ref-for-measure-location①①">measure location</a> as their endpoint,
 by supplying a <dfn class="dfn-paneled" data-dfn-for="spans" data-dfn-type="element-attr" data-noexport id="element-attrdef-spans-end"><code>end</code></dfn> attribute. This
-measure location must lie within the same run of <a data-link-type="dfn" href="#measure-content" id="ref-for-measure-content⑧">measure content</a> as the
+measure location must lie within the same run of <a data-link-type="dfn" href="#measure-content" id="ref-for-measure-content⑦">measure content</a> as the
 location given for the start of the spanning direction.</p>
     <h4 class="heading settled" data-level="6.9.2" id="the-octave-shift-element"><span class="secno">6.9.2. </span><span class="content">The <dfn data-dfn-type="element" data-noexport id="elementdef-octave-shift"><code>octave-shift</code><a class="self-link" href="#elementdef-octave-shift"></a></dfn> element</span><a class="self-link" href="#the-octave-shift-element"></a></h4>
     <section>
@@ -4133,7 +4071,7 @@ For example, consider a <code><a data-link-type="element" href="#elementdef-clef
 how many polyphonic voices exist in a measure, all notes in all voices either
 lie to the left or to the right of this clef.</p>
     <p>Staff directions that modify the interpretation or layout of the staff, apply
-from the start of that <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure①⑦">measure</a></code> to all subsequent measures within the same <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①④">global</a></code> or <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①⓪">part</a></code> element until changed.</p>
+from the start of that <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure①⑦">measure</a></code> to all subsequent measures within the same <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global⑧">global</a></code> or <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part⑥">part</a></code> element until changed.</p>
     <p>Most staff directions have a fixed location, typically the beginning or
 end of the measure in which they occur.</p>
     <h4 class="heading settled" data-level="6.10.1" id="the-key-element"><span class="secno">6.10.1. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport id="elementdef-key"><code>key</code></dfn> element</span><a class="self-link" href="#the-key-element"></a></h4>
@@ -4152,8 +4090,8 @@ measure content, until changed.</p>
      <p>The <a data-link-type="dfn" href="#staff-index" id="ref-for-staff-index⑨">staff index</a> of a <code><a data-link-type="element" href="#elementdef-key" id="ref-for-elementdef-key②">key</a></code> direction is ignored, as the direction always applies
 to all the staves in a given part (if not the whole score).</p>
      <p>It is invalid to place more than one <code><a data-link-type="element" href="#elementdef-key" id="ref-for-elementdef-key③">key</a></code> element within a <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure①⑧">measure</a></code>.</p>
-     <p>In the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard③">standard</a></code> MNX profile, <code><a data-link-type="element" href="#elementdef-key" id="ref-for-elementdef-key④">key</a></code> elements in <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⑤">global</a></code> measure content
-are required for every key change. <code><a data-link-type="element" href="#elementdef-key" id="ref-for-elementdef-key⑤">key</a></code> elements below <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①①">part</a></code> are optional; if present they must indicate a value of <code><a data-link-type="element-sub" href="#element-attrdef-key-fifths" id="ref-for-element-attrdef-key-fifths①">fifths</a></code> that is
+     <p><code><a data-link-type="element" href="#elementdef-key" id="ref-for-elementdef-key④">key</a></code> elements in <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global⑨">global</a></code> measure content
+are required for every key change. <code><a data-link-type="element" href="#elementdef-key" id="ref-for-elementdef-key⑤">key</a></code> elements below <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part⑦">part</a></code> are optional; if present they must indicate a value of <code><a data-link-type="element-sub" href="#element-attrdef-key-fifths" id="ref-for-element-attrdef-key-fifths①">fifths</a></code> that is
 either identical to the corresponding value in the global <code><a data-link-type="element" href="#elementdef-key" id="ref-for-elementdef-key⑥">key</a></code> or differs from it
 by a multiple of 12.</p>
      <p>The required <dfn class="dfn-paneled" data-dfn-for="key" data-dfn-type="element-attr" data-noexport id="element-attrdef-key-fifths"><code>fifths</code></dfn> attribute is a <a data-link-type="dfn" href="https://www.w3.org/TR/html5/infrastructure.html#signed-integers" id="ref-for-signed-integers⑤">valid
@@ -4175,8 +4113,7 @@ no accidentals.</p>
 measures, until changed.</p>
      <p>The <a data-link-type="dfn" href="#measure-location" id="ref-for-measure-location①④">measure location</a> of a <code><a data-link-type="element" href="#elementdef-time" id="ref-for-elementdef-time①">time</a></code> direction is ignored and is assumed to be zero.</p>
      <p>It is invalid to place more than one <code><a data-link-type="element" href="#elementdef-time" id="ref-for-elementdef-time②">time</a></code> element within a <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure①⑨">measure</a></code>.</p>
-     <p>In the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard④">standard</a></code> MNX profile, a <code><a data-link-type="element" href="#elementdef-time" id="ref-for-elementdef-time③">time</a></code> element may only appear
-inside <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⑥">global</a></code> measure content, not within a <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①②">part</a></code>.</p>
+     <p>A <code><a data-link-type="element" href="#elementdef-time" id="ref-for-elementdef-time③">time</a></code> element may only appear inside <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⓪">global</a></code> measure content, not within a <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part⑧">part</a></code>.</p>
      <p>The required <dfn class="dfn-paneled" data-dfn-for="time" data-dfn-type="element-attr" data-noexport id="element-attrdef-time-signature"><code>signature</code></dfn> attribute supplies a <a data-link-type="dfn" href="#time-signature" id="ref-for-time-signature②">time signature</a> that gives the time signature for this measure and for subsequent measures. By default this signature is displayed in normative rendering.</p>
      <p>Here is an example of a 4/4 time signature:</p>
      <div class="example" id="example-95d59963">
@@ -4232,9 +4169,8 @@ the contents of measures to determine their intended length.</p>
      <p>The <code><a data-link-type="element" href="#elementdef-tempo" id="ref-for-elementdef-tempo">tempo</a></code> element defines a tempo, from the point of its occurrence forward until changed.
 The tempo is rendered as a conventional pairing of a small beat unit notation equated to a
 metronome marking.</p>
-     <p>In the <code><a data-link-type="attr-value" href="#attr-valuedef-mnx-common-profile-standard" id="ref-for-attr-valuedef-mnx-common-profile-standard⑤">standard</a></code> MNX profile, a <code><a data-link-type="element" href="#elementdef-tempo" id="ref-for-elementdef-tempo①">tempo</a></code> element may only appear
-inside <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⑦">global</a></code> measure content, not within a <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①③">part</a></code>.</p>
-     <p>The required <dfn class="dfn-paneled" data-dfn-for="tempo" data-dfn-type="element-attr" data-noexport id="element-attrdef-tempo-value"><code>value</code></dfn> attribute supplies a <a data-link-type="dfn" href="#note-value" id="ref-for-note-value⑥">note value</a> which is asserted to occur with a frequency of <dfn class="dfn-paneled" data-dfn-for="tempo" data-dfn-type="element-attr" data-noexport id="element-attrdef-tempo-bpm"><code>bpm</code></dfn> times per
+     <p>A <code><a data-link-type="element" href="#elementdef-tempo" id="ref-for-elementdef-tempo①">tempo</a></code> element may only appear inside <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①①">global</a></code> measure content, not within a <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part⑨">part</a></code>.</p>
+     <p>The required <dfn class="dfn-paneled" data-dfn-for="tempo" data-dfn-type="element-attr" data-noexport id="element-attrdef-tempo-value"><code>value</code></dfn> attribute supplies a <a data-link-type="dfn" href="#note-value" id="ref-for-note-value⑤">note value</a> which is asserted to occur with a frequency of <dfn class="dfn-paneled" data-dfn-for="tempo" data-dfn-type="element-attr" data-noexport id="element-attrdef-tempo-bpm"><code>bpm</code></dfn> times per
 minute, which is a <a data-link-type="dfn" href="https://www.w3.org/TR/html5/infrastructure.html#floating-point-numbers" id="ref-for-floating-point-numbers③">valid floating-point number</a>.</p>
      <p>To notate tempi using arbitrary text, various approaches may be taken,
 singly or in combination:</p>
@@ -4262,8 +4198,8 @@ setting the <a class="property" data-link-type="propdesc" href="#propdef-display
 from the point of its occurrence forward until changed.</p>
      <p>The <a data-link-type="dfn" href="#measure-location" id="ref-for-measure-location①⑤">measure location</a> of a <code><a data-link-type="element" href="#elementdef-staves" id="ref-for-elementdef-staves①">staves</a></code> direction is ignored and is assumed to be zero.</p>
      <p>It is invalid to place more than one <code><a data-link-type="element" href="#elementdef-staves" id="ref-for-elementdef-staves②">staves</a></code> element within a <code><a data-link-type="element" href="#elementdef-measure" id="ref-for-elementdef-measure②⓪">measure</a></code>.</p>
-     <p>A <code><a data-link-type="element" href="#elementdef-staves" id="ref-for-elementdef-staves③">staves</a></code> element may only appear inside <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①④">part</a></code> measure content, not
-within <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⑧">global</a></code>.</p>
+     <p>A <code><a data-link-type="element" href="#elementdef-staves" id="ref-for-elementdef-staves③">staves</a></code> element may only appear inside <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①⓪">part</a></code> measure content, not
+within <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①②">global</a></code>.</p>
      <p>The required <dfn class="dfn-paneled" data-dfn-for="staves" data-dfn-type="element-attr" data-noexport id="element-attrdef-staves-number"><code>number</code></dfn> attribute supplies the number of staves
 in the part, as a <a data-link-type="dfn" href="https://www.w3.org/TR/html5/infrastructure.html#non-negative-integers" id="ref-for-non-negative-integers①">valid non-negative integer</a> other than zero.</p>
      <p>If no <code><a data-link-type="element" href="#elementdef-staves" id="ref-for-elementdef-staves④">staves</a></code> element is encountered at the start of a part, the number of staves
@@ -4324,7 +4260,7 @@ measure content in the part until changed. Expected to resemble MusicXML’s cor
     <p><strong class="advisement"> Other staff direction elements exist in MusicXML and need to be migrated.</strong></p>
     <h3 class="heading settled" data-level="6.11" id="common-part-description-content"><span class="secno">6.11. </span><span class="content">Part description content</span><a class="self-link" href="#common-part-description-content"></a></h3>
     <p><dfn class="dfn-paneled" data-dfn-type="dfn" data-noexport id="part-description-content">Part description content</dfn> consists of elements that supply information describing a part,
-and occur at the beginning of a <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①⑤">part</a></code> element.</p>
+and occur at the beginning of a <code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①①">part</a></code> element.</p>
     <h4 class="heading settled" data-level="6.11.1" id="the-part-name-element"><span class="secno">6.11.1. </span><span class="content">The <dfn data-dfn-type="element" data-noexport id="elementdef-part-name"><code>part-name</code><a class="self-link" href="#elementdef-part-name"></a></dfn> element</span><a class="self-link" href="#the-part-name-element"></a></h4>
     <section></section>
     <h4 class="heading settled" data-level="6.11.2" id="the-part-abbreviation-element"><span class="secno">6.11.2. </span><span class="content">The <dfn data-dfn-type="element" data-noexport id="elementdef-part-abbreviation"><code>part-abbreviation</code><a class="self-link" href="#elementdef-part-abbreviation"></a></dfn> element</span><a class="self-link" href="#the-part-abbreviation-element"></a></h4>
@@ -4350,7 +4286,7 @@ note values, and are thus modified in the case of elements for which the <a data
 containing element. All performance event times within <code><a data-link-type="element" href="#elementdef-interpret" id="ref-for-elementdef-interpret②">interpret</a></code> are thus
 relative to this origin. Negative event times are permitted, and specify
 performance events which precede the location of the containing element.</p>
-     <p>When <code><a data-link-type="element" href="#elementdef-interpret" id="ref-for-elementdef-interpret③">interpret</a></code> occurs within an <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①②">event</a></code> or <code><a data-link-type="element" href="#elementdef-note" id="ref-for-elementdef-note⑦">note</a></code> element, all <code><a data-link-type="element">performance-event</a></code> attributes are defaulted to the values that would be
+     <p>When <code><a data-link-type="element" href="#elementdef-interpret" id="ref-for-elementdef-interpret③">interpret</a></code> occurs within an <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①①">event</a></code> or <code><a data-link-type="element" href="#elementdef-note" id="ref-for-elementdef-note⑦">note</a></code> element, all <code><a data-link-type="element">performance-event</a></code> attributes are defaulted to the values that would be
 generated by an implementation for the first note in the containing element.</p>
      <p>As one example, consider this use of <code><a data-link-type="element" href="#elementdef-interpret" id="ref-for-elementdef-interpret④">interpret</a></code> to play a beamed pair of eighth
 notes in a swung triplet rhythm instead:</p>
@@ -4455,7 +4391,7 @@ in the <dfn class="dfn-paneled" data-dfn-for="score-audio-media" data-dfn-type="
       <dt><a data-link-type="dfn" href="#content-model" id="ref-for-content-model③⑤">Content Model</a>:
       <dd>Zero or more <code><a data-link-type="element" href="#elementdef-score-audio-region" id="ref-for-elementdef-score-audio-region">score-audio-region</a></code> elements.
       <dt><a data-link-type="dfn" href="https://dom.spec.whatwg.org/#concept-attribute" id="ref-for-concept-attribute③④">Attributes</a>:
-      <dd><code><a data-link-type="element-sub" href="#element-attrdef-score-audio-mapping-system" id="ref-for-element-attrdef-score-audio-mapping-system">system</a></code> - an optional reference to a <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⑨">global</a></code> element whose measures support the mapping
+      <dd><code><a data-link-type="element-sub" href="#element-attrdef-score-audio-mapping-system" id="ref-for-element-attrdef-score-audio-mapping-system">system</a></code> - an optional reference to a <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①③">global</a></code> element whose measures support the mapping
      </dl>
      <p>The <code><a data-link-type="element" href="#elementdef-score-audio-mapping" id="ref-for-elementdef-score-audio-mapping②">score-audio-mapping</a></code> element defines a sequence of disjoint,
 monotonically increasing time ranges within a specific recording.
@@ -4466,8 +4402,8 @@ increasing, due to the possibility of repeats and form jumps.</p>
      <p>Each <code><a data-link-type="element" href="#elementdef-score-audio-region" id="ref-for-elementdef-score-audio-region①">score-audio-region</a></code> element describes the mapping of a single absolute
 audio media time range to a single notated time range.  The elements must
 occur in forward time order in audio media time: the <code><a data-link-type="element-sub" href="#element-attrdef-score-audio-region-end" id="ref-for-element-attrdef-score-audio-region-end">end</a></code> value of each region must be less than or equal to the <code><a data-link-type="element-sub" href="#element-attrdef-score-audio-region-start" id="ref-for-element-attrdef-score-audio-region-start">start</a></code> value of the next region.</p>
-     <p><dfn class="dfn-paneled" data-dfn-for="score-audio-mapping" data-dfn-type="element-attr" data-noexport id="element-attrdef-score-audio-mapping-system"><code>system</code></dfn>, if present, this attribute gives the ID of the <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global②⓪">global</a></code> element whose measures will be used as references for the
-synchronization mappings. If absent, the first <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global②①">global</a></code> element is used.</p>
+     <p><dfn class="dfn-paneled" data-dfn-for="score-audio-mapping" data-dfn-type="element-attr" data-noexport id="element-attrdef-score-audio-mapping-system"><code>system</code></dfn>, if present, this attribute gives the ID of the <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①④">global</a></code> element whose measures will be used as references for the
+synchronization mappings. If absent, the first <code><a data-link-type="element" href="#elementdef-global" id="ref-for-elementdef-global①⑤">global</a></code> element is used.</p>
     </section>
     <h4 class="heading settled" data-level="6.13.4" id="the-score-audio-region-element"><span class="secno">6.13.4. </span><span class="content">The <dfn class="dfn-paneled" data-dfn-type="element" data-noexport id="elementdef-score-audio-region"><code>score-audio-region</code></dfn> element</span><a class="self-link" href="#the-score-audio-region-element"></a></h4>
     <section>
@@ -4576,7 +4512,7 @@ which apply to its parent element. The attribute value must be a valid <a data-l
 of a <a data-link-type="dfn" href="#style-class-style-class-definition" id="ref-for-style-class-style-class-definition①">style class definition</a> which applies to a that element as per the
 rules of <a data-link-type="dfn" href="#style-property-computation" id="ref-for-style-property-computation">style property computation</a>.</p>
     <p>The value of this attribute supplies the names of one or more style class
-definitions which apply to the containing element as an <a data-link-type="dfn" href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens" id="ref-for-space-separated-tokens②">ordered set of
+definitions which apply to the containing element as an <a data-link-type="dfn" href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens" id="ref-for-space-separated-tokens①">ordered set of
 space-separated tokens</a>. All style property values supplied by each class
 definition are applied to the element, in the order in which they were defined.</p>
     <p>For example, the following applies a class named <code>emphasis</code> to
@@ -4600,7 +4536,7 @@ apply to all descendants of the element within which they are specified.</p>
    <section>
     <dl class="def">
      <dt>Applies to:
-     <dd><code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①⑥">part</a></code>
+     <dd><code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①②">part</a></code>
      <dd><a data-link-type="dfn" href="#sequence-content" id="ref-for-sequence-content⑨">Sequence content</a>
      <dd><a data-link-type="dfn" href="#direction-content" id="ref-for-direction-content①④">Direction content</a>
      <dd><a data-link-type="dfn" href="#event-content" id="ref-for-event-content③">Event content</a>
@@ -4620,7 +4556,7 @@ apply to all descendants of the element within which they are specified.</p>
    <section>
     <dl class="def">
      <dt>Applies to:
-     <dd><code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①⑦">part</a></code>
+     <dd><code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①③">part</a></code>
      <dd><a data-link-type="dfn" href="#sequence-content" id="ref-for-sequence-content①⓪">Sequence content</a>
      <dd><a data-link-type="dfn" href="#direction-content" id="ref-for-direction-content①⑤">Direction content</a>
      <dd><a data-link-type="dfn" href="#event-content" id="ref-for-event-content④">Event content</a>
@@ -4651,7 +4587,7 @@ apply to all descendants of the element within which they are specified.</p>
    <section>
     <dl class="def">
      <dt>Applies to:
-     <dd><code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①⑧">part</a></code>
+     <dd><code><a data-link-type="element" href="#elementdef-part" id="ref-for-elementdef-part①④">part</a></code>
      <dd><a data-link-type="dfn" href="#sequence-content" id="ref-for-sequence-content①①">Sequence content</a>
      <dd><a data-link-type="dfn" href="#direction-content" id="ref-for-direction-content①⑦">Direction content</a>
      <dd><a data-link-type="dfn" href="#event-content" id="ref-for-event-content⑤">Event content</a>
@@ -4690,7 +4626,7 @@ descendants interact with the layout of the document.</p>
     <p>The <a class="property" data-link-type="propdesc" href="#propdef-visibility" id="ref-for-propdef-visibility">visibility</a> property controls whether an element’s contents (including
 all of its descendants) are displayed by a consumer or not.</p>
     <p>In contrast to <a class="property" data-link-type="propdesc" href="#propdef-display" id="ref-for-propdef-display②">display</a> with a value of <a class="css" data-link-type="maybe" href="#valdef-display-none" id="ref-for-valdef-display-none②">none</a>, a <a class="property" data-link-type="propdesc" href="#propdef-visibility" id="ref-for-propdef-visibility①">visibility</a> value of <a class="css" data-link-type="maybe" href="#valdef-visibility-hidden" id="ref-for-valdef-visibility-hidden①">hidden</a> does not affect the layout of any other
-elements in the document. For example, the contents of a hidden <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①③">event</a></code> will not be shown, but the place where the event would have appeared
+elements in the document. For example, the contents of a hidden <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①②">event</a></code> will not be shown, but the place where the event would have appeared
 will still occupy space in the containing measure.</p>
     <p>Permitted values include:</p>
     <ul>
@@ -4888,7 +4824,7 @@ property computation</a>.</p>
 implied style properties. The following rule syntax is supported:</p>
     <ul>
      <li data-md>
-      <p>An <a data-link-type="dfn" href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens" id="ref-for-space-separated-tokens③">unordered set of space-separated tokens</a>, each of which is the name
+      <p>An <a data-link-type="dfn" href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens" id="ref-for-space-separated-tokens②">unordered set of space-separated tokens</a>, each of which is the name
 of an MNX element. Elements whose names belong to this set are considered to
 match the rule.</p>
     </ul>
@@ -4899,7 +4835,7 @@ of <code><a data-link-type="element-sub" href="#element-attrdef-style-selector-r
 in the same order.</p>
     <p class="note" role="note"><span>Note:</span> The scope of a defined rule is not limited to descendants of the element in which
 the <code><a data-link-type="element" href="#elementdef-style-selector" id="ref-for-elementdef-style-selector③">style-selector</a></code> element occurs, but is global to the entire document.</p>
-    <p>For example, the following specifies that all <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①④">event</a></code> elements in the document
+    <p>For example, the following specifies that all <code><a data-link-type="element" href="#elementdef-event" id="ref-for-elementdef-event①③">event</a></code> elements in the document
 will employ a given stem width:</p>
     <div class="example" id="example-bf0e82b6">
      <a class="self-link" href="#example-bf0e82b6"></a> 
@@ -5101,12 +5037,7 @@ for only some of a time signature’s fractions, which would require a grouping 
    <li><a href="#ascii-digits">ASCII digits</a><span>, in §3.2.1</span>
    <li><a href="#ascii-hex-digits">ASCII hex digits</a><span>, in §3.2.1</span>
    <li><a href="#ascii-letters">ASCII letters</a><span>, in §3.2.1</span>
-   <li>
-    auto
-    <ul>
-     <li><a href="#attr-valuedef-note-accidental-auto">attr-value for note/accidental</a><span>, in §6.4.1</span>
-     <li><a href="#attr-valuedef-tuplet-bracket-auto">attr-value for tuplet/bracket</a><span>, in §6.3.2</span>
-    </ul>
+   <li><a href="#attr-valuedef-tuplet-bracket-auto">auto</a><span>, in §6.3.2</span>
    <li>
     barline
     <ul>
@@ -5363,7 +5294,6 @@ for only some of a time signature’s fractions, which would require a grouping 
     <ul>
      <li><a href="#attr-valuedef-collection-type-parts">attr-value for collection/type</a><span>, in §6.1.3</span>
      <li><a href="#parts">definition of</a><span>, in §4.1</span>
-     <li><a href="#element-attrdef-global-parts">element-attr for global</a><span>, in §6.1.8</span>
     </ul>
    <li><a href="#elementdef-pedal">pedal</a><span>, in §6.9.6</span>
    <li><a href="#attr-valuedef-clef-sign-percussion">percussion</a><span>, in §6.10.5</span>
@@ -5383,7 +5313,6 @@ for only some of a time signature’s fractions, which would require a grouping 
    <li><a href="#attr-valuedef-dynamics-type-pppp">pppp</a><span>, in §6.8.2</span>
    <li><a href="#attr-valuedef-dynamics-type-ppppp">ppppp</a><span>, in §6.8.2</span>
    <li><a href="#attr-valuedef-dynamics-type-pppppp">pppppp</a><span>, in §6.8.2</span>
-   <li><a href="#element-attrdef-mnx-common-profile">profile</a><span>, in §6.1.7</span>
    <li><a href="#elementdef-pull-off">pull-off</a><span>, in §6.6.8</span>
    <li><a href="#rational-number">rational number</a><span>, in §3.2.2.1</span>
    <li><a href="#attr-valuedef-measure-barline-regular">regular</a><span>, in §6.2.1</span>
@@ -5406,7 +5335,6 @@ for only some of a time signature’s fractions, which would require a grouping 
    <li><a href="#elementdef-score-audio-region">score-audio-region</a><span>, in §6.13.4</span>
    <li><a href="#element-attrdef-score-audio-region-score-end">score-end</a><span>, in §6.13.4</span>
    <li><a href="#score-order">score order</a><span>, in §6.2</span>
-   <li><a href="#score-profile">score profile</a><span>, in §3.1.2</span>
    <li><a href="#element-attrdef-score-audio-region-score-start">score-start</a><span>, in §6.13.4</span>
    <li><a href="#attr-valuedef-collection-type-sections">sections</a><span>, in §6.1.3</span>
    <li><a href="#elementdef-segno">segno</a><span>, in §6.8.8</span>
@@ -5457,7 +5385,6 @@ for only some of a time signature’s fractions, which would require a grouping 
    <li><a href="#elementdef-staff-details">staff-details</a><span>, in §6.10.6</span>
    <li><a href="#staff-directions">Staff directions</a><span>, in §6.10</span>
    <li><a href="#staff-index">staff index</a><span>, in §4.1</span>
-   <li><a href="#attr-valuedef-mnx-common-profile-standard">standard</a><span>, in §6.1.7</span>
    <li><a href="#element-attrdef-score-audio-region-start">start</a><span>, in §6.13.4</span>
    <li><a href="#starting-position">starting position</a><span>, in §6.3</span>
    <li><a href="#element-attrdef-slur-start-note">start-note</a><span>, in §6.7.2</span>
@@ -5540,7 +5467,6 @@ for only some of a time signature’s fractions, which would require a grouping 
     <ul>
      <li><a href="#element-attrdef-beamed-value">element-attr for beamed</a><span>, in §6.3.3</span>
      <li><a href="#element-attrdef-event-value">element-attr for event</a><span>, in §6.3.1</span>
-     <li><a href="#element-attrdef-note-value">element-attr for note</a><span>, in §6.4.1</span>
      <li><a href="#element-attrdef-tempo-value">element-attr for tempo</a><span>, in §6.10.3</span>
     </ul>
    <li><a href="#propdef-visibility">visibility</a><span>, in §6.14.3.5</span>
@@ -5616,9 +5542,8 @@ for only some of a time signature’s fractions, which would require a grouping 
    <a href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens">https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-space-separated-tokens">3.2.1. Common parser idioms</a>
-    <li><a href="#ref-for-space-separated-tokens①">6.1.8. The global element</a>
-    <li><a href="#ref-for-space-separated-tokens②">6.14.2. The class attribute</a>
-    <li><a href="#ref-for-space-separated-tokens③">6.15.3. The style-selector element</a>
+    <li><a href="#ref-for-space-separated-tokens①">6.14.2. The class attribute</a>
+    <li><a href="#ref-for-space-separated-tokens②">6.15.3. The style-selector element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-signed-integers">
@@ -5673,18 +5598,16 @@ for only some of a time signature’s fractions, which would require a grouping 
    <a href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens">https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-space-separated-tokens">3.2.1. Common parser idioms</a>
-    <li><a href="#ref-for-space-separated-tokens①">6.1.8. The global element</a>
-    <li><a href="#ref-for-space-separated-tokens②">6.14.2. The class attribute</a>
-    <li><a href="#ref-for-space-separated-tokens③">6.15.3. The style-selector element</a>
+    <li><a href="#ref-for-space-separated-tokens①">6.14.2. The class attribute</a>
+    <li><a href="#ref-for-space-separated-tokens②">6.15.3. The style-selector element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-space-separated-tokens">
    <a href="https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens">https://www.w3.org/TR/html5/infrastructure.html#space-separated-tokens</a><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-space-separated-tokens">3.2.1. Common parser idioms</a>
-    <li><a href="#ref-for-space-separated-tokens①">6.1.8. The global element</a>
-    <li><a href="#ref-for-space-separated-tokens②">6.14.2. The class attribute</a>
-    <li><a href="#ref-for-space-separated-tokens③">6.15.3. The style-selector element</a>
+    <li><a href="#ref-for-space-separated-tokens①">6.14.2. The class attribute</a>
+    <li><a href="#ref-for-space-separated-tokens②">6.15.3. The style-selector element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-floating-point-numbers">
@@ -5779,12 +5702,6 @@ for only some of a time signature’s fractions, which would require a grouping 
    <b><a href="#elementdef-this">#elementdef-this</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-elementdef-this">2.7.2. Typographic conventions</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="score-profile">
-   <b><a href="#score-profile">#score-profile</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-score-profile">6.1.7. The mnx-common element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="space-characters">
@@ -6058,8 +5975,7 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-note-value">4.2. Notated events</a>
     <li><a href="#ref-for-note-value①">5.2. Note value quantity syntax</a>
     <li><a href="#ref-for-note-value②">6.3.1. The event element</a> <a href="#ref-for-note-value③">(2)</a> <a href="#ref-for-note-value④">(3)</a>
-    <li><a href="#ref-for-note-value⑤">6.4.1. The note element</a>
-    <li><a href="#ref-for-note-value⑥">6.10.3. The tempo element</a>
+    <li><a href="#ref-for-note-value⑤">6.10.3. The tempo element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="base-note-values">
@@ -6242,73 +6158,50 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-elementdef-mnx-common⑦">6.15.1. The stylesheet element</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="element-attrdef-mnx-common-profile">
-   <b><a href="#element-attrdef-mnx-common-profile">#element-attrdef-mnx-common-profile</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-element-attrdef-mnx-common-profile">6.1.7. The mnx-common element</a> <a href="#ref-for-element-attrdef-mnx-common-profile①">(2)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="attr-valuedef-mnx-common-profile-standard">
-   <b><a href="#attr-valuedef-mnx-common-profile-standard">#attr-valuedef-mnx-common-profile-standard</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-attr-valuedef-mnx-common-profile-standard">6.1.8. The global element</a>
-    <li><a href="#ref-for-attr-valuedef-mnx-common-profile-standard①">6.4.1. The note element</a> <a href="#ref-for-attr-valuedef-mnx-common-profile-standard②">(2)</a>
-    <li><a href="#ref-for-attr-valuedef-mnx-common-profile-standard③">6.10.1. The key element</a>
-    <li><a href="#ref-for-attr-valuedef-mnx-common-profile-standard④">6.10.2. The time element</a>
-    <li><a href="#ref-for-attr-valuedef-mnx-common-profile-standard⑤">6.10.3. The tempo element</a>
-   </ul>
-  </aside>
   <aside class="dfn-panel" data-for="elementdef-global">
    <b><a href="#elementdef-global">#elementdef-global</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-elementdef-global">6.1.7. The mnx-common element</a> <a href="#ref-for-elementdef-global①">(2)</a> <a href="#ref-for-elementdef-global②">(3)</a> <a href="#ref-for-elementdef-global③">(4)</a> <a href="#ref-for-elementdef-global④">(5)</a>
-    <li><a href="#ref-for-elementdef-global⑤">6.1.8. The global element</a> <a href="#ref-for-elementdef-global⑥">(2)</a> <a href="#ref-for-elementdef-global⑦">(3)</a> <a href="#ref-for-elementdef-global⑧">(4)</a> <a href="#ref-for-elementdef-global⑨">(5)</a> <a href="#ref-for-elementdef-global①⓪">(6)</a>
-    <li><a href="#ref-for-elementdef-global①①">6.1.9. The part element</a>
-    <li><a href="#ref-for-elementdef-global①②">6.2.1. The measure element</a>
-    <li><a href="#ref-for-elementdef-global①③">6.2.3. The directions element</a>
-    <li><a href="#ref-for-elementdef-global①④">6.10. Staff directions</a>
-    <li><a href="#ref-for-elementdef-global①⑤">6.10.1. The key element</a>
-    <li><a href="#ref-for-elementdef-global①⑥">6.10.2. The time element</a>
-    <li><a href="#ref-for-elementdef-global①⑦">6.10.3. The tempo element</a>
-    <li><a href="#ref-for-elementdef-global①⑧">6.10.4. The staves element</a>
-    <li><a href="#ref-for-elementdef-global①⑨">6.13.3. The score-audio-mapping element</a> <a href="#ref-for-elementdef-global②⓪">(2)</a> <a href="#ref-for-elementdef-global②①">(3)</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="element-attrdef-global-parts">
-   <b><a href="#element-attrdef-global-parts">#element-attrdef-global-parts</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-element-attrdef-global-parts">6.1.8. The global element</a> <a href="#ref-for-element-attrdef-global-parts①">(2)</a>
+    <li><a href="#ref-for-elementdef-global">6.1.7. The mnx-common element</a>
+    <li><a href="#ref-for-elementdef-global①">6.1.8. The global element</a> <a href="#ref-for-elementdef-global②">(2)</a> <a href="#ref-for-elementdef-global③">(3)</a> <a href="#ref-for-elementdef-global④">(4)</a>
+    <li><a href="#ref-for-elementdef-global⑤">6.1.9. The part element</a>
+    <li><a href="#ref-for-elementdef-global⑥">6.2.1. The measure element</a>
+    <li><a href="#ref-for-elementdef-global⑦">6.2.3. The directions element</a>
+    <li><a href="#ref-for-elementdef-global⑧">6.10. Staff directions</a>
+    <li><a href="#ref-for-elementdef-global⑨">6.10.1. The key element</a>
+    <li><a href="#ref-for-elementdef-global①⓪">6.10.2. The time element</a>
+    <li><a href="#ref-for-elementdef-global①①">6.10.3. The tempo element</a>
+    <li><a href="#ref-for-elementdef-global①②">6.10.4. The staves element</a>
+    <li><a href="#ref-for-elementdef-global①③">6.13.3. The score-audio-mapping element</a> <a href="#ref-for-elementdef-global①④">(2)</a> <a href="#ref-for-elementdef-global①⑤">(3)</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="elementdef-part">
    <b><a href="#elementdef-part">#elementdef-part</a></b><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-elementdef-part">6.1.7. The mnx-common element</a> <a href="#ref-for-elementdef-part①">(2)</a> <a href="#ref-for-elementdef-part②">(3)</a>
-    <li><a href="#ref-for-elementdef-part③">6.1.8. The global element</a> <a href="#ref-for-elementdef-part④">(2)</a>
-    <li><a href="#ref-for-elementdef-part⑤">6.1.9. The part element</a>
-    <li><a href="#ref-for-elementdef-part⑥">6.2.1. The measure element</a> <a href="#ref-for-elementdef-part⑦">(2)</a>
-    <li><a href="#ref-for-elementdef-part⑧">6.2.2. The sequence element</a>
-    <li><a href="#ref-for-elementdef-part⑨">6.2.3. The directions element</a>
-    <li><a href="#ref-for-elementdef-part①⓪">6.10. Staff directions</a>
-    <li><a href="#ref-for-elementdef-part①①">6.10.1. The key element</a>
-    <li><a href="#ref-for-elementdef-part①②">6.10.2. The time element</a>
-    <li><a href="#ref-for-elementdef-part①③">6.10.3. The tempo element</a>
-    <li><a href="#ref-for-elementdef-part①④">6.10.4. The staves element</a>
-    <li><a href="#ref-for-elementdef-part①⑤">6.11. Part description content</a>
-    <li><a href="#ref-for-elementdef-part①⑥">6.14.3.1. The color property</a>
-    <li><a href="#ref-for-elementdef-part①⑦">6.14.3.2. The smufl-font property</a>
-    <li><a href="#ref-for-elementdef-part①⑧">6.14.3.4. The display property</a>
+    <li><a href="#ref-for-elementdef-part">6.1.7. The mnx-common element</a>
+    <li><a href="#ref-for-elementdef-part①">6.1.9. The part element</a>
+    <li><a href="#ref-for-elementdef-part②">6.2.1. The measure element</a> <a href="#ref-for-elementdef-part③">(2)</a>
+    <li><a href="#ref-for-elementdef-part④">6.2.2. The sequence element</a>
+    <li><a href="#ref-for-elementdef-part⑤">6.2.3. The directions element</a>
+    <li><a href="#ref-for-elementdef-part⑥">6.10. Staff directions</a>
+    <li><a href="#ref-for-elementdef-part⑦">6.10.1. The key element</a>
+    <li><a href="#ref-for-elementdef-part⑧">6.10.2. The time element</a>
+    <li><a href="#ref-for-elementdef-part⑨">6.10.3. The tempo element</a>
+    <li><a href="#ref-for-elementdef-part①⓪">6.10.4. The staves element</a>
+    <li><a href="#ref-for-elementdef-part①①">6.11. Part description content</a>
+    <li><a href="#ref-for-elementdef-part①②">6.14.3.1. The color property</a>
+    <li><a href="#ref-for-elementdef-part①③">6.14.3.2. The smufl-font property</a>
+    <li><a href="#ref-for-elementdef-part①④">6.14.3.4. The display property</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="measure-content">
    <b><a href="#measure-content">#measure-content</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-measure-content">5.5. Measure location syntax</a> <a href="#ref-for-measure-content①">(2)</a>
-    <li><a href="#ref-for-measure-content②">6.1.7. The mnx-common element</a> <a href="#ref-for-measure-content③">(2)</a> <a href="#ref-for-measure-content④">(3)</a>
-    <li><a href="#ref-for-measure-content⑤">6.1.8. The global element</a>
-    <li><a href="#ref-for-measure-content⑥">6.1.9. The part element</a>
-    <li><a href="#ref-for-measure-content⑦">6.2.1. The measure element</a>
-    <li><a href="#ref-for-measure-content⑧">6.9.1. Span attributes</a>
+    <li><a href="#ref-for-measure-content②">6.1.7. The mnx-common element</a> <a href="#ref-for-measure-content③">(2)</a>
+    <li><a href="#ref-for-measure-content④">6.1.8. The global element</a>
+    <li><a href="#ref-for-measure-content⑤">6.1.9. The part element</a>
+    <li><a href="#ref-for-measure-content⑥">6.2.1. The measure element</a>
+    <li><a href="#ref-for-measure-content⑦">6.9.1. Span attributes</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="score-order">
@@ -6467,12 +6360,12 @@ for only some of a time signature’s fractions, which would require a grouping 
     <li><a href="#ref-for-elementdef-event③">6.3. Sequence content</a>
     <li><a href="#ref-for-elementdef-event④">6.3.1. The event element</a> <a href="#ref-for-elementdef-event⑤">(2)</a>
     <li><a href="#ref-for-elementdef-event⑥">6.3.4. The forward element</a>
-    <li><a href="#ref-for-elementdef-event⑦">6.4.1. The note element</a> <a href="#ref-for-elementdef-event⑧">(2)</a> <a href="#ref-for-elementdef-event⑨">(3)</a>
-    <li><a href="#ref-for-elementdef-event①⓪">6.4.2. The rest element</a>
-    <li><a href="#ref-for-elementdef-event①①">6.6.2. The tied element</a>
-    <li><a href="#ref-for-elementdef-event①②">6.12.1. The interpret element</a>
-    <li><a href="#ref-for-elementdef-event①③">6.14.3.5. The visibility property</a>
-    <li><a href="#ref-for-elementdef-event①④">6.15.3. The style-selector element</a>
+    <li><a href="#ref-for-elementdef-event⑦">6.4.1. The note element</a> <a href="#ref-for-elementdef-event⑧">(2)</a>
+    <li><a href="#ref-for-elementdef-event⑨">6.4.2. The rest element</a>
+    <li><a href="#ref-for-elementdef-event①⓪">6.6.2. The tied element</a>
+    <li><a href="#ref-for-elementdef-event①①">6.12.1. The interpret element</a>
+    <li><a href="#ref-for-elementdef-event①②">6.14.3.5. The visibility property</a>
+    <li><a href="#ref-for-elementdef-event①③">6.15.3. The style-selector element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="element-attrdef-event-value">
@@ -6673,12 +6566,6 @@ for only some of a time signature’s fractions, which would require a grouping 
    <b><a href="#element-attrdef-note-accidental">#element-attrdef-note-accidental</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-element-attrdef-note-accidental">6.4.1. The note element</a>
-   </ul>
-  </aside>
-  <aside class="dfn-panel" data-for="element-attrdef-note-value">
-   <b><a href="#element-attrdef-note-value">#element-attrdef-note-value</a></b><b>Referenced in:</b>
-   <ul>
-    <li><a href="#ref-for-element-attrdef-note-value">6.4.1. The note element</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="elementdef-rest">
