@@ -1138,6 +1138,7 @@
     <p class="examplenotes">MusicXML uses two elements: <code>&lt;tie&gt;</code> to describe the sound and <code>&lt;tied&gt;</code> to indicate a visual tie in notation. The first note gets <code>type="start"</code>, the second gets <code>type="stop"</code>.</p>
     <p class="examplenotes">MNX uses a single element: <code>&lt;tied&gt;</code>. Only the first note in the tie encodes this; its <code>target</code> attribute points at the <code>id</code> of the end note.</p>
     <p class="examplenotes">For a series of notes tied together (e.g., the second tie in the above example), both MusicXML and MNX require you to encode each “inner tie” separately.</p>
+    <p class="examplenotes">Note that all references to an internal id consist of a '#' character followed by the id string.</p>
     <p class="showui">Show:
         <label><input type="radio" name="toggleties" class="switchdiff" data-example="ties" value="1" checked> Relevant section</label>
         <label><input type="radio" name="toggleties" class="switchdiff" data-example="ties" value="2"> Full document</label>
@@ -1270,7 +1271,7 @@
                 </event>
                 <event value="/4">
                     <note pitch="E5">
-</script><script type="application/xml" class="markupxml diff">                        <tied target="note3"/>
+</script><script type="application/xml" class="markupxml diff">                        <tied target="#note3"/>
 </script><script type="application/xml" class="markupxml nodiff">                    </note>
                 </event>
                 <event value="/4">
@@ -1278,7 +1279,7 @@
                 </event>
                 <event value="/4">
                     <note pitch="C5">
-</script><script type="application/xml" class="markupxml diff">                        <tied target="note5"/>
+</script><script type="application/xml" class="markupxml diff">                        <tied target="#note5"/>
 </script><script type="application/xml" class="markupxml nodiff">                    </note>
                 </event>
             </sequence>
@@ -1287,7 +1288,7 @@
             <sequence>
                 <event value="/2">
                     <note pitch="C5" id="note5">
-</script><script type="application/xml" class="markupxml diff">                        <tied target="note6"/>
+</script><script type="application/xml" class="markupxml diff">                        <tied target="#note6"/>
 </script><script type="application/xml" class="markupxml nodiff">                    </note>
                 </event>
                 <event value="/2">
@@ -1308,6 +1309,7 @@
     <img class="exampleimg" src="images/example-beams.png">
     <p class="examplenotes">In MusicXML, you put one or more <code>&lt;beam&gt;</code> elements within a <code>&lt;note&gt;</code> element — a separate element for each beam. The <code>number</code> attribute specifies whether it’s the outer (eighth-note) beam, versus an inner (e.g., 16th note) beam. Parsers need to keep track of currently open beams and look for the values <code>continue</code> or <code>end</code>.</p>
     <p class="examplenotes">In MNX, each beam is encoded as a <code>&lt;beam&gt;</code> element, containing the IDs of the beam’s events.</p>
+    <p class="examplenotes">Note that all references to an internal id consist of a '#' character followed by the id string.</p>
     <p class="showui">Show:
         <label><input type="radio" name="togglebeams" class="switchdiff" data-example="beams" value="1" checked> Relevant section</label>
         <label><input type="radio" name="togglebeams" class="switchdiff" data-example="beams" value="2"> Full document</label>
@@ -1509,8 +1511,8 @@
             </directions>
             <sequence>
 </script><script type="application/xml" class="markupxml diff">                <beams>
-                    <beam events="ev1 ev2 ev3 ev4"/>
-                    <beam events="ev5 ev6 ev7 ev8"/>
+                    <beam events="#ev1 #ev2 #ev3 #ev4"/>
+                    <beam events="#ev5 #ev6 #ev7 #ev8"/>
                 </beams>
 </script><script type="application/xml" class="markupxml nodiff">                <event id="ev1" value="/8">
                     <note pitch="C5"/>
@@ -1541,10 +1543,10 @@
         <measure>
             <sequence>
 </script><script type="application/xml" class="markupxml diff">                <beams>
-                    <beam events="ev9 ev10 ev11 ev12 ev13">
-                        <beam events="ev11 ev12"/>
+                    <beam events="#ev9 #ev10 #ev11 #ev12 #ev13">
+                        <beam events="#ev11 #ev12"/>
                     </beam>
-                    <beam events="ev14 ev15"/>
+                    <beam events="#ev14 #ev15"/>
                 </beams>
 </script><script type="application/xml" class="markupxml nodiff">                <event id="ev9" value="/8">
                     <note pitch="G4"/>
@@ -1581,14 +1583,16 @@
 
 <section id="beamsecondary" class="example">
     <div class="center">
-    <h2>Beams (secondary beam breaks)</h2>
-    <img class="exampleimg" src="images/example-beamsecondary.png">
-    <p class="examplenotes">In MusicXML, secondary beams are encoded with separate <code>&lt;beam&gt;</code> elements within <code>&lt;note&gt;</code> — each with a separate <code>number</code> attribute.</p>
-    <p class="examplenotes">In MNX, secondary beams are encoded as separate <code>&lt;beam&gt;</code> elements nested within parent <code>&lt;beam&gt;</code> elements.</p>
-    <p class="showui">Show:
-        <label><input type="radio" name="togglebeamsecondary" class="switchdiff" data-example="beamsecondary" value="1" checked> Relevant section</label>
-        <label><input type="radio" name="togglebeamsecondary" class="switchdiff" data-example="beamsecondary" value="2"> Full document</label>
-    </p>
+        <h2>Beams (secondary beam breaks)</h2>
+        <img class="exampleimg" src="images/example-beamsecondary.png">
+        <p class="examplenotes">In MusicXML, secondary beams are encoded with separate <code>&lt;beam&gt;</code> elements within <code>&lt;note&gt;</code> — each with a separate <code>number</code> attribute.</p>
+        <p class="examplenotes">In MNX, secondary beams are encoded as separate <code>&lt;beam&gt;</code> elements nested within parent <code>&lt;beam&gt;</code> elements.</p>
+        <p class="examplenotes">Note that all references to an internal id consist of a '#' character followed by the id string.</p>
+        <p class="showui">
+            Show:
+            <label><input type="radio" name="togglebeamsecondary" class="switchdiff" data-example="beamsecondary" value="1" checked> Relevant section</label>
+            <label><input type="radio" name="togglebeamsecondary" class="switchdiff" data-example="beamsecondary" value="2"> Full document</label>
+        </p>
     </div>
     <div id="markupexamplesbeamsecondary" class="markupexamples onlydiff">
         <div class="markupexample">
@@ -1824,22 +1828,22 @@
             </directions>
             <sequence>
 </script><script type="application/xml" class="markupxml diff">                <beams>
-                    <beam events="ev1 ev2 ev3 ev4 ev5 ev6 ev7 ev8">
-                        <beam events="ev1 ev2 ev3 ev4">
-                            <beam events="ev1 ev2 ev3 ev4"/>
+                    <beam events="#ev1 #ev2 #ev3 #ev4 #ev5 #ev6 #ev7 #ev8">
+                        <beam events="#ev1 #ev2 #ev3 #ev4">
+                            <beam events="#ev1 #ev2 #ev3 #ev4"/>
                         </beam>
-                        <beam events="ev5 ev6 ev7 ev8">
-                            <beam events="ev5 ev6 ev7 ev8"/>
+                        <beam events="#ev5 #ev6 #ev7 #ev8">
+                            <beam events="#ev5 #ev6 #ev7 #ev8"/>
                         </beam>
                     </beam>
-                    <beam events="ev9 ev10 ev11 ev12 ev13 ev14 ev15 ev16">
-                        <beam events="ev9 ev10 ev11 ev12">
-                            <beam events="ev9 ev10"/>
-                            <beam events="ev11 ev12"/>
+                    <beam events="#ev9 #ev10 #ev11 #ev12 #ev13 #ev14 #ev15 #ev16">
+                        <beam events="#ev9 #ev10 #ev11 #ev12">
+                            <beam events="#ev9 #ev10"/>
+                            <beam events="#ev11 #ev12"/>
                         </beam>
-                        <beam events="ev13 ev14 ev15 ev16">
-                            <beam events="ev13 ev14"/>
-                            <beam events="ev15 ev16"/>
+                        <beam events="#ev13 #ev14 #ev15 #ev16">
+                            <beam events="#ev13 #ev14"/>
+                            <beam events="#ev15 #ev16"/>
                         </beam>
                     </beam>
                 </beams>
@@ -1905,14 +1909,16 @@
 
 <section id="beamhooks" class="example">
     <div class="center">
-    <h2>Beams (hooks)</h2>
-    <img class="exampleimg" src="images/example-beamhooks.png">
-    <p class="examplenotes">MusicXML uses <code>&lt;beam&gt;</code> elements with the value <code>"forward hook"</code> or <code>"backward hook"</code>.</p>
-    <p class="examplenotes">MNX uses the <code>&lt;beam-hook&gt;</code> element, which lives inside a parent <code>&lt;beam&gt;</code>.</p>
-    <p class="showui">Show:
-        <label><input type="radio" name="togglebeamhooks" class="switchdiff" data-example="beamhooks" value="1" checked> Relevant section</label>
-        <label><input type="radio" name="togglebeamhooks" class="switchdiff" data-example="beamhooks" value="2"> Full document</label>
-    </p>
+        <h2>Beams (hooks)</h2>
+        <img class="exampleimg" src="images/example-beamhooks.png">
+        <p class="examplenotes">MusicXML uses <code>&lt;beam&gt;</code> elements with the value <code>"forward hook"</code> or <code>"backward hook"</code>.</p>
+        <p class="examplenotes">MNX uses the <code>&lt;beam-hook&gt;</code> element, which lives inside a parent <code>&lt;beam&gt;</code>.</p>
+        <p class="examplenotes">Note that all references to an internal id consist of a '#' character followed by the id string.</p>
+        <p class="showui">
+            Show:
+            <label><input type="radio" name="togglebeamhooks" class="switchdiff" data-example="beamhooks" value="1" checked> Relevant section</label>
+            <label><input type="radio" name="togglebeamhooks" class="switchdiff" data-example="beamhooks" value="2"> Full document</label>
+        </p>
     </div>
     <div id="markupexamplesbeamhooks" class="markupexamples onlydiff">
         <div class="markupexample">
@@ -2062,17 +2068,17 @@
             </directions>
             <sequence>
 </script><script type="application/xml" class="markupxml diff">                <beams>
-                    <beam events="ev1 ev2 ev3">
-                        <beam-hook direction="right" event="ev1"/>
-                        <beam-hook direction="left" event="ev3"/>
+                    <beam events="#ev1 #ev2 #ev3">
+                        <beam-hook direction="right" event="#ev1"/>
+                        <beam-hook direction="left" event="#ev3"/>
                     </beam>
-                    <beam events="ev4 ev5 ev6">
-                        <beam-hook direction="right" event="ev4"/>
-                        <beam-hook direction="left" event="ev6"/>
+                    <beam events="#ev4 #ev5 #ev6">
+                        <beam-hook direction="right" event="#ev4"/>
+                        <beam-hook direction="left" event="#ev6"/>
                     </beam>
-                    <beam events="ev7 ev8 ev9">
-                        <beam-hook direction="right" event="ev7"/>
-                        <beam-hook direction="left" event="ev9"/>
+                    <beam events="#ev7 #ev8 #ev9">
+                        <beam-hook direction="right" event="#ev7"/>
+                        <beam-hook direction="left" event="#ev9"/>
                     </beam>
                 </beams>
 </script><script type="application/xml" class="markupxml nodiff">                <event id="ev1" value="/16">
@@ -2116,15 +2122,17 @@
 
 <section id="beamgrace" class="example">
     <div class="center">
-    <h2>Beams (with inner grace notes)</h2>
-    <img class="exampleimg" src="images/example-beamgrace.png">
-    <p class="examplenotes">In MusicXML, to exclude a grace note from a beam, you exclude <code>&lt;beam&gt;continue&lt;/beam&gt;</code> from the grace note’s <code>&lt;note&gt;</code> element.</p>
-    <p class="examplenotes">In MNX, you exclude the grace note’s event from the <code>&lt;beam&gt;</code> element.</p>
-    <p class="examplenotes">NOTE: This MNX example is incomplete because it doesn’t encode the grace note.</p>
-    <p class="showui">Show:
-        <label><input type="radio" name="togglebeamgrace" class="switchdiff" data-example="beamgrace" value="1" checked> Relevant section</label>
-        <label><input type="radio" name="togglebeamgrace" class="switchdiff" data-example="beamgrace" value="2"> Full document</label>
-    </p>
+        <h2>Beams (with inner grace notes)</h2>
+        <img class="exampleimg" src="images/example-beamgrace.png">
+        <p class="examplenotes">In MusicXML, to exclude a grace note from a beam, you exclude <code>&lt;beam&gt;continue&lt;/beam&gt;</code> from the grace note’s <code>&lt;note&gt;</code> element.</p>
+        <p class="examplenotes">In MNX, you exclude the grace note’s event from the <code>&lt;beam&gt;</code> element.</p>
+        <p class="examplenotes">NOTE: This MNX example is incomplete because it doesn’t encode the grace note.</p>
+        <p class="examplenotes">Note that all references to an internal id consist of a '#' character followed by the id string.</p>
+        <p class="showui">
+            Show:
+            <label><input type="radio" name="togglebeamgrace" class="switchdiff" data-example="beamgrace" value="1" checked> Relevant section</label>
+            <label><input type="radio" name="togglebeamgrace" class="switchdiff" data-example="beamgrace" value="2"> Full document</label>
+        </p>
     </div>
     <div id="markupexamplesbeamgrace" class="markupexamples onlydiff">
         <div class="markupexample">
@@ -2226,7 +2234,7 @@
             </directions>
             <sequence>
 </script><script type="application/xml" class="markupxml diff">                <beams>
-                    <beam events="ev1 ev3 ev4 ev5"/>
+                    <beam events="#ev1 #ev3 #ev4 #ev5"/>
                 </beams>
 </script><script type="application/xml" class="markupxml nodiff">                <event id="ev1" value="/8">
                     <note pitch="C5"/>
@@ -2261,7 +2269,8 @@
     <img class="exampleimg" src="images/example-beambarline.png">
     <p class="examplenotes">Both MusicXML and MNX support beams crossing barlines.</p>
     <p class="examplenotes">In MNX, the <code>&lt;beam&gt;</code> element lives in the <code>&lt;sequence&gt;</code> in which the beam <em>starts</em>. The <code>&lt;beam&gt;</code> is free to reference IDs of events in a subsequent measure.</p>
-    <p class="showui">Show:
+    <p class="examplenotes">Note that all references to an internal id consist of a '#' character followed by the id string.</p>
+        <p class="showui">Show:
         <label><input type="radio" name="togglebeambarline" class="switchdiff" data-example="beambarline" value="1" checked> Relevant section</label>
         <label><input type="radio" name="togglebeambarline" class="switchdiff" data-example="beambarline" value="2"> Full document</label>
     </p>
@@ -2382,7 +2391,7 @@
             </directions>
             <sequence>
 </script><script type="application/xml" class="markupxml diff">                <beams>
-                    <beam events="ev3 ev4 ev5 ev6"/>
+                    <beam events="#ev3 #ev4 #ev5 #ev6"/>
                 </beams>
 </script><script type="application/xml" class="markupxml nodiff">                <event value="/2">
                     <rest/>
@@ -3084,6 +3093,7 @@
     <img class="exampleimg" src="images/slurs.png">
     <p class="examplenotes">In MusicXML, you put <code>&lt;slur&gt;</code> elements within the first and last notes in the slur. The first has <code>type=start</code> and the last has <code>type=stop</code>. Use the <code>placement</code> attribute to specify whether the slur is above or below the notes.</p>
     <p class="examplenotes">In MNX, you put a single <code>&lt;slur&gt;</code> element inside the slur’s first <code>&lt;event&gt;</code>. The element’s <code>target</code> attribute specifies the ID of the last event in the slur. (Every <code>&lt;event&gt;</code> element can have an optional ID.) Use the <code>side</code> attribute to specify whether the slur is above or below.</p>
+    <p class="examplenotes">Note that all references to an internal id consist of a '#' character followed by the id string.</p>
     <p class="showui">Show:
         <label><input type="radio" name="toggleslurs" class="switchdiff" data-example="slurs" value="1" checked> Relevant section</label>
         <label><input type="radio" name="toggleslurs" class="switchdiff" data-example="slurs" value="2"> Full document</label>
@@ -3219,7 +3229,7 @@
             <sequence>
                 <event value="/4" id="event1">
                     <note pitch="C5"/>
-</script><script type="application/xml" class="markupxml diff">                    <slur side="up" target="event4" />
+</script><script type="application/xml" class="markupxml diff">                    <slur side="up" target="#event4" />
 </script><script type="application/xml" class="markupxml nodiff">                </event>
                 <event value="/4" id="event2">
                     <note pitch="D5"/>
@@ -3236,7 +3246,7 @@
             <sequence>
                 <event value="/4" id="event5">
                     <note pitch="G4"/>
-</script><script type="application/xml" class="markupxml diff">                    <slur side="down" target="event8" />
+</script><script type="application/xml" class="markupxml diff">                    <slur side="down" target="#event8" />
 </script><script type="application/xml" class="markupxml nodiff">                </event>
                 <event value="/4" id="event6">
                     <note pitch="A4"/>
@@ -3258,14 +3268,16 @@
 
 <section id="slurchords" class="example">
     <div class="center">
-    <h2>Slurs (for chords)</h2>
-    <img class="exampleimg" src="images/slurchords.png">
-    <p class="examplenotes">In MusicXML, if the start and/or end points of a slur are chords, then the slur markup goes inside the first note of the chord.</p>
-    <p class="examplenotes">In MNX, the slur is attached to the <code>&lt;event&gt;</code>, not to the <code>&lt;note&gt;</code>.</p>
-    <p class="showui">Show:
-        <label><input type="radio" name="toggleslurchords" class="switchdiff" data-example="slurchords" value="1" checked> Relevant section</label>
-        <label><input type="radio" name="toggleslurchords" class="switchdiff" data-example="slurchords" value="2"> Full document</label>
-    </p>
+        <h2>Slurs (for chords)</h2>
+        <img class="exampleimg" src="images/slurchords.png">
+        <p class="examplenotes">In MusicXML, if the start and/or end points of a slur are chords, then the slur markup goes inside the first note of the chord.</p>
+        <p class="examplenotes">In MNX, the slur is attached to the <code>&lt;event&gt;</code>, not to the <code>&lt;note&gt;</code>.</p>
+        <p class="examplenotes">Note that all references to an internal id consist of a '#' character followed by the id string.</p>
+        <p class="showui">
+            Show:
+            <label><input type="radio" name="toggleslurchords" class="switchdiff" data-example="slurchords" value="1" checked> Relevant section</label>
+            <label><input type="radio" name="toggleslurchords" class="switchdiff" data-example="slurchords" value="2"> Full document</label>
+        </p>
     </div>
     <div id="markupexamplesslurchords" class="markupexamples onlydiff">
         <div class="markupexample">
@@ -3393,7 +3405,7 @@
             </directions>
             <sequence>
                 <event value="/4" id="event1">
-</script><script type="application/xml" class="markupxml diff">                    <slur side="up" target="event4" />
+</script><script type="application/xml" class="markupxml diff">                    <slur side="up" target="#event4" />
 </script><script type="application/xml" class="markupxml nodiff">                    <note pitch="C5"/>
                     <note pitch="E5"/>
                 </event>
@@ -3424,6 +3436,7 @@
     <img class="exampleimg" src="images/slurnotes.png">
     <p class="examplenotes">In MusicXML, slurs are always defined within <code>&lt;note&gt;</code> elements.</p>
     <p class="examplenotes">In MNX, a slur can optionally specify which specific notes it’s attached to, using the <code>start-note</code> and <code>end-note</code> attributes. The <code>start-note</code> must be within the event that contains the <code>&lt;slur&gt;</code>, and the <code>end-note</code> must be within the <code>target</code> event.</p>
+    <p class="examplenotes">Note that all references to an internal id consist of a '#' character followed by the id string.</p>
     <p class="showui">Show:
         <label><input type="radio" name="toggleslurnotes" class="switchdiff" data-example="slurnotes" value="1" checked> Relevant section</label>
         <label><input type="radio" name="toggleslurnotes" class="switchdiff" data-example="slurnotes" value="2"> Full document</label>
@@ -3554,12 +3567,12 @@
                     <note pitch="C5" id="note1"/>
                     <note pitch="E5" id="note2"/>
                     <note pitch="G5" id="note3"/>
-</script><script type="application/xml" class="markupxml diff">                    <slur side="down" target="event2"
-                        start-note="note1" end-note="note4"/>
-                    <slur side="up" target="event2"
-                        start-note="note2" end-note="note5"/>
-                    <slur side="up" target="event2"
-                        start-note="note3" end-note="note6"/>
+</script><script type="application/xml" class="markupxml diff">                    <slur side="down" target="#event2"
+                        start-note="#note1" end-note="#note4"/>
+                    <slur side="up" target="#event2"
+                        start-note="#note2" end-note="#note5"/>
+                    <slur side="up" target="#event2"
+                        start-note="#note3" end-note="#note6"/>
 </script><script type="application/xml" class="markupxml nodiff">                </event>
                 <event value="/2" id="event2">
                     <note pitch="B4" id="note4"/>
@@ -3687,6 +3700,7 @@
     </ul>
     <p class="examplenotes">MNX has only one way, similar to MusicXML’s <code>&lt;score-partwise&gt;</code>. Each <code>&lt;part&gt;</code> contains <code>&lt;measure&gt;</code> elements.</p>
     <p class="examplenotes">In MusicXML, part metadata such as the title lives within a <code>&lt;part-list&gt;</code> element. In MNX, part metadata goes in the individual <code>&lt;part&gt;</code> element.</p>
+    <p class="examplenotes">Note that all references to an internal id consist of a '#' character followed by the id string.</p>
     </div>
     <div id="markupexamplesparts" class="markupexamples">
         <div class="markupexample">
@@ -3932,7 +3946,7 @@
             </directions>
             <sequence>
                 <beams>
-                    <beam events="event6 event7 event8 event9"/>
+                    <beam events="#event6 #event7 #event8 #event9"/>
                 </beams>
                 <event value="/2">
                     <rest/>
