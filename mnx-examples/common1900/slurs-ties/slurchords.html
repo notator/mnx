@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Slurs (for chords)</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="center">
+        <h2>Slurs (for chords)</h2>
+        <img class="exampleimg" src="../images/slurchords.png">
+        <p class="examplenotes">In MusicXML, if the start and/or end points of a slur are chords, then the slur markup goes inside the first note of the chord.</p>
+        <p class="examplenotes">In MNX, the slur is attached to the <code>&lt;event&gt;</code>, not to the <code>&lt;note&gt;</code>.</p>
+        <p class="examplenotes">Note that all references to an internal id consist of a '#' character followed by the id string.</p>
+        <p class="showui">
+            Show:
+            <label><input type="radio" name="toggleslurchords" class="switchdiff" data-example="slurchords" value="1" checked> Relevant section</label>
+            <label><input type="radio" name="toggleslurchords" class="switchdiff" data-example="slurchords" value="2"> Full document</label>
+        </p>
+    </div>
+    <div id="markupexamplesslurchords" class="markupexamples onlydiff">
+        <div class="markupexample">
+            <h3>MusicXML</h3>
+            <div class="markupcode">
+            <script type="application/xml" class="markupxml nodiff"><score-partwise version="3.1">
+    <part-list>
+        <score-part id="P1">
+            <part-name>Music</part-name>
+        </score-part>
+    </part-list>
+    <part id="P1">
+        <measure number="1">
+            <attributes>
+                <divisions>256</divisions>
+                <key>
+                    <fifths>0</fifths>
+                    <mode>major</mode>
+                </key>
+                <time>
+                    <beats>4</beats>
+                    <beat-type>4</beat-type>
+                </time>
+                <staves>1</staves>
+                <clef>
+                    <sign>G</sign>
+                    <line>2</line>
+                </clef>
+            </attributes>
+            <note>
+                <pitch>
+                    <step>C</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+</script><script type="application/xml" class="markupxml diff">                <notations>
+                    <slur number="1" placement="above" type="start"/>
+                </notations>
+</script><script type="application/xml" class="markupxml nodiff">            </note>
+            <note>
+                <chord/>
+                <pitch>
+                    <step>E</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+            </note>
+            <note>
+                <pitch>
+                    <step>D</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+            </note>
+            <note>
+                <chord/>
+                <pitch>
+                    <step>F</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+            </note>
+            <note>
+                <pitch>
+                    <step>E</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+            </note>
+            <note>
+                <chord/>
+                <pitch>
+                    <step>G</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+            </note>
+            <note>
+                <pitch>
+                    <step>F</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+</script><script type="application/xml" class="markupxml diff">                <notations>
+                    <slur number="1" type="stop"/>
+                </notations>
+</script><script type="application/xml" class="markupxml nodiff">            </note>
+            <note>
+                <chord/>
+                <pitch>
+                    <step>A</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+            </note>
+        </measure>
+    </part>
+</score-partwise></script>
+            </div>
+        </div>
+        <div class="markupexample">
+            <h3>MNX</h3>
+            <div class="markupcode">
+            <script type="application/xml" class="markupxml nodiff"><mnx>
+    <global>
+        <measure>
+            <directions>
+                <time signature="4/4"/>
+            </directions>
+        </measure>
+    </global>
+    <part>
+        <part-name>Music</part-name>
+        <measure>
+            <directions>
+                <clef sign="G" line="2"/>
+            </directions>
+            <sequence>
+                <event value="/4" id="event1">
+</script><script type="application/xml" class="markupxml diff">                    <slur side="up" target="#event4" />
+</script><script type="application/xml" class="markupxml nodiff">                    <note pitch="C5"/>
+                    <note pitch="E5"/>
+                </event>
+                <event value="/4" id="event2">
+                    <note pitch="D5"/>
+                    <note pitch="F5"/>
+                </event>
+                <event value="/4" id="event3">
+                    <note pitch="E5"/>
+                    <note pitch="G5"/>
+                </event>
+                <event value="/4" id="event4">
+                    <note pitch="F5"/>
+                    <note pitch="A5"/>
+                </event>
+            </sequence>
+        </measure>
+    </part>
+</mnx></script>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="../../script.js"></script>
+</body>
+</html>

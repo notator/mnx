@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Chord</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="center">
+        <h2>Three-note chord and half rest</h2>
+        <img class="exampleimg" src="../images/example03.png">
+        <p class="examplenotes">In MusicXML, notes within chords contain <code>&lt;chord/&gt;</code> (except for the first note in the chord). MNX uses <code>&lt;event&gt;</code> to group notes within chords.</p>
+        <p class="showui">
+            Show:
+            <label><input type="radio" name="toggle3" class="switchdiff" data-example="3" value="1" checked> Relevant section</label>
+            <label><input type="radio" name="toggle3" class="switchdiff" data-example="3" value="2"> Full document</label>
+        </p>
+    </div>
+    <div id="markupexamples3" class="markupexamples onlydiff">
+        <div class="markupexample">
+            <h3>MusicXML</h3>
+            <div class="markupcode">
+                <script type="application/xml" class="markupxml nodiff"><score-partwise version="3.1">
+    <part-list>
+        <score-part id="P1">
+            <part-name>Music</part-name>
+        </score-part>
+    </part-list>
+    <part id="P1">
+        <measure number="1">
+            <attributes>
+                <divisions>1</divisions>
+                <key>
+                    <fifths>0</fifths>
+                </key>
+                <time>
+                    <beats>4</beats>
+                    <beat-type>4</beat-type>
+                </time>
+                <clef>
+                    <sign>G</sign>
+                    <line>2</line>
+                </clef>
+            </attributes>
+</script><script type="application/xml" class="markupxml diff">            <note>
+                <pitch>
+                    <step>C</step>
+                    <octave>4</octave>
+                </pitch>
+                <duration>2</duration>
+                <type>half</type>
+            </note>
+            <note>
+                <chord/>
+                <pitch>
+                    <step>E</step>
+                    <octave>4</octave>
+                </pitch>
+                <duration>2</duration>
+                <type>half</type>
+            </note>
+            <note>
+                <chord/>
+                <pitch>
+                    <step>G</step>
+                    <octave>4</octave>
+                </pitch>
+                <duration>2</duration>
+                <type>half</type>
+            </note>
+            <note>
+                <rest/>
+                <duration>2</duration>
+                <type>half</type>
+            </note>
+</script><script type="application/xml" class="markupxml nodiff">        </measure>
+    </part>
+</score-partwise></script>
+            </div>
+        </div>
+        <div class="markupexample">
+            <h3>MNX</h3>
+            <div class="markupcode">
+            <script type="application/xml" class="markupxml nodiff"><mnx>
+    <global>
+        <measure>
+            <directions>
+                <time signature="4/4"/>
+            </directions>
+        </measure>
+    </global>
+    <part>
+        <part-name>Music</part-name>
+        <measure barline="regular">
+            <directions>
+                <clef sign="G" line="2"/>
+            </directions>
+            <sequence>
+</script><script type="application/xml" class="markupxml diff">                <event value="/2">
+                    <note pitch="C4"/>
+                    <note pitch="E4"/>
+                    <note pitch="G4"/>
+                </event>
+                <event value="/2">
+                    <rest/>
+                </event>
+</script><script type="application/xml" class="markupxml nodiff">            </sequence>
+        </measure>
+    </part>
+</mnx></script>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="../../script.js"></script>
+</body>
+</html>

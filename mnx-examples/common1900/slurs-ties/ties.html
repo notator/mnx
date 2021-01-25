@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Ties</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="center">
+    <h2>Ties</h2>
+    <img class="exampleimg" src="../images/example-ties.png">
+    <p class="examplenotes">MusicXML uses two elements: <code>&lt;tie&gt;</code> to describe the sound and <code>&lt;tied&gt;</code> to indicate a visual tie in notation. The first note gets <code>type="start"</code>, the second gets <code>type="stop"</code>.</p>
+    <p class="examplenotes">MNX uses a single element: <code>&lt;tied&gt;</code>. Only the first note in the tie encodes this; its <code>target</code> attribute points at the <code>id</code> of the end note.</p>
+    <p class="examplenotes">For a series of notes tied together (e.g., the second tie in the above example), both MusicXML and MNX require you to encode each “inner tie” separately.</p>
+    <p class="examplenotes">Note that all references to an internal id consist of a '#' character followed by the id string.</p>
+    <p class="showui">Show:
+        <label><input type="radio" name="toggleties" class="switchdiff" data-example="ties" value="1" checked> Relevant section</label>
+        <label><input type="radio" name="toggleties" class="switchdiff" data-example="ties" value="2"> Full document</label>
+    </p>
+    </div>
+    <div id="markupexamplesties" class="markupexamples onlydiff">
+        <div class="markupexample">
+            <h3>MusicXML</h3>
+            <div class="markupcode">
+            <script type="application/xml" class="markupxml nodiff"><score-partwise version="3.1">
+    <part-list>
+        <score-part id="P1">
+            <part-name>Music</part-name>
+        </score-part>
+    </part-list>
+    <part id="P1">
+        <measure number="1">
+            <attributes>
+                <divisions>256</divisions>
+                <key>
+                    <fifths>0</fifths>
+                </key>
+                <time>
+                    <beats>4</beats>
+                    <beat-type>4</beat-type>
+                </time>
+                <clef>
+                    <sign>G</sign>
+                    <line>2</line>
+                </clef>
+            </attributes>
+            <note>
+                <pitch>
+                    <step>C</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+            </note>
+            <note>
+                <pitch>
+                    <step>E</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+</script><script type="application/xml" class="markupxml diff">                <tie type="start"/>
+</script><script type="application/xml" class="markupxml nodiff">                <type>quarter</type>
+</script><script type="application/xml" class="markupxml diff">                <notations>
+                    <tied type="start"/>
+                </notations>
+</script><script type="application/xml" class="markupxml nodiff">            </note>
+            <note>
+                <pitch>
+                    <step>E</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+</script><script type="application/xml" class="markupxml diff">                <tie type="stop"/>
+</script><script type="application/xml" class="markupxml nodiff">                <type>quarter</type>
+</script><script type="application/xml" class="markupxml diff">                <notations>
+                    <tied type="stop"/>
+                </notations>
+</script><script type="application/xml" class="markupxml nodiff">            </note>
+            <note>
+                <pitch>
+                    <step>C</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+</script><script type="application/xml" class="markupxml diff">                <tie type="start"/>
+</script><script type="application/xml" class="markupxml nodiff">                <type>quarter</type>
+</script><script type="application/xml" class="markupxml diff">                <notations>
+                    <tied type="start"/>
+                </notations>
+</script><script type="application/xml" class="markupxml nodiff">            </note>
+        </measure>
+        <measure number="2">
+            <note>
+                <pitch>
+                    <step>C</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>512</duration>
+</script><script type="application/xml" class="markupxml diff">                <tie type="stop"/>
+                <tie type="start"/>
+</script><script type="application/xml" class="markupxml nodiff">                <type>half</type>
+</script><script type="application/xml" class="markupxml diff">                <notations>
+                    <tied type="start"/>
+                    <tied type="stop"/>
+                </notations>
+</script><script type="application/xml" class="markupxml nodiff">            </note>
+            <note>
+                <pitch>
+                    <step>C</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>512</duration>
+</script><script type="application/xml" class="markupxml diff">                <tie type="stop"/>
+</script><script type="application/xml" class="markupxml nodiff">                <type>half</type>
+</script><script type="application/xml" class="markupxml diff">                <notations>
+                    <tied type="stop"/>
+                </notations>
+</script><script type="application/xml" class="markupxml nodiff">            </note>
+        </measure>
+    </part>
+</score-partwise></script>
+            </div>
+        </div>
+        <div class="markupexample">
+            <h3>MNX</h3>
+            <div class="markupcode">
+            <script type="application/xml" class="markupxml nodiff"><mnx>
+    <global>
+        <measure>
+            <directions>
+                <time signature="4/4"/>
+            </directions>
+        </measure>
+        <measure/>
+    </global>
+    <part>
+        <part-name>Music</part-name>
+        <measure>
+            <directions>
+                <clef sign="G" line="2"/>
+            </directions>
+            <sequence>
+                <event value="/4">
+                    <note pitch="C5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="E5">
+</script><script type="application/xml" class="markupxml diff">                        <tied target="#note3"/>
+</script><script type="application/xml" class="markupxml nodiff">                    </note>
+                </event>
+                <event value="/4">
+                    <note pitch="E5" id="note3"/>
+                </event>
+                <event value="/4">
+                    <note pitch="C5">
+</script><script type="application/xml" class="markupxml diff">                        <tied target="#note5"/>
+</script><script type="application/xml" class="markupxml nodiff">                    </note>
+                </event>
+            </sequence>
+        </measure>
+        <measure>
+            <sequence>
+                <event value="/2">
+                    <note pitch="C5" id="note5">
+</script><script type="application/xml" class="markupxml diff">                        <tied target="#note6"/>
+</script><script type="application/xml" class="markupxml nodiff">                    </note>
+                </event>
+                <event value="/2">
+                    <note pitch="C5" id="note6"/>
+                </event>
+            </sequence>
+        </measure>
+    </part>
+</mnx></script>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="../../script.js"></script>
+</body>
+</html>
