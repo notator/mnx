@@ -7,34 +7,14 @@
     <xs:annotation>
         <!--xs:documentation xml:lang="en"-->
         <xs:documentation>
-            *****************************
-            *  MNX Schema (.mnx files)  *
-            *  Open Source Licence      *
-            *
-            *   &lt;mnx&gt;
-            *   &lt;global&gt;
-            *       &lt;measure&gt;
-            *           &lt;directions&gt;
-            *               &lt;time signature="4/4"/&gt;
-            *           &lt;/directions&gt;
-            *       &lt;/measure&gt;
-            *   &lt;/global&gt;
-            *   &lt;part&gt;
-            *       &lt;part-name&gt;Music&lt;/part-name&gt;
-            *       &lt;measure barline="regular"&gt;
-            *       &lt;directions&gt;
-            *       &lt;clef sign="G" line="2"/&gt;
-            *               &lt;/directions&gt;
-            *            &lt;sequence&gt;
-            *                &lt;event value="/1"&gt;
-            *                    &lt;note pitch="C4"/&gt;
-            *                &lt;/event&gt;
-            *            &lt;/sequence&gt;
-            *        &lt;/measure&gt;
-            *    &lt;/part&gt;
-            *   &lt;/mnx&gt;
-            *
-            *****************************
+            ******************************************************
+            *  MNX Schema (.mnx files)                           *
+            *                                                    *
+            *  Licensed in accordance with the                   *
+            *  W3C COMMUNITY CONTRIBUTOR LICENSE AGREEMENT (CLA) *
+            *  https://www.w3.org/community/about/process/cla/   *
+            *                                                    *
+            ******************************************************
         </xs:documentation>
     </xs:annotation>
 
@@ -85,19 +65,13 @@
         </xs:sequence>
     </xs:complexType>
 
-    <xs:simpleType name="timeSigType">
-        <xs:annotation>
-            <xs:documentation>
-                Definition of a global measure directions &lt;time&gt; (=time signature):
-                An integer string that does not begin with 0, but has an unlimited number of digits,
-                followed by a "/" character,
-                followed by one of the strings "1", "2", "4", "8", "16", "32", "64", "128", "256"
-            </xs:documentation>
-        </xs:annotation>
-            <xs:restriction base="xs:token">
-                <xs:pattern value="^([1-9][0-9]*)/(1|2|4|8|16|32|64|128|256)$"/>
-            </xs:restriction>
-    </xs:simpleType>
+    <xs:complexType name="timeSigType">
+        <xs:attribute name="signature">
+            <xs:simpleType>
+                <xs:restriction base="multipleNoteValueType" />
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
     
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
     <!-- Part Types -->
@@ -109,8 +83,8 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="part-name" type="xs:string" maxOccurs="0" minOccurs="0"/>
-            <xs:element name="part-abbreviation" type="xs:string" maxOccurs="0" minOccurs="0"/>
+            <xs:element name="part-name" type="xs:string" maxOccurs="1" minOccurs="0"/>
+            <xs:element name="part-abbreviation" type="xs:string" maxOccurs="1" minOccurs="0"/>
             <!--<xs:element name="instrument-sound" type="xs:string" maxOccurs="0" minOccurs="0"/> -->
             <xs:element name="measure" type="partMeasureType" maxOccurs="unbounded" minOccurs="1"/>
         </xs:sequence>
@@ -126,6 +100,13 @@
             <xs:element name="directions" type="partMeasureDirectionsType" maxOccurs="1" minOccurs="0"/>
             <xs:element name="sequence" type="sequenceType" maxOccurs="unbounded" minOccurs="1"/>
         </xs:sequence>
+        <xs:attribute name="barline">
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:pattern value="regular|dotted|dashed|heavy|light-light|light-heavy|heavy-light|heavy-heavy|tick|short|none"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="partMeasureDirectionsType">
@@ -192,6 +173,11 @@
         <xs:sequence>
             <xs:element name="note" type="noteType" maxOccurs="unbounded" minOccurs="1"/>
         </xs:sequence>
+        <xs:attribute name="value">
+            <xs:simpleType>
+                <xs:restriction base="noteValueType" />
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="noteType">
@@ -213,6 +199,37 @@
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
-    </xs:complexType>    
+    </xs:complexType>
+
+    <xs:simpleType name="multipleNoteValueType">
+        <xs:annotation>
+            <xs:documentation>
+                An integer string that does not begin with 0, but that has an unlimited number of digits,
+                followed by a "/" character,
+                followed by one of the strings "8L", "4L", "2L", "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"
+                The strings "8L" "4L" and "2L" denote maxima, long and breve noteValues respectively.
+                (See MusicXML's note-value-type, that extends from maxima to 1024th note.)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="^([1-9][0-9]*)/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)$"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="noteValueType">
+        <xs:annotation>
+            <xs:documentation>
+                An integer string that is
+                an optional '1' character
+                followed by a compulsory "/" character,
+                followed by one of the strings "8L", "4L", "2L", "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"
+                The strings "8L" "4L" and "2L" denote maxima, long and breve noteValues respectively.
+                (See MusicXML's note-value-type, that extends from maxima to 1024th note.)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="^(1)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)$"/>
+        </xs:restriction>
+    </xs:simpleType>
     
 </xs:schema>
