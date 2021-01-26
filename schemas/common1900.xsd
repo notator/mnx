@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="https://github.com/w3c/mnx"
+    elementFormDefault="qualified"
+    xmlns="https://github.com/w3c/mnx"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+    <xs:annotation>
+        <!--xs:documentation xml:lang="en"-->
+        <xs:documentation>
+            *****************************
+            *  MNX Schema (.mnx files)  *
+            *  Open Source Licence      *
+            *
+            *   &lt;mnx&gt;
+            *   &lt;global&gt;
+            *       &lt;measure&gt;
+            *           &lt;directions&gt;
+            *               &lt;time signature="4/4"/&gt;
+            *           &lt;/directions&gt;
+            *       &lt;/measure&gt;
+            *   &lt;/global&gt;
+            *   &lt;part&gt;
+            *       &lt;part-name&gt;Music&lt;/part-name&gt;
+            *       &lt;measure barline="regular"&gt;
+            *       &lt;directions&gt;
+            *       &lt;clef sign="G" line="2"/&gt;
+            *               &lt;/directions&gt;
+            *            &lt;sequence&gt;
+            *                &lt;event value="/1"&gt;
+            *                    &lt;note pitch="C4"/&gt;
+            *                &lt;/event&gt;
+            *            &lt;/sequence&gt;
+            *        &lt;/measure&gt;
+            *    &lt;/part&gt;
+            *   &lt;/mnx&gt;
+            *
+            *****************************
+        </xs:documentation>
+    </xs:annotation>
+
+    <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+    <!-- mnx: the root element of an .mnx file -->
+    <xs:element name="mnx">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="global" type="globalType" maxOccurs="1" minOccurs="1"/>
+                <xs:element name="part" type="partType" maxOccurs="unbounded" minOccurs="1"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+    <!-- Global Types -->
+
+    <xs:complexType name="globalType">
+        <xs:annotation>
+            <xs:documentation>
+                definition of the &lt;global&gt; element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="measure" type="globalMeasureType" maxOccurs="unbounded" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="globalMeasureType">
+        <xs:annotation>
+            <xs:documentation>
+                definition of a global &lt;measure&gt;
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="directions" type="globalMeasureDirectionsType" maxOccurs="1" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="globalMeasureDirectionsType">
+        <xs:annotation>
+            <xs:documentation>
+                definition of a global measure &lt;directions&gt;
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="time" type="timeSigType" maxOccurs="1" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="timeSigType">
+        <xs:annotation>
+            <xs:documentation>
+                Definition of a global measure directions &lt;time&gt; (=time signature):
+                An integer string that does not begin with 0, but has an unlimited number of digits,
+                followed by a "/" character,
+                followed by one of the strings "1", "2", "4", "8", "16", "32", "64", "128", "256"
+            </xs:documentation>
+        </xs:annotation>
+            <xs:restriction base="xs:token">
+                <xs:pattern value="^([1-9][0-9]*)/(1|2|4|8|16|32|64|128|256)$"/>
+            </xs:restriction>
+    </xs:simpleType>
+    
+    <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+    <!-- Part Types -->
+
+    <xs:complexType name="partType">
+        <xs:annotation>
+            <xs:documentation>
+                definition of the &lt;part&gt; element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="part-name" type="xs:string" maxOccurs="0" minOccurs="0"/>
+            <xs:element name="part-abbreviation" type="xs:string" maxOccurs="0" minOccurs="0"/>
+            <!--<xs:element name="instrument-sound" type="xs:string" maxOccurs="0" minOccurs="0"/> -->
+            <xs:element name="measure" type="partMeasureType" maxOccurs="unbounded" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="partMeasureType">
+        <xs:annotation>
+            <xs:documentation>
+                definition of a global &lt;measure&gt;
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="directions" type="partMeasureDirectionsType" maxOccurs="1" minOccurs="0"/>
+            <xs:element name="sequence" type="sequenceType" maxOccurs="unbounded" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="partMeasureDirectionsType">
+        <xs:annotation>
+            <xs:documentation>
+                definition of a part measure &lt;directions&gt;
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="clef" type="clefType" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="clefType">
+        <xs:annotation>
+            <xs:documentation>
+                Definition of a part measure directions &lt;clef&gt;:
+                Attributes:
+                sign: One of the values "G", "F", "C", "percussion", "jianpu"
+                line: an integer in range [1..9] (restrict to 5?)
+                octave: A signed integer
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="sign">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="G|F|C|percussion|jianpu"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="line">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[1-9]"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="octave">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="^[-]?[0-9]$"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="sequenceType">
+        <xs:annotation>
+            <xs:documentation>
+                definition of a part measure &lt;sequence&gt;
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="event" type="eventType" maxOccurs="unbounded" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="eventType">
+        <xs:annotation>
+            <xs:documentation>
+                definition of a part measure sequence &lt;event&gt;
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="note" type="noteType" maxOccurs="unbounded" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="noteType">
+        <xs:annotation>
+            <xs:documentation>
+                Definition of a part measure sequence event &lt;note&gt;
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="pitch">
+            <xs:simpleType>
+                <xs:annotation>
+                    <xs:documentation>
+                        A character in range [A-G], optionally followed by b or bb or # or ##,
+                        followed by a character in range [0-9].
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="^([A-G])(b|bb|#|##)?([0-9])$"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>    
+    
+</xs:schema>
