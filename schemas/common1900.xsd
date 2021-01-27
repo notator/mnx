@@ -184,9 +184,12 @@
                 definition of a part measure sequence &lt;event&gt;
             </xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element name="note" type="noteType" maxOccurs="unbounded" minOccurs="1"/>
-        </xs:sequence>
+        <xs:choice>
+            <xs:sequence>
+                <xs:element name="note" type="noteType" maxOccurs="unbounded" minOccurs="1"/>
+            </xs:sequence>
+            <xs:element name="rest" maxOccurs="1" minOccurs="1" />            
+        </xs:choice>
         <xs:attribute name="value">
             <xs:simpleType>
                 <xs:restriction base="noteValueType" />
