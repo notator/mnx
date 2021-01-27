@@ -19,7 +19,7 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../schemas/common1900.xsd">
             </directions>
             <sequence>
                 <beams>
-                    <beam events="event3 event4 event5"/>
+                    <beam events="#event3 #event4 #event5"/>
                 </beams>
                 <tuplet inner="3/8" outer="2/8">
                     <event value="/4">
