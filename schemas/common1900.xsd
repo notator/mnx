@@ -254,12 +254,13 @@
                 an optional '1' character
                 followed by a compulsory "/" character,
                 followed by one of the strings "8L", "4L", "2L", "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"
+                followed by zero or more 'd' characters
                 The strings "8L" "4L" and "2L" denote maxima, long and breve noteValues respectively.
                 (See MusicXML's note-value-type, that extends from maxima to 1024th note.)
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:pattern value="^(1)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)$"/>
+            <xs:pattern value="^(1)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*)$"/>
         </xs:restriction>
     </xs:simpleType>
     
