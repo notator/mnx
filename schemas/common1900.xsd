@@ -2,8 +2,7 @@
 <xs:schema targetNamespace="https://github.com/w3c/mnx"
     elementFormDefault="qualified"
     xmlns="https://github.com/w3c/mnx"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
->
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" >
     <xs:annotation>
         <!--xs:documentation xml:lang="en"-->
         <xs:documentation>
@@ -177,8 +176,34 @@
             <xs:choice maxOccurs="unbounded" minOccurs="1">
                 <xs:element name="directions" type="sequenceDirectionsType"  maxOccurs="1" minOccurs="1"/>
                 <xs:element name="event" type="eventType" maxOccurs="1" minOccurs="1"/>
+                <xs:element name="tuplet" type="tupletType" maxOccurs="1" minOccurs="1"/>
             </xs:choice>
         </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="tupletType">
+        <xs:annotation>
+            <xs:documentation>
+                definition of a part measure sequence tuplet
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded" minOccurs="1">
+                <xs:element name="directions" type="sequenceDirectionsType"  maxOccurs="1" minOccurs="1"/>
+                <xs:element name="event" type="eventType" maxOccurs="1" minOccurs="1"/>
+                <xs:element name="tuplet" type="tupletType" maxOccurs="1" minOccurs="1"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="outer">
+            <xs:simpleType>
+                <xs:restriction base="multipleNoteValueType" />
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="inner">
+            <xs:simpleType>
+                <xs:restriction base="multipleNoteValueType" />
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="sequenceDirectionsType">
@@ -266,6 +291,9 @@
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
+
+    <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+    <!-- Simple Types -->
 
     <xs:simpleType name="multipleNoteValueType">
         <xs:annotation>
