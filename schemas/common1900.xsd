@@ -174,8 +174,43 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="event" type="eventType" maxOccurs="unbounded" minOccurs="1"/>
+            <xs:choice maxOccurs="unbounded" minOccurs="1">
+                <xs:element name="directions" type="sequenceDirectionsType"  maxOccurs="1" minOccurs="1"/>
+                <xs:element name="event" type="eventType" maxOccurs="1" minOccurs="1"/>
+            </xs:choice>
         </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="sequenceDirectionsType">
+        <xs:annotation>
+            <xs:documentation>
+                definition of a part measure &lt;directions&gt;
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                <xs:element name="clef" type="clefType" maxOccurs="unbounded" minOccurs="0"/>
+                <xs:element name="octave-shift" type="octaveShiftType" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="octaveShiftType">
+        <xs:annotation>
+            <xs:documentation>
+                definition of a part measure directions octave-shift
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="type">
+            <xs:simpleType>
+                <xs:restriction base="xs:integer" />
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="end">
+            <xs:simpleType>
+                <xs:restriction base="locationType" />
+            </xs:simpleType>
+        </xs:attribute>        
     </xs:complexType>
 
     <xs:complexType name="eventType">
@@ -261,6 +296,25 @@
         </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:pattern value="^(1)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*)$"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="locationType">
+        <xs:annotation>
+            <xs:documentation>
+                EITHER
+                { a reference to an ID (these consist of a '#' character, followed by arbitrary alphanumeric characters) }
+                OR
+                { an optional (measure number followed by a ':' character) followed by
+                    EITHER
+                    { a decimal floating-point number indicating the positive number of whole-notes after the start of the measure }
+                    OR
+                    { a multipleNoteValueType (2/4, 3/8, 4/2 6/1d etc.}
+                }
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="((#([a-z|A-Z|0-9])*)|(()|(([1-9][0-9]*):)?(([0-9]*)?.([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))))"/>
         </xs:restriction>
     </xs:simpleType>
     
