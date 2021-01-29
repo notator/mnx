@@ -170,7 +170,7 @@
         <xs:annotation>
             <xs:documentation>
                 definition of a part-measure-sequence
-                Issue: there should be some way to avoid the code duplication between sequenceType and tupletType.
+                Issue: there should be some way to avoid the code duplication between sequenceType, tupletType and graceType.
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -178,6 +178,7 @@
                 <xs:element name="directions" type="sequenceDirectionsType"  maxOccurs="1" minOccurs="1"/>
                 <xs:element name="event" type="eventType" maxOccurs="1" minOccurs="1"/>
                 <xs:element name="tuplet" type="tupletType" maxOccurs="1" minOccurs="1"/>
+                <xs:element name="grace" type="graceType" maxOccurs="1" minOccurs="1"/>
                 <xs:element name="beams" type="beamsType" maxOccurs="1" minOccurs="1"/>
             </xs:choice>
         </xs:sequence>
@@ -187,16 +188,16 @@
         <xs:annotation>
             <xs:documentation>
                 definition of a part-measure-sequence-tuplet
-                Issue: there should be some way to avoid the code duplication between sequenceType and tupletType.
+                Issue: there should be some way to avoid the code duplication between sequenceType, tupletType and graceType.
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:choice maxOccurs="unbounded" minOccurs="1">
-                <xs:element name="directions" type="sequenceDirectionsType"  maxOccurs="1" minOccurs="1"/>
+                <xs:element name="directions" type="sequenceDirectionsType"  maxOccurs="1" minOccurs="0"/>
                 <xs:element name="event" type="eventType" maxOccurs="1" minOccurs="1"/>
-                <xs:element name="tuplet" type="tupletType" maxOccurs="1" minOccurs="1"/>
-                <xs:element name="beams" type="beamsType" maxOccurs="1" minOccurs="1"/>
-            </xs:choice>
+                <xs:element name="tuplet" type="tupletType" maxOccurs="1" minOccurs="0"/>
+                <xs:element name="grace" type="graceType" maxOccurs="1" minOccurs="1"/>
+                <!-- I have disallowed a beams element here. j.i. -->            </xs:choice>
         </xs:sequence>
         <xs:attribute name="outer">
             <xs:simpleType>
@@ -208,6 +209,22 @@
                 <xs:restriction base="multipleNoteValueType" />
             </xs:simpleType>
         </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="graceType">
+        <xs:annotation>
+            <xs:documentation>
+                definition of a part-measure-sequence-grace
+                Issue: there should be some way to avoid the code duplication between sequenceType, tupletType and graceType.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded" minOccurs="1">
+                <xs:element name="directions" type="sequenceDirectionsType"  maxOccurs="1" minOccurs="0"/>
+                <xs:element name="event" type="eventType" maxOccurs="1" minOccurs="1"/>
+                <!-- I have disallowed tuplet, grace and beams elements here. j.i. -->
+            </xs:choice>
+        </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name="beamsType">
