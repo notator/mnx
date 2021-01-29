@@ -283,6 +283,11 @@
                 <xs:restriction base="noteValueType" />
             </xs:simpleType>
         </xs:attribute>
+        <xs:attribute name="id">
+            <xs:simpleType>
+                <xs:restriction base="idValueType" />
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="noteType">
@@ -385,6 +390,18 @@
                <xs:pattern value="(((#([a-zA-Z0-9])*)|(()|(([1-9][0-9]*):)?(([0-9]*)?.([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))))((([ ][#])([a-zA-Z0-9])*)|(()|(([1-9][0-9]*):)?(([0-9]*)?.([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))))*)"/>
         </xs:restriction>
         
+    </xs:simpleType>
+
+    <xs:simpleType name="idValueType">
+        <xs:annotation>
+            <xs:documentation>
+                A string beginning with a character in range [a-z] or [A-Z]
+                followed by an arbitrary number of characters from [a-z], [A-Z], [0-9], '-' (minus), or '_' (underscore).
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z][a-zA-Z0-9\-_]*" />
+        </xs:restriction>
     </xs:simpleType>
     
 </xs:schema>
