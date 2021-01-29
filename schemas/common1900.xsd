@@ -63,6 +63,7 @@
             <xs:element name="time" type="timeSigType" maxOccurs="1" minOccurs="0"/>
             <xs:element name="key" type="keySigType" maxOccurs="1" minOccurs="0"/>
             <xs:element name="repeat" type="repeatType" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="ending" type="endingType" maxOccurs="2" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -98,6 +99,23 @@
         <xs:attribute name="location">
             <xs:simpleType>
                 <xs:restriction base="locationType" />
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    
+    <xs:complexType name="endingType">
+        <xs:attribute name="type">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="start|stop|discontinue"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="number">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[1-9][0-9]*" />
+                </xs:restriction>                    
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
