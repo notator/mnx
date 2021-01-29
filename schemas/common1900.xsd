@@ -245,6 +245,7 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
+            <xs:element name="beam" type="beamType" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="beam-hook" type="beamHookType" maxOccurs="2" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute name="events">
