@@ -244,6 +244,9 @@
                 a beam inside a beams element
             </xs:documentation>
         </xs:annotation>
+        <xs:sequence>
+            <xs:element name="beam-hook" type="beamHookType" maxOccurs="2" minOccurs="0"/>
+        </xs:sequence>
         <xs:attribute name="events">
             <xs:simpleType>
                 <xs:restriction base="multipleLocationsType" />
@@ -338,6 +341,36 @@
                 <xs:restriction base="xs:string">
                     <xs:pattern value="^(flat|natural|sharp|double-sharp|flat-flat)$"/>
                 </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    
+    <xs:complexType name="beamHookType">
+        <xs:annotation>
+            <xs:documentation>
+                Definition of a part measure sequence beams beam beam-hook
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="direction">
+            <xs:simpleType>
+                <xs:annotation>
+                    <xs:documentation>
+                        One of the values 'left' or 'right'
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="left|right"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="event">
+            <xs:simpleType>
+                <xs:annotation>
+                    <xs:documentation>
+                        The location of the event to which this beam-hook is attached. 
+                    </xs:documentation>
+                </xs:annotation>
+                <xs:restriction base="locationType" />
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
