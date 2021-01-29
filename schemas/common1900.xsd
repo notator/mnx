@@ -291,7 +291,7 @@
         </xs:sequence>
         <xs:attribute name="events">
             <xs:simpleType>
-                <xs:restriction base="multipleLocationsType" />
+                <xs:restriction base="locationsListType" />
             </xs:simpleType>
         </xs:attribute>        
     </xs:complexType>
@@ -544,17 +544,14 @@
         <xs:union memberTypes="locationType incomingOutgoingType" />
     </xs:simpleType>    
 
-    <xs:simpleType name="multipleLocationsType">
+    <xs:simpleType name="locationsListType">
         <xs:annotation>
             <xs:documentation>
                 A string containing a list of locationTypes separated by whitespace
                 Issue: this regex allows ID references without an initial '#' character (needs more testing)
             </xs:documentation>
         </xs:annotation>
-        <xs:restriction base="xs:string">
-               <xs:pattern value="(((#([a-zA-Z0-9])*)|(()|(([1-9][0-9]*):)?(([0-9]*)?.([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))))((([ ][#])([a-zA-Z0-9])*)|(()|(([1-9][0-9]*):)?(([0-9]*)?.([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))))*)"/>
-        </xs:restriction>
-        
+        <xs:list itemType="locationType" />       
     </xs:simpleType>
 
     <xs:simpleType name="idValueType">
