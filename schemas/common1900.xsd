@@ -335,9 +335,10 @@
             </xs:documentation>
         </xs:annotation>
         <xs:choice>
-            <xs:sequence>
+            <xs:choice maxOccurs="unbounded" minOccurs="1">
                 <xs:element name="note" type="noteType" maxOccurs="unbounded" minOccurs="1"/>
-            </xs:sequence>
+                <xs:element name="slur" type="slurType" maxOccurs="unbounded" minOccurs="0"/>                
+            </xs:choice>
             <xs:element name="rest" maxOccurs="1" minOccurs="1" />            
         </xs:choice>
         <xs:attribute name="value">
@@ -383,6 +384,26 @@
                 <xs:restriction base="xs:string">
                     <xs:pattern value="^(flat|natural|sharp|double-sharp|flat-flat)$"/>
                 </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    
+    <xs:complexType name="slurType">
+        <xs:attribute name="side">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="up|down"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="target">
+            <xs:simpleType>
+                <xs:restriction base="idReferenceType" />                    
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="location">
+            <xs:simpleType>
+                <xs:restriction base="slurLocationType" />
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
@@ -464,12 +485,33 @@
                     OR
                     { a multipleNoteValueType (2/4, 3/8, 4/2 6/1d etc.}
                 }
+                TODO: redefine this as a union of idReferenceType and a simpleLocationType
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:pattern value="((#([a-zA-Z0-9])*)|(()|(([1-9][0-9]*):)?(([0-9]*)?.([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))))"/>
         </xs:restriction>
     </xs:simpleType>
+    
+    <xs:simpleType name="incomingOutgoingType">
+        <xs:annotation>
+            <xs:documentation>
+                Part of the slurLocationType
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="incoming|outgoing"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="slurLocationType">
+        <xs:annotation>
+            <xs:documentation>
+                the value of the slur.location attribute
+            </xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="locationType incomingOutgoingType" />
+    </xs:simpleType>    
 
     <xs:simpleType name="multipleLocationsType">
         <xs:annotation>
@@ -493,6 +535,18 @@
         </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:pattern value="[a-zA-Z][a-zA-Z0-9\-_]*" />
+        </xs:restriction>
+    </xs:simpleType>
+        
+    <xs:simpleType name="idReferenceType">
+        <xs:annotation>
+            <xs:documentation>
+                A string beginning with a '#' character
+                followed by an idValueType
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[#][a-zA-Z][a-zA-Z0-9\-_]*" />
         </xs:restriction>
     </xs:simpleType>
     
