@@ -411,6 +411,16 @@
                 <xs:restriction base="slurLocationType" />
             </xs:simpleType>
         </xs:attribute>
+        <xs:attribute name="start-note">
+            <xs:simpleType>
+                <xs:restriction base="idReferenceType" />
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="end-note">
+            <xs:simpleType>
+                <xs:restriction base="idReferenceType" />
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
     
     <xs:complexType name="beamHookType">
