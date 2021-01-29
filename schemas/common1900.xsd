@@ -234,7 +234,7 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="beam" type="beamType" maxOccurs="1" minOccurs="1"/>            
+            <xs:element name="beam" type="beamType" maxOccurs="unbounded" minOccurs="1"/>            
         </xs:sequence>        
     </xs:complexType>
 
