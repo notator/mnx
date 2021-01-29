@@ -359,6 +359,9 @@
                 Definition of a part measure sequence event &lt;note&gt;
             </xs:documentation>
         </xs:annotation>
+        <xs:sequence>
+            <xs:element name="tied" type="tiedType" maxOccurs="1" minOccurs="0"/>            
+        </xs:sequence>
         <xs:attribute name="id">
             <xs:simpleType>
                 <xs:restriction base="idValueType" />
@@ -389,6 +392,19 @@
                 <xs:restriction base="xs:string">
                     <xs:pattern value="^(flat|natural|sharp|double-sharp|flat-flat)$"/>
                 </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+    
+    <xs:complexType name="tiedType">
+        <xs:annotation>
+            <xs:documentation>
+                Definition of a part measure sequence note tied element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="target">
+            <xs:simpleType>
+                <xs:restriction base="idReferenceType" />                    
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
