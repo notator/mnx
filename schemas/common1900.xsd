@@ -201,7 +201,7 @@
         <xs:attribute name="octave">
             <xs:simpleType>
                 <xs:restriction base="xs:string">
-                    <xs:pattern value="^[-]?[0-9]$"/>
+                    <xs:pattern value="[-]?[0-9]"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
@@ -376,7 +376,7 @@
                     </xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
-                    <xs:pattern value="^([A-G])(b|bb|#|##)?([0-9])$"/>
+                    <xs:pattern value="[A-G])(b|bb|#|##)?([0-9]"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
@@ -390,7 +390,7 @@
                     </xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:string">
-                    <xs:pattern value="^(flat|natural|sharp|double-sharp|flat-flat)$"/>
+                    <xs:pattern value="flat|natural|sharp|double-sharp|flat-flat"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
@@ -483,7 +483,7 @@
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:pattern value="^([1-9][0-9]*)/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)$"/>
+            <xs:pattern value="([1-9][0-9]*)/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -500,10 +500,25 @@
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:pattern value="^(1)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*)$"/>
+            <xs:pattern value="(1)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*)"/>
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="simpleLocationType">
+        <xs:annotation>
+            <xs:documentation>
+                An optional (measure number followed by a ':' character) followed by
+                EITHER
+                { a decimal floating-point number indicating the positive number of whole-notes after the start of the measure }
+                OR
+                { a multipleNoteValueType (2/4, 3/8, 4/2 6/1d etc.}
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="(([1-9][0-9]*):)?(([0-9]*.)?([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
     <xs:simpleType name="locationType">
         <xs:annotation>
             <xs:documentation>
@@ -519,9 +534,7 @@
                 TODO: redefine this as a union of idReferenceType and a simpleLocationType
             </xs:documentation>
         </xs:annotation>
-        <xs:restriction base="xs:string">
-            <xs:pattern value="((#([a-zA-Z0-9])*)|(()|(([1-9][0-9]*):)?(([0-9]*)?.([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))))"/>
-        </xs:restriction>
+        <xs:union memberTypes="idReferenceType simpleLocationType" />
     </xs:simpleType>
     
     <xs:simpleType name="incomingOutgoingType">
