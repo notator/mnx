@@ -169,7 +169,8 @@
     <xs:complexType name="sequenceType">
         <xs:annotation>
             <xs:documentation>
-                definition of a part measure &lt;sequence&gt;
+                definition of a part-measure-sequence
+                Issue: there should be some way to avoid the code duplication between sequenceType and tupletType.
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -177,6 +178,7 @@
                 <xs:element name="directions" type="sequenceDirectionsType"  maxOccurs="1" minOccurs="1"/>
                 <xs:element name="event" type="eventType" maxOccurs="1" minOccurs="1"/>
                 <xs:element name="tuplet" type="tupletType" maxOccurs="1" minOccurs="1"/>
+                <xs:element name="beams" type="beamsType" maxOccurs="1" minOccurs="1"/>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
@@ -184,7 +186,8 @@
     <xs:complexType name="tupletType">
         <xs:annotation>
             <xs:documentation>
-                definition of a part measure sequence tuplet
+                definition of a part-measure-sequence-tuplet
+                Issue: there should be some way to avoid the code duplication between sequenceType and tupletType.
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -192,6 +195,7 @@
                 <xs:element name="directions" type="sequenceDirectionsType"  maxOccurs="1" minOccurs="1"/>
                 <xs:element name="event" type="eventType" maxOccurs="1" minOccurs="1"/>
                 <xs:element name="tuplet" type="tupletType" maxOccurs="1" minOccurs="1"/>
+                <xs:element name="beams" type="beamsType" maxOccurs="1" minOccurs="1"/>
             </xs:choice>
         </xs:sequence>
         <xs:attribute name="outer">
@@ -204,6 +208,30 @@
                 <xs:restriction base="multipleNoteValueType" />
             </xs:simpleType>
         </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="beamsType">
+        <xs:annotation>
+            <xs:documentation>
+                a list of beams that begin in this part-measure-sequence
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="beam" type="beamType" maxOccurs="1" minOccurs="1"/>            
+        </xs:sequence>        
+    </xs:complexType>
+
+    <xs:complexType name="beamType">
+        <xs:annotation>
+            <xs:documentation>
+                a beam inside a beams element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="events">
+            <xs:simpleType>
+                <xs:restriction base="multipleLocationsType" />
+            </xs:simpleType>
+        </xs:attribute>        
     </xs:complexType>
 
     <xs:complexType name="sequenceDirectionsType">
@@ -342,8 +370,21 @@
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:pattern value="((#([a-z|A-Z|0-9])*)|(()|(([1-9][0-9]*):)?(([0-9]*)?.([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))))"/>
+            <xs:pattern value="((#([a-zA-Z0-9])*)|(()|(([1-9][0-9]*):)?(([0-9]*)?.([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))))"/>
         </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="multipleLocationsType">
+        <xs:annotation>
+            <xs:documentation>
+                A string containing a list of locationTypes separated by whitespace
+                Issue: this regex allows ID references without an initial '#' character (needs more testing)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+               <xs:pattern value="(((#([a-zA-Z0-9])*)|(()|(([1-9][0-9]*):)?(([0-9]*)?.([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))))((([ ][#])([a-zA-Z0-9])*)|(()|(([1-9][0-9]*):)?(([0-9]*)?.([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))))*)"/>
+        </xs:restriction>
+        
     </xs:simpleType>
     
 </xs:schema>
