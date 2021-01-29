@@ -359,6 +359,11 @@
                 Definition of a part measure sequence event &lt;note&gt;
             </xs:documentation>
         </xs:annotation>
+        <xs:attribute name="id">
+            <xs:simpleType>
+                <xs:restriction base="idValueType" />
+            </xs:simpleType>
+        </xs:attribute>
         <xs:attribute name="pitch">
             <xs:simpleType>
                 <xs:annotation>
