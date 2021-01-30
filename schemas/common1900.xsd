@@ -10,14 +10,14 @@
             *  common1900.xsd:                                           *
             *  Draft MNX common1900 Schema (.mnx file)                   *
             *                                                            *
-            *  N.B.: This Schema is a volatile draft, that validates     *
+            *  N.B.: This Schema is an evolving draft, that validates    *
             *  an expanding set of MNX common1900 Example files.         *
             *  It will change in future, as new example files are added, *
             *  leading to the creation of new complexTypes, simpleTypes  *
             *  and elements. It will also change as part of the drive    *
             *  to accomodate new, related schemas.                       *
-            *  Suggestions for new examples and/or changes to this       *
-            *  Schema would be very welcome.                             *
+            *  Suggestions for new examples and/or changes or            *
+            *  improvements to this Schema would be very welcome.        *
             *                                                            *
             *  Author(s): James Ingram...                                *
             *                                                            *
