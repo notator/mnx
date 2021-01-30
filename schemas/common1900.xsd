@@ -6,20 +6,41 @@
     <xs:annotation>
         <!--xs:documentation xml:lang="en"-->
         <xs:documentation>
-            ******************************************************
-            *  MNX Schema (.mnx files)                           *
-            *                                                    *
-            *  Licensed in accordance with the                   *
-            *  W3C COMMUNITY CONTRIBUTOR LICENSE AGREEMENT (CLA) *
-            *  https://www.w3.org/community/about/process/cla/   *
-            *                                                    *
-            ******************************************************
+            **************************************************************
+            *  common1900.xsd:                                           *
+            *  Draft MNX common1900 Schema (.mnx file)                   *
+            *                                                            *
+            *  N.B.: This Schema is a volatile draft, that validates     *
+            *  an expanding set of MNX common1900 Example files.         *
+            *  It will change in future, as new example files are added, *
+            *  leading to the creation of new complexTypes, simpleTypes  *
+            *  and elements. It will also change as part of the drive    *
+            *  to accomodate new, related schemas.                       *
+            *  Suggestions for new examples and/or changes to this       *
+            *  Schema would be very welcome.                             *
+            *                                                            *
+            *  Author(s): James Ingram...                                *
+            *                                                            *
+            *  Licensed in accordance with the                           *
+            *  W3C COMMUNITY CONTRIBUTOR LICENSE AGREEMENT (CLA)         *
+            *  https://www.w3.org/community/about/process/cla/           *
+            *  Contributors must be members of the W3C Music Notation    *
+            *  Community Notation Group:                                 *
+            *  https://www.w3.org/community/music-notation/              *
+            *  and so have already signed the above licence.             *
+            *                                                            *
+            **************************************************************
         </xs:documentation>
     </xs:annotation>
 
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
     <!-- mnx: the root element of an .mnx file -->
     <xs:element name="mnx">
+        <xs:annotation>
+            <xs:documentation>
+                the root element of an .mnx file
+            </xs:documentation>
+        </xs:annotation>
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="global" type="globalType" maxOccurs="1" minOccurs="1"/>
@@ -30,11 +51,10 @@
     
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
     <!-- Global Types -->
-
     <xs:complexType name="globalType">
         <xs:annotation>
             <xs:documentation>
-                definition of the &lt;global&gt; element
+                the global element
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -45,7 +65,7 @@
     <xs:complexType name="globalMeasureType">
         <xs:annotation>
             <xs:documentation>
-                definition of a global &lt;measure&gt;
+                the global/measure element
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -56,7 +76,7 @@
     <xs:complexType name="globalMeasureDirectionsType">
         <xs:annotation>
             <xs:documentation>
-                definition of a global measure &lt;directions&gt;
+                the global/measure/directions element
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -68,6 +88,11 @@
     </xs:complexType>
 
     <xs:complexType name="timeSigType">
+        <xs:annotation>
+            <xs:documentation>
+                the global/measure/directions/timeSig element
+            </xs:documentation>
+        </xs:annotation>
         <xs:attribute name="signature">
             <xs:simpleType>
                 <xs:restriction base="multipleNoteValueType" />
@@ -76,6 +101,11 @@
     </xs:complexType>
 
     <xs:complexType name="keySigType">
+        <xs:annotation>
+            <xs:documentation>
+                the global/measure/directions/keySig element
+            </xs:documentation>
+        </xs:annotation>
         <xs:attribute name="fifths">
             <xs:annotation>
                 <xs:documentation>
@@ -89,6 +119,11 @@
     </xs:complexType>
     
     <xs:complexType name="repeatType">
+        <xs:annotation>
+            <xs:documentation>
+                the global/measure/directions/repeat element
+            </xs:documentation>
+        </xs:annotation>
         <xs:attribute name="type">
             <xs:simpleType>
                 <xs:restriction base="xs:string">
@@ -111,6 +146,11 @@
     </xs:complexType>
     
     <xs:complexType name="endingType">
+        <xs:annotation>
+            <xs:documentation>
+                the global/measure/directions/ending element
+            </xs:documentation>
+        </xs:annotation>
         <xs:attribute name="type">
             <xs:simpleType>
                 <xs:restriction base="xs:string">
@@ -121,7 +161,7 @@
         <xs:attribute name="number">
             <xs:simpleType>
                 <xs:restriction base="xs:string">
-                    <xs:pattern value="[1-9][0-9,]*" />
+                    <xs:pattern value="[1-9,]*" />
                 </xs:restriction>                    
             </xs:simpleType>
         </xs:attribute>
@@ -133,7 +173,7 @@
     <xs:complexType name="partType">
         <xs:annotation>
             <xs:documentation>
-                definition of the &lt;part&gt; element
+                the part element
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -147,7 +187,7 @@
     <xs:complexType name="partMeasureType">
         <xs:annotation>
             <xs:documentation>
-                definition of a global &lt;measure&gt;
+                the part/measure element
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -166,7 +206,7 @@
     <xs:complexType name="partMeasureDirectionsType">
         <xs:annotation>
             <xs:documentation>
-                definition of a part measure &lt;directions&gt;
+                the part/measure/directions element
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -177,11 +217,7 @@
     <xs:complexType name="clefType">
         <xs:annotation>
             <xs:documentation>
-                Definition of a part measure directions &lt;clef&gt;:
-                Attributes:
-                sign: One of the values "G", "F", "C", "percussion", "jianpu"
-                line: an integer in range [1..9] (restrict to 5?)
-                octave: A signed integer
+                the part/measure/directions/clef element
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="sign">
@@ -210,8 +246,8 @@
     <xs:complexType name="sequenceType">
         <xs:annotation>
             <xs:documentation>
-                definition of a part-measure-sequence
-                Issue: there should be some way to avoid the code duplication between sequenceType, tupletType and graceType.
+                the part/measure/sequence element
+                Issue: is there a way to avoid the code duplication between sequenceType, tupletType and graceType?
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -225,11 +261,24 @@
         </xs:sequence>
     </xs:complexType>
 
+    <xs:complexType name="sequenceDirectionsType">
+        <xs:annotation>
+            <xs:documentation>
+                the part/measure/sequence/directions element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
+                <xs:element name="clef" type="clefType" maxOccurs="unbounded" minOccurs="0"/>
+                <xs:element name="octave-shift" type="octaveShiftType" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
     <xs:complexType name="tupletType">
         <xs:annotation>
             <xs:documentation>
-                definition of a part-measure-sequence-tuplet
-                Issue: there should be some way to avoid the code duplication between sequenceType, tupletType and graceType.
+                the part/measure/sequence/tuplet element (recursive)
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -238,7 +287,8 @@
                 <xs:element name="event" type="eventType" maxOccurs="1" minOccurs="1"/>
                 <xs:element name="tuplet" type="tupletType" maxOccurs="1" minOccurs="0"/>
                 <xs:element name="grace" type="graceType" maxOccurs="1" minOccurs="1"/>
-                <!-- I have disallowed a beams element here. j.i. -->            </xs:choice>
+                <!-- beams are not allowed here. j.i. -->
+            </xs:choice>
         </xs:sequence>
         <xs:attribute name="outer">
             <xs:simpleType>
@@ -255,15 +305,14 @@
     <xs:complexType name="graceType">
         <xs:annotation>
             <xs:documentation>
-                definition of a part-measure-sequence-grace
-                Issue: there should be some way to avoid the code duplication between sequenceType, tupletType and graceType.
+                the part/measure/sequence/grace element
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:choice maxOccurs="unbounded" minOccurs="1">
                 <xs:element name="directions" type="sequenceDirectionsType"  maxOccurs="1" minOccurs="0"/>
                 <xs:element name="event" type="eventType" maxOccurs="1" minOccurs="1"/>
-                <!-- I have disallowed tuplet, grace and beams elements here. j.i. -->
+                <!-- tuplet, grace and beams elements are not allowed here. j.i. -->
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
@@ -271,7 +320,8 @@
     <xs:complexType name="beamsType">
         <xs:annotation>
             <xs:documentation>
-                a list of beams that begin in this part-measure-sequence
+                the part/measure/sequence/beams element
+                (contains a list of the beam elements that begin in this part-measure-sequence)
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -282,7 +332,7 @@
     <xs:complexType name="beamType">
         <xs:annotation>
             <xs:documentation>
-                a beam inside a beams element
+                the part/measure/sequence/beams/beam element
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -296,24 +346,31 @@
         </xs:attribute>        
     </xs:complexType>
 
-    <xs:complexType name="sequenceDirectionsType">
+    <xs:complexType name="beamHookType">
         <xs:annotation>
             <xs:documentation>
-                definition of a part measure &lt;directions&gt;
+                the part/measure/sequence/beams/beam/beam-hook element
             </xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:choice maxOccurs="unbounded" minOccurs="0">
-                <xs:element name="clef" type="clefType" maxOccurs="unbounded" minOccurs="0"/>
-                <xs:element name="octave-shift" type="octaveShiftType" maxOccurs="unbounded" minOccurs="0"/>
-            </xs:choice>
-        </xs:sequence>
+        <xs:attribute name="direction">
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="left|right"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="event">
+            <xs:simpleType>
+                <xs:restriction base="locationType" />
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="octaveShiftType">
         <xs:annotation>
             <xs:documentation>
-                definition of a part measure directions octave-shift
+                the part/measure/sequence/directions/octave-shift element
+                Issue: Should this element also be allowed in part/measure/directions ?
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="type">
@@ -331,7 +388,7 @@
     <xs:complexType name="eventType">
         <xs:annotation>
             <xs:documentation>
-                definition of a part measure sequence &lt;event&gt;
+                the part/measure/sequence/event element
             </xs:documentation>
         </xs:annotation>
         <xs:choice>
@@ -356,7 +413,7 @@
     <xs:complexType name="noteType">
         <xs:annotation>
             <xs:documentation>
-                Definition of a part measure sequence event &lt;note&gt;
+                the part/measure/sequence/event/note element
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -399,7 +456,10 @@
     <xs:complexType name="tiedType">
         <xs:annotation>
             <xs:documentation>
-                Definition of a part measure sequence note tied element
+                the part/measure/sequence/event/note/tied element
+                Issue: could we rename tied->tie?
+                This element is called 'tied' because 'tie' is used for something else in MusicXML,
+                but 'tie' would be better in the long run in MNX, because it corresponds to 'slur'.
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="target">
@@ -410,6 +470,11 @@
     </xs:complexType>
     
     <xs:complexType name="slurType">
+        <xs:annotation>
+            <xs:documentation>
+                the part/measure/sequence/event/slur element
+            </xs:documentation>
+        </xs:annotation>
         <xs:attribute name="side">
             <xs:simpleType>
                 <xs:restriction base="xs:string">
@@ -438,54 +503,9 @@
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
-    
-    <xs:complexType name="beamHookType">
-        <xs:annotation>
-            <xs:documentation>
-                Definition of a part measure sequence beams beam beam-hook
-            </xs:documentation>
-        </xs:annotation>
-        <xs:attribute name="direction">
-            <xs:simpleType>
-                <xs:annotation>
-                    <xs:documentation>
-                        One of the values 'left' or 'right'
-                    </xs:documentation>
-                </xs:annotation>
-                <xs:restriction base="xs:string">
-                    <xs:pattern value="left|right"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
-        <xs:attribute name="event">
-            <xs:simpleType>
-                <xs:annotation>
-                    <xs:documentation>
-                        The location of the event to which this beam-hook is attached. 
-                    </xs:documentation>
-                </xs:annotation>
-                <xs:restriction base="locationType" />
-            </xs:simpleType>
-        </xs:attribute>
-    </xs:complexType>
 
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
     <!-- Simple Types -->
-
-    <xs:simpleType name="multipleNoteValueType">
-        <xs:annotation>
-            <xs:documentation>
-                An integer string that does not begin with 0, but that has an unlimited number of digits,
-                followed by a "/" character,
-                followed by one of the strings "8L", "4L", "2L", "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"
-                The strings "8L" "4L" and "2L" denote maxima, long and breve noteValues respectively.
-                (See MusicXML's note-value-type, that extends from maxima to 1024th note.)
-            </xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:string">
-            <xs:pattern value="([1-9][0-9]*)/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)"/>
-        </xs:restriction>
-    </xs:simpleType>
 
     <xs:simpleType name="noteValueType">
         <xs:annotation>
@@ -494,13 +514,25 @@
                 an optional '1' character
                 followed by a compulsory "/" character,
                 followed by one of the strings "8L", "4L", "2L", "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"
-                followed by zero or more 'd' characters
-                The strings "8L" "4L" and "2L" denote maxima, long and breve noteValues respectively.
                 (See MusicXML's note-value-type, that extends from maxima to 1024th note.)
+                Issue: I have decided to associate the strings "8L" "4L" and "2L" with maxima, long and breve respectively,
+                so as to differentiate them from eighth-, quarter- and half-notes. Is that okay? (see also multipleNoteValueType)
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
             <xs:pattern value="(1)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*)"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="multipleNoteValueType">
+        <xs:annotation>
+            <xs:documentation>
+                An integer string that does not begin with 0, but that has an unlimited number of digits,
+                followed by a noteValueType. (Issue: see noteValueType)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="([1-9][0-9]*)/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -512,26 +544,22 @@
                 { a decimal floating-point number indicating the positive number of whole-notes after the start of the measure }
                 OR
                 { a multipleNoteValueType (2/4, 3/8, 4/2 6/1d etc.}
+                Issue: I think it would be better if the _measure_ component was _relative_ to the measure in which this
+                simpleLocation is defined. (Not absolute as defined in the Draft Spec.) That would keep the numbers down, and
+                be easier to check. For example: 1:2/4 would always mean 2 quarter-notes after the beginning of the following measure.
+                It would also be possible to have negative measure components: -2:3/8 would mean 3 eighth-notes after the beginning
+                of two measures earlier. This also solves the problem of "measure indices starting at 1"...
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
-            <xs:pattern value="(([1-9][0-9]*):)?(([0-9]*.)?([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))"/>
+            <xs:pattern value="(([1-9][0-9]*):)?(([0-9]*\.)?([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))"/>
         </xs:restriction>
     </xs:simpleType>
     
     <xs:simpleType name="locationType">
         <xs:annotation>
             <xs:documentation>
-                EITHER
-                { a reference to an ID (these consist of a '#' character, followed by arbitrary alphanumeric characters) }
-                OR
-                { an optional (measure number followed by a ':' character) followed by
-                    EITHER
-                    { a decimal floating-point number indicating the positive number of whole-notes after the start of the measure }
-                    OR
-                    { a multipleNoteValueType (2/4, 3/8, 4/2 6/1d etc.}
-                }
-                TODO: redefine this as a union of idReferenceType and a simpleLocationType
+                EITHER an idReferenceType OR a simpleLocationType.
             </xs:documentation>
         </xs:annotation>
         <xs:union memberTypes="idReferenceType simpleLocationType" />
@@ -540,7 +568,7 @@
     <xs:simpleType name="incomingOutgoingType">
         <xs:annotation>
             <xs:documentation>
-                Part of the slurLocationType
+                a component of the slurLocationType
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:string">
@@ -551,7 +579,8 @@
     <xs:simpleType name="slurLocationType">
         <xs:annotation>
             <xs:documentation>
-                the value of the slur.location attribute
+                the value of the slur.location attribute:
+                EITHER a locationType OR an incomingOutgoingType
             </xs:documentation>
         </xs:annotation>
         <xs:union memberTypes="locationType incomingOutgoingType" />
@@ -560,8 +589,8 @@
     <xs:simpleType name="locationsListType">
         <xs:annotation>
             <xs:documentation>
-                A string containing a list of locationTypes separated by whitespace
-                Issue: this regex allows ID references without an initial '#' character (needs more testing)
+                A string containing a list of locationTypes separated by whitespace.
+                This is the value of the part/measure/sequence/beams/beam/events attribute.
             </xs:documentation>
         </xs:annotation>
         <xs:list itemType="locationType" />       
@@ -570,6 +599,7 @@
     <xs:simpleType name="idValueType">
         <xs:annotation>
             <xs:documentation>
+                All ID attributes are of this form. It is defined here as:
                 A string beginning with a character in range [a-z] or [A-Z]
                 followed by an arbitrary number of characters from [a-z], [A-Z], [0-9], '-' (minus), or '_' (underscore).
             </xs:documentation>
@@ -582,6 +612,7 @@
     <xs:simpleType name="idReferenceType">
         <xs:annotation>
             <xs:documentation>
+                All ID references are of this form. It is defined here as:
                 A string beginning with a '#' character
                 followed by an idValueType
             </xs:documentation>
