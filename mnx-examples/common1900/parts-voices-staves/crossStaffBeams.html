@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Cross-staff beams</title>
+    <link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+    <div class="center">
+    <h2>Cross-staff beams</h2>
+    <img class="exampleimg" src="../images/crossStaffBeams.png">
+    <p class="examplenotes">MusicXML supports two ways of organizing parts:</p>
+    <ul class="examplenotes">
+        <li>If the top-level element is <code>&lt;score-partwise&gt;</code>, then the markup must contain <code>&lt;part&gt;</code> elements that contain <code>&lt;measure&gt;</code> elements.</li>
+        <li>If the top-level element is <code>&lt;score-timewise&gt;</code>, then the markup must contain <code>&lt;measure&gt;</code> elements that contain <code>&lt;part&gt;</code> elements.</li>
+    </ul>
+    <p class="examplenotes">MNX has only one way, similar to MusicXML’s <code>&lt;score-partwise&gt;</code>. Each <code>&lt;part&gt;</code> contains <code>&lt;measure&gt;</code> elements.</p>
+    <p class="examplenotes">In MusicXML, part metadata such as the title lives within a <code>&lt;part-list&gt;</code> element. In MNX, part metadata goes in the individual <code>&lt;part&gt;</code> element.</p>
+    <p class="examplenotes">Note that all references to an internal id consist of a '#' character followed by the id string.</p>
+    </div>
+    <div id="markupexamplesparts" class="markupexamples">
+        <div class="markupexample">
+            <h3>MusicXML</h3>
+            TODO:
+        </div>
+        <div class="markupexample">
+            <h3>MNX</h3>
+            <div class="markupcode">
+            <script type="application/xml" class="markupxml"><mnx>
+    <global>
+        <measure/>
+    </global>
+    <part> <!-- a single part on a grand staff having two staves -->
+      <part-name>Piano</part-name>
+      <measure>
+        <sequence staff="1"> <!-- default staff number for this voice -->
+          <directions>
+            <clef sign="G" line="2"/>
+          </directions>
+          <event value="/4" >
+            <note pitch="C5"/>
+          </event>
+        </sequence>
+        <sequence staff="2"> <!-- default staff number for this voice -->
+          <directions>
+            <clef sign="F" line="4"/>
+          </directions>
+          <event value="/16" id="event1">
+            <note pitch="Ab3"/>
+          </event>
+          <event value="/16" id="event2">
+            <note pitch="C4"/>
+          </event>
+          <event value="/16" staff="1" id="event3"> <!-- override default staff number -->
+            <note pitch="F4"/>
+          </event>
+          <event value="/16" staff="1" id="event4"> <!-- override default staff number -->
+            <note pitch="E4"/>
+          </event>
+          <beams>
+            <beam events="#event1 #event2 #event3 #event4" >
+              <beam events="#event1 #event2 #event3 #event4"" />
+            </beam>
+          </beams>
+        </sequence>
+      </measure>
+   </part>
+</mnx></script>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="../../script.js"></script>
+</body>
+</html>

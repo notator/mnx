@@ -296,6 +296,18 @@
                 <xs:element name="beams" type="beamsType" maxOccurs="1" minOccurs="1"/>
             </xs:choice>
         </xs:sequence>
+        <xs:attribute name="staff">
+            <xs:annotation>
+                <xs:documentation>
+                    Issue: is 9 possible staves enough?  (see also eventType)
+                </xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[1-9]" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="sequenceDirectionsType">
@@ -443,6 +455,18 @@
         <xs:attribute name="id">
             <xs:simpleType>
                 <xs:restriction base="idValueType" />
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="staff">
+            <xs:annotation>
+                <xs:documentation>
+                    Issue: is 9 possible staves enough? (see also sequenceType)
+                </xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[1-9]" />
+                </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
