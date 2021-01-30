@@ -209,9 +209,10 @@
                 the part/measure/directions element
             </xs:documentation>
         </xs:annotation>
-        <xs:sequence>
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
             <xs:element name="clef" type="clefType" maxOccurs="unbounded" minOccurs="0"/>
-        </xs:sequence>
+            <xs:element name="text" type="textType" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:choice>
     </xs:complexType>
 
     <xs:complexType name="clefType">
@@ -238,6 +239,42 @@
             <xs:simpleType>
                 <xs:restriction base="xs:string">
                     <xs:pattern value="[-]?[0-9]"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="textType">
+        <xs:annotation>
+            <xs:documentation>
+                the part/measure/directions/text element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="location">
+            <xs:simpleType>
+                <xs:restriction base="locationType"/>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="text">
+            <xs:simpleType>
+                <xs:restriction base="xs:string" />
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="align">
+            <xs:annotation>
+                <xs:documentation>
+                    Issue: I (ji) am currently assuming that:
+                    If align has one of the values 'left', 'right' or 'centre', the text will be aligned
+                    to the event whose location is given by the location attribute.
+                    If align has one of the values 'barlineLeft', 'barlineRight' or 'barlineCentre', the
+                    text will be aligned to the barline at the beginning of the measure, and the location
+                    attribute will be ignored.
+                    Is that okay?
+                </xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="left|right|center|barlineLeft|barlineRight|barlineCenter"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
