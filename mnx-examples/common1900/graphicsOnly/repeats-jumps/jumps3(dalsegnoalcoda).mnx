@@ -1,0 +1,87 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE mnx SYSTEM "../../../../schemas/mnx.dtd">
+<mnx
+xmlns="https://github.com/w3c/mnx"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xsd">
+    <global>
+        <measure>
+            <directions>
+                <time signature="4/4"/>
+            </directions>
+        </measure>
+        <measure/>
+        <measure/>
+        <measure/>
+        <measure/>
+        <measure/>
+        <measure/>
+    </global>
+    <part>
+        <part-name>Music</part-name>
+        <measure> <!-- m 1 -->
+            <directions>
+                <clef sign="G" line="2"/>
+            </directions>
+            <sequence>
+                <event value="/1">
+                    <note pitch="C5"/>
+                </event>
+            </sequence>
+        </measure>
+        <measure> <!-- m 2 -->
+            <directions>
+                <text location="0" text="&segno;" align="center" /> <!-- see: the Alignment issue -->
+            </directions>
+            <sequence>
+                <event value="/1">
+                    <note pitch="E5"/>
+                </event>
+            </sequence>
+        </measure>
+        <measure> <!-- m 3 -->
+            <directions>
+                <text location="4/4" text="al Coda" align="right"/>
+            </directions>
+            <sequence>
+                <event value="/1">
+                    <note pitch="C5"/>
+                </event>
+            </sequence>
+        </measure>
+        <measure> <!-- m 4 -->
+            <sequence>
+                <event value="/1">
+                    <note pitch="F5"/>
+                </event>
+            </sequence>
+        </measure>
+        <measure> <!-- m 5 -->
+            <directions>
+                <text location="4/4" text="D.S. al Coda" align="right"/>
+            </directions>
+            <sequence>
+                <event value="/1">
+                    <note pitch="C5"/>
+                </event>
+            </sequence>
+        </measure>
+        <measure> <!-- m 6 -->
+            <sequence>
+                <event value="/1">
+                    <note pitch="F5"/>
+                </event>
+            </sequence>
+        </measure>
+        <measure> <!-- m 7 -->
+            <directions>
+                <text location="0" text="&coda;" align="barlineCenter"/> <!-- see: the Alignment issue -->
+            </directions>
+            <sequence>
+                <event value="/1">
+                    <note pitch="C5"/>
+                </event>
+            </sequence>
+        </measure>
+    </part>
+</mnx>

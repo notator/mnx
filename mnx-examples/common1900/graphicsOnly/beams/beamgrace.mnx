@@ -1,0 +1,46 @@
+﻿<?xml version="1.0"?>
+<mnx
+xmlns="https://github.com/w3c/mnx"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xsd">
+    <global>
+        <measure>
+            <directions>
+                <time signature="4/4"/>
+            </directions>
+        </measure>
+    </global>
+    <part>
+        <part-name>Music</part-name>
+        <measure>
+            <directions>
+                <clef line="2" sign="G"/>
+            </directions>
+            <sequence>
+                <beams>
+                    <beam events="#ev1 #ev3 #ev4 #ev5"/>
+                </beams>
+                <event id="ev1" value="/8">
+                    <note pitch="C5"/>
+                </event>
+                <grace>
+                    <event value="/8">
+                        <note pitch="B4"/>
+                    </event>
+                </grace>
+                <event id="ev3" value="/8">
+                    <note pitch="D5"/>
+                </event>
+                <event id="ev4" value="/8">
+                    <note pitch="E5"/>
+                </event>
+                <event id="ev5" value="/8">
+                    <note pitch="F5"/>
+                </event>
+                <event value="/2">
+                    <rest/>
+                </event>
+            </sequence>
+        </measure>
+    </part>
+</mnx>

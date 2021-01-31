@@ -161,7 +161,7 @@
         <xs:attribute name="number">
             <xs:simpleType>
                 <xs:restriction base="xs:string">
-                    <xs:pattern value="[1-9,]*" />
+                    <xs:pattern value="[1-9,\.]*" />
                 </xs:restriction>                    
             </xs:simpleType>
         </xs:attribute>

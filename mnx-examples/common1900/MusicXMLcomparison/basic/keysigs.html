@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Key signatures</title>
+    <link rel="stylesheet" href="../../../styles.css">
+</head>
+<body>
+    <div class="center">
+    <h2>Key signatures</h2>
+    <img class="exampleimg" src="../_images/example-keysigs.png">
+    <p class="examplenotes">In MusicXML, each part’s <code>&lt;measure&gt;</code> can contain an <code>&lt;attributes&gt;</code> element with an optional <code>&lt;key&gt;</code>. MNX uses a score-wide <code>&lt;global&gt;</code> element. In both cases, you only specify the key signature when it differs from the previous bar.</p>
+    <p class="showui">Show:
+        <label><input type="radio" name="togglekeysig" class="switchdiff" data-example="keysig" value="1" checked> Relevant section</label>
+        <label><input type="radio" name="togglekeysig" class="switchdiff" data-example="keysig" value="2"> Full document</label>
+    </p>
+    </div>
+    <div id="markupexampleskeysig" class="markupexamples onlydiff">
+        <div class="markupexample">
+            <h3>MusicXML</h3>
+            <div class="markupcode">
+            <script type="application/xml" class="markupxml nodiff"><score-partwise version="3.1">
+    <part-list>
+        <score-part id="P1">
+            <part-name>Music</part-name>
+        </score-part>
+    </part-list>
+    <part id="P1">
+        <measure number="1">
+            <attributes>
+                <divisions>256</divisions>
+</script><script type="application/xml" class="markupxml diff">                <key>
+                    <fifths>4</fifths>
+                </key>
+</script><script type="application/xml" class="markupxml nodiff">                <time>
+                    <beats>4</beats>
+                    <beat-type>4</beat-type>
+                </time>
+                <clef>
+                    <sign>G</sign>
+                    <line>2</line>
+                </clef>
+            </attributes>
+            <note>
+                <pitch>
+                    <step>E</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+            </note>
+            <note>
+                <pitch>
+                    <step>F</step>
+                    <alter>1</alter>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+            </note>
+            <note>
+                <pitch>
+                    <step>G</step>
+                    <alter>1</alter>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+            </note>
+            <note>
+                <pitch>
+                    <step>E</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+            </note>
+        </measure>
+        <measure number="2">
+            <note>
+                <pitch>
+                    <step>G</step>
+                    <alter>1</alter>
+                    <octave>5</octave>
+                </pitch>
+                <duration>1024</duration>
+                <type>whole</type>
+            </note>
+        </measure>
+        <measure number="3">
+            <attributes>
+</script><script type="application/xml" class="markupxml diff">                <key>
+                    <fifths>-4</fifths>
+                </key>
+</script><script type="application/xml" class="markupxml nodiff">            </attributes>
+            <note>
+                <pitch>
+                    <step>A</step>
+                    <alter>-1</alter>
+                    <octave>4</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+            </note>
+            <note>
+                <pitch>
+                    <step>B</step>
+                    <alter>-1</alter>
+                    <octave>4</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+            </note>
+            <note>
+                <pitch>
+                    <step>C</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+            </note>
+            <note>
+                <pitch>
+                    <step>A</step>
+                    <alter>-1</alter>
+                    <octave>4</octave>
+                </pitch>
+                <duration>256</duration>
+                <type>quarter</type>
+            </note>
+        </measure>
+        <measure number="4">
+            <note>
+                <pitch>
+                    <step>C</step>
+                    <octave>5</octave>
+                </pitch>
+                <duration>1024</duration>
+                <type>whole</type>
+            </note>
+        </measure>
+    </part>
+</score-partwise></script>
+            </div>
+        </div>
+        <div class="markupexample">
+            <h3>MNX</h3>
+            <div class="markupcode">
+            <script type="application/xml" class="markupxml nodiff"><mnx>
+    <global>
+        <measure>
+            <directions>
+                <time signature="4/4"/>
+</script><script type="application/xml" class="markupxml diff">                <key fifths="4"/>
+</script><script type="application/xml" class="markupxml nodiff">            </directions>
+        </measure>
+        <measure/>
+        <measure>
+            <directions>
+</script><script type="application/xml" class="markupxml diff">                <key fifths="-4"/>
+</script><script type="application/xml" class="markupxml nodiff">            </directions>
+        </measure>
+        <measure/>
+    </global>
+    <part>
+        <part-name>Music</part-name>
+        <measure>
+            <directions>
+                <clef sign="G" line="2"/>
+            </directions>
+            <sequence>
+                <event value="/4">
+                    <note pitch="E5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="F#5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="G#5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="E5"/>
+                </event>
+            </sequence>
+        </measure>
+        <measure>
+            <sequence>
+                <event value="/1">
+                    <note pitch="G#5"/>
+                </event>
+            </sequence>
+        </measure>
+        <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="Ab4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="Bb4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="C5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="Ab4"/>
+                </event>
+            </sequence>
+        </measure>
+        <measure>
+            <sequence>
+                <event value="/1">
+                    <note pitch="C5"/>
+                </event>
+            </sequence>
+        </measure>
+    </part>
+</mnx></script>
+            </div>
+        </div>
+    </div>
+<script type="text/javascript" src="../../../script.js"></script>
+</body>
+</html>

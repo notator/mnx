@@ -1,0 +1,73 @@
+﻿<?xml version="1.0"?>
+<mnx
+xmlns="https://github.com/w3c/mnx"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xsd">
+    <global>
+        <measure>
+            <directions>
+                <time signature="4/4"/>
+            </directions>
+        </measure>
+    </global>
+    <part>
+        <part-name>Music</part-name>
+        <measure>
+            <directions>
+                <clef line="2" sign="G"/>
+            </directions>
+            <sequence>
+                <beams>
+                    <beam events="#grace1 #grace2"/>
+                    <beam events="#grace3 #grace4 #grace5"/>
+                    <beam events="#grace6 #grace7 #grace8 #grace9"/>
+                </beams>
+                <event value="/8">
+                    <note pitch="C5"/>
+                </event>
+                <grace>                
+                    <event value="/8" id="grace1">
+                        <note pitch="B4"/>
+                    </event>
+                    <event value="/8" id="grace2">
+                        <note pitch="C5"/>
+                    </event>
+                </grace>
+                <event value="/8">
+                    <note pitch="D5"/>
+                </event>
+                <grace>                
+                    <event value="/8" id="grace3">
+                        <note pitch="B4"/>
+                    </event>
+                    <event value="/8" id="grace4">
+                        <note pitch="C5"/>
+                    </event>
+                    <event value="/8" id="grace5">
+                        <note pitch="D5"/>
+                    </event>
+                </grace>
+                <event value="/8">
+                    <note pitch="E5"/>
+                </event>
+                <grace>                
+                    <event value="/8" id="grace6">
+                        <note pitch="B4"/>
+                    </event>
+                    <event value="/8" id="grace7">
+                        <note pitch="C5"/>
+                    </event>
+                    <event value="/8" id="grace8">
+                        <note pitch="D5"/>
+                    </event>
+                    <event value="/8" id="grace9">
+                        <note pitch="E5"/>
+                    </event>
+                </grace>
+                <event value="/8">
+                    <note pitch="F5"/>
+                </event>
+            </sequence>
+        </measure>
+    </part>
+</mnx>
