@@ -6,14 +6,16 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
     <global> 
         <measure>
             <directions>
+                <instrSections>
+                    <section name="woodwind" >
+                        <partGroup name="Flute" abbreviatedBasename="Fl." />
+                        <partGroup name="Oboe" abbreviatedBasename="Ob." />
+                    </section>
+                    <section name="piano" >
+                        <partGroup name="Piano" abbreviatedBasename="Piano" />
+                    </section>
+                </instrSections>
                 <time signature="3/4"/>
-                <section name="woodwind" >
-                    <partGroup name="Flute" abbreviatedBasename="Fl." nParts="3" />
-                    <partGroup name="Oboe" abbreviatedBasename="Ob." nParts="2" />
-                </section>
-                <section name="piano" >
-                    <partGroup name="Piano" abbreviatedBasename="Piano" nParts="1" />
-                </section>
             </directions>
         </measure>
         <measure/>
