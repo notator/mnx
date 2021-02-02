@@ -191,7 +191,7 @@
                 <xs:restriction base="idValueType" />
             </xs:simpleType>
         </xs:attribute>
-        <xs:attribute name="basename">
+        <xs:attribute name="partGroup">
             <xs:annotation>
                 <xs:documentation>
                     This string will be printed followed by the number-in-section (if any)

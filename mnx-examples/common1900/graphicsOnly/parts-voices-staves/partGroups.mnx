@@ -3,11 +3,17 @@
 xmlns="https://github.com/w3c/mnx"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xsd">
-
     <global> 
         <measure>
             <directions>
                 <time signature="3/4"/>
+                <section name="woodwind" >
+                    <partGroup name="Flute" abbreviatedBasename="Fl." nParts="3" />
+                    <partGroup name="Oboe" abbreviatedBasename="Ob." nParts="2" />
+                </section>
+                <section name="piano" >
+                    <partGroup name="Piano" abbreviatedBasename="Piano" nParts="1" />
+                </section>
             </directions>
         </measure>
         <measure/>
@@ -19,32 +25,32 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
     </global>
 
     <!-- like the parts defined in §6.1.7 in the current spec -->
-    <part id="fl1" basename="Flute" abbreviatedBasename="Fl." partNumberInGroup="1">
+    <part id="fl1" partGroup="Flute" partNumberInGroup="1">
         <measure>...</measure>
         <measure>...</measure>
         <measure>...</measure>
     </part>
-    <part id="fl2" basename="Flute" abbreviatedBasename="Fl." partNumberInGroup="2">
+    <part id="fl2" partGroup="Flute" partNumberInGroup="2">
         <measure>...</measure>
         <measure>...</measure>
         <measure>...</measure>
     </part>
-    <part id="fl3" basename="Flute" abbreviatedBasename="Fl." partNumberInGroup="3">
+    <part id="fl3" partGroup="Flute" partNumberInGroup="3">
         <measure>...</measure>
         <measure>...</measure>
         <measure>...</measure>
     </part>
-    <part id="ob1" basename="Oboe" abbreviatedBasename="Ob." partNumberInGroup="1">
+    <part id="ob1" partGroup="Oboe" partNumberInGroup="1">
         <measure>...</measure>
         <measure>...</measure>
         <measure>...</measure>
     </part>
-    <part id="ob1" basename="Oboe" abbreviatedBasename="Ob." partNumberInGroup="2">
+    <part id="ob2" partGroup="Oboe" partNumberInGroup="2">
         <measure>...</measure>
         <measure>...</measure>
         <measure>...</measure>
     </part>
-    <part id="piano" basename="Piano" abbreviatedBasename="Piano">
+    <part id="piano" partGroup="Piano">
         <measure>...</measure>
         <measure>...</measure>
         <measure>...</measure>
