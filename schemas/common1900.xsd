@@ -178,14 +178,63 @@
         <xs:annotation>
             <xs:documentation>
                 the part element
+                Issue: I'm using baseName, abbreviatedBasename and partNumberInGroup attributes here
+                instead of MusicXML's part-name and part-abbreviation elements. 
+                The MusicXML instrument-sound element has not (yet) been defined here.
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="part-name" type="xs:string" maxOccurs="1" minOccurs="0"/>
-            <xs:element name="part-abbreviation" type="xs:string" maxOccurs="1" minOccurs="0"/>
-            <!--<xs:element name="instrument-sound" type="xs:string" maxOccurs="0" minOccurs="0"/> -->
             <xs:element name="measure" type="partMeasureType" maxOccurs="unbounded" minOccurs="1"/>
         </xs:sequence>
+        <xs:attribute name="id">
+            <xs:simpleType>
+                <xs:restriction base="idValueType" />
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="basename">
+            <xs:annotation>
+                <xs:documentation>
+                    This string will be printed followed by the number-in-section (if any)
+                    (e.g. if basename=Flute, part-number="1", Flute 1 will be printed on the booklet.)
+                    Used on the front of the part's booklet, and to the left of the score's first system.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:string"/>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="abbreviatedBasename">
+             <xs:annotation>
+                <xs:documentation>
+                    The string that is used in the score from system 2 onwards
+                    EITHER concatenated before a part-number
+                           and printed to the left of a staff that is only used by this part.
+                    OR printed, vertically centred, to the left of a brace that encloses parts
+                           having the same part-abbreviation-root.
+                    (e.g. Fl.)
+                </xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:string"/>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="partNumberInGroup">
+             <xs:annotation>
+                <xs:documentation>
+                    The part's number in the group (optional).
+                    This attribute can be omitted if there is only one part having this basename.
+                    This value can either be concatenated, after a space, to the basename
+                    or abbreviatedBasename
+                    or used on its own, centred above othe partNumbers, in front of staves
+                    containing more than one part.
+                </xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:string">
+                    <xs:pattern value="[1-9][0-9]*" />
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="partMeasureType">
