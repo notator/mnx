@@ -39,10 +39,6 @@
         <xs:annotation>
             <xs:documentation>
                 the root element of an .mnx file
-                Issue1: The Draft Spec says that there can be more than one global element
-                (enclosed in a globals element).
-                That does not seem necessary in this common1900 schema.
-                Issue2: should the part elements be enclosed in a parts element?
             </xs:documentation>
         </xs:annotation>
         <xs:complexType>
