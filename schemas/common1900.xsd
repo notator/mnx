@@ -184,6 +184,7 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
+            <xs:element name="part-name" type="xs:string" maxOccurs="1" minOccurs="0"/>
             <xs:element name="measure" type="partMeasureType" maxOccurs="unbounded" minOccurs="1"/>
         </xs:sequence>
         <xs:attribute name="id">
