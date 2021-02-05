@@ -130,7 +130,7 @@
         </xs:annotation>
         <xs:attribute name="type">
             <xs:simpleType>
-                <xs:restriction base="xs:string">
+                <xs:restriction base="xs:token">
                     <xs:pattern value="start|end"/>
                 </xs:restriction>
             </xs:simpleType>
@@ -142,7 +142,7 @@
         </xs:attribute>
         <xs:attribute name="times">
             <xs:simpleType>
-                <xs:restriction base="xs:string">
+                <xs:restriction base="xs:token">
                     <xs:pattern value="[1-9][0-9]*" />
                 </xs:restriction>                    
             </xs:simpleType>
@@ -157,14 +157,14 @@
         </xs:annotation>
         <xs:attribute name="type">
             <xs:simpleType>
-                <xs:restriction base="xs:string">
+                <xs:restriction base="xs:token">
                     <xs:pattern value="start|stop|discontinue"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
         <xs:attribute name="number">
             <xs:simpleType>
-                <xs:restriction base="xs:string">
+                <xs:restriction base="xs:token">
                     <xs:pattern value="[1-9,\.]*" />
                 </xs:restriction>                    
             </xs:simpleType>
@@ -184,7 +184,7 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="part-name" type="xs:string" maxOccurs="1" minOccurs="0"/>
+            <xs:element name="part-name" type="xs:token" maxOccurs="1" minOccurs="0"/>
             <xs:element name="measure" type="partMeasureType" maxOccurs="unbounded" minOccurs="1"/>
         </xs:sequence>
         <xs:attribute name="id">
@@ -201,7 +201,7 @@
                 </xs:documentation>
             </xs:annotation>
             <xs:simpleType>
-                <xs:restriction base="xs:string"/>
+                <xs:restriction base="xs:token"/>
             </xs:simpleType>
         </xs:attribute>
         <xs:attribute name="abbreviatedBasename">
@@ -216,7 +216,7 @@
                 </xs:documentation>
             </xs:annotation>
             <xs:simpleType>
-                <xs:restriction base="xs:string"/>
+                <xs:restriction base="xs:token"/>
             </xs:simpleType>
         </xs:attribute>
         <xs:attribute name="partNumberInGroup">
@@ -231,7 +231,7 @@
                 </xs:documentation>
             </xs:annotation>
             <xs:simpleType>
-                <xs:restriction base="xs:string">
+                <xs:restriction base="xs:token">
                     <xs:pattern value="[1-9][0-9]*" />
                 </xs:restriction>
             </xs:simpleType>
@@ -277,21 +277,21 @@
         </xs:annotation>
         <xs:attribute name="sign">
             <xs:simpleType>
-                <xs:restriction base="xs:string">
+                <xs:restriction base="xs:token">
                     <xs:pattern value="G|F|C|percussion|jianpu"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
         <xs:attribute name="line">
             <xs:simpleType>
-                <xs:restriction base="xs:string">
+                <xs:restriction base="xs:token">
                     <xs:pattern value="[1-9]"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
         <xs:attribute name="octave">
             <xs:simpleType>
-                <xs:restriction base="xs:string">
+                <xs:restriction base="xs:token">
                     <xs:pattern value="[-]?[0-9]"/>
                 </xs:restriction>
             </xs:simpleType>
@@ -311,7 +311,7 @@
         </xs:attribute>
         <xs:attribute name="text">
             <xs:simpleType>
-                <xs:restriction base="xs:string" />
+                <xs:restriction base="xs:token" />
             </xs:simpleType>
         </xs:attribute>
         <xs:attribute name="align">
@@ -327,7 +327,7 @@
                 </xs:documentation>
             </xs:annotation>
             <xs:simpleType>
-                <xs:restriction base="xs:string">
+                <xs:restriction base="xs:token">
                     <xs:pattern value="left|right|center|barlineLeft|barlineRight|barlineCenter"/>
                 </xs:restriction>
             </xs:simpleType>
@@ -357,7 +357,7 @@
                 </xs:documentation>
             </xs:annotation>
             <xs:simpleType>
-                <xs:restriction base="xs:string">
+                <xs:restriction base="xs:token">
                     <xs:pattern value="[1-9]" />
                 </xs:restriction>
             </xs:simpleType>
@@ -457,7 +457,7 @@
         </xs:annotation>
         <xs:attribute name="direction">
             <xs:simpleType>
-                <xs:restriction base="xs:string">
+                <xs:restriction base="xs:token">
                     <xs:pattern value="left|right"/>
                 </xs:restriction>
             </xs:simpleType>
@@ -518,7 +518,7 @@
                 </xs:documentation>
             </xs:annotation>
             <xs:simpleType>
-                <xs:restriction base="xs:string">
+                <xs:restriction base="xs:token">
                     <xs:pattern value="[1-9]" />
                 </xs:restriction>
             </xs:simpleType>
@@ -547,7 +547,7 @@
                         followed by a character in range [0-9].
                     </xs:documentation>
                 </xs:annotation>
-                <xs:restriction base="xs:string">
+                <xs:restriction base="xs:token">
                     <xs:pattern value="[A-G])(b|bb|#|##)?([0-9]"/>
                 </xs:restriction>
             </xs:simpleType>
@@ -561,7 +561,7 @@
                         See Issue #184 (Unicode accidentals) 
                     </xs:documentation>
                 </xs:annotation>
-                <xs:restriction base="xs:string">
+                <xs:restriction base="xs:token">
                     <xs:pattern value="flat|natural|sharp|double-sharp|flat-flat"/>
                 </xs:restriction>
             </xs:simpleType>
@@ -592,7 +592,7 @@
         </xs:annotation>
         <xs:attribute name="side">
             <xs:simpleType>
-                <xs:restriction base="xs:string">
+                <xs:restriction base="xs:token">
                     <xs:pattern value="up|down"/>
                 </xs:restriction>
             </xs:simpleType>
@@ -634,7 +634,7 @@
                 so as to differentiate them from eighth-, quarter- and half-notes. Is that okay? (see also multipleNoteValueType)
             </xs:documentation>
         </xs:annotation>
-        <xs:restriction base="xs:string">
+        <xs:restriction base="xs:token">
             <xs:pattern value="(1)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*)"/>
         </xs:restriction>
     </xs:simpleType>
@@ -646,7 +646,7 @@
                 followed by a noteValueType. (Issue: see noteValueType)
             </xs:documentation>
         </xs:annotation>
-        <xs:restriction base="xs:string">
+        <xs:restriction base="xs:token">
             <xs:pattern value="([1-9][0-9]*)/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)"/>
         </xs:restriction>
     </xs:simpleType>
@@ -666,7 +666,7 @@
                 of two measures earlier. This also solves the problem of "measure indices starting at 1"...
             </xs:documentation>
         </xs:annotation>
-        <xs:restriction base="xs:string">
+        <xs:restriction base="xs:token">
             <xs:pattern value="(([1-9][0-9]*):)?(([0-9]*\.)?([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))"/>
         </xs:restriction>
     </xs:simpleType>
@@ -686,7 +686,7 @@
                 a component of the slurLocationType
             </xs:documentation>
         </xs:annotation>
-        <xs:restriction base="xs:string">
+        <xs:restriction base="xs:token">
             <xs:pattern value="incoming|outgoing"/>
         </xs:restriction>
     </xs:simpleType>
@@ -719,7 +719,7 @@
                 followed by an arbitrary number of characters from [a-z], [A-Z], [0-9], '-' (minus), or '_' (underscore).
             </xs:documentation>
         </xs:annotation>
-        <xs:restriction base="xs:string">
+        <xs:restriction base="xs:token">
             <xs:pattern value="[a-zA-Z][a-zA-Z0-9\-_]*" />
         </xs:restriction>
     </xs:simpleType>
@@ -732,7 +732,7 @@
                 followed by an idValueType
             </xs:documentation>
         </xs:annotation>
-        <xs:restriction base="xs:string">
+        <xs:restriction base="xs:token">
             <xs:pattern value="[#][a-zA-Z][a-zA-Z0-9\-_]*" />
         </xs:restriction>
     </xs:simpleType>
