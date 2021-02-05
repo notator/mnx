@@ -499,7 +499,7 @@
                 <xs:element name="note" type="noteType" maxOccurs="unbounded" minOccurs="1"/>
                 <xs:element name="slur" type="slurType" maxOccurs="unbounded" minOccurs="0"/>                
             </xs:choice>
-            <xs:element name="rest" maxOccurs="1" minOccurs="1" />            
+            <xs:element name="rest" type="xs:string" fixed="" maxOccurs="1" minOccurs="1" />            
         </xs:choice>
         <xs:attribute name="value">
             <xs:simpleType>
