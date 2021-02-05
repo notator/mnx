@@ -2,7 +2,7 @@
 <mnx
 xmlns="https://github.com/w3c/mnx"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="https://github.com/w3c/mnx ../../../../../schemas/common1900.xsd">
+xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xsd">
     <global>
         <measure>
             <directions>
