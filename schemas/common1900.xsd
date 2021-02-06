@@ -97,7 +97,7 @@
                 the global/measure/directions/timeSig element
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="signature">
+        <xs:attribute name="signature" use="required">
             <xs:simpleType>
                 <xs:restriction base="multipleNoteValueType" />
             </xs:simpleType>
@@ -110,7 +110,7 @@
                 the global/measure/directions/keySig element
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="fifths">
+        <xs:attribute name="fifths" use="required">
             <xs:annotation>
                 <xs:documentation>
                     An optional '-' or '+' character followed by one or more characters in range [0..9]
@@ -128,7 +128,7 @@
                 the global/measure/directions/repeat element
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="type">
+        <xs:attribute name="type" use="required">
             <xs:simpleType>
                 <xs:restriction base="xs:token">
                     <xs:pattern value="start|end"/>
@@ -142,9 +142,7 @@
         </xs:attribute>
         <xs:attribute name="times">
             <xs:simpleType>
-                <xs:restriction base="xs:token">
-                    <xs:pattern value="[1-9][0-9]*" />
-                </xs:restriction>                    
+                <xs:restriction base="xs:positiveInteger" />                   
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
@@ -155,7 +153,7 @@
                 the global/measure/directions/ending element
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="type">
+        <xs:attribute name="type" use="required">
             <xs:simpleType>
                 <xs:restriction base="xs:token">
                     <xs:pattern value="start|stop|discontinue"/>
@@ -231,9 +229,7 @@
                 </xs:documentation>
             </xs:annotation>
             <xs:simpleType>
-                <xs:restriction base="xs:token">
-                    <xs:pattern value="[1-9][0-9]*" />
-                </xs:restriction>
+                <xs:restriction base="xs:positiveInteger" />
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
@@ -248,7 +244,7 @@
             <xs:element name="directions" type="partMeasureDirectionsType" maxOccurs="1" minOccurs="0"/>
             <xs:element name="sequence" type="sequenceType" maxOccurs="unbounded" minOccurs="1"/>
         </xs:sequence>
-        <xs:attribute name="barline">
+        <xs:attribute name="barline" default="regular">
             <xs:simpleType>
                 <xs:restriction base="xs:token">
                     <xs:pattern value="regular|dotted|dashed|heavy|light-light|light-heavy|heavy-light|heavy-heavy|tick|short|none"/>
@@ -275,24 +271,25 @@
                 the part/measure/directions/clef element
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="sign">
+        <xs:attribute name="sign" use="required">
             <xs:simpleType>
                 <xs:restriction base="xs:token">
                     <xs:pattern value="G|F|C|percussion|jianpu"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
-        <xs:attribute name="line">
+        <xs:attribute name="line" use="required">
             <xs:simpleType>
                 <xs:restriction base="xs:token">
                     <xs:pattern value="[1-9]"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
-        <xs:attribute name="octave">
+        <xs:attribute name="octave" default="0">
             <xs:simpleType>
-                <xs:restriction base="xs:token">
-                    <xs:pattern value="[-]?[0-9]"/>
+                <xs:restriction base="xs:int">
+                    <xs:minInclusive value="-4" />
+                    <xs:maxInclusive value="4" />
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
@@ -314,7 +311,7 @@
                 <xs:restriction base="xs:token" />
             </xs:simpleType>
         </xs:attribute>
-        <xs:attribute name="align">
+        <xs:attribute name="align" default="left">
             <xs:annotation>
                 <xs:documentation>
                     Issue: I (ji) am currently assuming that:
@@ -353,13 +350,11 @@
         <xs:attribute name="staff">
             <xs:annotation>
                 <xs:documentation>
-                    Issue: is 9 possible staves enough?  (see also eventType)
+                    
                 </xs:documentation>
             </xs:annotation>
             <xs:simpleType>
-                <xs:restriction base="xs:token">
-                    <xs:pattern value="[1-9]" />
-                </xs:restriction>
+                <xs:restriction base="xs:positiveInteger" />           
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
@@ -393,12 +388,12 @@
                 <!-- beams are not allowed here. j.i. -->
             </xs:choice>
         </xs:sequence>
-        <xs:attribute name="outer">
+        <xs:attribute name="outer" use="required">
             <xs:simpleType>
                 <xs:restriction base="multipleNoteValueType" />
             </xs:simpleType>
         </xs:attribute>
-        <xs:attribute name="inner">
+        <xs:attribute name="inner" use="required">
             <xs:simpleType>
                 <xs:restriction base="multipleNoteValueType" />
             </xs:simpleType>
@@ -442,7 +437,7 @@
             <xs:element name="beam" type="beamType" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="beam-hook" type="beamHookType" maxOccurs="2" minOccurs="0"/>
         </xs:sequence>
-        <xs:attribute name="events">
+        <xs:attribute name="events" use="required">
             <xs:simpleType>
                 <xs:restriction base="locationsListType" />
             </xs:simpleType>
@@ -455,14 +450,14 @@
                 the part/measure/sequence/beams/beam/beam-hook element
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="direction">
+        <xs:attribute name="direction" use="required">
             <xs:simpleType>
                 <xs:restriction base="xs:token">
                     <xs:pattern value="left|right"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
-        <xs:attribute name="event">
+        <xs:attribute name="event" use="required">
             <xs:simpleType>
                 <xs:restriction base="locationType" />
             </xs:simpleType>
@@ -476,12 +471,12 @@
                 Issue: Should this element also be allowed in part/measure/directions ?
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="type">
+        <xs:attribute name="type" use="required">
             <xs:simpleType>
                 <xs:restriction base="xs:integer" />
             </xs:simpleType>
         </xs:attribute>
-        <xs:attribute name="end">
+        <xs:attribute name="end" use="required">
             <xs:simpleType>
                 <xs:restriction base="locationType" />
             </xs:simpleType>
@@ -501,7 +496,7 @@
             </xs:choice>
             <xs:element name="rest" type="xs:string" fixed="" />            
         </xs:choice>
-        <xs:attribute name="value">
+        <xs:attribute name="value" use="required">
             <xs:simpleType>
                 <xs:restriction base="noteValueType" />
             </xs:simpleType>
@@ -514,13 +509,11 @@
         <xs:attribute name="staff">
             <xs:annotation>
                 <xs:documentation>
-                    Issue: is 9 possible staves enough? (see also sequenceType)
+                    
                 </xs:documentation>
             </xs:annotation>
             <xs:simpleType>
-                <xs:restriction base="xs:token">
-                    <xs:pattern value="[1-9]" />
-                </xs:restriction>
+                <xs:restriction base="xs:positiveInteger" />
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
@@ -539,7 +532,7 @@
                 <xs:restriction base="idValueType" />
             </xs:simpleType>
         </xs:attribute>
-        <xs:attribute name="pitch">
+        <xs:attribute name="pitch" use="required">
             <xs:simpleType>
                 <xs:annotation>
                     <xs:documentation>
@@ -552,17 +545,18 @@
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
-        <xs:attribute name="accidental">
+        <xs:attribute name="accidental" default="none">
             <xs:simpleType>
                 <xs:annotation>
                     <xs:documentation>
-                        One of the values 'flat', 'natural', 'sharp', 'double-sharp', 'flat-flat'
+                        The value 'none' or one of the values 'flat', 'natural', 'sharp', 'double-sharp', 'flat-flat'
                         (that have been imported from MusicXML).
-                        See Issue #184 (Unicode accidentals) 
+                        See Issue #184 (Unicode accidentals)
+                        Issue: use doubleSharp and flatFlat to avoid using '-' characters?
                     </xs:documentation>
                 </xs:annotation>
                 <xs:restriction base="xs:token">
-                    <xs:pattern value="flat|natural|sharp|double-sharp|flat-flat"/>
+                    <xs:pattern value="none|flat|natural|sharp|double-sharp|flat-flat"/>
                 </xs:restriction>
             </xs:simpleType>
         </xs:attribute>
@@ -577,7 +571,7 @@
                 but 'tie' would be better in the long run in MNX, because it corresponds to 'slur'.
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="target">
+        <xs:attribute name="target" use="required">
             <xs:simpleType>
                 <xs:restriction base="idReferenceType" />                    
             </xs:simpleType>
@@ -590,7 +584,7 @@
                 the part/measure/sequence/event/slur element
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="side">
+        <xs:attribute name="side" use="required">
             <xs:simpleType>
                 <xs:restriction base="xs:token">
                     <xs:pattern value="up|down"/>
