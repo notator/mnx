@@ -50,6 +50,7 @@
                 <xs:element name="global" type="globalType" maxOccurs="1" minOccurs="1"/>
                 <xs:element name="part" type="partType" maxOccurs="unbounded" minOccurs="1"/>
                 <xs:element name="systemLayouts" type="systemLayoutsType" maxOccurs="1" minOccurs="0"/>
+                <xs:element name="scores" type="scoresType" maxOccurs="1" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -724,8 +725,77 @@
     </xs:complexType>
 
     <xs:complexType name="staffGroupStaffType">
-        <xs:attribute name="partIDs" type="idReferenceListType" use="required" />
+        <xs:attribute name="parts" type="idReferenceListType" use="required" />
         <xs:attribute name="staff" type="xs:positiveInteger" default="1" />
+    </xs:complexType>
+
+    <xs:complexType name="scoresType">
+        <xs:sequence>
+            <xs:element name="score" type="scoreType" maxOccurs="unbounded" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="scoreType">
+        <xs:sequence>
+            <xs:element name="globals" type="globalType" maxOccurs="1" minOccurs="0" />
+            <xs:element name="systemLayouts" type="systemLayoutsType" maxOccurs="1" minOccurs="0" />
+            <xs:element name="scoreLayout" type="scoreLayoutType" maxOccurs="1" minOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="name" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:token" />
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="scoreLayoutType">
+        <xs:annotation>
+            <xs:documentation>
+                (j.i.) I think the actual dimensions on the screen or paper should be
+                controlled by the client application.
+                The margins should be handled as they are in CSS:
+                One value means set all margins to that value,
+                Two values means set top and bottom to the first value, left and right to the second value,
+                Four values are in the order top, right, bottom, left.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="page" type="pageType" maxOccurs="unbounded" minOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="relWidth" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:positiveInteger" />
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="relHeight" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:positiveInteger" />
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="relMargins" use="required">
+            <xs:simpleType>
+                <xs:restriction base="positiveIntegerListType" />
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="pageType">
+        <xs:sequence>
+            <xs:element name="system" type="systemType" maxOccurs="unbounded" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="systemType">
+        <xs:attribute name="startMeasureNumber" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:positiveInteger" />
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="systemLayout" use="required">
+            <xs:simpleType>
+                <xs:restriction base="idReferenceType" />
+            </xs:simpleType>
+        </xs:attribute>
     </xs:complexType>
     
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
@@ -818,6 +888,15 @@
             </xs:documentation>
         </xs:annotation>
         <xs:list itemType="locationType" />       
+    </xs:simpleType>
+
+    <xs:simpleType name="positiveIntegerListType">
+        <xs:annotation>
+            <xs:documentation>
+                A string containing a list of xs:positiveInteger separated by whitespace.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:list itemType="xs:positiveInteger" />
     </xs:simpleType>
 
     <xs:simpleType name="idReferenceListType">
