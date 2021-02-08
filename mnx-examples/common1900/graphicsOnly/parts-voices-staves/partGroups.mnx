@@ -7,13 +7,13 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
         <measure>
             <directions>
                 <instrSections>
-                    <section name="woodwind" >
+                    <instrSection name="woodwind" >
                         <partGroup name="Flute" abbreviatedBasename="Fl." />
                         <partGroup name="Oboe" abbreviatedBasename="Ob." />
-                    </section>
-                    <section name="piano" >
+                    </instrSection>
+                    <instrSection name="piano" >
                         <partGroup name="Piano" abbreviatedBasename="Piano" />
-                    </section>
+                    </instrSection>
                 </instrSections>
                 <time signature="3/4"/>
             </directions>

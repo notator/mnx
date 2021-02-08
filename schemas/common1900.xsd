@@ -84,10 +84,13 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="time" type="timeSigType" maxOccurs="1" minOccurs="0"/>
-            <xs:element name="key" type="keySigType" maxOccurs="1" minOccurs="0"/>
-            <xs:element name="repeat" type="repeatType" maxOccurs="unbounded" minOccurs="0"/>
-            <xs:element name="ending" type="endingType" maxOccurs="2" minOccurs="0"/>
+            <xs:choice minOccurs="0" maxOccurs="unbounded" >
+                <xs:element name="time" type="timeSigType" maxOccurs="1" minOccurs="0"/>
+                <xs:element name="key" type="keySigType" maxOccurs="1" minOccurs="0"/>
+                <xs:element name="repeat" type="repeatType" maxOccurs="unbounded" minOccurs="0"/>
+                <xs:element name="ending" type="endingType" maxOccurs="2" minOccurs="0"/>
+                <xs:element name="instrSections" type="instrSectionsType" maxOccurs="1" minOccurs="0"/>
+            </xs:choice>
         </xs:sequence>
     </xs:complexType>
 
@@ -146,7 +149,7 @@
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
-    
+
     <xs:complexType name="endingType">
         <xs:annotation>
             <xs:documentation>
@@ -164,7 +167,52 @@
             <xs:simpleType>
                 <xs:restriction base="xs:token">
                     <xs:pattern value="[1-9,\.]*" />
-                </xs:restriction>                    
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="instrSectionsType">
+        <xs:annotation>
+            <xs:documentation>
+                the global/measure/directions/instrSections element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="instrSection" type="instrSectionType" maxOccurs="unbounded" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="instrSectionType">
+        <xs:annotation>
+            <xs:documentation>
+                the global/measure/directions/instrSection element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="partGroup" type="partGroupType" maxOccurs="unbounded" minOccurs="1"/>
+        </xs:sequence>
+        <xs:attribute name="name">
+            <xs:simpleType>
+                <xs:restriction base="xs:token" />
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="partGroupType">
+        <xs:annotation>
+            <xs:documentation>
+                the global/measure/directions/instrSection/partGroup element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="name" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:token" />
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="abbreviatedBasename">
+            <xs:simpleType>
+                <xs:restriction base="xs:token" />
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
