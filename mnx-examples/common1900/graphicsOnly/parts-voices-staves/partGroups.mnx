@@ -521,10 +521,37 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
 
     <!-- global systemLayout-definitions (optional) -->
     <systemLayouts>
-        <systemLayout id="globalSysLayout1">... </systemLayout>
-        <systemLayout id="globalSysLayout2">... </systemLayout>
-        <systemLayout id="globalSysLayout3">... </systemLayout>
-        <!-- etc., more global systemLayout definitions -->
+        <systemLayout id="globalSysLayout1">
+            <staffGroup name="Woodwind" bracket="straight" barline="true" displayName="false" >
+                <staffGroup name="Flutes" bracket="curly" barline="true" displayName="true" >
+                    <staffGroupStaff partIDs="#fl1 #fl2" />
+                    <staffGroupStaff partIDs="#fl3" />                    
+                </staffGroup>
+                <staffGroup name="Oboes" bracket="none" barline="true" displayName="true" >
+                    <staffGroupStaff partIDs="#ob1 #ob2" />                   
+                </staffGroup>               
+            </staffGroup>
+            <staffGroup name="Piano" bracket="curly" barline="true" displayName="true" >
+                <staffGroupStaff partIDs="#piano" staff="1" />
+                <staffGroupStaff partIDs="#piano" staff="2" />
+            </staffGroup> 
+        </systemLayout>
+        <systemLayout id="globalSysLayout2">
+            <staffGroup name="Woodwind" bracket="straight" barline="true" displayName="false" >
+                <staffGroup name="Fl." bracket="curly" barline="true" displayName="true" >
+                    <staffGroupStaff partIDs="#fl1" />
+                    <staffGroupStaff partIDs="#fl2" />
+                    <staffGroupStaff partIDs="#fl3" />                    
+                </staffGroup>
+                <staffGroup name="Ob." bracket="none" barline="true" displayName="true" >
+                    <staffGroupStaff partIDs="#ob1 #ob2" />                   
+                </staffGroup>               
+            </staffGroup>
+            <staffGroup name="Piano" bracket="curly" barline="true" displayName="true" >
+                <staffGroupStaff partIDs="#piano" staff="1" />
+                <staffGroupStaff partIDs="#piano" staff="2" />
+            </staffGroup> 
+        </systemLayout>
     </systemLayouts>
 
     <!-- all the scores in this mnx element -->

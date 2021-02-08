@@ -49,6 +49,7 @@
             <xs:sequence>
                 <xs:element name="global" type="globalType" maxOccurs="1" minOccurs="1"/>
                 <xs:element name="part" type="partType" maxOccurs="unbounded" minOccurs="1"/>
+                <xs:element name="systemLayouts" type="systemLayoutsType" maxOccurs="1" minOccurs="0"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -662,6 +663,72 @@
     </xs:complexType>
 
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+    <!-- Layout Types -->
+
+    <xs:complexType name="systemLayoutsType">
+        <xs:sequence>
+            <xs:element name="systemLayout" type="systemLayoutType" maxOccurs="unbounded" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="systemLayoutType">
+        <xs:sequence>
+            <xs:element name="staffGroup" type="staffGroupType" maxOccurs="unbounded" minOccurs="1" />
+        </xs:sequence>
+        <xs:attribute name="id">
+            <xs:simpleType>
+                <xs:restriction base="idValueType" />
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="staffGroupType">
+        <xs:annotation>
+            <xs:documentation>
+                This element is recursive.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:choice maxOccurs="unbounded" minOccurs="1">
+                <xs:element name="staffGroup" type="staffGroupType" maxOccurs="unbounded" minOccurs="0" />
+                <xs:element name="staffGroupStaff" type="staffGroupStaffType" maxOccurs="unbounded" minOccurs="0" />
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="name" use="required">
+            <xs:annotation>
+                <xs:documentation>
+                    This name must match the name of a partGroup
+                </xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:token" />
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="bracket" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:pattern value="none|curly|straight"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="barline" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:boolean" />
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="displayName" use="required">
+            <xs:simpleType>
+                <xs:restriction base="xs:boolean" />
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="staffGroupStaffType">
+        <xs:attribute name="partIDs" type="idReferenceListType" use="required" />
+        <xs:attribute name="staff" type="xs:positiveInteger" default="1" />
+    </xs:complexType>
+    
+    <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
     <!-- Simple Types -->
 
     <xs:simpleType name="noteValueType">
@@ -751,6 +818,15 @@
             </xs:documentation>
         </xs:annotation>
         <xs:list itemType="locationType" />       
+    </xs:simpleType>
+
+    <xs:simpleType name="idReferenceListType">
+        <xs:annotation>
+            <xs:documentation>
+                A string containing a list of idReferenceTypes separated by whitespace.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:list itemType="idReferenceType" />
     </xs:simpleType>
 
     <xs:simpleType name="idValueType">
