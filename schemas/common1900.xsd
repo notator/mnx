@@ -91,7 +91,7 @@
                 <xs:element name="key" type="keySigType" maxOccurs="1" minOccurs="0"/>
                 <xs:element name="repeat" type="repeatType" maxOccurs="unbounded" minOccurs="0"/>
                 <xs:element name="ending" type="endingType" maxOccurs="2" minOccurs="0"/>
-                <xs:element name="instrSections" type="instrSectionsType" maxOccurs="1" minOccurs="0"/>
+                <xs:element name="partGroups" type="partGroupsType" maxOccurs="1" minOccurs="0"/>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
@@ -174,31 +174,15 @@
         </xs:attribute>
     </xs:complexType>
 
-    <xs:complexType name="instrSectionsType">
+    <xs:complexType name="partGroupsType">
         <xs:annotation>
             <xs:documentation>
-                the global/measure/directions/instrSections element
-            </xs:documentation>
-        </xs:annotation>
-        <xs:sequence>
-            <xs:element name="instrSection" type="instrSectionType" maxOccurs="unbounded" minOccurs="1"/>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="instrSectionType">
-        <xs:annotation>
-            <xs:documentation>
-                the global/measure/directions/instrSection element
+                the global/measure/directions/partGroups element
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="partGroup" type="partGroupType" maxOccurs="unbounded" minOccurs="1"/>
         </xs:sequence>
-        <xs:attribute name="name">
-            <xs:simpleType>
-                <xs:restriction base="xs:token" />
-            </xs:simpleType>
-        </xs:attribute>
     </xs:complexType>
 
     <xs:complexType name="partGroupType">
@@ -207,16 +191,10 @@
                 the global/measure/directions/instrSection/partGroup element
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="name" use="required">
-            <xs:simpleType>
-                <xs:restriction base="xs:token" />
-            </xs:simpleType>
-        </xs:attribute>
-        <xs:attribute name="abbreviatedBasename">
-            <xs:simpleType>
-                <xs:restriction base="xs:token" />
-            </xs:simpleType>
-        </xs:attribute>
+        <xs:attribute name="id" type="idValueType" use="required" />
+        <xs:attribute name="groupName" type="xs:token" use="required" />
+        <xs:attribute name="name" type="xs:token" use="required" />
+        <xs:attribute name="nameAbbrev" type="xs:token" use="required" />
     </xs:complexType>
     
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
@@ -225,9 +203,13 @@
     <xs:complexType name="partType">
         <xs:annotation>
             <xs:documentation>
-                the part element
-                Issue: I'm using baseName, abbreviatedBasename and partNumberInGroup attributes here
-                instead of MusicXML's part-name and part-abbreviation elements. 
+                The partGroup groupName, name and nameAbbrev are retrieved via the partGroup ID.
+                The partNumberInGroup is determined by the attribute: A value of 0 means that the group
+                has no other members. If non-0:
+                a) the value can be concatenated, after a space, to either partGroup's name or nameAbbrev.
+                b) used on its own, centred above othe partNumbers, in front of staves.
+                Issue: I'm using partGroup name, nameAbbrev and partNumberInGroup here
+                instead of MusicXML's part-name and part-abbreviation elements.
                 The MusicXML instrument-sound element has not (yet) been defined here.
             </xs:documentation>
         </xs:annotation>
@@ -235,53 +217,9 @@
             <xs:element name="part-name" type="xs:token" maxOccurs="1" minOccurs="0"/>
             <xs:element name="measure" type="partMeasureType" maxOccurs="unbounded" minOccurs="1"/>
         </xs:sequence>
-        <xs:attribute name="id">
-            <xs:simpleType>
-                <xs:restriction base="idValueType" />
-            </xs:simpleType>
-        </xs:attribute>
-        <xs:attribute name="partGroup">
-            <xs:annotation>
-                <xs:documentation>
-                    This string will be printed followed by the number-in-section (if any)
-                    (e.g. if basename=Flute, part-number="1", Flute 1 will be printed on the booklet.)
-                    Used on the front of the part's booklet, and to the left of the score's first system.
-                </xs:documentation>
-            </xs:annotation>
-            <xs:simpleType>
-                <xs:restriction base="xs:token"/>
-            </xs:simpleType>
-        </xs:attribute>
-        <xs:attribute name="abbreviatedBasename">
-             <xs:annotation>
-                <xs:documentation>
-                    The string that is used in the score from system 2 onwards
-                    EITHER concatenated before a part-number
-                           and printed to the left of a staff that is only used by this part.
-                    OR printed, vertically centred, to the left of a brace that encloses parts
-                           having the same part-abbreviation-root.
-                    (e.g. Fl.)
-                </xs:documentation>
-            </xs:annotation>
-            <xs:simpleType>
-                <xs:restriction base="xs:token"/>
-            </xs:simpleType>
-        </xs:attribute>
-        <xs:attribute name="partNumberInGroup">
-             <xs:annotation>
-                <xs:documentation>
-                    The part's number in the group (optional).
-                    This attribute can be omitted if there is only one part having this basename.
-                    This value can either be concatenated, after a space, to the basename
-                    or abbreviatedBasename
-                    or used on its own, centred above othe partNumbers, in front of staves
-                    containing more than one part.
-                </xs:documentation>
-            </xs:annotation>
-            <xs:simpleType>
-                <xs:restriction base="xs:positiveInteger" />
-            </xs:simpleType>
-        </xs:attribute>
+        <xs:attribute name="id" type="idValueType" use="required" />
+        <xs:attribute name="partGroup" type="idReferenceType" use="required" />
+        <xs:attribute name="partNumberInGroup" type="xs:nonNegativeInteger" default="0" />
     </xs:complexType>
 
     <xs:complexType name="partMeasureType">
@@ -673,12 +611,85 @@
     </xs:complexType>
 
     <xs:complexType name="systemLayoutType">
-        <xs:sequence>
-            <xs:element name="staffGroup" type="staffGroupType" maxOccurs="unbounded" minOccurs="1" />
-        </xs:sequence>
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="partGroupStaff" type="partGroupStaffType" />
+            <xs:element name="partStaff" type="partStaffType" />
+            <xs:element name="partStaves" type="partStavesType" />
+            <xs:element name="staffGroup" type="staffGroupType" />
+        </xs:choice>
         <xs:attribute name="id">
             <xs:simpleType>
                 <xs:restriction base="idValueType" />
+            </xs:simpleType>
+        </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="partGroupStaffType">
+        <xs:annotation>
+            <xs:documentation>
+                One staff containing data from more than one part.
+                The parts' groupName, name and nameAbbrev are retrieved from the partGroup
+                via the part definitions.
+                The parts', partNumberInGroup values are retrieved via the part definitions,
+                and are often printed, aligned vertically, immediately to the left of the staff.
+                There is no bracket to the left of the staff.
+                Appropriate types of barline are always printed.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="parts" type="idReferenceListType" use="required" />
+        <xs:attribute name="displayGroupName" type="xs:boolean" default="false" />
+        <xs:attribute name="displayName" type="xs:boolean" default="false" />
+        <xs:attribute name="displayNameAbbrev" type="xs:boolean" default="false" />
+        <xs:attribute name="displayPartNumbers" type="xs:boolean" default="false" />
+    </xs:complexType>
+
+    <xs:complexType name="partStaffType">
+        <xs:annotation>
+            <xs:documentation>
+                One staff containing data from one part.
+                The part's name and nameAbbrev can be retrieved from the partGroup via the part definition.
+                The part's, partNumberInGroup value can be retrieved via the part definition and, if non-zero,
+                concatenated with the name or nameAbbrev and printed to the left of the staff.
+                There is no bracket to the left of the staff.
+                Appropriate types of barline are always printed.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="part" type="idReferenceType" use="required" />
+        <xs:attribute name="displayName" type="xs:boolean" default="false" />
+        <xs:attribute name="displayNameAbbrev" type="xs:boolean" default="false" />
+        <xs:attribute name="displayPartNumber" type="xs:boolean" default="false" />
+    </xs:complexType>
+    
+    <xs:complexType name="partStavesType">
+        <xs:annotation>
+            <xs:documentation>
+                One or more staves containing data from one part (default is 2 staves).
+                The part's name and nameAbbrev can be retrieved from the partGroup via the part definition.
+                The part's, partNumberInGroup value can be retrieved via the part definition and, if non-zero,
+                concatenated with the name or nameAbbrev and printed to the left of the staves.
+                By default, there is a curly bracket to the left of the staves.
+                Appropriate types of barline are always printed through all the staves.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="part" type="idReferenceType" use="required" />
+        <xs:attribute name="displayName" type="xs:boolean" default="false" />
+        <xs:attribute name="displayNameAbbrev" type="xs:boolean" default="false" />
+        <xs:attribute name="displayPartNumber" type="xs:boolean" default="false" />
+        <xs:attribute name="bracket" default="curly">
+            <xs:simpleType>
+                <xs:restriction base="xs:token">
+                    <xs:pattern value="none|curly|straight"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:attribute>
+        <xs:attribute name="nStaves" default="2">
+            <xs:annotation>
+                <xs:documentation>
+                    The number of staves in this partSystem
+                </xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+                <xs:restriction base="xs:positiveInteger" />
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
@@ -687,46 +698,24 @@
         <xs:annotation>
             <xs:documentation>
                 This element is recursive.
+                The name attribute is just informative. Its not used for anything except documentation.
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:choice maxOccurs="unbounded" minOccurs="1">
-                <xs:element name="staffGroup" type="staffGroupType" maxOccurs="unbounded" minOccurs="0" />
-                <xs:element name="staffGroupStaff" type="staffGroupStaffType" maxOccurs="unbounded" minOccurs="0" />
+                <xs:element name="partGroupStaff" type="partGroupStaffType" />
+                <xs:element name="partStaff" type="partStaffType" />
+                <xs:element name="partStaves" type="partStavesType" />
+                <xs:element name="staffGroup" type="staffGroupType" />
             </xs:choice>
         </xs:sequence>
-        <xs:attribute name="name" use="required">
-            <xs:annotation>
-                <xs:documentation>
-                    This name must match the name of a partGroup
-                </xs:documentation>
-            </xs:annotation>
-            <xs:simpleType>
-                <xs:restriction base="xs:token" />
-            </xs:simpleType>
-        </xs:attribute>
-        <xs:attribute name="bracket" use="required">
-            <xs:simpleType>
-                <xs:restriction base="xs:token">
-                    <xs:pattern value="none|curly|straight"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:attribute>
-        <xs:attribute name="barline" use="required">
-            <xs:simpleType>
-                <xs:restriction base="xs:boolean" />
-            </xs:simpleType>
-        </xs:attribute>
-        <xs:attribute name="displayName" use="required">
-            <xs:simpleType>
-                <xs:restriction base="xs:boolean" />
-            </xs:simpleType>
-        </xs:attribute>
-    </xs:complexType>
-
-    <xs:complexType name="staffGroupStaffType">
-        <xs:attribute name="parts" type="idReferenceListType" use="required" />
-        <xs:attribute name="staff" type="xs:positiveInteger" default="1" />
+        <xs:attribute name="name" type="xs:token" default="" />
+        <xs:attribute name="bracket" type="bracketType" use="required" />
+        <xs:attribute name="barline" type="xs:boolean" use="required" />
+        <xs:attribute name="displayGroupName" type="xs:boolean" default="false" />
+        <xs:attribute name="displayName" type="xs:boolean" default="false" />
+        <xs:attribute name="displayNameAbbrev" type="xs:boolean" default="false" />
+        <xs:attribute name="displayPartNumber" type="xs:boolean" default="false" />
     </xs:complexType>
 
     <xs:complexType name="scoresType">
@@ -801,6 +790,17 @@
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
     <!-- Simple Types -->
 
+    <xs:simpleType name="bracketType">
+        <xs:annotation>
+            <xs:documentation>
+                The types of bracket that can occur to the left of systems and staves
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:pattern value="none|curly|straight"/>
+        </xs:restriction>        
+    </xs:simpleType>
+    
     <xs:simpleType name="noteValueType">
         <xs:annotation>
             <xs:documentation>
