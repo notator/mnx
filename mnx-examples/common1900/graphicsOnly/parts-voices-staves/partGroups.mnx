@@ -6,11 +6,6 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
     <global> 
         <measure>
             <directions>
-                <partGroups>
-                    <partGroup id="flutesPartGroup" groupName="Flutes" name="Flute" nameAbbrev="Fl." />
-                    <partGroup id="oboesPartGroup" groupName="Oboes" name="Oboe" nameAbbrev="Ob." />
-                    <partGroup id="pianoPartGroup" groupName="Piano" name="Piano" nameAbbrev="Piano" />
-                </partGroups>
                 <time signature="3/4"/>
             </directions>
         </measure>
@@ -22,378 +17,393 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
         <measure/>
     </global>
 
-    <!-- like the parts defined in §6.1.7 in the current spec -->
-    <part id="fl1" partGroup="#flutesPartGroup" partNumberInGroup="1">
-        <!-- the clef will be defined in the systemLayout -->
-        <measure>
-            <sequence>
+    <parts>
+        <!-- like the parts defined in §6.1.7 in the current spec -->
+        <part id="fl1" partGroup="#flutesPartGroup" partNumberInGroup="1">
+            <partGroup id="flutesPartGroup" groupName="Flutes" name="Flute" nameAbbrev="Fl." />
+            <!-- the clef will be defined in the systemLayout -->
+            <measures>
+                <measure>
+                <sequence>
                 <event value="/2d">
                     <note pitch="C5"/>
                 </event>
             </sequence>
-        </measure>
-        <measure>
-            <sequence>
+            </measure>
+                <measure>
+                <sequence>
                 <event value="/2d">
                     <note pitch="D5"/>
                 </event>
             </sequence>
-        </measure>
-        <measure>
-            <sequence>
+            </measure>
+                <measure>
+                <sequence>
                 <event value="/2d">
                     <note pitch="E5"/>
                 </event>
             </sequence>
-        </measure>
-        <measure>
-            <sequence>
+            </measure>
+                <measure>
+                <sequence>
                 <event value="/2d">
                     <note pitch="F5"/>
                 </event>
             </sequence>
-        </measure>
-        <measure>
-            <sequence>
+            </measure>
+                <measure>
+                <sequence>
                 <event value="/2d">
                     <note pitch="G5"/>
                 </event>
             </sequence>
-        </measure>
-        <measure>
-            <sequence>
+            </measure>
+                <measure>
+                <sequence>
                 <event value="/2d">
                     <note pitch="A5"/>
                 </event>
             </sequence>
+            </measure>
+                <measure>
+                <sequence>
+                <event value="/2d">
+                    <note pitch="B5"/>
+                </event>
+            </sequence>
+            </measure>
+            </measures>
+        </part>
+        <part id="fl2" partGroup="#flutesPartGroup" partNumberInGroup="2">
+            <!-- the clef will be defined in the systemLayout -->
+            <measures>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="A4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="A4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="A4"/>
+                </event>
+            </sequence>
         </measure>
-        <measure>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="G4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="G4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="G4"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="F4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="F4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="F4"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="E4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="E4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="E4"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="D4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="D4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="D4"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="E4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="E4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="E4"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/2d">
+                    <note pitch="F4"/>
+                </event>
+            </sequence>
+        </measure>
+            </measures>
+        </part>
+        <part id="fl3" partGroup="#flutesPartGroup" partNumberInGroup="3">
+            <!-- the clef will be defined in the systemLayout -->
+            <measures>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="F4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="F4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="F4"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="E4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="E4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="E4"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="D4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="D4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="D4"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="C4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="C4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="C4"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="B3"/>
+                </event>
+                <event value="/4">
+                    <note pitch="B3"/>
+                </event>
+                <event value="/4">
+                    <note pitch="B3"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="C4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="C4"/>
+                </event>
+                <event value="/4">
+                    <note pitch="C4"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/2d">
+                    <note pitch="D4"/>
+                </event>
+            </sequence>
+        </measure>
+            </measures>
+        </part>
+        <part id="ob1" partGroup="#oboesPartGroup" partNumberInGroup="1">
+            <!-- the clef will be defined in the systemLayout -->
+            <partGroup id="oboesPartGroup" groupName="Oboes" name="Oboe" nameAbbrev="Ob." />
+            <measures>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="C5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="C5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="C5"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="D5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="D5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="D5"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="E5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="E5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="E5"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="F5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="F5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="F5"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="G5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="G5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="G5"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
+            <sequence>
+                <event value="/4">
+                    <note pitch="A5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="A5"/>
+                </event>
+                <event value="/4">
+                    <note pitch="A5"/>
+                </event>
+            </sequence>
+        </measure>
+                <measure>
             <sequence>
                 <event value="/2d">
                     <note pitch="B5"/>
                 </event>
             </sequence>
         </measure>
-    </part>
-    <part id="fl2" partGroup="#flutesPartGroup" partNumberInGroup="2">
-        <!-- the clef will be defined in the systemLayout -->
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="A4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="A4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="A4"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="G4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="G4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="G4"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="F4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="F4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="F4"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="E4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="E4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="E4"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="D4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="D4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="D4"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="E4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="E4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="E4"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/2d">
-                    <note pitch="F4"/>
-                </event>
-            </sequence>
-        </measure>
-    </part>
-    <part id="fl3" partGroup="#flutesPartGroup" partNumberInGroup="3">
-        <!-- the clef will be defined in the systemLayout -->
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="F4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="F4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="F4"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="E4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="E4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="E4"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="D4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="D4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="D4"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="C4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="C4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="C4"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="B3"/>
-                </event>
-                <event value="/4">
-                    <note pitch="B3"/>
-                </event>
-                <event value="/4">
-                    <note pitch="B3"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="C4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="C4"/>
-                </event>
-                <event value="/4">
-                    <note pitch="C4"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/2d">
-                    <note pitch="D4"/>
-                </event>
-            </sequence>
-        </measure>
-    </part>
-    <part id="ob1" partGroup="#oboesPartGroup" partNumberInGroup="1">
-        <!-- the clef will be defined in the systemLayout -->
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="C5"/>
-                </event>
-                <event value="/4">
-                    <note pitch="C5"/>
-                </event>
-                <event value="/4">
-                    <note pitch="C5"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="D5"/>
-                </event>
-                <event value="/4">
-                    <note pitch="D5"/>
-                </event>
-                <event value="/4">
-                    <note pitch="D5"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="E5"/>
-                </event>
-                <event value="/4">
-                    <note pitch="E5"/>
-                </event>
-                <event value="/4">
-                    <note pitch="E5"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="F5"/>
-                </event>
-                <event value="/4">
-                    <note pitch="F5"/>
-                </event>
-                <event value="/4">
-                    <note pitch="F5"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="G5"/>
-                </event>
-                <event value="/4">
-                    <note pitch="G5"/>
-                </event>
-                <event value="/4">
-                    <note pitch="G5"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/4">
-                    <note pitch="A5"/>
-                </event>
-                <event value="/4">
-                    <note pitch="A5"/>
-                </event>
-                <event value="/4">
-                    <note pitch="A5"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/2d">
-                    <note pitch="B5"/>
-                </event>
-            </sequence>
-        </measure>
-    </part>
-    <part id="ob2" partGroup="#oboesPartGroup" partNumberInGroup="2">
-        <!-- the clef will be defined in the systemLayout -->
-        <measure>
+            </measures>
+        </part>
+        <part id="ob2" partGroup="#oboesPartGroup" partNumberInGroup="2">
+            <!-- the clef will be defined in the systemLayout -->
+            <measures>
+                <measure>
             <sequence>
                 <event value="/2d">
                     <note pitch="A4"/>
                 </event>
             </sequence>
         </measure>
-        <measure>
+                <measure>
             <sequence>
                 <event value="/2d">
                     <note pitch="G4"/>
                 </event>
             </sequence>
         </measure>
-        <measure>
+                <measure>
             <sequence>
                 <event value="/2d">
                     <note pitch="F4"/>
                 </event>
             </sequence>
         </measure>
-        <measure>
+                <measure>
             <sequence>
                 <event value="/2d">
                     <note pitch="E4"/>
                 </event>
             </sequence>
         </measure>
-        <measure>
+                <measure>
             <sequence>
                 <event value="/2d">
                     <note pitch="D4"/>
                 </event>
             </sequence>
         </measure>
-        <measure>
+                <measure>
             <sequence>
                 <event value="/2d">
                     <note pitch="E4"/>
                 </event>
             </sequence>
         </measure>
-        <measure>
+                <measure>
             <sequence>
                 <event value="/2d">
                     <note pitch="F4"/>
                 </event>
             </sequence>
         </measure>
-    </part>
-    <part id="piano" partGroup="#pianoPartGroup">
-        <!-- the clefs will be defined in the systemLayout -->
-        <measure>
+            </measures>
+        </part>
+        <part id="piano" partGroup="#pianoPartGroup">
+            <!-- the clefs will be defined in the systemLayout -->
+            <partGroup id="pianoPartGroup" groupName="Piano" name="Piano" nameAbbrev="Piano" />
+            <measures>
+                <measure>
             <sequence>
                 <event value="/4">
                     <rest/>
@@ -411,7 +421,7 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
                 </event>
             </sequence>
         </measure>
-        <measure>
+                <measure>
             <sequence>
                 <event value="/4">
                     <rest/>
@@ -429,7 +439,7 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
                 </event>
             </sequence>
         </measure>
-        <measure>
+                <measure>
             <sequence>
                 <event value="/4">
                     <rest/>
@@ -447,7 +457,7 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
                 </event>
             </sequence>
         </measure>
-        <measure>
+                <measure>
             <sequence>
                 <event value="/4">
                     <rest/>
@@ -465,7 +475,7 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
                 </event>
             </sequence>
         </measure>
-        <measure>
+                <measure>
             <sequence>
                 <event value="/4">
                     <rest/>
@@ -483,7 +493,7 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
                 </event>
             </sequence>
         </measure>
-        <measure>
+                <measure>
             <sequence>
                 <event value="/4">
                     <rest/>
@@ -501,7 +511,7 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
                 </event>
             </sequence>
         </measure>
-        <measure>
+                <measure>
             <sequence>
                 <event value="/2d">
                     <note pitch="C5"/>
@@ -513,8 +523,10 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
                 </event>
             </sequence>
         </measure>
-    </part>
-
+            </measures>
+        </part>
+    </parts>
+    
     <!-- optional global systemLayout definitions (?) -->
   
     <!-- all the scores in this mnx file -->

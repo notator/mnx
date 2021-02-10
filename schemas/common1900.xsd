@@ -48,7 +48,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="global" type="globalType" maxOccurs="1" minOccurs="1"/>
-                <xs:element name="part" type="partType" maxOccurs="unbounded" minOccurs="1"/>
+                <xs:element name="parts" type="partsType" maxOccurs="unbounded" minOccurs="1"/>
                 <xs:element name="systemLayouts" type="systemLayoutsType" maxOccurs="1" minOccurs="0"/>
                 <xs:element name="scores" type="scoresType" maxOccurs="1" minOccurs="0"/>
             </xs:sequence>
@@ -60,11 +60,22 @@
     <xs:complexType name="globalType">
         <xs:annotation>
             <xs:documentation>
-                the global element
+                the mnx/global element
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="measure" type="globalMeasureType" maxOccurs="unbounded" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="partsType">
+        <xs:annotation>
+            <xs:documentation>
+                the mnx/parts element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="part" type="partType" maxOccurs="unbounded" minOccurs="1"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -91,7 +102,6 @@
                 <xs:element name="key" type="keySigType" maxOccurs="1" minOccurs="0"/>
                 <xs:element name="repeat" type="repeatType" maxOccurs="unbounded" minOccurs="0"/>
                 <xs:element name="ending" type="endingType" maxOccurs="2" minOccurs="0"/>
-                <xs:element name="partGroups" type="partGroupsType" maxOccurs="1" minOccurs="0"/>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
@@ -173,33 +183,10 @@
             </xs:simpleType>
         </xs:attribute>
     </xs:complexType>
-
-    <xs:complexType name="partGroupsType">
-        <xs:annotation>
-            <xs:documentation>
-                the global/measure/directions/partGroups element
-            </xs:documentation>
-        </xs:annotation>
-        <xs:sequence>
-            <xs:element name="partGroup" type="partGroupType" maxOccurs="unbounded" minOccurs="1"/>
-        </xs:sequence>
-    </xs:complexType>
-
-    <xs:complexType name="partGroupType">
-        <xs:annotation>
-            <xs:documentation>
-                the global/measure/directions/instrSection/partGroup element
-            </xs:documentation>
-        </xs:annotation>
-        <xs:attribute name="id" type="idValueType" use="required" />
-        <xs:attribute name="groupName" type="xs:token" use="required" />
-        <xs:attribute name="name" type="xs:token" use="required" />
-        <xs:attribute name="nameAbbrev" type="xs:token" use="required" />
-    </xs:complexType>
     
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
     <!-- Part Types -->
-
+    
     <xs:complexType name="partType">
         <xs:annotation>
             <xs:documentation>
@@ -214,13 +201,37 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="part-name" type="xs:token" maxOccurs="1" minOccurs="0"/>
-            <xs:element name="measure" type="partMeasureType" maxOccurs="unbounded" minOccurs="1"/>
+            <xs:element name="partGroup" type="partGroupType" maxOccurs="1" minOccurs="0"/>
+            <xs:element name="measures" type="partMeasuresType" maxOccurs="1" minOccurs="1"/>
         </xs:sequence>
         <xs:attribute name="id" type="idValueType" use="required" />
         <xs:attribute name="partGroup" type="idReferenceType" use="required" />
         <xs:attribute name="partNumberInGroup" type="xs:nonNegativeInteger" default="0" />
     </xs:complexType>
+
+    <xs:complexType name="partGroupType">
+        <xs:annotation>
+            <xs:documentation>
+                the global/measure/directions/instrSection/partGroup element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="id" type="idValueType" use="required" />
+        <xs:attribute name="groupName" type="xs:token" use="required" />
+        <xs:attribute name="name" type="xs:token" use="required" />
+        <xs:attribute name="nameAbbrev" type="xs:token" use="required" />
+    </xs:complexType>
+    
+    <xs:complexType name="partMeasuresType">
+        <xs:annotation>
+            <xs:documentation>
+                the part/measures element
+                (contains a sequence of measure elements)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="measure" type="partMeasureType" maxOccurs="unbounded" minOccurs="1"/>            
+        </xs:sequence>        
+    </xs:complexType>    
 
     <xs:complexType name="partMeasureType">
         <xs:annotation>
