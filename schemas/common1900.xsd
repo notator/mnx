@@ -47,6 +47,7 @@
             <xs:sequence>
                 <xs:element name="global" type="globalType"/>
                 <xs:element name="parts" type="partsType"/>
+                <xs:element name="systemLayouts" type="systemLayoutsType"/>
                 <xs:element name="scores" type="scoresType"/>
             </xs:sequence>
         </xs:complexType>
@@ -80,9 +81,17 @@
         <xs:annotation>
             <xs:documentation>
                 the global/measure/directions element
+                By default, these elements are printed once per staff in the score, but their style
+                and position can be controlled by optional &gt;style&lt; elements in
+                mnx/systemLayouts/systemLayout
+                mnx/systemLayouts/staffGroup
+                mnx/systemLayouts/partStaves
+                These styles cascade upwards. The outermost style takes precedence over the inner styles.
+                Note that these name strings should also be put in the directionClassType definition below.
                 Issue: The draft spec says that there can be only one time or key element in a measure.
                 There seems to be no way to enforce that here. Instead, I think that if there is more
-                than one, the final one should overrides the others.
+                than one, the final one should override the others.
+
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -456,25 +465,11 @@
     </xs:complexType>
 
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
-    <!-- Scores -->    
-    
-    <xs:complexType name="scoresType">
-        <xs:annotation>
-            <xs:documentation>
-                the mnx/scores element
-            </xs:documentation>
-        </xs:annotation>
-        <xs:sequence>
-            <xs:element name="score" type="scoreType" maxOccurs="unbounded"/>
-        </xs:sequence>
-    </xs:complexType>
+    <!-- SystemLayouts -->
 
-    <xs:complexType name="scoreType">
-        <xs:sequence>
-            <xs:element name="systemLayouts" type="systemLayoutsType"/>
-            <xs:element name="scoreLayout" type="scoreLayoutType"/>
-        </xs:sequence>
-        <xs:attribute name="name" type="xs:token" use="required"/>
+    <xs:complexType name="styleType">
+        <xs:attribute name="directionClasses" type="directionClassListType" />
+        <xs:attribute name="textLocation" type="aboveBelowType" />
     </xs:complexType>
 
     <xs:complexType name="systemLayoutsType">
@@ -484,12 +479,15 @@
     </xs:complexType>
 
     <xs:complexType name="systemLayoutType">
-        <xs:choice maxOccurs="unbounded">
-            <xs:element name="partGroupStaff" type="partGroupStaffType"/>
-            <xs:element name="partStaff" type="partStaffType"/>
-            <xs:element name="partStaves" type="partStavesType"/>
-            <xs:element name="staffGroup" type="staffGroupType"/>
-        </xs:choice>
+        <xs:sequence>
+            <xs:element name="style" type="styleType" minOccurs="0"/>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="partGroupStaff" type="partGroupStaffType"/>
+                <xs:element name="partStaff" type="partStaffType"/>
+                <xs:element name="partStaves" type="partStavesType"/>
+                <xs:element name="staffGroup" type="staffGroupType"/>
+            </xs:choice>
+        </xs:sequence>
         <xs:attribute name="id" type="idValueType" use="required"/>
     </xs:complexType>
 
@@ -505,6 +503,9 @@
                 Appropriate types of barline are always printed.
             </xs:documentation>
         </xs:annotation>
+        <xs:sequence>
+            <xs:element name="style" type="styleType" minOccurs="0"/>
+        </xs:sequence>
         <xs:attribute name="parts" type="idReferenceListType" use="required"/>
         <xs:attribute name="displayGroupName" type="xs:boolean" default="false"/>
         <xs:attribute name="displayName" type="xs:boolean" default="false"/>
@@ -529,7 +530,7 @@
         <xs:attribute name="displayNameAbbrev" type="xs:boolean" default="false"/>
         <xs:attribute name="displayPartNumber" type="xs:boolean" default="false"/>
     </xs:complexType>
-    
+
     <xs:complexType name="partStavesType">
         <xs:annotation>
             <xs:documentation>
@@ -542,12 +543,15 @@
                 Appropriate types of barline are always printed through all the staves.
             </xs:documentation>
         </xs:annotation>
+        <xs:sequence>
+            <xs:element name="style" type="styleType" minOccurs="0"/>
+        </xs:sequence>
         <xs:attribute name="part" type="idReferenceType" use="required"/>
         <xs:attribute name="nStaves" type="xs:positiveInteger" default="2"/>
         <xs:attribute name="bracket" type="bracketType" default="curly"/>
         <xs:attribute name="displayName" type="xs:boolean" default="false"/>
         <xs:attribute name="displayNameAbbrev" type="xs:boolean" default="false"/>
-        <xs:attribute name="displayPartNumber" type="xs:boolean" default="false"/>        
+        <xs:attribute name="displayPartNumber" type="xs:boolean" default="false"/>
     </xs:complexType>
 
     <xs:complexType name="staffGroupType">
@@ -558,6 +562,7 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
+            <xs:element name="style" type="styleType" minOccurs="0"/>
             <xs:choice maxOccurs="unbounded">
                 <xs:element name="partGroupStaff" type="partGroupStaffType"/>
                 <xs:element name="partStaff" type="partStaffType"/>
@@ -572,6 +577,27 @@
         <xs:attribute name="displayName" type="xs:boolean" default="false"/>
         <xs:attribute name="displayNameAbbrev" type="xs:boolean" default="false"/>
         <xs:attribute name="displayPartNumber" type="xs:boolean" default="false"/>
+    </xs:complexType>
+    
+    <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+    <!-- Scores -->
+
+    <xs:complexType name="scoresType">
+        <xs:annotation>
+            <xs:documentation>
+                the mnx/scores element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="score" type="scoreType" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="scoreType">
+        <xs:sequence>
+            <xs:element name="scoreLayout" type="scoreLayoutType"/>
+        </xs:sequence>
+        <xs:attribute name="name" type="xs:token" use="required"/>
     </xs:complexType>
 
     <xs:complexType name="scoreLayoutType">
@@ -708,7 +734,7 @@
             <xs:pattern value="n|b|bb|#|##"/>
         </xs:restriction>
     </xs:simpleType>
-    
+
     <xs:simpleType name="upDownType">
         <xs:annotation>
             <xs:documentation>
@@ -717,6 +743,17 @@
         </xs:annotation>
         <xs:restriction base="xs:token">
             <xs:pattern value="up|down"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="aboveBelowType">
+        <xs:annotation>
+            <xs:documentation>
+                Text position
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:pattern value="above|below"/>
         </xs:restriction>
     </xs:simpleType>
     
@@ -807,6 +844,27 @@
             </xs:documentation>
         </xs:annotation>
         <xs:list itemType="xs:positiveInteger"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="directionClassListType">
+        <xs:annotation>
+            <xs:documentation>
+                A string containing a list of direction class names separated by whitespace.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:list itemType="directionClassType"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="directionClassType">
+        <xs:annotation>
+            <xs:documentation>
+                A direction class name.
+                These names should match the names of the directions defined in globalMeasureDirectionsType.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:pattern value="time|key|repeat|ending"/>
+        </xs:restriction>
     </xs:simpleType>
 
     <xs:simpleType name="idReferenceListType">
