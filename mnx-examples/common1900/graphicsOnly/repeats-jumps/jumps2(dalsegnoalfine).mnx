@@ -5,64 +5,78 @@ xmlns="https://github.com/w3c/mnx"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xsd">
     <global>
-        <measure>
-            <directions>
-                <time signature="4/4"/>
-            </directions>
-        </measure>
-        <measure/>
-        <measure/>
-        <measure/>
-        <measure/>
+        <measures>
+            <measure>
+                <directions>
+                    <time signature="4/4"/>
+                </directions>
+            </measure>
+            <measure/>
+            <measure/>
+            <measure/>
+            <measure/>
+        </measures>
     </global>
-    <part>
-        <part-name>Music</part-name>
-        <measure> <!-- m 1 -->
-            <directions>
-                <clef sign="G" line="2"/>
-            </directions>
-            <sequence>
-                <event value="/1">
-                    <note pitch="C5"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure> <!-- m 2 -->
-            <directions>
-                <text location="0" text="&segno;" /> <!-- default align="left" -->
-            </directions>
-            <sequence>
-                <event value="/1">
-                    <note pitch="E5"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure> <!-- m 3 -->
-            <directions>
-                <text location="4/4" text="fine" align="right"/>
-            </directions>
-            <sequence>
-                <event value="/1">
-                    <note pitch="C5"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure> <!-- m 4 -->
-            <sequence>
-                <event value="/1">
-                    <note pitch="F5"/>
-                </event>
-            </sequence>
-        </measure>
-        <measure> <!-- m 5 -->
-            <directions>
-                <text location="4/4" text="D.S. al Fine" align="right"/>
-            </directions>
-            <sequence>
-                <event value="/1">
-                    <note pitch="C5"/>
-                </event>
-            </sequence>
-        </measure>
+    <part id="part">
+        <measures>
+            <measure> <!-- m 1 -->
+                <directions>
+                    <clef sign="G" line="2"/>
+                </directions>
+                <sequence>
+                    <event value="/1">
+                        <note pitch="C5"/>
+                    </event>
+                </sequence>
+            </measure>
+            <measure> <!-- m 2 -->
+                <directions>
+                    <text location="0" text="&segno;" />
+                    <!-- default align="left" -->
+                </directions>
+                <sequence>
+                    <event value="/1">
+                        <note pitch="E5"/>
+                    </event>
+                </sequence>
+            </measure>
+            <measure> <!-- m 3 -->
+                <directions>
+                    <text location="4/4" text="fine" align="right"/>
+                </directions>
+                <sequence>
+                    <event value="/1">
+                        <note pitch="C5"/>
+                    </event>
+                </sequence>
+            </measure>
+            <measure> <!-- m 4 -->
+                <sequence>
+                    <event value="/1">
+                        <note pitch="F5"/>
+                    </event>
+                </sequence>
+            </measure>
+            <measure> <!-- m 5 -->
+                <directions>
+                    <text location="4/4" text="D.S. al Fine" align="right"/>
+                </directions>
+                <sequence>
+                    <event value="/1">
+                        <note pitch="C5"/>
+                    </event>
+                </sequence>
+            </measure>
+        </measures>
     </part>
+    <systemLayout id="systemLayout">
+        <partStaff part="#part" />
+    </systemLayout>
+    <score name="score" relWidth="500" relHeight="100" relMargins="20">
+        <pages>
+            <page>
+                <system startMeasureNumber="1" systemLayout="#systemlayout" />
+            </page>
+        </pages>
+    </score>
 </mnx>

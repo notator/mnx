@@ -4,24 +4,37 @@ xmlns="https://github.com/w3c/mnx"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xsd">
     <global>
-        <measure>
-            <directions>
-                <time signature="4/4"/>
-                <repeat type="end" times="4"/>
-            </directions>
-        </measure>
+        <measures>
+            <measure>
+                <directions>
+                    <time signature="4/4"/>
+                    <repeat type="end" times="4"/>
+                </directions>
+            </measure>
+        </measures>
     </global>
-    <part>
-        <part-name>Music</part-name>
-        <measure>
-            <directions>
-                <clef sign="G" line="2"/>
-            </directions>
-            <sequence>
-                <event value="/1">
-                    <note pitch="C5"/>
-                </event>
-            </sequence>
-        </measure>
+    <part id="part">
+        <measures>
+            <measure>
+                <directions>
+                    <clef sign="G" line="2"/>
+                </directions>
+                <sequence>
+                    <event value="/1">
+                        <note pitch="C5"/>
+                    </event>
+                </sequence>
+            </measure>
+        </measures>
     </part>
+    <systemLayout id="systemLayout">
+        <partStaff part="#part" />        
+    </systemLayout>
+    <score name="score" relWidth="500" relHeight="100" relMargins="20">
+        <pages>
+            <page>
+                <system startMeasureNumber="1" systemLayout="#systemlayout" />
+            </page>   
+        </pages>        
+    </score>
 </mnx>
