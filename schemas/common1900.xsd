@@ -496,8 +496,8 @@
         <xs:attribute name="side" type="upDownType" use="required"/>
         <xs:attribute name="target" type="idReferenceType" use="optional"/>
         <xs:attribute name="location" type="slurLocationType" use="optional"/>
-        <xs:attribute name="start-note" type="idReferenceType" use="required"/>
-        <xs:attribute name="end-note" type="idReferenceType" use="optional"/>
+        <xs:attribute name="startNote" type="idReferenceType" use="optional"/>
+        <xs:attribute name="endNote" type="idReferenceType" use="optional"/>
     </xs:complexType>
 
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
