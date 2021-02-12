@@ -4,49 +4,62 @@ xmlns="https://github.com/w3c/mnx"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xsd">
     <global>
-        <measure>
-            <directions>
-                <time signature="4/4"/>
-            </directions>
-        </measure>
-        <measure/>
+        <measures>
+            <measure>
+                <directions>
+                    <time signature="4/4"/>
+                </directions>
+            </measure>
+            <measure/>
+        </measures>
     </global>
-    <part>
-        <part-name>Music</part-name>
-        <measure>
-            <directions>
-                <clef sign="G" line="2"/>
-            </directions>
-            <sequence>
-                <event value="/4">
-                    <note pitch="C5"/>
-                </event>
-                <event value="/4">
-                    <note pitch="E5">
-                        <tied target="#note3"/>
-                    </note>
-                </event>
-                <event value="/4">
-                    <note pitch="E5" id="note3"/>
-                </event>
-                <event value="/4">
-                    <note pitch="C5">
-                        <tied target="#note5"/>
-                    </note>
-                </event>
-            </sequence>
-        </measure>
-        <measure>
-            <sequence>
-                <event value="/2">
-                    <note pitch="C5" id="note5">
-                        <tied target="#note6"/>
-                    </note>
-                </event>
-                <event value="/2">
-                    <note pitch="C5" id="note6"/>
-                </event>
-            </sequence>
-        </measure>
+    <part id="part">
+        <measures>
+            <measure>
+                <directions>
+                    <clef sign="G" line="2"/>
+                </directions>
+                <sequence>
+                    <event value="/4">
+                        <note pitch="C5"/>
+                    </event>
+                    <event value="/4">
+                        <note pitch="E5">
+                            <tied target="#note3"/>
+                        </note>
+                    </event>
+                    <event value="/4">
+                        <note pitch="E5" id="note3"/>
+                    </event>
+                    <event value="/4">
+                        <note pitch="C5">
+                            <tied target="#note5"/>
+                        </note>
+                    </event>
+                </sequence>
+            </measure>
+            <measure>
+                <sequence>
+                    <event value="/2">
+                        <note pitch="C5" id="note5">
+                            <tied target="#note6"/>
+                        </note>
+                    </event>
+                    <event value="/2">
+                        <note pitch="C5" id="note6"/>
+                    </event>
+                </sequence>
+            </measure>
+        </measures>   
     </part>
+    <systemLayout id="systemLayout">
+        <partStaff part="#part" />
+    </systemLayout>
+    <score name="score" relWidth="500" relHeight="100" relMargins="20">
+        <pages>
+            <page>
+                <system startMeasureNumber="1" systemLayout="#systemlayout" />
+            </page>
+        </pages>
+    </score>
 </mnx>
