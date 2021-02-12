@@ -323,28 +323,19 @@
         <xs:annotation>
             <xs:documentation>
                 the part/measures/measure/sequence element
-            </xs:documentation>
-        </xs:annotation>
-        <xs:sequence>
-            <xs:element name="directions" type="sequenceDirectionsType" minOccurs="0"/>
-            <xs:element name="beams" type="beamsType" minOccurs="0"/>
-            <xs:element name="events" type="eventsType"/>
-        </xs:sequence>
-        <xs:attribute name="staff" type="xs:positiveInteger" default="1"/>
-    </xs:complexType>
-    
-    <xs:complexType name="eventsType">
-        <xs:annotation>
-            <xs:documentation>
-                the part/measures/measure/sequence element
                 Issue: is there a way to avoid the code duplication between eventType, tupletType and graceType?
             </xs:documentation>
         </xs:annotation>
-        <xs:choice maxOccurs="unbounded">
-            <xs:element name="event" type="eventType"/>
-            <xs:element name="tuplet" type="tupletType"/>
-            <xs:element name="grace" type="graceType"/>
-        </xs:choice>
+        <xs:sequence>            
+            <xs:element name="beams" type="beamsType" minOccurs="0"/>            
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="directions" type="sequenceDirectionsType"/>
+                <xs:element name="event" type="eventType"/>
+                <xs:element name="tuplet" type="tupletType"/>
+                <xs:element name="grace" type="graceType"/>
+            </xs:choice>
+        </xs:sequence>
+        <xs:attribute name="staff" type="xs:positiveInteger" default="1"/>
     </xs:complexType>
     
     <xs:complexType name="sequenceDirectionsType">
