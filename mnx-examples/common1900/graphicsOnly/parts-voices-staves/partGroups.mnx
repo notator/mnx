@@ -3,23 +3,29 @@
 xmlns="https://github.com/w3c/mnx"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xsd">
-    <global> 
-        <measure>
-            <directions>
-                <time signature="3/4"/>
-            </directions>
-        </measure>
-        <measure/>
-        <measure/>
-        <measure/>
-        <measure/> 
-        <measure/>
-        <measure/>
+    <global>
+        <instrumentTypes>
+            <instrumentType id="flute" groupName="Flutes" name="Flute" nameAbbrev="Fl." />
+            <instrumentType id="oboe" groupName="Oboes" name="Oboe" nameAbbrev="Ob." />
+            <instrumentType id="piano" groupName="Pianos" name="Piano" nameAbbrev="Piano" />
+        </instrumentTypes>
+        <measures>
+            <measure>
+                <directions>
+                    <time signature="3/4"/>
+                </directions>
+            </measure>
+            <measure/>
+            <measure/>
+            <measure/>
+            <measure/> 
+            <measure/>
+            <measure/>
+        </measures>
     </global>
 
     <parts>
-        <part id="fl1" partNames="#fluteNames" partNumberInGroup="1">
-            <partNames id="fluteNames" groupName="Flutes" name="Flute" nameAbbrev="Fl." />
+        <part id="fl1" instrumentType="#flute" partNumberInGroup="1">
             <measures>
                 <measure>
                     <sequence>
@@ -86,7 +92,7 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
                 </measure>
             </measures>
         </part>
-        <part id="fl2" partNames="#fluteNames" partNumberInGroup="2">
+        <part id="fl2" instrumentType="#flute" partNumberInGroup="2">
             <measures>
                 <measure>
                     <sequence>
@@ -189,7 +195,7 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
                 </measure>
             </measures>
         </part>
-        <part id="fl3" partNames="#fluteNames" partNumberInGroup="3">
+        <part id="fl3" instrumentType="#flute" partNumberInGroup="3">
             <measures>
                 <measure>
                     <sequence>
@@ -292,8 +298,7 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
                 </measure>
             </measures>
         </part>
-        <part id="ob1" partNames="#oboeNames" partNumberInGroup="1">
-            <partNames id="oboeNames" groupName="Oboes" name="Oboe" nameAbbrev="Ob." />
+        <part id="ob1" instrumentType="#oboe" partNumberInGroup="1">
             <measures>
                 <measure>
                     <sequence>
@@ -396,7 +401,7 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
                 </measure>
             </measures>
         </part>
-        <part id="ob2" partNames="#oboeNames" partNumberInGroup="2">
+        <part id="ob2" instrumentType="#oboe" partNumberInGroup="2">
             <measures>
                 <measure>
                     <sequence>
@@ -463,8 +468,7 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
                 </measure>
             </measures>
         </part>
-        <part id="piano" partNames="#pianoNames">
-            <partNames id="pianoNames" name="Piano" nameAbbrev="Piano" />
+        <part id="piano" instrumentType="#piano">
             <measures>
                 <measure>
                     <sequence>

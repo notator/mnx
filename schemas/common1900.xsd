@@ -46,9 +46,18 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="global" type="globalType"/>
-                <xs:element name="parts" type="partsType"/>
-                <xs:element name="systemLayouts" type="systemLayoutsType"/>
-                <xs:element name="scores" type="scoresType"/>
+                <xs:choice>
+                    <xs:element name="parts" type="partsType"/>
+                    <xs:element name="part" type="partType"/>                    
+                </xs:choice>
+                <xs:choice>
+                    <xs:element name="systemLayouts" type="systemLayoutsType"/>
+                    <xs:element name="systemLayout" type="systemLayoutType"/>                    
+                </xs:choice>
+                <xs:choice>
+                    <xs:element name="scores" type="scoresType"/>
+                    <xs:element name="score" type="scoreType"/>                   
+                </xs:choice>          
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -60,16 +69,56 @@
             <xs:documentation>
                 the mnx/global element
             </xs:documentation>
+        </xs:annotation>        
+        <xs:sequence>
+            <xs:element name="instrumentTypes" type="instrumentTypesType" minOccurs="0" />
+            <xs:element name="measures" type="globalMeasuresType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="instrumentTypesType">
+        <xs:annotation>
+            <xs:documentation>
+                the mnx/global/instrumentTypes element
+            </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="measure" type="globalMeasureType" maxOccurs="unbounded"/>
+            <xs:element name="instrumentType" type="instrumentType" maxOccurs="unbounded" />
         </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="globalMeasuresType">
+        <xs:annotation>
+            <xs:documentation>
+                the mnx/global/measures element
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="measure" type="globalMeasureType" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="instrumentType">
+        <xs:annotation>
+            <xs:documentation>
+                the mnx/globals/instrumentTypes/instrumentType element
+                See https://github.com/w3c/musicxml/blob/v3.1/schema/sounds.xml for a list of
+                possible values for the instrumentSound attribute.
+                Note that the file says: "Applications may wish to provide a modified version of this
+                file where the element content includes an application's method for identifying sounds."
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="id" type="idValueType" use="required"/>
+        <xs:attribute name="groupName" type="xs:token" use="optional"/>
+        <xs:attribute name="name" type="xs:token" use="required"/>
+        <xs:attribute name="nameAbbrev" type="xs:token" use="required"/>
+        <xs:attribute name="instrumentSound" type="xs:token" use="optional"/>        
     </xs:complexType>
 
     <xs:complexType name="globalMeasureType">
         <xs:annotation>
             <xs:documentation>
-                the global/measure element
+                the mnx/global/measures/measure element
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -91,7 +140,6 @@
                 Issue: The draft spec says that there can be only one time or key element in a measure.
                 There seems to be no way to enforce that here. Instead, I think that if there is more
                 than one, the final one should override the others.
-
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -190,35 +238,22 @@
     <xs:complexType name="partType">
         <xs:annotation>
             <xs:documentation>
-                The partNames element is defined in the first part in a group, even if there are no more parts in the group.
-                Each part retrieves its partNames (groupName, name and nameAbbrev) using its partNames attribute.
-                The partNumberInGroup is determined by the attribute: A value of 0 means that the group has no other members.
-                If non-0:
-                    a) the partNumberInGroup can be concatenated, after a space, to any of the partNames.
+                If required here, the instrumentType is defined in mnx/globals.
+                Each part retrieves its groupName, name, nameAbbrev and instrumentSound using its instrumentType attribute.
+                If the part is one of a group having the same instrumentType, the partNumberInGroup should be set.
+                If set:
+                    a) the partNumberInGroup can be concatenated, after a space, to any of the name values.
                     b) used on its own, centred above other partNumberInGroup values, in front of staves.
-                Issue: I'm using referenced partNames here instead of MusicXML's part-name and part-abbreviation elements.
-                The MusicXML instrument-sound element has not (yet) been defined here.
+                Issue: I'm using a reference to the instrumentType here instead of MusicXML's part-name,
+                part-abbreviation and instrument-sound elements.
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="partNames" type="partNamesType" minOccurs="0"/>
             <xs:element name="measures" type="partMeasuresType"/>
         </xs:sequence>
         <xs:attribute name="id" type="idValueType" use="required"/>
-        <xs:attribute name="partNames" type="idReferenceType" use="required"/>
-        <xs:attribute name="partNumberInGroup" type="xs:nonNegativeInteger" default="0"/>
-    </xs:complexType>
-
-    <xs:complexType name="partNamesType">
-        <xs:annotation>
-            <xs:documentation>
-                the parts/part/partNames element
-            </xs:documentation>
-        </xs:annotation>
-        <xs:attribute name="id" type="idValueType" use="required"/>
-        <xs:attribute name="groupName" type="xs:token" default=""/>
-        <xs:attribute name="name" type="xs:token" use="required"/>
-        <xs:attribute name="nameAbbrev" type="xs:token" use="required"/>
+        <xs:attribute name="instrumentType" type="idReferenceType" use="optional"/>
+        <xs:attribute name="partNumberInGroup" type="xs:nonNegativeInteger" use="optional"/>
     </xs:complexType>
     
     <xs:complexType name="partMeasuresType">
@@ -429,6 +464,15 @@
         <xs:annotation>
             <xs:documentation>
                 the part/measures/measure/sequence/event/note element
+                Issue1: The Draft Spec defines an "accidental" attribute, that
+                "supplies an accidental value for this note. This attribute must match the alteration of the pitch attribute.
+                Omission of the attribute indicates that no accidental is to be displayed."
+                I think it would be clearer and less error prone, to define a boolean "displayAcc" attribute
+                with a default value of false.
+                Issue2: The Draft Spec says that the values of the accidental attribute sould be imported from MusicXML.
+                The MusicXML values are the words "flat", "sharp" etc. I think it would be better (if not using displayAcc)
+                to use the values in the pitch definition: "b", "#" etc. (see accidentalType).
+                Issue3: See MNX Issue #184 (Unicode accidentals)
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -436,7 +480,8 @@
         </xs:sequence>
         <xs:attribute name="id" type="idValueType" use="optional"/>
         <xs:attribute name="pitch" type="pitchType" use="required"/>
-        <xs:attribute name="accidental" type="accidentalType" use="optional"/>
+        <xs:attribute name="accidental" type="accidentalType" use="optional"/> <!-- delete? -->
+        <!--<xs:attribute name="displayAcc" type="xs:boolean" default="false" /> -->
     </xs:complexType>
     
     <xs:complexType name="tiedType">
@@ -495,10 +540,8 @@
         <xs:annotation>
             <xs:documentation>
                 One staff containing data from more than one part.
-                The parts' groupName, name, nameAbbrev and partNumberInGroup are retrieved from
-                the partNames via the part definitions.
-                The partNumberInGroup values can be printed vertically above each other, to the
-                left of the staff.
+                The parts' groupName, name, nameAbbrev and partNumberInGroup are retrieved from its instrumentType.
+                The partNumberInGroup values can be printed vertically above each other, to the  left of the staff.
                 There is no bracket to the left of the staff.
                 Appropriate types of barline are always printed.
             </xs:documentation>
@@ -517,9 +560,8 @@
         <xs:annotation>
             <xs:documentation>
                 One staff containing data from one part.
-                The part's name, nameAbbrev and partNumberInGroup are retrieved from the partNames via
-                the part definition.
-                If non-zero, the partNumberInGroup can be concatenated with the name or nameAbbrev and
+                The part's name and nameAbbrev can be retrieved from its instrumentType.
+                The partNumberInGroup (if defined) can be concatenated with the name or nameAbbrev and
                 printed to the left of the staff.
                 There is no bracket to the left of the staff.
                 Appropriate types of barline are always printed.
@@ -535,9 +577,9 @@
         <xs:annotation>
             <xs:documentation>
                 One or more staves containing data from one part (default is 2 staves).
-                The part's name, nameAbbrev and partNumberInGroup are retrieved from the partNames via
-                the part definition.
-                If non-zero, the partNumberInGroup can be concatenated with the name or nameAbbrev and
+                The part's name and nameAbbrev can be retrieved from its instrumentType.
+                The partNumberInGroup (if defined) can be concatenated with the name or nameAbbrev and
+
                 printed to the left of the staves.
                 By default, there is a curly bracket to the left of the staves.
                 Appropriate types of barline are always printed through all the staves.
@@ -721,17 +763,12 @@
     <xs:simpleType name="accidentalType">
         <xs:annotation>
             <xs:documentation>
-                These values correspond to the values 'flat', 'natural', 'sharp', 'double-sharp', 'flat-flat'
-                (imported from MusicXML).
-                Issue: The Draft Spec says that an attribute of this type is provided in order to force the printing
-                of an accidental, and that its value must match the accidental in the pitch value. That seems to be
-                unnecesarily complicated. There could just be a boolean attribute (displayAccidental) that is true if
-                provided, othewise false?
-                See Issue #184 (Unicode accidentals)
+                These values have been imported from MusicXML.
+                Issues: See noteType above
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:token">
-            <xs:pattern value="n|b|bb|#|##"/>
+            <xs:pattern value="natural|flat|flatFlat|sharp|sharpSharp"/>
         </xs:restriction>
     </xs:simpleType>
 
