@@ -674,7 +674,7 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
       
     <!-- all the scores in this mnx file -->
     <scores>
-        <score name="Full Score">                        
+        <score name="Full Score" relWidth="500" relHeight="707" relMargins="30">                        
             <!-- scoreLayout for the full score
                 Issue: I think the dimensions given here should be relative (i.e. without units).
                     The actual dimensions on the screen or paper should be controlled by the
@@ -685,36 +685,36 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
                         second value,
                     Three values means set top to the first value, left and right to the second
                         value, and bottom to the third value.
-                    Four values are in the order top, right, bottom, left.                
+                    Four values are in the order top, right, bottom, left.
+                    Further values should be ignored.
             -->
-            <scoreLayout relWidth="500" relHeight="707" relMargins="30">
+            <pages>
                 <page>
                     <system startMeasureNumber="1" systemLayout="#fullScoreSystemLayout1"/>
                     <system startMeasureNumber="4" systemLayout="#fullScoreSystemLayout2"/>
                 </page>                
-            </scoreLayout>
+            </pages>
         </score>
 
-        <score name="Flute 1 part">            
+        <score name="Flute 1 part"  relWidth="500" relHeight="707" relMargins="30">            
             <!-- scoreLayout for the flute 1 part -->
-            <scoreLayout relWidth="500" relHeight="707" relMargins="30">
+            <pages>
                 <page>
                     <system startMeasureNumber="1" systemLayout="#flute1PartSystem1Layout"/>
                     <!-- all 7 bars are printed in this one system -->
                 </page>
-            </scoreLayout>
+            </pages>
         </score>
         
         <!-- etc., all the woodwind part "scores" (booklets) -->
     
-        <score name="Piano part">            
-            <!-- scoreLayout for the piano part -->
-            <scoreLayout relWidth="500" relHeight="707" relMargins="30">
+        <score name="Piano part"  relWidth="500" relHeight="707" relMargins="30">            
+            <pages>
                 <page>
                     <system startMeasureNumber="1" systemLayout="#pianoSystem1Layout"/>
                     <system startMeasureNumber="5" systemLayout="#pianoDefaultSystemLayout"/>
                </page>
-            </scoreLayout>
+            </pages>
         </score>
     </scores>
 </mnx>

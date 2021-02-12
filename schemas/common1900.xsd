@@ -636,36 +636,36 @@
     </xs:complexType>
 
     <xs:complexType name="scoreType">
-        <xs:sequence>
-            <xs:element name="scoreLayout" type="scoreLayoutType"/>
-        </xs:sequence>
-        <xs:attribute name="name" type="xs:token" use="required"/>
-    </xs:complexType>
-
-    <xs:complexType name="scoreLayoutType">
         <xs:annotation>
             <xs:documentation>
-                (j.i.) I think the actual dimensions on the screen or paper should be
-                controlled by the client application.
-                The margins should be handled as they are in CSS:
-                One value means set all margins to that value,
-                Two values means set top and bottom to the first value, left and right to the second value,
-                Four values are in the order top, right, bottom, left.
+                These dimensions are relative. The actual dimensions on the screen or paper
+                should be controlled by the client application.
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="page" type="pageType" maxOccurs="unbounded"/>
+            <xs:element name="pages" type="pagesType"/>
         </xs:sequence>
+        <xs:attribute name="name" type="xs:token" use="required"/>
         <xs:attribute name="relWidth" type="xs:positiveInteger" use="required"/>
         <xs:attribute name="relHeight" type="xs:positiveInteger" use="required"/>
         <xs:attribute name="relMargins" type="positiveIntegerListType" use="required">
             <xs:annotation>
                 <xs:documentation>
-                    A maximum of 4 positive integers are allowed.
-                    Applications should ignore any further integers in the list.
+                    Margins should be handled as they are in CSS:
+                    One value means set all margins to that value,
+                    Two values means set top and bottom to the first value, left and right to the second value,
+                    Four values are in the order top, right, bottom, left.
+                    Further values should be ignored.
                 </xs:documentation>
             </xs:annotation>
         </xs:attribute>
+    </xs:complexType>
+
+    <xs:complexType name="pagesType">
+        <xs:sequence>
+            <xs:element name="page" type="pageType" maxOccurs="unbounded"/>
+        </xs:sequence>
+
     </xs:complexType>
 
     <xs:complexType name="pageType">
