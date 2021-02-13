@@ -9,7 +9,7 @@
 <body>
     <div class="center">
     <h2>Tuplets</h2>
-    <img class="exampleimg" src="../_images/example-tuplets.png">
+    <img class="exampleimg" src="images/tuplets.png">
     <p class="examplenotes">MusicXML uses two separate concepts: a <code>&lt;time-modification&gt;</code> element to encode the tuplet’s ratio and a <code>&lt;tuplet&gt;</code> element to encode the engraved tuplet itself. These go inside <code>&lt;note&gt;</code> elements. Parsers need to keep track of currently open tuplets and look for the value <code>stop</code>.</p>
     <p class="examplenotes">MNX uses a single <code>&lt;tuplet&gt;</code> element, which contains the notes or rests therein. The <code>inner</code> attribute encodes the rhythmic duration of the tuplet’s elements as if the tuplet were ignored; the <code>outer</code> attribute encodes the rhythmic duration taking the tuplet’s ratio into account.</p>
     <p class="showui">Show:
