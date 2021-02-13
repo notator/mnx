@@ -39,7 +39,9 @@
         <xs:annotation>
             <xs:documentation>
                 the root element of an .mnx file
-                Issue1: The Draft Spec says that there can be more than one global element (enclosed
+                Both systemLayouts and systemLayout can be omitted only if the score contains
+                a single part on a single system.
+                Issue: The Draft Spec says that there can be more than one global element (enclosed
                 in a globals element). That does not seem necessary in this common1900 schema.
             </xs:documentation>
         </xs:annotation>
@@ -50,7 +52,7 @@
                     <xs:element name="parts" type="partsType"/>
                     <xs:element name="part" type="partType"/>                    
                 </xs:choice>
-                <xs:choice>
+                <xs:choice minOccurs="0">
                     <xs:element name="systemLayouts" type="systemLayoutsType"/>
                     <xs:element name="systemLayout" type="systemLayoutType"/>                    
                 </xs:choice>
@@ -631,11 +633,17 @@
             <xs:documentation>
                 These dimensions are relative. The actual dimensions on the screen or paper
                 should be controlled by the client application.
+                Issue: TODO: add titelei, metadata.
             </xs:documentation>
         </xs:annotation>
-        <xs:sequence>
+        <xs:choice>
             <xs:element name="pages" type="pagesType"/>
-        </xs:sequence>
+            <xs:element name="page" type="pageType"/>
+            <xs:element name="system" type="systemType"/>
+            <xs:element name="partStaff" type="partStaffType"/>
+            <xs:element name="partGroupStaff" type="partGroupStaffType"/>
+            <xs:element name="partStaves" type="partStavesType"/>
+        </xs:choice>
         <xs:attribute name="name" type="xs:token" use="required"/>
         <xs:attribute name="relWidth" type="xs:positiveInteger" use="required"/>
         <xs:attribute name="relHeight" type="xs:positiveInteger" use="required"/>

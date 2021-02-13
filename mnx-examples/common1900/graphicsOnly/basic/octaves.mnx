@@ -49,14 +49,7 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
             </measure>
         </measures>
     </part>
-    <systemLayout id="systemLayout">
-        <partStaff part="#part" />
-    </systemLayout>
     <score name="score" relWidth="500" relHeight="100" relMargins="20">
-        <pages>
-            <page>
-                <system startMeasureNumber="1" systemLayout="#systemlayout" />
-            </page>
-        </pages>
+        <partStaff part="#part" />
     </score>
 </mnx>
