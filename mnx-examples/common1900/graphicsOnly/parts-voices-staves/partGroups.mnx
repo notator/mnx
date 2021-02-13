@@ -576,20 +576,20 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
       
     <!-- all the scores in this mnx file -->
     <scores>
+        <!--
+        Score dimensions Issue:
+        I think score dimensions should be relative (i.e. without units). The actual
+        dimensions on the screen or paper should be controlled by the client application.
+        Margins should be handled as they are in CSS:
+            One value means set all margins to that value,
+            Two values means set top and bottom to the first value, left and right to the
+                second value,
+            Three values means set top to the first value, left and right to the second
+                value, and bottom to the third value.
+            Four values are in the order top, right, bottom, left.
+            Further values should be ignored.
+        -->
         <score name="Full Score" relWidth="500" relHeight="707" relMargins="30">                        
-            <!-- scoreLayout for the full score
-                Issue: I think the dimensions given here should be relative (i.e. without units).
-                    The actual dimensions on the screen or paper should be controlled by the
-                    client application.
-                The margins should be handled as they are in CSS:
-                    One value means set all margins to that value,
-                    Two values means set top and bottom to the first value, left and right to the
-                        second value,
-                    Three values means set top to the first value, left and right to the second
-                        value, and bottom to the third value.
-                    Four values are in the order top, right, bottom, left.
-                    Further values should be ignored.
-            -->
             <pages>
                 <page>
                     <system startMeasureNumber="1" systemLayout="#fullScoreSystemLayout1"/>
@@ -599,7 +599,6 @@ xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xs
         </score>
 
         <score name="Flute 1 part"  relWidth="500" relHeight="707" relMargins="30">            
-            <!-- scoreLayout for the flute 1 part -->
             <pages>
                 <page>
                     <system startMeasureNumber="1" systemLayout="#flute1PartSystem1Layout"/>
