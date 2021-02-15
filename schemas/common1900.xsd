@@ -74,7 +74,10 @@
         </xs:annotation>        
         <xs:sequence>
             <xs:element name="instrumentTypes" type="instrumentTypesType" minOccurs="0" />
-            <xs:element name="measures" type="globalMeasuresType"/>
+            <xs:choice>
+                <xs:element name="measures" type="globalMeasuresType"/>
+                <xs:element name="measure" type="globalMeasureType"/>                
+            </xs:choice>            
         </xs:sequence>
     </xs:complexType>
 
@@ -137,6 +140,8 @@
                 mnx/systemLayouts/systemLayout
                 mnx/systemLayouts/staffGroup
                 mnx/systemLayouts/partStaves
+                For example, if &gt;style directionClasses="key" /&lt; is defined in partStaves,
+                the key signature will be printed, large, across all the staves in the partStaves.
                 These styles cascade upwards. The outermost style takes precedence over the inner styles.
                 Note that these name strings should also be put in the directionClassType definition below.
                 Issue: The draft spec says that there can be only one time or key element in a measure.
@@ -250,9 +255,10 @@
                 part-abbreviation and instrument-sound elements.
             </xs:documentation>
         </xs:annotation>
-        <xs:sequence>
+        <xs:choice>
             <xs:element name="measures" type="partMeasuresType"/>
-        </xs:sequence>
+            <xs:element name="measure" type="partMeasureType"/>
+        </xs:choice>
         <xs:attribute name="id" type="idValueType" use="required"/>
         <xs:attribute name="instrumentType" type="idReferenceType" use="optional"/>
         <xs:attribute name="partNumberInGroup" type="xs:nonNegativeInteger" use="optional"/>
@@ -572,7 +578,6 @@
                 One or more staves containing data from one part (default is 2 staves).
                 The part's name and nameAbbrev can be retrieved from its instrumentType.
                 The partNumberInGroup (if defined) can be concatenated with the name or nameAbbrev and
-
                 printed to the left of the staves.
                 By default, there is a curly bracket to the left of the staves.
                 Appropriate types of barline are always printed through all the staves.

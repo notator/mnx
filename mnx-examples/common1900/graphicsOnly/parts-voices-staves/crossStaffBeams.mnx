@@ -4,49 +4,45 @@ xmlns="https://github.com/w3c/mnx"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xsd">
     <global>
-        <measures>
-            <measure/>
-        </measures>
+        <measure/>
     </global>
     <part id="part"> <!-- a single part on a grand staff having two staves -->
-        <measures>
-            <measure>
-                <sequence staff="1">
-                    <!-- default staff number for this voice -->
-                    <directions>
-                        <clef sign="G" line="2"/>
-                    </directions>
-                    <event value="/4" >
-                        <note pitch="C5"/>
-                    </event>
-                </sequence>
-                <sequence staff="2">
-                    <beams>
-                        <beam events="#event1 #event2 #event3 #event4" >
-                            <beam events="#event1 #event2 #event3 #event4" />
-                        </beam>
-                    </beams>
-                    <!-- default staff number for this voice -->
-                    <directions>
-                        <clef sign="F" line="4"/>
-                    </directions>
-                    <event value="/16" id="event1">
-                        <note pitch="Ab3"/>
-                    </event>
-                    <event value="/16" id="event2">
-                        <note pitch="C4"/>
-                    </event>
-                    <event value="/16" staff="1" id="event3">
-                        <!-- override default staff number -->
-                        <note pitch="F4"/>
-                    </event>
-                    <event value="/16" staff="1" id="event4">
-                        <!-- override default staff number -->
-                        <note pitch="E4"/>
-                    </event>
-                </sequence>
-            </measure>
-        </measures>
+        <measure>
+            <sequence staff="1">
+                <!-- default staff number for this voice -->
+                <directions>
+                    <clef sign="G" line="2"/>
+                </directions>
+                <event value="/4" >
+                    <note pitch="C5"/>
+                </event>
+            </sequence>
+            <sequence staff="2">
+                <beams>
+                    <beam events="#event1 #event2 #event3 #event4" >
+                        <beam events="#event1 #event2 #event3 #event4" />
+                    </beam>
+                </beams>
+                <!-- default staff number for this voice -->
+                <directions>
+                    <clef sign="F" line="4"/>
+                </directions>
+                <event value="/16" id="event1">
+                    <note pitch="Ab3"/>
+                </event>
+                <event value="/16" id="event2">
+                    <note pitch="C4"/>
+                </event>
+                <event value="/16" staff="1" id="event3">
+                    <!-- override default staff number -->
+                    <note pitch="F4"/>
+                </event>
+                <event value="/16" staff="1" id="event4">
+                    <!-- override default staff number -->
+                    <note pitch="E4"/>
+                </event>
+            </sequence>
+        </measure>
     </part>
     <score name="score" relWidth="500" relHeight="100" relMargins="20">
         <partStaves part="#part"/>  <!-- N.B. partStaves -->

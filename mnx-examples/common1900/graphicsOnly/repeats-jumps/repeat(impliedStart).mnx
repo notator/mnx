@@ -4,28 +4,24 @@ xmlns="https://github.com/w3c/mnx"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xsd">
     <global>
-        <measures>
-            <measure>
-                <directions>
-                    <time signature="4/4"/>
-                    <repeat type="end"/>
-                </directions>
-            </measure>
-        </measures>
+        <measure>
+            <directions>
+                <time signature="4/4"/>
+                <repeat type="end"/>
+            </directions>
+        </measure>
     </global>
     <part id="part">
-        <measures>
-            <measure>
-                <directions>
-                    <clef sign="G" line="2"/>
-                </directions>
-                <sequence>
-                    <event value="/1">
-                        <note pitch="C5"/>
-                    </event>
-                </sequence>
-            </measure>
-        </measures>
+        <measure>
+            <directions>
+                <clef sign="G" line="2"/>
+            </directions>
+            <sequence>
+                <event value="/1">
+                    <note pitch="C5"/>
+                </event>
+            </sequence>
+        </measure>
     </part>
     <score name="score" relWidth="500" relHeight="100" relMargins="20">
         <partStaff part="#part" />
