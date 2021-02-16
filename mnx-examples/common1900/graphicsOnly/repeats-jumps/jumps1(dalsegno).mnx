@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0"?>
 <!DOCTYPE mnx SYSTEM "../../../../schemas/mnx.dtd">
 <mnx
-xmlns="https://github.com/w3c/mnx"
+xmlns="https://github.com/notator/mnx"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="https://github.com/w3c/mnx ../../../../schemas/common1900.xsd">
+xsi:schemaLocation="https://github.com/notator/mnx https://james-ingram-act-two.de/open-source/XMLSchemas/common1900.xsd">
     <global>
         <measures>
             <measure>

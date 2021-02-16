@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           targetNamespace="https://github.com/w3c/mnx"
+           targetNamespace="https://github.com/notator/mnx"
            elementFormDefault="qualified"
-           xmlns="https://github.com/w3c/mnx">
+           xmlns="https://github.com/notator/mnx">
     <xs:annotation>
         <!--xs:documentation xml:lang="en"-->
         <xs:documentation>
