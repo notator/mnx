@@ -599,23 +599,17 @@ xsi:schemaLocation="https://github.com/notator/mnx https://james-ingram-act-two.
         </score>
 
         <score name="Flute 1 part"  relWidth="500" relHeight="707" relMargins="30">            
-            <pages>
-                <page>
-                    <system startMeasureNumber="1" systemLayout="#flute1PartSystem1Layout"/>
-                    <!-- all 7 bars are printed in this one system -->
-                </page>
-            </pages>
+            <system startMeasureNumber="1" systemLayout="#flute1PartSystem1Layout"/>
+            <!-- all 7 bars are printed in this one system -->
         </score>
         
         <!-- etc., all the woodwind part "scores" (booklets) -->
     
         <score name="Piano part"  relWidth="500" relHeight="707" relMargins="30">            
-            <pages>
-                <page>
-                    <system startMeasureNumber="1" systemLayout="#pianoSystem1Layout"/>
-                    <system startMeasureNumber="5" systemLayout="#pianoDefaultSystemLayout"/>
-               </page>
-            </pages>
+            <page>
+                <system startMeasureNumber="1" systemLayout="#pianoSystem1Layout"/>
+                <system startMeasureNumber="5" systemLayout="#pianoDefaultSystemLayout"/>
+            </page>
         </score>
     </scores>
 </mnx>
