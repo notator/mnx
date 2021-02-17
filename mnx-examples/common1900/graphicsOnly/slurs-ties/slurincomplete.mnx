@@ -26,7 +26,7 @@ xsi:schemaLocation="https://github.com/notator/mnx https://james-ingram-act-two.
             </sequence>
         </measure>
     </part>
-    <score name="score" relWidth="500" relHeight="100" relMargins="20">
+    <score name="score" relWidth="500" relHeight="150" relMargins="30 40 40 40">
         <partStaff part="#part" />
     </score>
 </mnx>
