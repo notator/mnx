@@ -679,8 +679,27 @@
     </xs:complexType>
 
     <xs:complexType name="systemType">
+        <xs:annotation>
+            <xs:documentation>
+                A particular system in the score
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="multiMeasureRest" type="multiMeasureRestType" minOccurs="0"/>
+        </xs:sequence>
         <xs:attribute name="startMeasureNumber" type="xs:positiveInteger" use="required"/>
-        <xs:attribute name="systemLayout" type="idReferenceType" use="required"/>
+        <xs:attribute name="systemLayout" type="idReferenceType" use="required"/>        
+    </xs:complexType>
+
+    <xs:complexType name="multiMeasureRestType">
+        <xs:annotation>
+            <xs:documentation>
+                A multi-measure rest (contained in a system)
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="relWidth" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="startMeasureNumber" type="xs:positiveInteger" use="required"/>
+        <xs:attribute name="nMeasures" type="xs:positiveInteger" use="required"/>
     </xs:complexType>
     
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
