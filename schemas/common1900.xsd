@@ -566,6 +566,9 @@
                 Appropriate types of barline are always printed.
             </xs:documentation>
         </xs:annotation>
+        <xs:sequence>
+            <xs:element name="multiMeasureRest" type="multiMeasureRestType" minOccurs="0"/>
+        </xs:sequence>
         <xs:attribute name="part" type="idReferenceType" use="required"/>
         <xs:attribute name="displayName" type="xs:boolean" default="false"/>
         <xs:attribute name="displayNameAbbrev" type="xs:boolean" default="false"/>
@@ -585,6 +588,7 @@
         </xs:annotation>
         <xs:sequence>
             <xs:element name="style" type="styleType" minOccurs="0"/>
+            <xs:element name="multiMeasureRest" type="multiMeasureRestType" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute name="part" type="idReferenceType" use="required"/>
         <xs:attribute name="nStaves" type="xs:positiveInteger" default="2"/>
