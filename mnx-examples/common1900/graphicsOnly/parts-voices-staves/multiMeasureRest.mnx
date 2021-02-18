@@ -71,21 +71,21 @@ xsi:schemaLocation="https://github.com/notator/mnx https://james-ingram-act-two.
                 </measure>
                 <measure>
                     <sequence>
-                        <event value="/4">
+                        <event value="/2d">
                             <rest/>
                         </event>
                     </sequence>
                 </measure>
                 <measure>
                     <sequence>
-                        <event value="/4">
+                        <event value="/2d">
                             <rest/>
                         </event>
                     </sequence>
                 </measure>
                 <measure>
                     <sequence>
-                        <event value="/4">
+                        <event value="/2d">
                             <rest/>
                         </event>
                     </sequence>
@@ -118,7 +118,7 @@ xsi:schemaLocation="https://github.com/notator/mnx https://james-ingram-act-two.
             <partStaff part="#fl1" displayName="true" displayPartNumber="true"/>
         </systemLayout>
         
-        <!-- systemLayout-definitions for the flute 1 part booklet -->
+        <!-- systemLayout-definitions for the flute 2 part booklet -->
         <systemLayout id="flute2PartSystemLayout">
             <partStaff part="#fl2" displayName="true" displayPartNumber="true"/>
         </systemLayout>
