@@ -1,0 +1,650 @@
+﻿<?xml version="1.0"?>
+<mnx
+xmlns="https://github.com/notator/mnx"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="https://github.com/notator/mnx ../../../../schemas/common1900.xsd">
+    <global>
+        <instrumentTypes>
+            <instrumentType id="flute" groupName="Flutes" name="Flute" nameAbbrev="Fl." />
+            <instrumentType id="oboe" groupName="Oboes" name="Oboe" nameAbbrev="Ob." />
+            <instrumentType id="piano" groupName="Pianos" name="Piano" nameAbbrev="Piano" />
+        </instrumentTypes>
+        <measures>
+            <measure>
+                <directions>
+                    <time signature="3/4"/>
+                </directions>
+            </measure>
+            <measure/>
+            <measure/>
+            <measure/>
+            <measure>
+                <directions>
+                    <time signature="2/4"/>
+                </directions>                
+            </measure>
+            <measure/> 
+            <measure/>
+            <measure/>
+        </measures>
+    </global>
+
+    <parts>
+        <part id="fl1" instrumentType="#flute" partNumberInGroup="1">
+            <measures>
+                <measure>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="C5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="D5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="E5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="F5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2">
+                            <note pitch="G5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2">
+                            <note pitch="A5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>
+                        <event value="/2">
+                            <note pitch="G5"/>
+                        </event>
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>
+                        <event value="/2">
+                            <note pitch="F5"/>
+                        </event>
+                    </sequence>
+                </measure>
+            </measures>
+        </part>
+        <part id="fl2" instrumentType="#flute" partNumberInGroup="2">
+            <measures>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <note pitch="A4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="A4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="A4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <note pitch="G4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="G4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="G4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <note pitch="F4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="F4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="F4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <note pitch="E4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="E4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="E4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <note pitch="D4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="D4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>
+                        <event value="/4">
+                            <note pitch="D4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="E4"/>
+                        </event>
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>
+                        <event value="/4">
+                            <note pitch="E4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="E4"/>
+                        </event>
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2">
+                            <note pitch="F4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+            </measures>
+        </part>
+        <part id="fl3" instrumentType="#flute" partNumberInGroup="3">
+            <measures>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <note pitch="F4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="F4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="F4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <note pitch="E4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="E4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="E4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <note pitch="D4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="D4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="D4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <note pitch="C4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="C4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="C4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <note pitch="B3"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="B3"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>
+                        <event value="/4">
+                            <note pitch="B3"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="C4"/>
+                        </event>
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>
+                        <event value="/4">
+                            <note pitch="C4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="C4"/>
+                        </event>
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2">
+                            <note pitch="D4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+            </measures>
+        </part>
+        <part id="ob1" instrumentType="#oboe" partNumberInGroup="1">
+            <measures>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <note pitch="C5"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="C5"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="C5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <note pitch="D5"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="D5"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="D5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <note pitch="E5"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="E5"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="E5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <note pitch="F5"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="F5"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="F5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <note pitch="G5"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="G5"/>
+                        </event>                       
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>
+                        <event value="/4">
+                            <note pitch="G5"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="A5"/>
+                        </event>
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>
+                        <event value="/4">
+                            <note pitch="A5"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="A5"/>
+                        </event>
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2">
+                            <note pitch="B5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+            </measures>
+        </part>
+        <part id="ob2" instrumentType="#oboe" partNumberInGroup="2">
+            <measures>
+                <measure>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="A4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="G4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="F4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="E4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>
+                        <event value="/2">
+                            <note pitch="D4"/>
+                        </event>
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>
+                        <event value="/2">
+                            <note pitch="E4"/>
+                        </event>
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2">
+                            <note pitch="F4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2">
+                            <note pitch="F4"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+            </measures>
+        </part>
+        <part id="piano" instrumentType="#piano">
+            <measures>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <rest/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="C4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="C4"/>
+                        </event>                        
+                    </sequence>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="F2"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <rest/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="D4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="D4"/>
+                        </event>                        
+                    </sequence>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="G2"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <rest/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="E4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="E4"/>
+                        </event>                        
+                    </sequence>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="A2"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <rest/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="F4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="F4"/>
+                        </event>                        
+                    </sequence>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="B2"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/4">
+                            <rest/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="G4"/>
+                        </event>                        
+                    </sequence>        
+                    <sequence>                        
+                        <event value="/2">
+                            <note pitch="C3"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>
+                        <event value="/4">
+                            <note pitch="G4"/>
+                        </event>
+                        <event value="/4">
+                            <rest/>
+                        </event>
+                    </sequence>
+                    <sequence>
+                        <event value="/2">
+                            <note pitch="D3"/>
+                        </event>
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>
+                        <event value="/4">
+                            <note pitch="A4"/>
+                        </event>
+                        <event value="/4">
+                            <note pitch="A4"/>
+                        </event>
+                    </sequence>
+                    <sequence>
+                        <event value="/2">
+                            <note pitch="E3"/>
+                        </event>
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2">
+                            <note pitch="C5"/>
+                        </event>                        
+                    </sequence>
+                    <sequence>                        
+                        <event value="/2">
+                            <note pitch="F3"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+            </measures>
+        </part>
+    </parts>
+    
+    <systemLayouts>
+        <systemLayout id="fullScoreSystemLayout1">
+            <staffGroup name="Woodwind" bracket="straight" barline="true" >
+                <staffGroup name="Flutes" bracket="curly" barline="true" displayGroupName="true" >
+                    <partGroupStaff parts="#fl1 #fl2" displayPartNumbers="true" />
+                    <partStaff part="#fl3" displayPartNumber="true" />
+                </staffGroup>
+                <partGroupStaff parts="#ob1 #ob2" displayGroupName="true" displayPartNumbers="true" />
+            </staffGroup>
+            <partStaves part="#piano" nStaves="2" displayName="true"/>
+        </systemLayout>
+        
+        <systemLayout id="fullScoreSystemLayout2">
+            <staffGroup name="Woodwind" bracket="straight" barline="true" >
+                <staffGroup bracket="curly" barline="true" displayNameAbbrev="true" >
+                    <partStaff part="#fl1" displayPartNumber="true" />
+                    <partStaff part="#fl2" displayPartNumber="true" />
+                    <partStaff part="#fl3" displayPartNumber="true" />
+                </staffGroup>
+                <partGroupStaff parts="#ob1 #ob2" displayNameAbbrev="true" displayPartNumbers="true" />
+            </staffGroup>
+            <partStaves part="#piano" nStaves="2" displayNameAbbrev="true"/>
+        </systemLayout>
+        
+        <!-- systemLayout-definitions for the flute 1 part booklet -->
+        <systemLayout id="flute1PartSystem1Layout">
+            <partStaff part="#fl1" displayName="true" displayPartNumber="true"/>
+        </systemLayout>
+        
+        <systemLayout id="flute1PartDefaultSystemLayout">
+            <partStaff part="#fl1" />
+        </systemLayout>
+        
+        <!-- etc. for all the woodwind part "scores" (booklets) -->
+
+        <!-- systemLayout-definitions for the piano part -->
+        <systemLayout id="pianoSystem1Layout">
+            <partStaves part="#piano" nStaves="2" displayName="true"/>
+        </systemLayout>
+        
+        <systemLayout id="pianoDefaultSystemLayout">
+            <partStaves part="#piano" nStaves="2" />
+        </systemLayout>
+    </systemLayouts>
+      
+    <!-- all the scores in this mnx file -->
+    <scores>
+        <!--
+        Score dimensions Issue:
+        I think score dimensions should be relative (i.e. without units). The actual
+        dimensions on the screen or paper should be controlled by the client application.
+        Margins should be handled as they are in CSS:
+            One value means set all margins to that value,
+            Two values means set top and bottom to the first value, left and right to the
+                second value,
+            Three values means set top to the first value, left and right to the second
+                value, and bottom to the third value.
+            Four values are in the order top, right, bottom, left.
+            Further values should be ignored.
+        -->
+        <score name="Full Score" relWidth="500" relHeight="707" relMargins="30">                        
+            <pages>
+                <page>
+                    <system startMeasureNumber="1" systemLayout="#fullScoreSystemLayout1"/>
+                    <system startMeasureNumber="4" systemLayout="#fullScoreSystemLayout2"/>
+                </page>                
+            </pages>
+        </score>
+
+        <score name="Flute 1 part"  relWidth="500" relHeight="707" relMargins="30">            
+            <system startMeasureNumber="1" systemLayout="#flute1PartSystem1Layout"/>
+            <!-- all 7 bars are printed in this one system -->
+        </score>
+        
+        <!-- etc., all the woodwind part "scores" (booklets) -->
+    
+        <score name="Piano part"  relWidth="460" relHeight="552" relMargins="30">            
+            <page>
+                <system startMeasureNumber="1" systemLayout="#pianoSystem1Layout"/>
+                <system startMeasureNumber="5" systemLayout="#pianoDefaultSystemLayout"/>
+            </page>
+        </score>
+    </scores>
+</mnx>
