@@ -104,10 +104,7 @@ xsi:schemaLocation="https://github.com/notator/mnx https://james-ingram-act-two.
     <systemLayouts>
         <!-- systemLayout definitions for the full score  -->
         <systemLayout id="fullScoreSystemLayout">
-            <!-- There is an optional <style> element here. -->
             <staffGroup name="Flutes" bracket="straight" barline="true" displayGroupName="true" >
-                <!-- There is an optional <style> element here. -->
-                <!-- And there is an optional <style> element inside partGroupStaff -->
                 <partStaff part="#fl1" displayPartNumber="true" />
                 <partStaff part="#fl2" displayPartNumber="true" />
             </staffGroup>
