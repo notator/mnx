@@ -1,0 +1,134 @@
+﻿<?xml version="1.0"?>
+<mnx
+xmlns="https://github.com/notator/mnx"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="https://github.com/notator/mnx ../../../../schemas/common1900.xsd">
+    <global>
+        <instrumentTypes>
+            <instrumentType id="flute" groupName="Flutes" name="Flute" nameAbbrev="Fl." />
+        </instrumentTypes>
+        <measures>
+            <measure>
+                <directions>
+                    <time signature="3/4"/>
+                </directions>
+            </measure>
+            <emptyMeasures count="4"/> 
+        </measures>
+    </global>
+
+    <parts>
+        <part id="fl1" instrumentType="#flute" partNumberInGroup="1">
+            <measures>
+                <measure>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="C5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="D5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="E5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="F5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+                <measure>
+                    <sequence>                        
+                        <event value="/2d">
+                            <note pitch="G5"/>
+                        </event>                        
+                    </sequence>
+                </measure>
+            </measures>
+        </part>
+        <part id="fl2" instrumentType="#flute" partNumberInGroup="2">
+            <measures>
+                <measure>
+                    <sequence>
+                        <event value="/2d">
+                            <note pitch="G4"/>
+                        </event>
+                    </sequence>
+                </measure>
+                <emptyMeasures count="3"/>
+                <measure>
+                    <sequence>
+                        <event value="/2d">
+                            <note pitch="G4"/>
+                        </event>
+                    </sequence>
+                </measure>
+            </measures>
+        </part>
+    </parts>
+    
+    <systemLayouts>
+        <!-- systemLayout definitions for the full score  -->
+        <systemLayout id="fullScoreSystemLayout">
+            <staffGroup name="Flutes" bracket="straight" barline="true" displayGroupName="true" >
+                <partStaff part="#fl1" displayPartNumber="true" />
+                <partStaff part="#fl2" displayPartNumber="true" />
+            </staffGroup>
+        </systemLayout>        
+        
+        <!-- systemLayout-definitions for the flute 1 part booklet -->
+        <systemLayout id="flute1PartSystemLayout">
+            <partStaff part="#fl1" displayName="true" displayPartNumber="true"/>
+        </systemLayout>
+        
+        <!-- systemLayout-definitions for the flute 2 part booklet -->
+        <systemLayout id="flute2PartSystemLayout">
+            <partStaff part="#fl2" displayName="true" displayPartNumber="true"/>
+        </systemLayout>
+        
+    </systemLayouts>
+      
+    <!-- all the scores in this mnx file -->
+    <scores>
+        <!--
+        Score dimensions Issue:
+        I think score dimensions should be relative (i.e. without units). The actual
+        dimensions on the screen or paper should be controlled by the client application.
+        Margins should be handled as they are in CSS:
+            One value means set all margins to that value,
+            Two values means set top and bottom to the first value, left and right to the
+                second value,
+            Three values means set top to the first value, left and right to the second
+                value, and bottom to the third value.
+            Four values are in the order top, right, bottom, left.
+            Further values should be ignored.
+        -->
+        <score name="Full Score" relWidth="500" relHeight="220" relMargins="30">                        
+            <system startMeasureNumber="1" systemLayout="#fullScoreSystemLayout"/>
+        </score>
+
+        <score name="Flute 1 part"  relWidth="500" relHeight="220" relMargins="30">
+            <system startMeasureNumber="1" systemLayout="#flute1PartSystem1Layout"/>
+            <!-- all 5 bars are printed in this one system -->
+        </score>
+
+        <score name="Flute 2 part"  relWidth="500" relHeight="220" relMargins="30">
+            <system startMeasureNumber="1" systemLayout="#flute2PartSystemLayout">
+                <multiMeasureRest relWidth="205" startMeasureNumber="2" nMeasures="3"/>
+            </system>
+            <!-- all 5 bars are printed in this one system -->
+        </score>
+        
+    </scores>
+</mnx>

@@ -99,8 +99,16 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="measure" type="globalMeasureType" maxOccurs="unbounded" />
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="measure" type="globalMeasureType" />
+                <xs:element name="emptyMeasures" type="emptyMeasuresType" />
+            </xs:choice>
         </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name ="emptyMeasuresType">
+        <xs:attribute name="count" type="xs:positiveInteger" use="required"/>
     </xs:complexType>
 
     <xs:complexType name="instrumentType">
@@ -135,18 +143,7 @@
         <xs:annotation>
             <xs:documentation>
                 the global/measure/directions element
-                By default, these elements are printed once per staff in the score, but their style
-                and position can be controlled by optional &gt;style&lt; elements in
-                mnx/systemLayouts/systemLayout
-                mnx/systemLayouts/staffGroup
-                mnx/systemLayouts/partStaves
-                For example, if &gt;style directionClasses="key" /&lt; is defined in partStaves,
-                the key signature will be printed, large, across all the staves in the partStaves.
-                These styles cascade upwards. The outermost style takes precedence over the inner styles.
-                Note that these name strings should also be put in the directionClassType definition below.
-                Issue: The draft spec says that there can be only one time or key element in a measure.
-                There seems to be no way to enforce that here. Instead, I think that if there is more
-                than one, the final one should override the others.
+                How these elements relate to groups and staves has yet to be decided.
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
@@ -271,19 +268,24 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="measure" type="partMeasureType" maxOccurs="unbounded"/>            
-        </xs:sequence>        
+            <xs:choice maxOccurs="unbounded">
+                <xs:element name="measure" type="partMeasureType"/>            
+                <xs:element name="emptyMeasures" type="emptyMeasuresType" />
+            </xs:choice>
+        </xs:sequence>       
     </xs:complexType>    
 
     <xs:complexType name="partMeasureType">
         <xs:annotation>
             <xs:documentation>
                 the part/measures/measure element
+                Note that an empty part/measure element will be printed (if at all) containing a measure rest.
+                See also the emptyMeasuresType.
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
             <xs:element name="directions" type="partMeasureDirectionsType" minOccurs="0"/>
-            <xs:element name="sequence" type="sequenceType" maxOccurs="unbounded"/>
+            <xs:element name="sequence" type="sequenceType" maxOccurs="unbounded" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute name="barline" type="barlineType" default="regular"/>
     </xs:complexType>
@@ -511,11 +513,6 @@
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
     <!-- SystemLayouts -->
 
-    <xs:complexType name="styleType">
-        <xs:attribute name="directionClasses" type="directionClassListType" />
-        <xs:attribute name="textLocation" type="aboveBelowType" />
-    </xs:complexType>
-
     <xs:complexType name="systemLayoutsType">
         <xs:sequence>
             <xs:element name="systemLayout" type="systemLayoutType" maxOccurs="unbounded"/>
@@ -523,15 +520,12 @@
     </xs:complexType>
 
     <xs:complexType name="systemLayoutType">
-        <xs:sequence>
-            <xs:element name="style" type="styleType" minOccurs="0"/>
-            <xs:choice maxOccurs="unbounded">
-                <xs:element name="partGroupStaff" type="partGroupStaffType"/>
-                <xs:element name="partStaff" type="partStaffType"/>
-                <xs:element name="partStaves" type="partStavesType"/>
-                <xs:element name="staffGroup" type="staffGroupType"/>
-            </xs:choice>
-        </xs:sequence>
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="partGroupStaff" type="partGroupStaffType"/>
+            <xs:element name="partStaff" type="partStaffType"/>
+            <xs:element name="partStaves" type="partStavesType"/>
+            <xs:element name="staffGroup" type="staffGroupType"/>
+        </xs:choice>
         <xs:attribute name="id" type="idValueType" use="required"/>
     </xs:complexType>
 
@@ -545,9 +539,6 @@
                 Appropriate types of barline are always printed.
             </xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element name="style" type="styleType" minOccurs="0"/>
-        </xs:sequence>
         <xs:attribute name="parts" type="idReferenceListType" use="required"/>
         <xs:attribute name="displayGroupName" type="xs:boolean" default="false"/>
         <xs:attribute name="displayName" type="xs:boolean" default="false"/>
@@ -587,7 +578,6 @@
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="style" type="styleType" minOccurs="0"/>
             <xs:element name="multiMeasureRest" type="multiMeasureRestType" minOccurs="0"/>
         </xs:sequence>
         <xs:attribute name="part" type="idReferenceType" use="required"/>
@@ -605,15 +595,12 @@
                 The name attribute is just informative. Its not used for anything except documentation.
             </xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element name="style" type="styleType" minOccurs="0"/>
-            <xs:choice maxOccurs="unbounded">
-                <xs:element name="partGroupStaff" type="partGroupStaffType"/>
-                <xs:element name="partStaff" type="partStaffType"/>
-                <xs:element name="partStaves" type="partStavesType"/>
-                <xs:element name="staffGroup" type="staffGroupType"/>
-            </xs:choice>
-        </xs:sequence>
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="partGroupStaff" type="partGroupStaffType"/>
+            <xs:element name="partStaff" type="partStaffType"/>
+            <xs:element name="partStaves" type="partStavesType"/>
+            <xs:element name="staffGroup" type="staffGroupType"/>
+        </xs:choice>
         <xs:attribute name="name" type="xs:token" use="optional"/>
         <xs:attribute name="bracket" type="bracketType" use="required"/>
         <xs:attribute name="barline" type="xs:boolean" use="required"/>
