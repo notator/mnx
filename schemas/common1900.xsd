@@ -333,12 +333,13 @@
         <xs:annotation>
             <xs:documentation>
                 the part/measures/measure/sequence element
+                Note that an empty sequence will be printed (if at all) containing a measure rest.
                 Issue: is there a way to avoid the code duplication between eventType, tupletType and graceType?
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>            
             <xs:element name="beams" type="beamsType" minOccurs="0"/>            
-            <xs:choice maxOccurs="unbounded">
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
                 <xs:element name="directions" type="sequenceDirectionsType"/>
                 <xs:element name="event" type="eventType"/>
                 <xs:element name="tuplet" type="tupletType"/>
