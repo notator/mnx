@@ -12,7 +12,7 @@ xsi:schemaLocation="https://github.com/notator/mnx ../../../../schemas/common190
         <measures>
             <measure>
                 <directions>
-                    <time signature="3/4"/>
+                    <time signature="3/4" staffGroupClasses="woodwind piano"/>
                 </directions>
             </measure>
             <measure/>
@@ -20,7 +20,7 @@ xsi:schemaLocation="https://github.com/notator/mnx ../../../../schemas/common190
             <measure/>
             <measure>
                 <directions>
-                    <time signature="2/4"/>
+                    <time signature="2/4" staffGroupClasses="woodwind piano"/>
                 </directions>                
             </measure>
             <measure/> 
@@ -566,18 +566,18 @@ xsi:schemaLocation="https://github.com/notator/mnx ../../../../schemas/common190
     
     <systemLayouts>
         <systemLayout id="fullScoreSystemLayout1">
-            <staffGroup name="Woodwind" bracket="straight" barline="true" >
-                <staffGroup name="Flutes" bracket="curly" barline="true" displayGroupName="true" >
+            <staffGroup staffGroupClass="woodwind" bracket="straight" barline="true" >
+                <staffGroup bracket="curly" barline="true" displayGroupName="true" >
                     <partGroupStaff parts="#fl1 #fl2" displayPartNumbers="true" />
                     <partStaff part="#fl3" displayPartNumber="true" />
                 </staffGroup>
                 <partGroupStaff parts="#ob1 #ob2" displayGroupName="true" displayPartNumbers="true" />
             </staffGroup>
-            <partStaves part="#piano" nStaves="2" displayName="true"/>
+            <partStaves staffGroupClass="piano" part="#piano" nStaves="2" displayName="true"/>
         </systemLayout>
         
         <systemLayout id="fullScoreSystemLayout2">
-            <staffGroup name="Woodwind" bracket="straight" barline="true" >
+            <staffGroup staffGroupClass="woodwind" bracket="straight" barline="true" >
                 <staffGroup bracket="curly" barline="true" displayNameAbbrev="true" >
                     <partStaff part="#fl1" displayPartNumber="true" />
                     <partStaff part="#fl2" displayPartNumber="true" />
@@ -585,7 +585,7 @@ xsi:schemaLocation="https://github.com/notator/mnx ../../../../schemas/common190
                 </staffGroup>
                 <partGroupStaff parts="#ob1 #ob2" displayNameAbbrev="true" displayPartNumbers="true" />
             </staffGroup>
-            <partStaves part="#piano" nStaves="2" displayNameAbbrev="true"/>
+            <partStaves staffGroupClass="piano" part="#piano" nStaves="2" displayNameAbbrev="true"/>
         </systemLayout>
         
         <!-- systemLayout-definitions for the flute 1 part booklet -->
@@ -601,11 +601,11 @@ xsi:schemaLocation="https://github.com/notator/mnx ../../../../schemas/common190
 
         <!-- systemLayout-definitions for the piano part -->
         <systemLayout id="pianoSystem1Layout">
-            <partStaves part="#piano" nStaves="2" displayName="true"/>
+            <partStaves staffGroupClass="piano" part="#piano" nStaves="2" displayName="true"/>
         </systemLayout>
         
         <systemLayout id="pianoDefaultSystemLayout">
-            <partStaves part="#piano" nStaves="2" />
+            <partStaves staffGroupClass="piano" part="#piano" nStaves="2" />
         </systemLayout>
     </systemLayouts>
       

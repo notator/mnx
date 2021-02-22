@@ -163,6 +163,7 @@
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="signature" type="multipleNoteValueType" use="required"/>
+        <xs:attribute name="staffGroupClasses" type="namesListType" default=""/>
     </xs:complexType>
 
     <xs:complexType name="keySigType">
@@ -581,6 +582,7 @@
         <xs:sequence>
             <xs:element name="multiMeasureRest" type="multiMeasureRestType" minOccurs="0"/>
         </xs:sequence>
+        <xs:attribute name="staffGroupClass" type="xs:Name" use="optional"/>
         <xs:attribute name="part" type="idReferenceType" use="required"/>
         <xs:attribute name="nStaves" type="xs:positiveInteger" default="2"/>
         <xs:attribute name="bracket" type="bracketType" default="curly"/>
@@ -602,7 +604,7 @@
             <xs:element name="partStaves" type="partStavesType"/>
             <xs:element name="staffGroup" type="staffGroupType"/>
         </xs:choice>
-        <xs:attribute name="name" type="xs:token" use="optional"/>
+        <xs:attribute name="staffGroupClass" type="xs:Name" use="optional"/>
         <xs:attribute name="bracket" type="bracketType" use="required"/>
         <xs:attribute name="barline" type="xs:boolean" use="required"/>
         <xs:attribute name="displayGroupName" type="xs:boolean" default="false"/>
@@ -877,7 +879,17 @@
             </xs:documentation>
         </xs:annotation>
         <xs:union memberTypes="locationType incomingOutgoingType"/>
-    </xs:simpleType>    
+    </xs:simpleType>
+
+    <xs:simpleType name="namesListType">
+        <xs:annotation>
+            <xs:documentation>
+                A string containing a list of xs:Name separated by whitespace.
+                This is the value of the part/measures/measure/sequence/beams/beam/events attribute.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:list itemType="xs:Name"/>
+    </xs:simpleType>
 
     <xs:simpleType name="locationsListType">
         <xs:annotation>
@@ -886,7 +898,7 @@
                 This is the value of the part/measures/measure/sequence/beams/beam/events attribute.
             </xs:documentation>
         </xs:annotation>
-        <xs:list itemType="locationType"/>       
+        <xs:list itemType="locationType"/>
     </xs:simpleType>
 
     <xs:simpleType name="positiveIntegerListType">
