@@ -151,7 +151,7 @@
                 <xs:element name="key" type="keySigType"/>
                 <xs:element name="repeat" type="repeatType"/>
                 <xs:element name="ending" type="endingType"/>
-                <xs:element name="text" type="textType"/>
+                <xs:element name="text" type="extendableTextType"/>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
@@ -303,7 +303,7 @@
         </xs:annotation>
         <xs:choice maxOccurs="unbounded" minOccurs="0">
             <xs:element name="clef" type="clefType"/>
-            <xs:element name="text" type="textType"/>
+            <xs:element name="text" type="extendableTextType"/>
             <xs:element name="key" type="keySigType"/>
         </xs:choice>
     </xs:complexType>
@@ -503,25 +503,43 @@
     
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
     <!-- General ComplexTypes                                           -->
-    <!-- These can be used both globally, in staffGroups and in parts.  -->
+    <!-- These can be used both globally and in parts.  -->
     
-    <xs:complexType name="textType">
+    <xs:complexType name="extendableTextType">
         <xs:annotation>
-        <xs:documentation>
-            A text that can be added to measure directions (both global and parts).
-            Note that if a text only applies at the part level, then it must be added
-            to all the parts to which it applies.
-            If two or more parts having the same text share a staff, the text will
-            only be printed once.                
-        </xs:documentation>
-    </xs:annotation>
-        <xs:simpleContent>
-            <xs:extension base="xs:string">
-                <xs:attribute name="location" type="locationType" default="0"/>
-                <xs:attribute name="orient" type="aboveBelowType" default="above"/>
-                <xs:attribute name="staffGroupClasses" type="namesListType" default=""/>
-            </xs:extension>
-        </xs:simpleContent>
+            <xs:documentation>
+                A text that can be added to measure directions (both global and parts).
+                It may optionally be followed by a textExtenderLine.
+                Note: If a text only applies at the part level, then it must be added
+                to all the parts to which it applies. If two or more parts having the same
+                text share a staff, the text will only be printed once.
+                Issue 1: There ought to be some way to describe the text and extender styles.
+                Text could be handled using standard markup in the text string (_italic_, *bold* etc.),
+                Both text and extender styles could be handled by defining values for CSS-like class attributes.
+                Issue 2: I tried unsuccessfuly to have the string as the content of this element,
+                but that became a problem when trying to define extendedText as a text plus a
+                textExtender. Maybe we could define this element differently... 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="textExtenderLine" type="textExtenderLineType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="string" type="xs:string" use="required"/>
+        <xs:attribute name="location" type="locationType" default="0"/>
+        <xs:attribute name="orient" type="aboveBelowType" default="above"/>
+        <xs:attribute name="align" type="textAlignType" default="left"/>
+        <xs:attribute name="staffGroupClasses" type="namesListType" default=""/>
+    </xs:complexType>
+    
+    <xs:complexType name="textExtenderLineType">
+        <xs:annotation>
+            <xs:documentation>
+                The duration of the extender is measured from the location of
+                its containing text.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="type" type="groupOrPartType" use="required"/>
+        <xs:attribute name="duration" type="durationType" use="required"/>        
     </xs:complexType>
 
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
@@ -871,6 +889,27 @@
         </xs:annotation>
         <xs:union memberTypes="idReferenceType simpleLocationType"/>
     </xs:simpleType>
+         
+    <xs:simpleType name="durationType">
+        <xs:annotation>
+            <xs:documentation>
+                EITHER a multipleNoteValueType OR a tickDurationType.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="multipleNoteValueType tickDurationType"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="tickDurationType">
+        <xs:annotation>
+            <xs:documentation>
+                A string that is a positive integer followed by a 't' character.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[1-9][0-9]*[t]"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
     
     <xs:simpleType name="incomingOutgoingType">
         <xs:annotation>
@@ -880,6 +919,17 @@
         </xs:annotation>
         <xs:restriction base="xs:token">
             <xs:pattern value="incoming|outgoing"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="groupOrPartType">
+        <xs:annotation>
+            <xs:documentation>
+                determines the style of a textExtender
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:pattern value="group|part"/>
         </xs:restriction>
     </xs:simpleType>
     
