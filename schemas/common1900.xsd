@@ -104,8 +104,7 @@
                 <xs:element name="emptyMeasures" type="emptyMeasuresType" />
             </xs:choice>
         </xs:sequence>
-    </xs:complexType>
-    
+    </xs:complexType>    
     
     <xs:complexType name ="emptyMeasuresType">
         <xs:attribute name="count" type="xs:positiveInteger" use="required"/>
@@ -152,6 +151,7 @@
                 <xs:element name="key" type="keySigType"/>
                 <xs:element name="repeat" type="repeatType"/>
                 <xs:element name="ending" type="endingType"/>
+                <xs:element name="text" type="textType"/>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
@@ -317,17 +317,6 @@
         <xs:attribute name="sign" type="clefSignType" use="required"/>
         <xs:attribute name="line" type="xs:positiveInteger" use="required"/>
         <xs:attribute name="octave" type="xs:int" default="0"/>
-    </xs:complexType>
-
-    <xs:complexType name="textType">
-        <xs:annotation>
-            <xs:documentation>
-                the part/measures/measure/directions/text element
-            </xs:documentation>
-        </xs:annotation>
-        <xs:attribute name="text" type="xs:token" use="required"/>
-        <xs:attribute name="location" type="locationType" use="required"/>
-        <xs:attribute name="align" type="textAlignType" default="left"/>
     </xs:complexType>
 
     <xs:complexType name="sequenceType">
@@ -510,6 +499,29 @@
         <xs:attribute name="location" type="slurLocationType" use="optional"/>
         <xs:attribute name="startNote" type="idReferenceType" use="optional"/>
         <xs:attribute name="endNote" type="idReferenceType" use="optional"/>
+    </xs:complexType>
+    
+    <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+    <!-- General ComplexTypes                                           -->
+    <!-- These can be used both globally, in staffGroups and in parts.  -->
+    
+    <xs:complexType name="textType">
+        <xs:annotation>
+        <xs:documentation>
+            A text that can be added to measure directions (both global and parts).
+            Note that if a text only applies at the part level, then it must be added
+            to all the parts to which it applies.
+            If two or more parts having the same text share a staff, the text will
+            only be printed once.                
+        </xs:documentation>
+    </xs:annotation>
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="location" type="locationType" default="0"/>
+                <xs:attribute name="orient" type="aboveBelowType" default="above"/>
+                <xs:attribute name="staffGroupClasses" type="namesListType" default=""/>
+            </xs:extension>
+        </xs:simpleContent>
     </xs:complexType>
 
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
