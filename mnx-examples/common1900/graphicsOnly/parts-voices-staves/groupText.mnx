@@ -634,12 +634,10 @@ xsi:schemaLocation="https://github.com/notator/mnx ../../../../schemas/common190
             Further values should be ignored.
         -->
         <score name="Full Score" relWidth="500" relHeight="707" relMargins="30">                        
-            <pages>
-                <page>
-                    <system startMeasureNumber="1" systemLayout="#fullScoreSystemLayout1"/>
-                    <system startMeasureNumber="4" systemLayout="#fullScoreSystemLayout2"/>
-                </page>                
-            </pages>
+            <page>
+                <system startMeasureNumber="1" systemLayout="#fullScoreSystemLayout1"/>
+                <system startMeasureNumber="4" systemLayout="#fullScoreSystemLayout2"/>
+            </page>                
         </score>
 
         <score name="Flute 1 part"  relWidth="500" relHeight="707" relMargins="30">            
