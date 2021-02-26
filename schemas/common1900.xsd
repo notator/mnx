@@ -160,6 +160,8 @@
         <xs:annotation>
             <xs:documentation>
                 the global/measure/directions/timeSig element
+                Note that the staffGroupClasses are simply the names of staffGroup
+                classes. They are not IDs, so don't have '#' prefixes.                
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="signature" type="multipleNoteValueType" use="required"/>
@@ -510,12 +512,16 @@
             <xs:documentation>
                 A text that can be added to measure directions (both global and parts).
                 It may optionally be followed by a textExtenderLine.
-                Note: If a text only applies at the part level, then it must be added
+                Note 1: If a text only applies at the part level, then it must be added
                 to all the parts to which it applies. If two or more parts having the same
                 text share a staff, the text will only be printed once.
+                Note 2: The staffGroupClasses are simply the names of classes. They are not IDs.
+                This allows the text and it's extender (if any) to be used in different staffGroups,
+                and so to span different systems.                
                 Issue 1: There ought to be some way to describe the text and extender styles.
                 Text could be handled using standard markup in the text string (_italic_, *bold* etc.),
-                Both text and extender styles could be handled by defining values for CSS-like class attributes.
+                Alternatively, both text and extender styles could be handled by defining values for
+                CSS-like class attributes.
                 Issue 2: I tried unsuccessfuly to have the string as the content of this element,
                 but that became a problem when trying to define extendedText as a text plus a
                 textExtender. Maybe we could define this element differently... 
