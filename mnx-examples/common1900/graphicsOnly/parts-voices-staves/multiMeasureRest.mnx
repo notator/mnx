@@ -2,7 +2,7 @@
 <mnx
 xmlns="https://github.com/notator/mnx"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="https://github.com/notator/mnx https://james-ingram-act-two.de/open-source/XMLSchemas/common1900.xsd">
+xsi:schemaLocation="https://github.com/notator/mnx ../../../../schemas/common1900.xsd">
     <global>
         <instrumentTypes>
             <instrumentType id="flute" groupName="Flutes" name="Flute" nameAbbrev="Fl." />
@@ -104,7 +104,7 @@ xsi:schemaLocation="https://github.com/notator/mnx https://james-ingram-act-two.
     <systemLayouts>
         <!-- systemLayout definitions for the full score  -->
         <systemLayout id="fullScoreSystemLayout">
-            <staffGroup name="Flutes" bracket="straight" barline="true" displayGroupName="true" >
+            <staffGroup staffGroupClass="Flutes" bracket="straight" barline="true" displayGroupName="true" >
                 <partStaff part="#fl1" displayPartNumber="true" />
                 <partStaff part="#fl2" displayPartNumber="true" />
             </staffGroup>

@@ -3,7 +3,7 @@
 <mnx
 xmlns="https://github.com/notator/mnx"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="https://github.com/notator/mnx https://james-ingram-act-two.de/open-source/XMLSchemas/common1900.xsd">
+xsi:schemaLocation="https://github.com/notator/mnx ../../../../schemas/common1900.xsd">
     <global>
         <measures>
             <measure>
@@ -31,7 +31,7 @@ xsi:schemaLocation="https://github.com/notator/mnx https://james-ingram-act-two.
             </measure>
             <measure>
                 <directions>
-                    <text location="0" text="&segno;" align="center" /> <!-- default align="left" -->
+                    <text location="0" string="&segno;" align="center" /> <!-- default align="left" -->
                 </directions>
                 <sequence>
                     <event value="/1">
@@ -55,7 +55,7 @@ xsi:schemaLocation="https://github.com/notator/mnx https://james-ingram-act-two.
             </measure>
             <measure>
                 <directions>
-                    <text location="4/4" text="D.S." align="right"/>
+                    <text location="4/4" string="D.S." align="right"/>
                 </directions>
                 <sequence>
                     <event value="/1">

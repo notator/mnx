@@ -3,7 +3,7 @@
 <mnx
 xmlns="https://github.com/notator/mnx"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xsi:schemaLocation="https://github.com/notator/mnx https://james-ingram-act-two.de/open-source/XMLSchemas/common1900.xsd">
+xsi:schemaLocation="https://github.com/notator/mnx ../../../../schemas/common1900.xsd">
     <global>
         <measures>
             <measure>
@@ -31,7 +31,7 @@ xsi:schemaLocation="https://github.com/notator/mnx https://james-ingram-act-two.
             </measure>
             <measure> <!-- m 2 -->
                 <directions>
-                    <text location="0" text="&segno;" /> <!-- default align="left" -->
+                    <text location="0" string="&segno;" /> <!-- default align="left" -->
                 </directions>
                 <sequence>
                     <event value="/1">
@@ -41,7 +41,7 @@ xsi:schemaLocation="https://github.com/notator/mnx https://james-ingram-act-two.
             </measure>
             <measure> <!-- m 3 -->
                 <directions>
-                    <text location="4/4" text="fine" align="right"/>
+                    <text location="4/4" string="fine" align="right"/>
                 </directions>
                 <sequence>
                     <event value="/1">
@@ -58,7 +58,7 @@ xsi:schemaLocation="https://github.com/notator/mnx https://james-ingram-act-two.
             </measure>
             <measure> <!-- m 5 -->
                 <directions>
-                    <text location="4/4" text="D.S. al Fine" align="right"/>
+                    <text location="4/4" string="D.S. al Fine" align="right"/>
                 </directions>
                 <sequence>
                     <event value="/1">
