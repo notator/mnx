@@ -104,8 +104,7 @@
                 <xs:element name="emptyMeasures" type="emptyMeasuresType" />
             </xs:choice>
         </xs:sequence>
-    </xs:complexType>
-    
+    </xs:complexType>    
     
     <xs:complexType name ="emptyMeasuresType">
         <xs:attribute name="count" type="xs:positiveInteger" use="required"/>
@@ -152,6 +151,7 @@
                 <xs:element name="key" type="keySigType"/>
                 <xs:element name="repeat" type="repeatType"/>
                 <xs:element name="ending" type="endingType"/>
+                <xs:element name="text" type="extendableTextType"/>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
@@ -160,9 +160,12 @@
         <xs:annotation>
             <xs:documentation>
                 the global/measure/directions/timeSig element
+                Note that the staffGroupClasses are simply the names of staffGroup
+                classes. They are not IDs, so don't have '#' prefixes.                
             </xs:documentation>
         </xs:annotation>
         <xs:attribute name="signature" type="multipleNoteValueType" use="required"/>
+        <xs:attribute name="staffGroupClasses" type="namesListType" default=""/>
     </xs:complexType>
 
     <xs:complexType name="keySigType">
@@ -302,7 +305,7 @@
         </xs:annotation>
         <xs:choice maxOccurs="unbounded" minOccurs="0">
             <xs:element name="clef" type="clefType"/>
-            <xs:element name="text" type="textType"/>
+            <xs:element name="text" type="extendableTextType"/>
             <xs:element name="key" type="keySigType"/>
         </xs:choice>
     </xs:complexType>
@@ -318,27 +321,17 @@
         <xs:attribute name="octave" type="xs:int" default="0"/>
     </xs:complexType>
 
-    <xs:complexType name="textType">
-        <xs:annotation>
-            <xs:documentation>
-                the part/measures/measure/directions/text element
-            </xs:documentation>
-        </xs:annotation>
-        <xs:attribute name="text" type="xs:token" use="required"/>
-        <xs:attribute name="location" type="locationType" use="required"/>
-        <xs:attribute name="align" type="textAlignType" default="left"/>
-    </xs:complexType>
-
     <xs:complexType name="sequenceType">
         <xs:annotation>
             <xs:documentation>
                 the part/measures/measure/sequence element
+                Note that an empty sequence will be printed (if at all) containing a measure rest.
                 Issue: is there a way to avoid the code duplication between eventType, tupletType and graceType?
             </xs:documentation>
         </xs:annotation>
         <xs:sequence>            
             <xs:element name="beams" type="beamsType" minOccurs="0"/>            
-            <xs:choice maxOccurs="unbounded">
+            <xs:choice maxOccurs="unbounded" minOccurs="0">
                 <xs:element name="directions" type="sequenceDirectionsType"/>
                 <xs:element name="event" type="eventType"/>
                 <xs:element name="tuplet" type="tupletType"/>
@@ -509,6 +502,51 @@
         <xs:attribute name="startNote" type="idReferenceType" use="optional"/>
         <xs:attribute name="endNote" type="idReferenceType" use="optional"/>
     </xs:complexType>
+    
+    <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
+    <!-- General ComplexTypes                                           -->
+    <!-- These can be used both globally and in parts.  -->
+    
+    <xs:complexType name="extendableTextType">
+        <xs:annotation>
+            <xs:documentation>
+                A text that can be added to measure directions (both global and parts).
+                It may optionally be followed by a textExtenderLine.
+                Note 1: If a text only applies at the part level, then it must be added
+                to all the parts to which it applies. If two or more parts having the same
+                text share a staff, the text will only be printed once.
+                Note 2: The staffGroupClasses are simply the names of classes. They are not IDs.
+                This allows the text and it's extender (if any) to be used in different staffGroups,
+                and so to span different systems.                
+                Issue 1: There ought to be some way to describe the text and extender styles.
+                Text could be handled using standard markup in the text string (_italic_, *bold* etc.),
+                Alternatively, both text and extender styles could be handled by defining values for
+                CSS-like class attributes.
+                Issue 2: I tried unsuccessfuly to have the string as the content of this element,
+                but that became a problem when trying to define extendedText as a text plus a
+                textExtender. Maybe we could define this element differently... 
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="textExtenderLine" type="textExtenderLineType" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="string" type="xs:string" use="required"/>
+        <xs:attribute name="location" type="locationType" default="0"/>
+        <xs:attribute name="orient" type="aboveBelowType" default="above"/>
+        <xs:attribute name="align" type="textAlignType" default="left"/>
+        <xs:attribute name="staffGroupClasses" type="namesListType" default=""/>
+    </xs:complexType>
+    
+    <xs:complexType name="textExtenderLineType">
+        <xs:annotation>
+            <xs:documentation>
+                The duration of the extender is measured from the location of
+                its containing text.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="type" type="groupOrPartType" use="required"/>
+        <xs:attribute name="duration" type="durationType" use="required"/>        
+    </xs:complexType>
 
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
     <!-- SystemLayouts -->
@@ -580,6 +618,7 @@
         <xs:sequence>
             <xs:element name="multiMeasureRest" type="multiMeasureRestType" minOccurs="0"/>
         </xs:sequence>
+        <xs:attribute name="staffGroupClass" type="xs:Name" use="optional"/>
         <xs:attribute name="part" type="idReferenceType" use="required"/>
         <xs:attribute name="nStaves" type="xs:positiveInteger" default="2"/>
         <xs:attribute name="bracket" type="bracketType" default="curly"/>
@@ -601,7 +640,7 @@
             <xs:element name="partStaves" type="partStavesType"/>
             <xs:element name="staffGroup" type="staffGroupType"/>
         </xs:choice>
-        <xs:attribute name="name" type="xs:token" use="optional"/>
+        <xs:attribute name="staffGroupClass" type="xs:Name" use="optional"/>
         <xs:attribute name="bracket" type="bracketType" use="required"/>
         <xs:attribute name="barline" type="xs:boolean" use="required"/>
         <xs:attribute name="displayGroupName" type="xs:boolean" default="false"/>
@@ -856,6 +895,27 @@
         </xs:annotation>
         <xs:union memberTypes="idReferenceType simpleLocationType"/>
     </xs:simpleType>
+         
+    <xs:simpleType name="durationType">
+        <xs:annotation>
+            <xs:documentation>
+                EITHER a multipleNoteValueType OR a tickDurationType.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:union memberTypes="multipleNoteValueType tickDurationType"/>
+    </xs:simpleType>
+    
+    <xs:simpleType name="tickDurationType">
+        <xs:annotation>
+            <xs:documentation>
+                A string that is a positive integer followed by a 't' character.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[1-9][0-9]*[t]"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
     
     <xs:simpleType name="incomingOutgoingType">
         <xs:annotation>
@@ -868,6 +928,17 @@
         </xs:restriction>
     </xs:simpleType>
     
+    <xs:simpleType name="groupOrPartType">
+        <xs:annotation>
+            <xs:documentation>
+                determines the style of a textExtender
+            </xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:token">
+            <xs:pattern value="group|part"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
     <xs:simpleType name="slurLocationType">
         <xs:annotation>
             <xs:documentation>
@@ -876,7 +947,17 @@
             </xs:documentation>
         </xs:annotation>
         <xs:union memberTypes="locationType incomingOutgoingType"/>
-    </xs:simpleType>    
+    </xs:simpleType>
+
+    <xs:simpleType name="namesListType">
+        <xs:annotation>
+            <xs:documentation>
+                A string containing a list of xs:Name separated by whitespace.
+                This is the value of the part/measures/measure/sequence/beams/beam/events attribute.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:list itemType="xs:Name"/>
+    </xs:simpleType>
 
     <xs:simpleType name="locationsListType">
         <xs:annotation>
@@ -885,7 +966,7 @@
                 This is the value of the part/measures/measure/sequence/beams/beam/events attribute.
             </xs:documentation>
         </xs:annotation>
-        <xs:list itemType="locationType"/>       
+        <xs:list itemType="locationType"/>
     </xs:simpleType>
 
     <xs:simpleType name="positiveIntegerListType">
