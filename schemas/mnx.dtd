@@ -1,9 +1,10 @@
 ﻿
-<!-- This DTD seems to work, even though Visual Studio is not really happy. -->
+<!-- Entity definitions for inclusion in .mnx files -->
 
-<!ELEMENT mnx (segno,coda)> <!-- VS warns here that neither segno nor coda are declared. -->
-<!ENTITY segno "&#x1D10B;"> <!-- VS shows a real error here if CDATA is used. --> 
-<!ENTITY coda "&#119052;"> <!-- VS shows a real error here if CDATA is used. -->
+<!ENTITY segno "&#x1D10B;">
+<!ENTITY coda "&#119052;">
+<!ENTITY ff "&#xE52F;">
+<!-- etc. -->
 
 <!-- Does this file _have_ to end with an empty line (a newline) after the final definition? -->
 
