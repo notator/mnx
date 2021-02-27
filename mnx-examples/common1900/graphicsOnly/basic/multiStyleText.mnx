@@ -1,0 +1,81 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE mnx SYSTEM "../../../../schemas/mnx.dtd">
+<mnx
+xmlns="https://github.com/notator/mnx"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="https://github.com/notator/mnx ../../../../schemas/common1900.xsd">
+    <!--
+    I think the Draft Spec's style proposals in
+        §6.14 Style properties and 
+        §6.15 Stylesheet definitions
+    are in some respects too specific. In particular, applications
+    should be enabled to use their own "house-style" for fonts and
+    font sizes. Music fonts should not all have to be SMuFL compliant,
+    though SMuFL code points could be used as conventional glyph identifiers.
+    There are, however, a number of music-notation-specific text classes
+    that could be defined so that texts that have a similar
+    function can be defined to look the same. These include:
+        1.1 "musicFont"
+            the basic font and font-size used to print clefs, noteheads,
+            accidentals etc.
+        1.2 "musicFont small"
+            the font and font size used to print clefs, noteheads,
+            accidentals etc. (in cues etc.)        
+        2.1 "instruction" - the font used to print ordinary performance
+            instructions, instrument names etc.
+        2.2 "instruction bold"
+        2.3 "instruction italic"
+        2.4 "instruction bold italic"
+        2.5 "instruction entity" - the font used to print (particular) HTML entities
+
+    The music elements (e.g. clef, note) have, by default, the class "musicFont",
+    so this does not need to be stipulated explicitly.
+    HTML entities automatically have the class "entity". Each consuming application
+    can decide for itself which font to use for each individual entity. So here
+    again, the font does not need to be stipulated explicitly.
+    For example: a small clef can be coded as follows because the clef element's
+    default class is "musicFont":
+        <clef class="small" sign="G" line="2"/>
+    And an italic instruction can be:
+        <text class="instruction" location="0" align="center">
+            <string class="italic" value=" diminuendo"/>
+        </text>
+    Possibly, the text element would, by default have class="instruction", and the above
+    could be simplified accordingly.
+    Other text element classes might be:
+        3.1 "title"
+        3.2 "author"
+        3.3 "accelRit"
+        3.4 "crescDim"
+        etc. 
+    
+    These classes could all be implemented as separate elements.
+    -->
+    <global>
+        <measure>
+            <directions>
+                <time signature="4/4"/>
+            </directions>
+        </measure>
+    </global>
+    <part id="part">
+        <measure barline="regular">
+            <directions>
+                <clef sign="G" line="2"/>
+                <text class="instruction" location="0" align="center">  <!-- aligns the first string here. default align="left" -->
+                    <string value="&ff;" />
+                    <string class="italic" value=" diminuendo"/>
+                </text>
+
+            </directions>
+            <sequence>                    
+                <event value="/1">
+                    <note pitch="C4"/>
+                </event>                    
+            </sequence>
+        </measure>
+    </part>
+    <score name="score" relWidth="500" relHeight="150" relMargins="30 180 30 30">
+        <partStaff part="#part" />
+    </score>
+</mnx>
