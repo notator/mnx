@@ -17,10 +17,18 @@ xsi:schemaLocation="https://github.com/notator/mnx ../../../../schemas/common190
                 <clef sign="G" line="2"/>
             </directions>
             <sequence>
-                <instruction orient="below" >
-                    <entity value="&ff;" align="center"/>  <!-- aligns to the inherited location -->
-                    <string class="italic" value=" diminuendo"/>
-                </instruction>
+                <directions>
+                    <instruction orient="below" >
+                        <!-- this string aligns to the inherited location (the following event) -->
+                        <string value="&ff;" align="center"/>
+                        <!-- this string is concatenated to the right of the previous string -->
+                        <string value=" diminuendo" class="italic" />
+                        <!--
+                             Note that a list of strings, each having align="left", could be
+                             used to create a multi-line block of text.
+                        -->
+                    </instruction>
+                </directions>
                 <event value="/1">
                     <note pitch="C4"/>
                 </event>                    

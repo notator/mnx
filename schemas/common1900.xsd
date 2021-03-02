@@ -151,7 +151,13 @@
                 <xs:element name="key" type="keySigType"/>
                 <xs:element name="repeat" type="repeatType"/>
                 <xs:element name="ending" type="endingType"/>
-                <xs:element name="text" type="extendableTextType"/>
+                <xs:element name="instruction" type="textBlockType"/>
+                <xs:element name="accel" type="extendableTextType"/>
+                <xs:element name="rit" type="extendableTextType"/>
+                <xs:element name="cresc" type="extendableTextType"/>
+                <xs:element name="dim" type="extendableTextType"/>
+                <xs:element name="crescWedge" type="extenderLineType"/>
+                <xs:element name="dimWedge" type="extenderLineType"/>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
@@ -305,8 +311,12 @@
         </xs:annotation>
         <xs:choice maxOccurs="unbounded" minOccurs="0">
             <xs:element name="clef" type="clefType"/>
-            <xs:element name="text" type="extendableTextType"/>
             <xs:element name="key" type="keySigType"/>
+            <xs:element name="instruction" type="textBlockType"/>
+            <xs:element name="cresc" type="extendableTextType"/>
+            <xs:element name="dim" type="extendableTextType"/>
+            <xs:element name="crescWedge" type="extenderLineType"/>
+            <xs:element name="dimWedge" type="extenderLineType"/>
         </xs:choice>
     </xs:complexType>
 
@@ -350,7 +360,13 @@
         <xs:sequence>
             <xs:choice maxOccurs="unbounded" minOccurs="0">
                 <xs:element name="clef" type="clefType"/>
+                <xs:element name="instruction" type="textBlockType"/>
                 <xs:element name="octave-shift" type="octaveShiftType"/>
+                <xs:element name="pedal" type="extendableTextType"/>
+                <xs:element name="cresc" type="extendableTextType"/>
+                <xs:element name="dim" type="extendableTextType"/>
+                <xs:element name="crescWedge" type="extenderLineType"/>
+                <xs:element name="dimWedge" type="extenderLineType"/>
             </xs:choice>
         </xs:sequence>
     </xs:complexType>
@@ -506,46 +522,108 @@
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
     <!-- General ComplexTypes                                           -->
     <!-- These can be used both globally and in parts.  -->
-    
-    <xs:complexType name="extendableTextType">
+
+    <xs:complexType name="textBlockType">
         <xs:annotation>
             <xs:documentation>
-                A text that can be added to measure directions (both global and parts).
-                It may optionally be followed by a textExtenderLine.
+                A sequence of one or more string and/or image elements.
+                By default, consecutive strings are concatenated (to the right), but this behaviour
+                can be changed by giving each string and/or image an align attribute. All the
+                align attributes refer to the location of the textBlock as a whole.
+                This textBlock can be added to any directions element (global, part/measure and
+                part/measure/sequence).
                 Note 1: If a text only applies at the part level, then it must be added
-                to all the parts to which it applies. If two or more parts having the same
-                text share a staff, the text will only be printed once.
+                to all the parts to which it applies. If two or more parts or part/sequence having
+                the same text share a staff, the text will only be printed once.
                 Note 2: The staffGroupClasses are simply the names of classes. They are not IDs.
                 This allows the text and it's extender (if any) to be used in different staffGroups,
-                and so to span different systems.                
-                Issue 1: There ought to be some way to describe the text and extender styles.
-                Text could be handled using standard markup in the text string (_italic_, *bold* etc.),
-                Alternatively, both text and extender styles could be handled by defining values for
-                CSS-like class attributes.
+                and so to span different systems.
+                Issue 1: The consuming application will provide standard styles for elements of
+                this type that depend on the _names_ of the elements and their local or global scope.
+                These default styles will be overridable by CSS-like class attributes defined in a
+                &gt;style&lt; element at the top of the file.
                 Issue 2: I tried unsuccessfuly to have the string as the content of this element,
                 but that became a problem when trying to define extendedText as a text plus a
-                textExtender. Maybe we could define this element differently... 
+                textExtender. Maybe we could define this element differently...
             </xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element name="textExtenderLine" type="textExtenderLineType" minOccurs="0"/>
-        </xs:sequence>
-        <xs:attribute name="string" type="xs:string" use="required"/>
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="string" type="stringElementType"/>
+            <xs:element name="image" type="imageType"/>
+        </xs:choice>
         <xs:attribute name="location" type="locationType" default="0"/>
         <xs:attribute name="orient" type="aboveBelowType" default="above"/>
         <xs:attribute name="align" type="textAlignType" default="left"/>
         <xs:attribute name="staffGroupClasses" type="namesListType" default=""/>
     </xs:complexType>
-    
-    <xs:complexType name="textExtenderLineType">
+
+    <xs:complexType name="extendableTextType">
         <xs:annotation>
             <xs:documentation>
-                The duration of the extender is measured from the location of
-                its containing text.
+                A textBlockType that can optionally be followed by an extenderLine.
             </xs:documentation>
         </xs:annotation>
-        <xs:attribute name="type" type="groupOrPartType" use="required"/>
-        <xs:attribute name="duration" type="durationType" use="required"/>        
+        <xs:complexContent>
+            <xs:extension base="textBlockType">
+                <xs:sequence>
+                    <xs:element name="extenderLine" type="extenderLineType" minOccurs="0"/>
+                </xs:sequence>                
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:complexType name="extenderLineType">
+        <xs:annotation>
+            <xs:documentation>
+                Issue: How to define the end-point of the line? duration or end?
+                Either one or both must be defined here.
+                Only one of them must be used in the XML.
+                The duration of the extender would be measured from the location
+                of its containing text.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="class" type="xs:token" use="optional"/>
+        <xs:attribute name="duration" type="durationType" use="optional"/>
+        <xs:attribute name="end" type="locationType" use="optional"/>
+    </xs:complexType>
+
+    <xs:complexType name="stringElementType">
+        <xs:annotation>
+            <xs:documentation>
+                An element component of the textBlockType
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="class" type="xs:token" use="optional"/>
+        <xs:attribute name="value" type="xs:string" use="required"/>
+        <xs:attribute name="location" type="locationType" use="optional"/>
+        <xs:attribute name="align" type="textAlignType" use="optional"/>
+    </xs:complexType>
+    
+    <xs:complexType name="imageType">
+        <xs:annotation>
+            <xs:documentation>
+                This is an external image file, such as an SVG, that can be a
+                component of the textBlockType.
+                The width, height and baseline would be in the same anonymous
+                units as all the other measurements in the file including page
+                and margin sizes and the heights of fonts.
+                (The units can generally be thought of as pixels, as in SVG.)
+                The baseline is the height of the image's baseline below the top
+                of the image at the final scale. The image's baseline is 
+                vertically aligned with the baseline of any surrounding text.
+                Issue class: The color of an SVG can be changed using a CSS
+                filter, so the class attribute can be used to stipulate the
+                color in the SVG output: It might be better, simply to call the
+                attribute 'color' - but that might encourage its overuse...                
+            </xs:documentation>
+        </xs:annotation>
+        <xs:attribute name="src" type="xs:anyURI" use="required"/>
+        <xs:attribute name="class" type="xs:token" use="optional"/>
+        <xs:attribute name="location" type="locationType" use="optional"/>
+        <xs:attribute name="align" type="textAlignType" use="optional"/>
+        <xs:attribute name="width" type="xs:decimal" use="required"/>
+        <xs:attribute name="height" type="xs:decimal" use="required"/>
+        <xs:attribute name="baseline" type="xs:decimal" use="required"/>    
     </xs:complexType>
 
     <!--::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::-->
@@ -914,8 +992,7 @@
         <xs:restriction base="xs:string">
             <xs:pattern value="[1-9][0-9]*[t]"/>
         </xs:restriction>
-    </xs:simpleType>
-    
+    </xs:simpleType>    
     
     <xs:simpleType name="incomingOutgoingType">
         <xs:annotation>
@@ -926,18 +1003,7 @@
         <xs:restriction base="xs:token">
             <xs:pattern value="incoming|outgoing"/>
         </xs:restriction>
-    </xs:simpleType>
-    
-    <xs:simpleType name="groupOrPartType">
-        <xs:annotation>
-            <xs:documentation>
-                determines the style of a textExtender
-            </xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:token">
-            <xs:pattern value="group|part"/>
-        </xs:restriction>
-    </xs:simpleType>
+    </xs:simpleType>    
     
     <xs:simpleType name="slurLocationType">
         <xs:annotation>
@@ -1033,5 +1099,5 @@
             <xs:pattern value="[#][a-zA-Z][a-zA-Z0-9\-_]*"/>
         </xs:restriction>
     </xs:simpleType>
-    
+
 </xs:schema>
