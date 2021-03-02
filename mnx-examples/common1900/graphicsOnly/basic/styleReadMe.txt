@@ -39,8 +39,9 @@ defined by applications for particular elements using their _name_ (e.g. "title"
   
 - An "instruction" uses the text-font by default. An application sets "instruction"
   to its default setting for performance instructions in parts.
-  An instruction contains one or more components of type "string" "entity" and
-  "image". These are concatenated into a single line instruction.
+  An instruction contains one or more components of type "string" and "image". These
+  are concatenated into a single or multi-line instruction. Multiple strings can have different
+  classes (=styles).
   
 - Other text primitives are "title" and "author" (etc.?)
 
@@ -51,10 +52,11 @@ defined by applications for particular elements using their _name_ (e.g. "title"
   have no text so are not extendableTexts. They are their own classes.
   As always, each of these elements has a distinct default style (different for
   global and part contexts) supplied by the consuming application.
-  "octave-shift" and "pedal" are only available in part/measure/directions or
-  part/measure/sequence.
-  "accel", "rit", "cresc", "dim", "crescWedge" and "dimWedge" are available in
-  global/measure/directions, part/measure/directions and part/measure/sequence. 
+  Availability:
+  "cresc", "dim", "crescWedge" and "dimWedge" are available in all directions
+  elements: global/measure/directions, part/measure/directions and part/measure/sequence/directions.
+  "octave-shift" and "pedal" are only available in part/measure/sequence/directions.
+  "accel" and "rit" are only available in global/measure/directions.
 
 - Entities: Each consuming application can decide for itself which font to use for
   each individual entity. So here again, the font does not _need_ to be stipulated
@@ -62,13 +64,10 @@ defined by applications for particular elements using their _name_ (e.g. "title"
   and horizontally depending on the surrounding text. By default, entity baselines
   would be aligned to the surrounding text's baseline.
   
-- SVGs: It should be possible to include arbitrary external SVGs.
+- SVGs: It should be possible to include arbitrary external images.
   In instructions, these could be used as glyphs, and would not be stylable by CSS.
   The size of an <image> element should be determined by its width and height parameters
   (anonymous units as in page size).
-  For simplicity of use, I think the MNX <image> element should have attributes that
-  control both horizontal (left, right, center), vertical (top, middle, baseline,
-  bottom) and orient (above, below) alignment.
   
 
 For example: a small clef could be coded as follows:
@@ -76,15 +75,15 @@ For example: a small clef could be coded as follows:
     
 And a small instruction can be:
     <instruction style="font-size:small" location="0">
-        <entity style="color:red;text-align:center" value="&ff;"/>
-        <instruction style="font-style:italic" value=" diminuendo"/>
-        <instruction style="font-style:normal" value=" al fine"/>
+        <string style="color:red;text-align:center" value="&ff;"/>
+        <string style="font-style:italic" value=" diminuendo"/>
+        <string style="font-style:normal" value=" al fine"/>
     </instruction>
     or
     <instruction class="small" location="0">
-        <img src="ff.jpg" alt="fortissimo" width="500" height="60" align="center">
-        <instruction style="font-style:italic" value=" diminuendo"/>
-        <instruction style="font-style:normal" value=" al fine"/>
+        <image src="ff.jpg" alt="fortissimo" width="500" height="60" baseline="40" align="center">
+        <string style="font-style:italic" value=" diminuendo"/>
+        <string style="font-style:normal" value=" al fine"/>
     </instruction>
 
 The Draft Spec allows classes to be defined. Class definitions would simplify the
