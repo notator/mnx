@@ -17,9 +17,10 @@ xsi:schemaLocation="https://github.com/notator/mnx ../../../../schemas/common190
             </measure>
             <measure>
                 <directions>
-                    <text string="rit." location="0" orient="above" staffGroupClasses="woodwind piano">
-                        <textExtenderLine type="group" duration="9/4"/>
-                    </text> 
+                    <rit location="0" orient="above" staffGroupClasses="woodwind piano">
+                        <string value="rit."/>
+                        <extenderLine duration="9/4"/>
+                    </rit> 
                 </directions>
             </measure>
             <measure/>
@@ -27,9 +28,10 @@ xsi:schemaLocation="https://github.com/notator/mnx ../../../../schemas/common190
             <measure>
                 <directions>
                     <time signature="2/4" staffGroupClasses="woodwind piano"/>
-                    <text string="accel." location="0" orient="above" staffGroupClasses="woodwind piano">
-                        <textExtenderLine type="group" duration="6/4"/>
-                    </text> 
+                    <accel location="0" align="left" orient="above" staffGroupClasses="woodwind piano">
+                        <string value="accel." location="0"/>
+                        <extenderLine duration="6/4"/>                        
+                    </accel>
                 </directions>                
             </measure>
             <measure/> 
