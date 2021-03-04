@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{ data_type.name }} data type{% endblock %}
+
+{% block content %}
+<p class="breadcrumb"><a href="{% relative_url 'data_type_list' %}">Data types</a> &gt; {{ data_type.name }}</p>
+
+<h1>{{ data_type.name }} data type</h1>
+
+{% if data_type.description %}
+<p>{{ data_type.description }}</p>
+{% endif %}
+
+{% if options %}
+<h2>Allowed values</h2>
+
+<table>
+{% for option in options %}
+<tr>
+    <th class="nobr">{{ option.value }}</th>
+    <td>{{ option.description }}</td>
+</tr>
+{% endfor %}
+</table>
+{% endif %}
+
+{% if element_attributes %}
+<h2>Where is this type used?</h2>
+
+{% for el_attribute in element_attributes %}
+<p><a href="{% relative_url_string el_attribute.element.get_absolute_url %}">{{ el_attribute.element.name_with_brackets }}</a> — "{{ el_attribute.attribute.name }}" attribute</p>
+{% endfor %}
+{% endif %}
+
+{% endblock %}
