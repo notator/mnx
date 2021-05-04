@@ -818,15 +818,18 @@
             <xs:documentation>
                 An integer string that is
                 an optional '1' character
-                followed by a compulsory "/" character,
-                followed by one of the strings "8L", "4L", "2L", "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"
-                (See MusicXML's note-value-type, that extends from maxima to 1024th note.)
-                Issue: I have decided to associate the strings "8L" "4L" and "2L" with maxima, long and breve respectively,
-                so as to differentiate them from eighth-, quarter- and half-notes. Is that okay? (see also multipleNoteValueType)
+                followed by
+                {
+                EITHER  (breve, long, maxima)
+                    a compulsory "*" character followed by one of the strings "2", "4", "8"
+                OR (semibreve to 1024th)
+                    a compulsory "/" character followed by one of the strings "1", "2", "4", "8", "16", "32", "64", "128", "256", "512", "1024"
+                }
+                followed by zero or more "d" characters.
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:token">
-            <xs:pattern value="(1)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*)"/>
+            <xs:pattern value="(1)?((\*(8|4|2))|(/(1|2|4|8|16|32|64|128|256|512|1024)))(d*)"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -834,11 +837,11 @@
         <xs:annotation>
             <xs:documentation>
                 An integer string that does not begin with 0, but that has an unlimited number of digits,
-                followed by a noteValueType. (Issue: see noteValueType)
+                followed by a noteValueType.
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:token">
-            <xs:pattern value="([1-9][0-9]*)/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)"/>
+            <xs:pattern value="([1-9][0-9]*)((\*(8|4|2))|(/(1|2|4|8|16|32|64|128|256|512|1024)))(d*)"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -858,7 +861,7 @@
             </xs:documentation>
         </xs:annotation>
         <xs:restriction base="xs:token">
-            <xs:pattern value="(([1-9][0-9]*):)?(([0-9]*\.)?([0-9]*)|([1-9][0-9]*)?/(8L|4L|2L|1|2|4|8|16|32|64|128|256|512|1024)(d*))"/>
+            <xs:pattern value="(([1-9][0-9]*):)?(([0-9]*\.)?([0-9]*)|([1-9][0-9]*)?((\*(8|4|2))|(/(1|2|4|8|16|32|64|128|256|512|1024)))(d*))"/>
         </xs:restriction>
     </xs:simpleType>
     
