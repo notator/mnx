@@ -816,8 +816,7 @@
     <xs:simpleType name="noteValueType">
         <xs:annotation>
             <xs:documentation>
-                An integer string that is
-                an optional '1' character
+                An optional '1' character
                 followed by
                 {
                 EITHER  (breve, long, maxima)
@@ -836,7 +835,7 @@
     <xs:simpleType name="multipleNoteValueType">
         <xs:annotation>
             <xs:documentation>
-                An integer string that does not begin with 0, but that has an unlimited number of digits,
+                A string that does not begin with 0, but that has an unlimited number of digits,
                 followed by a noteValueType.
             </xs:documentation>
         </xs:annotation>
